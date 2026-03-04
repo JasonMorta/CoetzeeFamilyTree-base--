@@ -1,0 +1,148 @@
+.backdrop {
+  background: rgba(3, 8, 20, 0.9) !important;
+  backdrop-filter: blur(8px);
+}
+
+.modal :global(.rs-modal-dialog) {
+  width: min(640px, 92vw);
+  margin: 5vh auto;
+}
+
+.modal :global(.rs-modal-content) {
+  background: #0b1220;
+  color: #e5eefc;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.56);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal :global(.rs-modal-header) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex: 0 0 auto;
+}
+
+.modal :global(.rs-modal-footer) {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex: 0 0 auto;
+}
+
+.modal :global(.rs-modal-title),
+.modal :global(.rs-divider-text),
+.modal :global(.rs-modal-body),
+.modal :global(.rs-modal-footer) {
+  color: #edf4ff;
+}
+
+.body {
+  color: #e5eefc;
+  overflow-y: auto;
+  max-height: calc(88vh - 120px);
+}
+
+.imageWrap {
+  margin: 0 0 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 380px;
+  border-radius: 18px;
+  display: block;
+}
+
+.caption {
+  color: #bfdbfe;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+.peopleList {
+  display: grid;
+  gap: 12px;
+}
+
+.personCard {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px;
+  color: #f8fbff;
+}
+
+.moreBio {
+  color: #e2e8f0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.personName {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.life {
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+.notes {
+  color: #e2e8f0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 767px) {
+  .modal :global(.rs-modal-dialog) {
+    width: calc(100vw - 16px);
+    margin: 3vh auto;
+  }
+
+  .modal :global(.rs-modal-content) {
+    max-height: 92vh;
+    border-radius: 18px;
+  }
+
+  .body {
+    max-height: calc(92vh - 116px);
+  }
+
+  .image {
+    max-height: 220px;
+  }
+}
+
+.personImageWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.personImage {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: 14px;
+  display: block;
+}

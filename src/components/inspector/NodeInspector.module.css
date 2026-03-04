@@ -1,0 +1,36 @@
+.card {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 360px;
+  max-height: 48vh;
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  z-index: 20;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.section {
+  margin-bottom: 12px;
+}
+
+.person {
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.05);
+  margin-bottom: 8px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: .88rem;
+}

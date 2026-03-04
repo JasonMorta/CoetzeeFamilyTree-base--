@@ -1,0 +1,62 @@
+.drawer :global(.rs-drawer-content) {
+  background: #0f172a;
+  color: #e6eef9;
+}
+
+.drawer :global(.rs-drawer-header) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer :global(.rs-control-label),
+.drawer :global(.rs-drawer-title),
+.drawer :global(.rs-divider-text),
+.drawer :global(.rs-picker-toggle-value),
+.drawer :global(.rs-picker-toggle-text),
+.drawer :global(.rs-picker-toggle-placeholder) {
+  color: #f8fbff !important;
+}
+
+.drawer :global(.rs-input),
+.drawer :global(.rs-picker-toggle),
+.drawer :global(.rs-input-group),
+.drawer textarea {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #f8fbff !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+.body {
+  color: #e6eef9;
+}
+
+.note {
+  color: #d7e6ff;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.sliderField {
+  margin-bottom: 18px;
+}
+
+.sliderHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: #f8fbff;
+}
+
+.help {
+  color: #bcd0f5;
+  font-size: 0.86rem;
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}

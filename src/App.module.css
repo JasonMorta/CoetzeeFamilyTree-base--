@@ -1,0 +1,29 @@
+.appShell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.content {
+  padding: 18px;
+}
+
+.workspace {
+  height: calc(100vh - 98px);
+  border: 1px solid var(--panel-border);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--canvas-bg) 85%, #12254f 15%), color-mix(in srgb, var(--canvas-bg) 92%, #040b1a 8%));
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 12px;
+  }
+
+  .workspace {
+    height: calc(100vh - 90px);
+    border-radius: 18px;
+  }
+}

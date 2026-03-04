@@ -1,0 +1,101 @@
+.drawer :global(.rs-drawer-content) {
+  background: #0f172a;
+  color: #e6eef9;
+}
+
+.drawer :global(.rs-drawer-header) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer :global(.rs-control-label),
+.drawer :global(.rs-drawer-title),
+.drawer :global(.rs-divider-text) {
+  color: #f8fbff !important;
+}
+
+.drawer :global(.rs-input),
+.drawer :global(.rs-input-group),
+.drawer textarea {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #f8fbff !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+.drawer :global(.rs-slider-bar),
+.drawer :global(.rs-slider-progress-bar) {
+  height: 6px;
+}
+
+.body {
+  color: #e6eef9;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.note {
+  color: #d7e6ff;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.previewBlock {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.previewImage {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sliderField {
+  margin-bottom: 18px;
+}
+
+.sliderHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: #f8fbff;
+}
+
+.help {
+  color: #bcd0f5;
+  font-size: 0.86rem;
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.sideCard {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+.sideTitle {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #eaf2ff;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    flex-direction: column;
+  }
+}
