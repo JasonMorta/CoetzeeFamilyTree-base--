@@ -9,7 +9,7 @@
 }
 
 .workspace {
-  height: calc(100vh - 98px);
+  height: calc(100vh - 158px);
   border: 1px solid var(--panel-border);
   background: linear-gradient(180deg, color-mix(in srgb, var(--canvas-bg) 85%, #12254f 15%), color-mix(in srgb, var(--canvas-bg) 92%, #040b1a 8%));
   border-radius: var(--radius-lg);
