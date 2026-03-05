@@ -8,9 +8,9 @@ export const STORAGE_KEYS = {
 };
 
 export const APP_METADATA = {
-  appName: 'Family Tree Builder',
+  appName: 'Coetzee Family Tree',
   version: '1.8.3',
-  author: 'mortaDev'
+  author: 'JasonM'
 };
 
 export const DEFAULT_VIEWPORT = { x: 0, y: 0, zoom: 0.9 };
