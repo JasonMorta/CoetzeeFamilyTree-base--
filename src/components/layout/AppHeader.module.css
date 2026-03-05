@@ -9,18 +9,19 @@
 .brand {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0px;
 }
 
 .title {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 800;
+  line-height: normal;
 }
 
 .subtitle {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.52rem;
 }
 
 .actions {

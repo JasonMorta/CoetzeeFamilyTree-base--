@@ -23,7 +23,7 @@
   }
 
   .workspace {
-    height: calc(100vh - 90px);
+    height: calc(100vh - 190px);
     border-radius: 18px;
   }
 }
