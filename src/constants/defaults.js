@@ -9,7 +9,7 @@ export const STORAGE_KEYS = {
 
 export const APP_METADATA = {
   appName: 'Family Tree Builder',
-  version: '1.8.1',
+  version: '1.8.3',
   author: 'mortaDev'
 };
 

@@ -1,0 +1,4 @@
+[build]
+  functions = "netlify/functions"
+
+# Nothing else is required here; Netlify will still auto-detect Vite.

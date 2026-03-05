@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Button } from 'rsuite';
 import styles from './RemoteRefreshPanel.module.css';
 
@@ -13,8 +13,19 @@ export default function RemoteRefreshPanel({
   onRefresh,
   description = 'Refresh available every 30s'
 }) {
-  const now = Date.now();
-  const msRemaining = useMemo(() => Math.max(0, (cooldownUntil || 0) - now), [cooldownUntil, now]);
+  // Tick while cooldown is active so the countdown text updates.
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    const now = Date.now();
+    const ms = Math.max(0, (cooldownUntil || 0) - now);
+    if (ms <= 0) return;
+
+    const id = window.setInterval(() => setTick((t) => t + 1), 250);
+    return () => window.clearInterval(id);
+  }, [cooldownUntil]);
+
+  const msRemaining = useMemo(() => Math.max(0, (cooldownUntil || 0) - Date.now()), [cooldownUntil, tick]);
   const isCooldownActive = msRemaining > 0;
 
   return (

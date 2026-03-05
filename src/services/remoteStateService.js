@@ -50,23 +50,76 @@ export function parseRemoteSnapshot(json) {
   };
 }
 
+function isGoogleDriveLikeUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.hostname === 'drive.google.com' || url.hostname === 'docs.googleusercontent.com';
+  } catch {
+    return false;
+  }
+}
+
+function buildProxyUrl(remoteUrl) {
+  const params = new URLSearchParams({
+    url: remoteUrl,
+    cb: String(Date.now())
+  });
+  return `/.netlify/functions/remoteStateProxy?${params.toString()}`;
+}
+
+async function parseJsonResponse(res) {
+  const contentType = res.headers.get('content-type') || '';
+  const text = await res.text();
+
+  if (!res.ok) {
+    throw new Error(`Remote fetch failed (${res.status})`);
+  }
+
+  // Helpful guard so HTML error pages do not silently blow up as JSON parse errors.
+  if (!contentType.includes('application/json') && text.trim().startsWith('<')) {
+    throw new Error('Remote response was HTML instead of JSON.');
+  }
+
+  return JSON.parse(text);
+}
+
 export async function fetchRemoteSnapshot(remoteUrl) {
   if (!remoteUrl) {
     return { ok: false, error: 'Missing remote URL.' };
   }
 
   try {
-    // Cache-bust so Drive/CDN returns the latest JSON.
-    const cacheBustedUrl = remoteUrl.includes('?')
-      ? `${remoteUrl}&cb=${Date.now()}`
-      : `${remoteUrl}?cb=${Date.now()}`;
+    let json;
 
-    const res = await fetch(cacheBustedUrl, { cache: 'no-store' });
-    if (!res.ok) {
-      return { ok: false, error: `Remote fetch failed (${res.status})` };
+    if (isGoogleDriveLikeUrl(remoteUrl)) {
+      // IMPORTANT:
+      // Do NOT hit Google Drive directly from the browser.
+      // Even publicly shared files often return 403 / CORS failures for JS fetch requests.
+      // Route Drive reads through the Netlify Function proxy only.
+      const proxiedUrl = buildProxyUrl(remoteUrl);
+      const res = await fetch(proxiedUrl, { cache: 'no-store' });
+      json = await parseJsonResponse(res);
+    } else {
+      // Non-Drive URLs can still try a direct browser fetch first.
+      const cacheBustedUrl = remoteUrl.includes('?')
+        ? `${remoteUrl}&cb=${Date.now()}`
+        : `${remoteUrl}?cb=${Date.now()}`;
+
+      let res;
+      try {
+        res = await fetch(cacheBustedUrl, { cache: 'no-store' });
+      } catch {
+        res = null;
+      }
+
+      if (!res) {
+        const proxiedUrl = buildProxyUrl(cacheBustedUrl);
+        res = await fetch(proxiedUrl, { cache: 'no-store' });
+      }
+
+      json = await parseJsonResponse(res);
     }
 
-    const json = await res.json();
     const parsed = parseRemoteSnapshot(json);
     if (!parsed) {
       return { ok: false, error: 'Remote JSON was not in a supported format.' };
@@ -75,6 +128,6 @@ export async function fetchRemoteSnapshot(remoteUrl) {
     return { ok: true, ...parsed };
   } catch (error) {
     console.error('Remote fetch error:', error);
-    return { ok: false, error: 'Remote fetch error (see console).' };
+    return { ok: false, error: error?.message || 'Remote fetch error (see console).' };
   }
 }

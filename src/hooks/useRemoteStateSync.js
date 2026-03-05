@@ -6,8 +6,6 @@ import { hashObject } from '../utils/stableHash';
 
 // Paste your Google Drive "direct JSON" URL into VITE_REMOTE_STATE_URL in .env
 const REMOTE_URL = import.meta.env.VITE_REMOTE_STATE_URL || '';
-console.log('REMOTE_URL', REMOTE_URL)
-
 
 function shouldApplyRemote(localHash, remoteHash) {
   // If nothing exists locally, remote becomes the source of truth.
@@ -28,7 +26,6 @@ export function useRemoteStateSync(state, dispatch) {
 
   const runSync = useCallback(async (reason = 'auto') => {
     if (!REMOTE_URL) {
-      
       return { ok: false, skipped: true, reason: 'No remote URL configured.' };
     }
     if (inFlightRef.current) {
@@ -39,10 +36,8 @@ export function useRemoteStateSync(state, dispatch) {
     dispatch({ type: ACTIONS.REMOTE_SYNC_START, payload: { reason } });
 
     const result = await fetchRemoteSnapshot(REMOTE_URL);
-    console.log('result after await', result)
 
     if (!result.ok) {
-      console.log('result', result)
       dispatch({
         type: ACTIONS.REMOTE_SYNC_END,
         payload: { error: result.error, syncedAt: Date.now(), reason }
@@ -55,7 +50,6 @@ export function useRemoteStateSync(state, dispatch) {
     const localHash = hashObject(localSnapshot);
 
     const remoteHash = result.meta.hash || result.meta.computedHash;
-    console.log('remoteHash', remoteHash)
 
     if (shouldApplyRemote(localHash, remoteHash)) {
       dispatch({ type: ACTIONS.APPLY_REMOTE_SNAPSHOT, payload: result.snapshot });

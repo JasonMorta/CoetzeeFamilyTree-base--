@@ -27,10 +27,10 @@ export default function AppHeader({ isAdminAuthenticated, onLogin, onLogout, onA
               <Button appearance="primary" color="violet" onClick={onAddNode}>
                 Add Node
               </Button>
-              {extraActions}
+                {extraActions}
             </>
-       
-           
+            
+            
           )}
 
           {!isAdminAuthenticated ? (

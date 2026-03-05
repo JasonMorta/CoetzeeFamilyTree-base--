@@ -23,3 +23,12 @@
   font-size: 0.92rem;
   color: #dbeafe;
 }
+
+/*
+  React Flow MiniMap sits bottom-right.
+  This panel is positioned above it (same corner) with extra bottom spacing.
+*/
+.remotePanelAboveMiniMap {
+  margin-bottom: 170px; /* leaves room for the MiniMap below */
+  pointer-events: auto;
+}

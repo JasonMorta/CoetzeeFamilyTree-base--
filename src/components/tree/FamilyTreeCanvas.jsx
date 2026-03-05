@@ -57,7 +57,19 @@ function toBackgroundVariant(value) {
 function toConnectionLineType(value) {
   if (value === 'smoothstep') return ConnectionLineType.SmoothStep;
   if (value === 'straight') return ConnectionLineType.Straight;
+  // Treat both "bezier" (legacy UI value) and "default" as the same visual connection style.
   return ConnectionLineType.Bezier;
+}
+
+// React Flow edge "type" values differ from the connection line style selector.
+// - React Flow expects "default" for bezier edges (NOT "bezier").
+// - Our UI stores "bezier" for readability.
+function toReactFlowEdgeType(value) {
+  if (value === 'bezier') return 'default';
+  if (value === 'smoothstep') return 'smoothstep';
+  if (value === 'straight') return 'straight';
+  // Safe fallback.
+  return 'default';
 }
 
 function isHandleAvailable(edgeList, nodeId, handleId) {
@@ -114,7 +126,9 @@ export default function FamilyTreeCanvas() {
     () =>
       state.edges.map((edge) => ({
         ...edge,
-        type: state.appSettings.edgeType,
+        // IMPORTANT: React Flow does not recognise "bezier" as an edge type.
+        // Using "bezier" here causes warning spam (and can slow down the app).
+        type: toReactFlowEdgeType(state.appSettings.edgeType),
         animated: state.appSettings.edgeAnimated,
         selected: state.selectedEdgeId === edge.id,
         style: {
@@ -127,7 +141,7 @@ export default function FamilyTreeCanvas() {
 
   const defaultEdgeOptions = useMemo(
     () => ({
-      type: state.appSettings.edgeType,
+      type: toReactFlowEdgeType(state.appSettings.edgeType),
       animated: state.appSettings.edgeAnimated
     }),
     [state.appSettings.edgeAnimated, state.appSettings.edgeType]
@@ -226,6 +240,24 @@ export default function FamilyTreeCanvas() {
         <Background variant={toBackgroundVariant(state.appSettings.backgroundVariant)} gap={18} size={1.2} color="rgba(255,255,255,0.25)" />
         <Controls />
         {state.appSettings.showMiniMap && <MiniMap />}
+
+        {/*
+          Viewer-only remote sync status + manual refresh.
+          Placed above the MiniMap (bottom-right) so it fits into the UI just above the MAP.
+        */}
+        {!state.isAdminAuthenticated && (
+          <Panel
+            position="bottom-right"
+            className={state.appSettings.showMiniMap ? styles.remotePanelAboveMiniMap : undefined}
+          >
+            <RemoteRefreshPanel
+              isUpdating={state.isRemoteUpdating}
+              cooldownUntil={state.remoteCooldownUntil}
+              onRefresh={refreshWithCooldown}
+              description="Refresh available every 30s"
+            />
+          </Panel>
+        )}
 
         <Panel position="top-left">
           <div className={styles.tipPanel}>
