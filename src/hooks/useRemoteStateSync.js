@@ -39,6 +39,7 @@ export function useRemoteStateSync(state, dispatch) {
     const result = await fetchRemoteSnapshot(REMOTE_URL);
 
     if (!result.ok) {
+      console.log('result', result)
       dispatch({
         type: ACTIONS.REMOTE_SYNC_END,
         payload: { error: result.error, syncedAt: Date.now(), reason }
@@ -51,6 +52,7 @@ export function useRemoteStateSync(state, dispatch) {
     const localHash = hashObject(localSnapshot);
 
     const remoteHash = result.meta.hash || result.meta.computedHash;
+    console.log('remoteHash', remoteHash)
 
     if (shouldApplyRemote(localHash, remoteHash)) {
       dispatch({ type: ACTIONS.APPLY_REMOTE_SNAPSHOT, payload: result.snapshot });
