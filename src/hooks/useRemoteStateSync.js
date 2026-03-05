@@ -7,6 +7,7 @@ import { hashObject } from '../utils/stableHash';
 // Paste your Google Drive "direct JSON" URL into VITE_REMOTE_STATE_URL in .env
 const REMOTE_URL = import.meta.env.VITE_REMOTE_STATE_URL || '';
 
+
 function shouldApplyRemote(localHash, remoteHash) {
   // If nothing exists locally, remote becomes the source of truth.
   if (!localHash) return true;
