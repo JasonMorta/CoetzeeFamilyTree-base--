@@ -13,6 +13,8 @@ import { Button, ButtonGroup } from 'rsuite';
 import styles from './FamilyTreeCanvas.module.css';
 import FamilyNode from './FamilyNode';
 import { useAppState } from '../../context/AppStateContext';
+import { useRemoteStateSync } from '../../hooks/useRemoteStateSync';
+import RemoteRefreshPanel from '../sync/RemoteRefreshPanel';
 import { ACTIONS } from '../../context/appReducer';
 
 const nodeTypes = {
@@ -72,6 +74,7 @@ function isHandleAvailable(edgeList, nodeId, handleId) {
 
 export default function FamilyTreeCanvas() {
   const { state, dispatch } = useAppState();
+  const { refreshWithCooldown } = useRemoteStateSync(state, dispatch);
   const { connectedSlotsByNode, handleUsage } = useMemo(() => buildConnectedHandleMaps(state.edges), [state.edges]);
 
   const handleEdit = useCallback((nodeId) => dispatch({ type: ACTIONS.OPEN_EDITOR, payload: nodeId }), [dispatch]);

@@ -4,6 +4,8 @@ import styles from './LoginModal.module.css';
 import { useAppState } from '../../context/AppStateContext';
 import { ACTIONS } from '../../context/appReducer';
 import { loginAdmin } from '../../services/authService';
+import { getPersistedSnapshot, saveAppMeta } from '../../services/localStorageService';
+import { hashObject } from '../../utils/stableHash';
 import { hasConfiguredAdminCredentials } from '../../constants/auth';
 
 export default function LoginModal() {
@@ -26,6 +28,13 @@ export default function LoginModal() {
     }
 
     setErrorMessage('');
+
+    // When an admin logs in, treat the current state as the "baseline".
+    // This keeps the Save button hidden until an actual change is made.
+    const baselineHash = hashObject(getPersistedSnapshot(state));
+    saveAppMeta({ hash: baselineHash, exportedAt: new Date().toISOString() });
+    dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: baselineHash });
+
     dispatch({ type: ACTIONS.LOGIN_SUCCESS });
   }
 

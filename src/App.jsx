@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import { useAppState } from './context/AppStateContext';
 import { ACTIONS } from './context/appReducer';
 import AppHeader from './components/layout/AppHeader';
+import AdminSaveChangesButton from './components/sync/AdminSaveChangesButton';
 import LoginModal from './components/auth/LoginModal';
 import FamilyTreeCanvas from './components/tree/FamilyTreeCanvas';
 import NodeEditorDrawer from './components/editor/NodeEditorDrawer';
@@ -23,6 +24,7 @@ export default function App() {
     <div className={styles.appShell}>
       <AppHeader
         isAdminAuthenticated={state.isAdminAuthenticated}
+        extraActions={<AdminSaveChangesButton />}
         onLogin={() => dispatch({ type: ACTIONS.OPEN_LOGIN })}
         onLogout={() => dispatch({ type: ACTIONS.LOGOUT })}
         onAddNode={() => dispatch({ type: ACTIONS.ADD_NODE, payload: { x: 280, y: 220 } })}

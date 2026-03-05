@@ -1,19 +1,22 @@
 import React, { createContext, useContext, useMemo, useReducer } from 'react';
 import { DEFAULT_APP_STATE } from '../constants/defaults';
 import { appReducer } from './appReducer';
-import { loadAppData } from '../services/localStorageService';
+import { loadAppData, loadAppMeta } from '../services/localStorageService';
 import { loadAuthState } from '../services/authService';
 import { useLocalStorageSync } from '../hooks/useLocalStorageSync';
+import { useDirtyTracker } from '../hooks/useDirtyTracker';
 
 const AppStateContext = createContext(null);
 
 function createInitialState() {
   const appData = loadAppData();
+  const meta = loadAppMeta();
   const authState = loadAuthState();
   return {
     ...DEFAULT_APP_STATE,
     ...appData,
-    ...authState
+    ...authState,
+    lastExportHash: meta.hash || null
   };
 }
 
@@ -21,6 +24,7 @@ export function AppStateProvider({ children }) {
   const [state, dispatch] = useReducer(appReducer, undefined, createInitialState);
 
   useLocalStorageSync(state);
+  useDirtyTracker(state, dispatch);
 
   const value = useMemo(() => ({ state, dispatch }), [state]);
 

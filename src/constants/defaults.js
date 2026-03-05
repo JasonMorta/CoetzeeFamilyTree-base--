@@ -3,12 +3,13 @@ import { createDefaultHandles, createDefaultHandleLayout, NODE_TYPES, createDefa
 
 export const STORAGE_KEYS = {
   APP_DATA: 'familyTreeAppData',
-  AUTH: 'familyTreeAuthData'
+  AUTH: 'familyTreeAuthData',
+  APP_DATA_META: 'familyTreeAppDataMeta'
 };
 
 export const APP_METADATA = {
   appName: 'Family Tree Builder',
-  version: '1.8.0',
+  version: '1.8.1',
   author: 'mortaDev'
 };
 
@@ -63,5 +64,12 @@ export const DEFAULT_APP_STATE = {
   isAdminAuthenticated: false,
   isLoginOpen: false,
   isEditorOpen: false,
-  isSettingsOpen: false
+  isSettingsOpen: false,
+  // UI sync state
+  isDirty: false,
+  lastExportHash: null,
+  isRemoteUpdating: false,
+  remoteSyncError: null,
+  lastRemoteSyncAt: null,
+  remoteCooldownUntil: 0
 };

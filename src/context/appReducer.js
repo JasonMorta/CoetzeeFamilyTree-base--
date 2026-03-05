@@ -29,7 +29,14 @@ export const ACTIONS = {
   SET_VIEWPORT: 'SET_VIEWPORT',
   OPEN_SETTINGS: 'OPEN_SETTINGS',
   CLOSE_SETTINGS: 'CLOSE_SETTINGS',
-  UPDATE_APP_SETTINGS: 'UPDATE_APP_SETTINGS'
+  UPDATE_APP_SETTINGS: 'UPDATE_APP_SETTINGS',
+  SET_DIRTY: 'SET_DIRTY',
+  SET_CLEAN: 'SET_CLEAN',
+  SET_EXPORT_HASH: 'SET_EXPORT_HASH',
+  REMOTE_SYNC_START: 'REMOTE_SYNC_START',
+  REMOTE_SYNC_END: 'REMOTE_SYNC_END',
+  APPLY_REMOTE_SNAPSHOT: 'APPLY_REMOTE_SNAPSHOT',
+  SET_REMOTE_COOLDOWN: 'SET_REMOTE_COOLDOWN'
 };
 
 function parseHandleId(handleId) {
@@ -147,6 +154,34 @@ export function appReducer(state, action) {
           ...action.payload
         }
       };
+
+    case ACTIONS.SET_DIRTY:
+      return { ...state, isDirty: true };
+    case ACTIONS.SET_CLEAN:
+      return { ...state, isDirty: false };
+    case ACTIONS.SET_EXPORT_HASH:
+      return { ...state, lastExportHash: action.payload, isDirty: false };
+    case ACTIONS.REMOTE_SYNC_START:
+      return { ...state, isRemoteUpdating: true, remoteSyncError: null };
+    case ACTIONS.REMOTE_SYNC_END:
+      return {
+        ...state,
+        isRemoteUpdating: false,
+        remoteSyncError: action.payload?.error || null,
+        lastRemoteSyncAt: action.payload?.syncedAt || state.lastRemoteSyncAt
+      };
+    case ACTIONS.SET_REMOTE_COOLDOWN:
+      return { ...state, remoteCooldownUntil: action.payload };
+    case ACTIONS.APPLY_REMOTE_SNAPSHOT:
+      // Keep auth + UI modals as-is. Only replace persisted canvas data.
+      return {
+        ...state,
+        nodes: action.payload.nodes,
+        edges: action.payload.edges,
+        viewport: action.payload.viewport,
+        appSettings: action.payload.appSettings
+      };
+
     case ACTIONS.SET_NODES:
       return { ...state, nodes: action.payload };
     case ACTIONS.SET_EDGES:
