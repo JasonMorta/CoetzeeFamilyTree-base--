@@ -259,13 +259,13 @@ export default function FamilyTreeCanvas() {
           </Panel>
         )}
 
-        <Panel position="top-left">
+        {/* <Panel position="top-left">
           <div className={styles.tipPanel}>
             {state.isAdminAuthenticated
               ? 'Admin: click a node to preview it, use Edit on the node to open the side editor, and click a connection to remove it.'
               : 'Viewer: click a node to open its details modal.'}
           </div>
-        </Panel>
+        </Panel> */}
 
         {state.isAdminAuthenticated && state.selectedEdgeId && (
           <Panel position="top-right">
