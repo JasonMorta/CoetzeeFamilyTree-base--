@@ -1,8 +1,8 @@
 {
   "meta": {
-    "hash": "d8bd8cfc",
-    "exportedAt": "2026-03-06T21:33:08.514Z",
-    "appVersion": "1.9.0"
+    "hash": "fe1b0808",
+    "exportedAt": "2026-03-06T22:31:45.153Z",
+    "appVersion": "1.9.6"
   },
   "data": {
     "nodes": [
@@ -10,8 +10,8 @@
         "id": "node_i4c3kxp1_mmazde9b",
         "type": "familyNode",
         "position": {
-          "x": -1001.6837474506319,
-          "y": 874.636589227932
+          "x": -1009.1390350767117,
+          "y": 866.1162605124122
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -140,8 +140,8 @@
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
-          "x": -1001.6837474506319,
-          "y": 874.636589227932
+          "x": -1009.1390350767117,
+          "y": 866.1162605124122
         }
       },
       {
@@ -515,8 +515,8 @@
         "id": "node_30sqckxd_mmb8xqmn",
         "type": "familyNode",
         "position": {
-          "x": -1213.11984335723,
-          "y": 441.386433886794
+          "x": -1410.1524449036228,
+          "y": 416.8904888296749
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -628,8 +628,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -1213.11984335723,
-          "y": 441.386433886794
+          "x": -1410.1524449036228,
+          "y": 416.8904888296749
         },
         "dragging": false,
         "selected": true
@@ -760,8 +760,8 @@
         "id": "node_2bm1t8e8_mmb90z41",
         "type": "familyNode",
         "position": {
-          "x": -264.13509298547126,
-          "y": 468.21802436226096
+          "x": -296.08632566867016,
+          "y": 543.8359417124983
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -871,10 +871,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": -264.13509298547126,
-          "y": 468.21802436226096
+          "x": -296.08632566867016,
+          "y": 543.8359417124983
         },
         "dragging": false
       },
@@ -1038,8 +1038,8 @@
         "id": "node_lj8aj66f_mmb9jq6r",
         "type": "familyNode",
         "position": {
-          "x": -839.5636779269119,
-          "y": 416.26943838873893
+          "x": -884.2954036833902,
+          "y": 332.13119232298203
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1151,8 +1151,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -839.5636779269119,
-          "y": 416.26943838873893
+          "x": -884.2954036833902,
+          "y": 332.13119232298203
         },
         "dragging": false,
         "selected": true
@@ -1161,8 +1161,8 @@
         "id": "node_2zmy7je0_mmbb4odt",
         "type": "familyNode",
         "position": {
-          "x": 618.4333170233542,
-          "y": 337.2889924156327
+          "x": 318.4333170233544,
+          "y": 345.2889924156327
         },
         "data": {
           "nodeType": "persons",
@@ -1240,7 +1240,7 @@
             },
             {
               "id": "person_sgfulgr3_mmbb5bma",
-              "fullName": "Eline Mintoor",
+              "fullName": "Elien Mintoor",
               "nickname": "Hata",
               "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
               "relationshipToPrimary": "other",
@@ -1430,8 +1430,8 @@
         "width": 446,
         "height": 446,
         "positionAbsolute": {
-          "x": 618.4333170233542,
-          "y": 337.2889924156327
+          "x": 318.4333170233544,
+          "y": 345.2889924156327
         },
         "dragging": false,
         "selected": true
@@ -1440,8 +1440,8 @@
         "id": "node_2uut8aax_mmcngoza",
         "type": "familyNode",
         "position": {
-          "x": 1184.5332014145608,
-          "y": -1148.6456637204788
+          "x": 756.5332014145608,
+          "y": -618.645663720479
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1558,8 +1558,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1184.5332014145608,
-          "y": -1148.6456637204788
+          "x": 756.5332014145608,
+          "y": -618.645663720479
         },
         "dragging": false
       },
@@ -1567,8 +1567,8 @@
         "id": "node_a536uox5_mme44h15",
         "type": "familyNode",
         "position": {
-          "x": 879.9941568327856,
-          "y": -179.54205933765985
+          "x": 389.99415683278573,
+          "y": -61.54205933765991
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1704,18 +1704,18 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": 879.9941568327856,
-          "y": -179.54205933765985
+          "x": 389.99415683278573,
+          "y": -61.54205933765991
         },
         "dragging": false,
-        "selected": true
+        "selected": false
       },
       {
         "id": "node_td8wzvae_mme7cdvz",
         "type": "familyNode",
         "position": {
-          "x": 846.8390160248812,
-          "y": -547.3892750299465
+          "x": 388.8390160248812,
+          "y": -487.3892750299466
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1856,18 +1856,18 @@
         "width": 300,
         "height": 300,
         "positionAbsolute": {
-          "x": 846.8390160248812,
-          "y": -547.3892750299465
+          "x": 388.8390160248812,
+          "y": -487.3892750299466
         },
         "dragging": false,
-        "selected": true
+        "selected": false
       },
       {
         "id": "node_xmsm2vly_mme7m01y",
         "type": "familyNode",
         "position": {
-          "x": 633.9222779258549,
-          "y": -1046.869960988431
+          "x": 125.92227792585513,
+          "y": -640.8699609884313
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1982,10 +1982,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 633.9222779258549,
-          "y": -1046.869960988431
+          "x": 125.92227792585513,
+          "y": -640.8699609884313
         },
         "dragging": false
       },
@@ -1993,8 +1993,8 @@
         "id": "node_mgrf6btg_mme7u73g",
         "type": "familyNode",
         "position": {
-          "x": 814.3066451249522,
-          "y": -805.9579192966853
+          "x": 334.3066451249522,
+          "y": -849.9579192966853
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2109,10 +2109,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 814.3066451249522,
-          "y": -805.9579192966853
+          "x": 334.3066451249522,
+          "y": -849.9579192966853
         },
         "dragging": false
       },
@@ -2120,8 +2120,8 @@
         "id": "node_dgjwi773_mme95tfj",
         "type": "familyNode",
         "position": {
-          "x": 1022.1102888878223,
-          "y": -898.032247382554
+          "x": 600.1102888878224,
+          "y": -860.0322473825541
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2238,8 +2238,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1022.1102888878223,
-          "y": -898.032247382554
+          "x": 600.1102888878224,
+          "y": -860.0322473825541
         },
         "dragging": false
       },
@@ -2247,8 +2247,8 @@
         "id": "node_hptk6sjk_mmea8q9e",
         "type": "familyNode",
         "position": {
-          "x": 30.4439375406171,
-          "y": 611.7937761457916
+          "x": -43.043897630740304,
+          "y": 658.65558408115
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2416,8 +2416,8 @@
         "height": 177,
         "selected": true,
         "positionAbsolute": {
-          "x": 30.4439375406171,
-          "y": 611.7937761457916
+          "x": -43.043897630740304,
+          "y": 658.65558408115
         },
         "dragging": false
       },
@@ -2425,8 +2425,8 @@
         "id": "node_ivecs8z4_mmf6h215",
         "type": "familyNode",
         "position": {
-          "x": -422.79568837568723,
-          "y": 49.5301940654505
+          "x": -457.05446299369027,
+          "y": 64.60405489737187
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2534,10 +2534,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": -422.79568837568723,
-          "y": 49.5301940654505
+          "x": -457.05446299369027,
+          "y": 64.60405489737187
         },
         "dragging": false
       },
@@ -2545,8 +2545,8 @@
         "id": "node_6lyh90p0_mmf7l3qp",
         "type": "familyNode",
         "position": {
-          "x": 1323.4914512889163,
-          "y": -1445.4411389577895
+          "x": 959.4914512889163,
+          "y": -815.4411389577895
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2658,10 +2658,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 1323.4914512889163,
-          "y": -1445.4411389577895
+          "x": 959.4914512889163,
+          "y": -815.4411389577895
         },
         "dragging": false
       },
@@ -2669,8 +2669,8 @@
         "id": "node_9dxd1tt9_mmf9c7po",
         "type": "familyNode",
         "position": {
-          "x": 1251.7421511088855,
-          "y": 571.8895363012016
+          "x": 913.7421511088855,
+          "y": 581.8895363012016
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2782,8 +2782,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1251.7421511088855,
-          "y": 571.8895363012016
+          "x": 913.7421511088855,
+          "y": 581.8895363012016
         },
         "dragging": false
       },
@@ -2791,8 +2791,8 @@
         "id": "node_b5se6njb_mmf9xch1",
         "type": "familyNode",
         "position": {
-          "x": 1553.505484137961,
-          "y": 307.5106066131835
+          "x": 1155.5054841379613,
+          "y": 331.5106066131835
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2908,8 +2908,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1553.505484137961,
-          "y": 307.5106066131835
+          "x": 1155.5054841379613,
+          "y": 331.5106066131835
         },
         "dragging": false
       },
@@ -2917,8 +2917,8 @@
         "id": "node_7ciodjxr_mmfa2rzi",
         "type": "familyNode",
         "position": {
-          "x": 971.2258367272916,
-          "y": -1467.973002284832
+          "x": 645.2258367272916,
+          "y": -1151.973002284832
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3032,8 +3032,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 971.2258367272916,
-          "y": -1467.973002284832
+          "x": 645.2258367272916,
+          "y": -1151.973002284832
         },
         "dragging": false
       },
@@ -3041,8 +3041,8 @@
         "id": "node_9woqxfyn_mmfadybv",
         "type": "familyNode",
         "position": {
-          "x": 1532.575184278671,
-          "y": 670.736514668987
+          "x": 1174.5751842786713,
+          "y": 666.736514668987
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3096,7 +3096,7 @@
             "maidenName": "",
             "birthDate": "1994-12-20",
             "birthPlace": "",
-            "stillAlive": true,
+            "stillAlive": false,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
@@ -3156,8 +3156,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1532.575184278671,
-          "y": 670.736514668987
+          "x": 1174.5751842786713,
+          "y": 666.736514668987
         },
         "dragging": false
       },
@@ -3165,8 +3165,8 @@
         "id": "node_2j9lc61c_mmfaujna",
         "type": "familyNode",
         "position": {
-          "x": 1557.9681586574554,
-          "y": -423.3753479259193
+          "x": 1227.9681586574554,
+          "y": -345.3753479259192
         },
         "data": {
           "nodeType": "persons",
@@ -3196,7 +3196,7 @@
               "spread": 40
             },
             "bottom": {
-              "anchor": 50,
+              "anchor": 9,
               "spread": 40
             },
             "left": {
@@ -3220,7 +3220,7 @@
             },
             {
               "id": "person_5nu9u487_mmfaw80c",
-              "fullName": "Gene Mintoor",
+              "fullName": "Jene Mintoor",
               "nickname": "",
               "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
               "relationshipToPrimary": "other"
@@ -3228,13 +3228,13 @@
             {
               "id": "person_8t7vsrh4_mmfaw8so",
               "fullName": "Heinrich Mintoor",
-              "nickname": "Hinie",
+              "nickname": "Heinie",
               "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
               "relationshipToPrimary": "other"
             },
             {
               "id": "person_bhwvon8w_mmfaw9ka",
-              "fullName": "Own Mintoor",
+              "fullName": "Owen Mintoor",
               "nickname": "",
               "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png",
               "relationshipToPrimary": "other"
@@ -3303,10 +3303,10 @@
         },
         "width": 325,
         "height": 325,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 1557.9681586574554,
-          "y": -423.3753479259193
+          "x": 1227.9681586574554,
+          "y": -345.3753479259192
         },
         "dragging": false
       },
@@ -3794,8 +3794,8 @@
         "id": "node_o0ju7wdx_mmfb258c",
         "type": "familyNode",
         "position": {
-          "x": -131.96202633077922,
-          "y": -503.84366445494624
+          "x": -153.96202633077922,
+          "y": -637.8436644549463
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3905,8 +3905,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": -131.96202633077922,
-          "y": -503.84366445494624
+          "x": -153.96202633077922,
+          "y": -637.8436644549463
         },
         "dragging": false
       },
@@ -3914,12 +3914,12 @@
         "id": "node_ouci43n2_mmfbla1v",
         "type": "familyNode",
         "position": {
-          "x": 1161.9268490247982,
-          "y": -65.64230100863796
+          "x": 745.9268490247982,
+          "y": -55.64230100863796
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "Eline Mintoor",
+          "title": "Elien Mintoor",
           "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
           "photoCaption": "",
           "location": "",
@@ -3962,7 +3962,7 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "Eline Mintoor",
+            "fullName": "Elien Mintoor",
             "nickname": "Hata",
             "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg",
             "prefix": "Mrs",
@@ -4056,7 +4056,7 @@
               "siblings": false
             },
             "nodeMeta": {
-              "title": "Eline Mintoor",
+              "title": "Elien Mintoor",
               "thumbnailPhoto": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
               "photoCaption": "",
               "eventDate": "",
@@ -4068,8 +4068,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1161.9268490247982,
-          "y": -65.64230100863796
+          "x": 745.9268490247982,
+          "y": -55.64230100863796
         },
         "dragging": false
       },
@@ -4077,8 +4077,8 @@
         "id": "node_60wfgw6q_mmfbqtyn",
         "type": "familyNode",
         "position": {
-          "x": -548.22701861198,
-          "y": -481.2940330638405
+          "x": -529.0421048258983,
+          "y": -403.18402693479345
         },
         "data": {
           "nodeType": "persons",
@@ -4221,28 +4221,16 @@
           }
         },
         "width": 369,
-        "height": 369
+        "height": 369,
+        "dragging": false,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -529.0421048258983,
+          "y": -403.18402693479345
+        }
       }
     ],
     "edges": [
-      {
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "top-source-50",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "top-1",
-        "id": "edge_97impdkt_mmb58rnx",
-        "animated": true,
-        "type": "smoothstep"
-      },
-      {
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "right-1",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "right-target-50",
-        "id": "edge_l013msig_mmb58whn",
-        "animated": true,
-        "type": "smoothstep"
-      },
       {
         "source": "node_i4c3kxp1_mmazde9b",
         "sourceHandle": "left-2-target",
@@ -4278,7 +4266,7 @@
         "target": "node_a536uox5_mme44h15",
         "targetHandle": "bottom-1",
         "id": "edge_yxb3br2p_mme46i36",
-        "selected": true
+        "selected": false
       },
       {
         "type": "default",
@@ -4398,7 +4386,7 @@
         "target": "node_7ciodjxr_mmfa2rzi",
         "targetHandle": "bottom-1",
         "id": "edge_s0bjavqn_mmfbdw3i",
-        "selected": true
+        "selected": false
       },
       {
         "type": "default",
@@ -4407,18 +4395,7 @@
         "sourceHandle": "top-2",
         "target": "node_ouci43n2_mmfbla1v",
         "targetHandle": "bottom-1",
-        "id": "edge_jiopx3r8_mmfbo2k3",
-        "selected": true
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_60wfgw6q_mmfbqtyn",
-        "sourceHandle": "bottom-1",
-        "target": "node_ivecs8z4_mmf6h215",
-        "targetHandle": "top-1",
-        "id": "edge_0iy9j45s_mmfbqtyn",
-        "selected": false
+        "id": "edge_jiopx3r8_mmfbo2k3"
       },
       {
         "type": "default",
@@ -4427,63 +4404,7 @@
         "sourceHandle": "right-1",
         "target": "node_2j9lc61c_mmfaujna",
         "targetHandle": "bottom-1",
-        "id": "edge_19stjoe8_mmfbr8y8",
-        "selected": false
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "left-1",
-        "target": "node_epcks337_mmb8wcv0",
-        "targetHandle": "right-1",
-        "id": "edge_wf40yqks_mmfd10kv"
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "left-2",
-        "target": "node_67f3wycj_mmb8svip",
-        "targetHandle": "right-1",
-        "id": "edge_iu8h5gxc_mmfd1254"
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "left-3",
-        "target": "node_5qwwykwa_mmb8uizn",
-        "targetHandle": "right-1",
-        "id": "edge_kva6kmzh_mmfefix3"
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "right-1",
-        "target": "node_2bm1t8e8_mmb90z41",
-        "targetHandle": "bottom-1",
-        "id": "edge_onzxmw2p_mmfeqtye"
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "right-2",
-        "target": "node_hptk6sjk_mmea8q9e",
-        "targetHandle": "left-1",
-        "id": "edge_bpxr89qv_mmfer7ky",
-        "selected": false
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "right-3",
-        "target": "node_1u3w2l43_mmb91ckp",
-        "targetHandle": "left-1",
-        "id": "edge_c0zpt3fq_mmfer9fo"
+        "id": "edge_19stjoe8_mmfbr8y8"
       },
       {
         "type": "default",
@@ -4492,7 +4413,7 @@
         "sourceHandle": "top-1",
         "target": "node_30sqckxd_mmb8xqmn",
         "targetHandle": "bottom-1",
-        "id": "edge_bs6nfz75_mmfesh76"
+        "id": "edge_7gyaq5gm_mmfgs4pd"
       },
       {
         "type": "default",
@@ -4501,7 +4422,7 @@
         "sourceHandle": "top-2",
         "target": "node_lj8aj66f_mmb9jq6r",
         "targetHandle": "bottom-1",
-        "id": "edge_5mtox352_mmfesxfc"
+        "id": "edge_1qvqevww_mmfgs65n"
       },
       {
         "type": "default",
@@ -4510,13 +4431,76 @@
         "sourceHandle": "top-3",
         "target": "node_4v0225g0_mmb8xy8r",
         "targetHandle": "bottom-1",
-        "id": "edge_1paipb2h_mmfesz1y"
+        "id": "edge_zqk4n2ig_mmfgs808"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "right-1",
+        "target": "node_2bm1t8e8_mmb90z41",
+        "targetHandle": "bottom-1",
+        "id": "edge_z96ai7o3_mmfgskkj"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "right-2",
+        "target": "node_hptk6sjk_mmea8q9e",
+        "targetHandle": "left-1",
+        "id": "edge_mjr957aq_mmfgso9p"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "right-3",
+        "target": "node_1u3w2l43_mmb91ckp",
+        "targetHandle": "left-1",
+        "id": "edge_t0e1siwc_mmfgspxs"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "left-1",
+        "target": "node_epcks337_mmb8wcv0",
+        "targetHandle": "right-1",
+        "id": "edge_dlc3w12s_mmfgsrwe"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "left-2",
+        "target": "node_67f3wycj_mmb8svip",
+        "targetHandle": "right-1",
+        "id": "edge_xze41z48_mmfgstqs"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "left-3",
+        "target": "node_5qwwykwa_mmb8uizn",
+        "targetHandle": "right-1",
+        "id": "edge_gajywufs_mmfgsvm1"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_ivecs8z4_mmf6h215",
+        "sourceHandle": "top-1",
+        "target": "node_60wfgw6q_mmfbqtyn",
+        "targetHandle": "bottom-1",
+        "id": "edge_naytct5q_mmfgt269"
       }
     ],
     "viewport": {
-      "x": 996.7010346576726,
-      "y": 618.3176696353005,
-      "zoom": 0.5000000000000001
+      "x": -571.196751921826,
+      "y": 785.910616930574,
+      "zoom": 1.0650410894399633
     },
     "appSettings": {
       "backgroundColor": "#060a13",
@@ -6263,7 +6247,7 @@
         "maidenName": "",
         "birthDate": "1994-12-20",
         "birthPlace": "",
-        "stillAlive": true,
+        "stillAlive": false,
         "deathDate": "",
         "deathPlace": "",
         "occupation": "",
@@ -6319,35 +6303,35 @@
         }
       },
       {
-        "id": "person_cxdeea3n_mmfaw6ft",
+        "id": "person_wrcjeoum_mmfbqtyn",
         "fullName": "Jerico Lawrence Samson",
         "nickname": "",
         "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
         "relationshipToPrimary": "primary"
       },
       {
-        "id": "person_5nu9u487_mmfaw80c",
+        "id": "person_7ndfeoff_mmfbqtyn",
         "fullName": "Olivia Lucille Solomns",
         "nickname": "",
         "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
         "relationshipToPrimary": "other"
       },
       {
-        "id": "person_8t7vsrh4_mmfaw8so",
+        "id": "person_pxbgz15d_mmfbqtyn",
         "fullName": "Peter Kenneth Solomons",
         "nickname": "",
         "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
         "relationshipToPrimary": "other"
       },
       {
-        "id": "person_bhwvon8w_mmfaw9ka",
+        "id": "person_wo2ufbjb_mmfbqtyn",
         "fullName": "Jaylynn Joan Samson",
         "nickname": "",
         "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
         "relationshipToPrimary": "other"
       },
       {
-        "id": "person_k3k95kro_mmfawaog",
+        "id": "person_f5bduna0_mmfbqtyn",
         "fullName": "Sthephanie Elmareze Samson",
         "nickname": "",
         "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
@@ -6510,11 +6494,11 @@
         "relationshipNotes": ""
       },
       {
-        "id": "person_cxdeea3n_mmfaw6ft",
+        "id": "person_bhwvon8w_mmfaw9ka",
         "fullName": "Owen Mintoor",
         "nickname": "",
-        "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
-        "relationshipToPrimary": "primary"
+        "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png",
+        "relationshipToPrimary": "other"
       },
       {
         "id": "person_5nu9u487_mmfaw80c",
@@ -6533,7 +6517,7 @@
       {
         "id": "person_8t7vsrh4_mmfaw8so",
         "fullName": "Heinrich Mintoor",
-        "nickname": "Hinie",
+        "nickname": "Heinie",
         "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
         "relationshipToPrimary": "other"
       },
@@ -6547,6 +6531,93 @@
       {
         "fullName": "Delphin Mintoor",
         "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+      },
+      {
+        "id": "person_sgfulgr3_mmbb5bma",
+        "fullName": "Elien Mintoor",
+        "nickname": "Hata",
+        "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Grieta Coetzee",
+          "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [
+          {
+            "name": "Delphin Mintoor",
+            "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+          }
+        ],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Clive Ivon Morta",
+            "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+          },
+          {
+            "name": "Leonard Coetzee",
+            "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png"
+          },
+          {
+            "name": "Patrick Coetzee",
+            "photo": ""
+          },
+          {
+            "name": "Mario Coetzee",
+            "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+          },
+          {
+            "name": "Ricardo Coetzee",
+            "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
+          }
+        ],
+        "hiddenFields": {},
+        "nodeMeta": {
+          "title": "Elien Mintoor",
+          "thumbnailPhoto": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        },
+        "relationshipToPrimary": "other",
+        "gender": "unknown",
+        "burialPlace": "",
+        "residence": "",
+        "confidence": "unconfirmed",
+        "sources": "",
+        "parents": [],
+        "relationshipNotes": "",
+        "relationshipStatus": "married"
+      },
+      {
+        "id": "person_5nu9u487_mmfaw80c",
+        "fullName": "Jene Mintoor",
+        "nickname": "",
+        "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
+        "relationshipToPrimary": "other"
       }
     ]
   }

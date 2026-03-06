@@ -54,34 +54,62 @@ function parseHandleId(handleId) {
   };
 }
 
-function remapHandleId(handleId, requestedHandles) {
+function isHandleWithinRequestedCount(handleId, requestedHandles) {
   const parsed = parseHandleId(handleId);
   if (!parsed) {
-    return handleId;
+    return true;
   }
 
   const requestedCount = Math.max(0, Number(requestedHandles?.[parsed.side]) || 0);
-  if (requestedCount <= 0) {
-    return `${parsed.side}-1`;
-  }
-
-  const clampedIndex = Math.min(parsed.index, requestedCount);
-  return `${parsed.side}-${clampedIndex}`;
+  return requestedCount > 0 && parsed.index <= requestedCount;
 }
 
-function remapNodeEdges(edges, nodeId, requestedHandles) {
-  return edges.map((edge) => {
-    const nextEdge = { ...edge };
-
-    if (edge.source === nodeId) {
-      nextEdge.sourceHandle = remapHandleId(edge.sourceHandle, requestedHandles);
+function pruneNodeEdges(edges, nodeId, requestedHandles) {
+  return edges.filter((edge) => {
+    if (edge.source === nodeId && !isHandleWithinRequestedCount(edge.sourceHandle, requestedHandles)) {
+      return false;
     }
 
-    if (edge.target === nodeId) {
-      nextEdge.targetHandle = remapHandleId(edge.targetHandle, requestedHandles);
+    if (edge.target === nodeId && !isHandleWithinRequestedCount(edge.targetHandle, requestedHandles)) {
+      return false;
     }
 
-    return nextEdge;
+    return true;
+  });
+}
+
+function buildNodeLookup(nodes = []) {
+  return new Map(nodes.map((node) => [node.id, node]));
+}
+
+function edgeHandleExistsOnNode(node, handleId) {
+  if (!node || !handleId) {
+    return false;
+  }
+
+  return isHandleWithinRequestedCount(handleId, node.data?.handles || {});
+}
+
+function sanitizeEdgesForNodes(edges = [], nodes = []) {
+  const nodeLookup = buildNodeLookup(nodes);
+
+  return edges.filter((edge) => {
+    const sourceNode = nodeLookup.get(edge.source);
+    const targetNode = nodeLookup.get(edge.target);
+
+    if (!sourceNode || !targetNode) {
+      return false;
+    }
+
+    if (!edgeHandleExistsOnNode(sourceNode, edge.sourceHandle)) {
+      return false;
+    }
+
+    if (!edgeHandleExistsOnNode(targetNode, edge.targetHandle)) {
+      return false;
+    }
+
+    return true;
   });
 }
 
@@ -182,17 +210,19 @@ export function appReducer(state, action) {
         ...node,
         data: normalizeNodeData(node.data || {})
       }));
+      const edges = sanitizeEdgesForNodes(payload.edges || [], nodes);
       const savedPeople = Array.isArray(payload.savedPeople) ? payload.savedPeople : [];
       return {
         ...state,
         nodes,
-        edges: payload.edges || [],
+        edges,
         viewport: payload.viewport || state.viewport,
         appSettings: {
           ...DEFAULT_APP_SETTINGS,
           ...(payload.appSettings || {})
         },
-        savedPeople
+        savedPeople,
+        selectedEdgeId: edges.some((edge) => edge.id === state.selectedEdgeId) ? state.selectedEdgeId : null
       };
     }
 
@@ -340,12 +370,19 @@ export function appReducer(state, action) {
         return state;
       }
 
-      const nextNodeData = mergeNodeData(targetNode.data, data, state.edges, id);
-      const remappedEdges = remapNodeEdges(state.edges, id, nextNodeData.handles);
+      const mergedNodeData = normalizeNodeData({ ...targetNode.data, ...data });
+      const requestedHandles = sanitizeHandleCounts(mergedNodeData.handles);
+      const prunedEdges = pruneNodeEdges(state.edges, id, requestedHandles);
+      const nextNodeData = {
+        ...mergedNodeData,
+        handles: ensureConnectedSidesHaveCapacity(prunedEdges, id, requestedHandles),
+        handleLayout: sanitizeHandleLayout(mergedNodeData.handleLayout)
+      };
 
       return {
         ...state,
-        edges: remappedEdges,
+        edges: prunedEdges,
+        selectedEdgeId: prunedEdges.some((edge) => edge.id === state.selectedEdgeId) ? state.selectedEdgeId : null,
         nodes: state.nodes.map((node) =>
           node.id === id
             ? {

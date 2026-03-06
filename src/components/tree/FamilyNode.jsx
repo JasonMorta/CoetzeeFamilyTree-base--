@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useMemo } from 'react';
 import { Handle, Position, useUpdateNodeInternals } from 'reactflow';
 import { Button } from 'rsuite';
 import styles from './FamilyNode.module.css';
@@ -45,7 +45,7 @@ function renderHandles({ nodeId, side, count, layout, connectedSlotIds, showAllH
 
     return (
       <Handle
-        key={`${nodeId}-${slotId}`}
+        key={`${nodeId}-${slotId}-${usageCount}`}
         id={slotId}
         type="source"
         position={config.position}
@@ -117,10 +117,20 @@ function renderImageArea(data) {
 
 function FamilyNode({ id, data, selected }) {
   const updateNodeInternals = useUpdateNodeInternals();
+  const handleSyncSignature = useMemo(() => JSON.stringify({
+    handles: data.handles || {},
+    handleLayout: data.handleLayout || {},
+    nodeWidth: data.nodeWidth,
+    nodeHeight: data.nodeHeight,
+    nodeType: data.nodeType,
+    peopleCount: Array.isArray(data.people) ? data.people.length : 0,
+    connectedSlotIds: Array.isArray(data.connectedSlotIds) ? [...data.connectedSlotIds].sort() : [],
+    handleUsage: data.handleUsage || {}
+  }), [data.handles, data.handleLayout, data.nodeWidth, data.nodeHeight, data.nodeType, data.people, data.connectedSlotIds, data.handleUsage]);
 
   useEffect(() => {
     updateNodeInternals(id);
-  }, [id, data.handles, data.handleLayout, data.nodeWidth, data.nodeHeight, data.nodeType, data.people, updateNodeInternals]);
+  }, [id, handleSyncSignature, updateNodeInternals]);
 
   const width = Math.max(100, Number(data.nodeWidth) || 220);
   const height = Math.max(100, Number(data.nodeHeight) || 220);

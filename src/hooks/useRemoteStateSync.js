@@ -1,25 +1,17 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { ACTIONS } from '../context/appReducer';
 import { fetchRemoteSnapshot } from '../services/remoteStateService';
-import { getPersistedSnapshot, saveAppMeta } from '../services/localStorageService';
-import { hashObject } from '../utils/stableHash';
+import { saveAppMeta } from '../services/localStorageService';
 
 import { LOCAL_STATE_PATH } from '../services/remoteStateService';
 
 const REMOTE_URL = LOCAL_STATE_PATH;
 
-function shouldApplyRemote(localHash, remoteHash) {
-  // If nothing exists locally, remote becomes the source of truth.
-  if (!localHash) return true;
-  // Apply remote only if it's different.
-  return String(localHash) !== String(remoteHash);
-}
-
 /**
  * Keeps viewer clients in sync with the bundled JSON state snapshot.
  *
- * - On load: fetch the latest bundled JSON and compare to localStorage snapshot.
- * - If the file differs, apply it and let the existing localStorage sync persist it.
+ * - On load: fetch the latest bundled JSON and always apply it as the startup source of truth.
+ * - Logged-in admins can then keep working from in-memory state, with localStorage acting as a session cache only after the JSON has loaded.
  * - Exposes a manual refresh action with a 30s cooldown (for viewers).
  */
 export function useRemoteStateSync(state, dispatch) {
@@ -44,18 +36,13 @@ export function useRemoteStateSync(state, dispatch) {
       return result;
     }
 
-    const localSnapshot = getPersistedSnapshot(state);
-    const localHash = hashObject(localSnapshot);
-
     const remoteHash = result.meta.hash || result.meta.computedHash;
 
-    if (shouldApplyRemote(localHash, remoteHash)) {
-      dispatch({ type: ACTIONS.APPLY_REMOTE_SNAPSHOT, payload: result.snapshot });
+    dispatch({ type: ACTIONS.APPLY_REMOTE_SNAPSHOT, payload: result.snapshot });
 
-      // Save meta so admins can see what was last pulled/exported.
-      saveAppMeta({ hash: remoteHash, exportedAt: result.meta.exportedAt || new Date().toISOString() });
-      dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: remoteHash });
-    }
+    // Save meta so admins can see what was last pulled/exported.
+    saveAppMeta({ hash: remoteHash, exportedAt: result.meta.exportedAt || new Date().toISOString() });
+    dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: remoteHash });
 
     dispatch({
       type: ACTIONS.REMOTE_SYNC_END,
@@ -64,7 +51,7 @@ export function useRemoteStateSync(state, dispatch) {
 
     inFlightRef.current = false;
     return { ok: true };
-  }, [dispatch, state]);
+  }, [dispatch]);
 
   // Auto-run on mount so both local admins and live viewers start from the saved JSON file.
   useEffect(() => {

@@ -84,6 +84,42 @@ function isHandleAvailable(edgeList, nodeId, handleId) {
   );
 }
 
+
+function isHandleDefinedOnNode(node, handleId) {
+  const match = String(handleId || '').match(/^(top|right|bottom|left)-(\d+)$/);
+  if (!match) {
+    return false;
+  }
+
+  const side = match[1];
+  const index = Number(match[2]) || 0;
+  const count = Number(node?.data?.handles?.[side]) || 0;
+  return index >= 1 && index <= count;
+}
+
+function sanitizeRenderableEdges(edges, nodes) {
+  const nodeLookup = new Map(nodes.map((node) => [node.id, node]));
+
+  return edges.filter((edge) => {
+    const sourceNode = nodeLookup.get(edge.source);
+    const targetNode = nodeLookup.get(edge.target);
+
+    if (!sourceNode || !targetNode) {
+      return false;
+    }
+
+    if (!isHandleDefinedOnNode(sourceNode, edge.sourceHandle)) {
+      return false;
+    }
+
+    if (!isHandleDefinedOnNode(targetNode, edge.targetHandle)) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
 export default function FamilyTreeCanvas() {
   const { state, dispatch } = useAppState();
   const { refreshWithCooldown } = useRemoteStateSync(state, dispatch);
@@ -124,7 +160,7 @@ export default function FamilyTreeCanvas() {
 
   const edges = useMemo(
     () =>
-      state.edges.map((edge) => ({
+      sanitizeRenderableEdges(state.edges, state.nodes).map((edge) => ({
         ...edge,
         // IMPORTANT: React Flow does not recognise "bezier" as an edge type.
         // Using "bezier" here causes warning spam (and can slow down the app).
@@ -136,7 +172,7 @@ export default function FamilyTreeCanvas() {
           stroke: state.selectedEdgeId === edge.id ? '#22d3ee' : state.appSettings.edgeColor
         }
       })),
-    [state.edges, state.selectedEdgeId, state.appSettings]
+    [state.edges, state.nodes, state.selectedEdgeId, state.appSettings]
   );
 
   const defaultEdgeOptions = useMemo(
