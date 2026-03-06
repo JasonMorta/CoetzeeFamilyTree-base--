@@ -9,7 +9,7 @@ export const STORAGE_KEYS = {
 
 export const APP_METADATA = {
   appName: 'Coetzee Family Tree',
-  version: '1.9.6',
+  version: '1.9.13',
   author: 'JasonM'
 };
 

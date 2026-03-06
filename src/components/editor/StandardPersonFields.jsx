@@ -40,6 +40,49 @@ function FieldRow({ label, hidden, onToggleHidden, children }) {
   );
 }
 
+const MultiRelationshipField = memo(function MultiRelationshipField({
+  label,
+  field,
+  hidden,
+  onToggleHidden,
+  options,
+  valueArr,
+  onChange,
+  onSearch,
+  onPhotoChange
+}) {
+  return (
+    <FieldRow label={label} hidden={hidden} onToggleHidden={onToggleHidden}>
+      <TagPicker
+        data={options}
+        value={valueArr.map((x) => x.name)}
+        onChange={onChange}
+        onSearch={onSearch}
+        placeholder="Type or select"
+        searchable
+        cleanable
+        creatable
+        block
+        renderMenuItem={renderPersonOption}
+      />
+      {valueArr.length ? (
+        <div className={styles.relationshipPhotos}>
+          {valueArr.map((x) => (
+            <div key={`${field}-${x.name}`} className={styles.relationshipPhotoRow}>
+              <div className={styles.relationshipPhotoName}>{x.name}</div>
+              <Input
+                value={x.photo || ''}
+                onChange={(val) => onPhotoChange(x.name, val)}
+                placeholder="Image URL (optional)"
+              />
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </FieldRow>
+  );
+});
+
 function buildHybridList(savedPeopleOptions, keyword, selected = []) {
   const kw = (keyword || '').trim().toLowerCase();
   const filtered = !kw ? savedPeopleOptions : savedPeopleOptions.filter((o) => o.value.toLowerCase().includes(kw));
@@ -245,40 +288,6 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
   const adoptiveParentsOptions = useMemo(() => buildHybridList(savedPeopleOptions, adoptiveParentsSearch, adoptiveParentsArr.map((c) => c.name)), [savedPeopleOptions, adoptiveParentsSearch, adoptiveParentsArr]);
   const adoptedChildrenOptions = useMemo(() => buildHybridList(savedPeopleOptions, adoptedChildrenSearch, adoptedChildrenArr.map((c) => c.name)), [savedPeopleOptions, adoptedChildrenSearch, adoptedChildrenArr]);
 
-  const MultiRel = ({ label, field, options, searchSetter, valueArr, searchValue }) => (
-    <FieldRow
-      label={label}
-      hidden={fieldHidden(person, field)}
-      onToggleHidden={(checked) => updateHiddenField('relationships', field, checked)}
-    >
-      <TagPicker
-        data={options}
-        value={valueArr.map((x) => x.name)}
-        onChange={(val) => setRelMulti(field, val)}
-        onSearch={(kw) => searchSetter(kw)}
-        placeholder="Type or select"
-        searchable
-        cleanable
-        creatable
-        block
-        renderMenuItem={renderPersonOption}
-      />
-      {valueArr.length ? (
-        <div className={styles.relationshipPhotos}>
-          {valueArr.map((x) => (
-            <div key={`${field}-${x.name}`} className={styles.relationshipPhotoRow}>
-              <div className={styles.relationshipPhotoName}>{x.name}</div>
-              <Input
-                value={x.photo || ''}
-                onChange={(val) => setRelMultiPhoto(field, x.name, val)}
-                placeholder="Image URL (optional)"
-              />
-            </div>
-          ))}
-        </div>
-      ) : null}
-    </FieldRow>
-  );
 
   return (
     <div className={styles.standardPersonWrap}>
@@ -511,19 +520,19 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
           ) : null}
         </FieldRow>
 
-        <MultiRel label="Children" field="children" options={childrenOptions} searchSetter={setChildrenSearch} valueArr={childrenArr} searchValue={childrenSearch} />
-        <MultiRel label="Siblings" field="siblings" options={siblingsOptions} searchSetter={setSiblingsSearch} valueArr={siblingsArr} searchValue={siblingsSearch} />
-        <MultiRel label="Girlfriends" field="girlfriends" options={girlfriendsOptions} searchSetter={setGirlfriendsSearch} valueArr={girlfriendsArr} searchValue={girlfriendsSearch} />
-        <MultiRel label="Boyfriends" field="boyfriends" options={boyfriendsOptions} searchSetter={setBoyfriendsSearch} valueArr={boyfriendsArr} searchValue={boyfriendsSearch} />
-        <MultiRel label="Husbands" field="husbands" options={husbandsOptions} searchSetter={setHusbandsSearch} valueArr={husbandsArr} searchValue={husbandsSearch} />
-        <MultiRel label="Wives" field="wives" options={wivesOptions} searchSetter={setWivesSearch} valueArr={wivesArr} searchValue={wivesSearch} />
+        <MultiRelationshipField label="Children" field="children" hidden={fieldHidden(person, 'children')} onToggleHidden={(checked) => updateHiddenField('relationships', 'children', checked)} options={childrenOptions} valueArr={childrenArr} onChange={(val) => setRelMulti('children', val)} onSearch={(kw) => setChildrenSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('children', name, val)} />
+        <MultiRelationshipField label="Siblings" field="siblings" hidden={fieldHidden(person, 'siblings')} onToggleHidden={(checked) => updateHiddenField('relationships', 'siblings', checked)} options={siblingsOptions} valueArr={siblingsArr} onChange={(val) => setRelMulti('siblings', val)} onSearch={(kw) => setSiblingsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('siblings', name, val)} />
+        <MultiRelationshipField label="Girlfriends" field="girlfriends" hidden={fieldHidden(person, 'girlfriends')} onToggleHidden={(checked) => updateHiddenField('relationships', 'girlfriends', checked)} options={girlfriendsOptions} valueArr={girlfriendsArr} onChange={(val) => setRelMulti('girlfriends', val)} onSearch={(kw) => setGirlfriendsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('girlfriends', name, val)} />
+        <MultiRelationshipField label="Boyfriends" field="boyfriends" hidden={fieldHidden(person, 'boyfriends')} onToggleHidden={(checked) => updateHiddenField('relationships', 'boyfriends', checked)} options={boyfriendsOptions} valueArr={boyfriendsArr} onChange={(val) => setRelMulti('boyfriends', val)} onSearch={(kw) => setBoyfriendsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('boyfriends', name, val)} />
+        <MultiRelationshipField label="Husbands" field="husbands" hidden={fieldHidden(person, 'husbands')} onToggleHidden={(checked) => updateHiddenField('relationships', 'husbands', checked)} options={husbandsOptions} valueArr={husbandsArr} onChange={(val) => setRelMulti('husbands', val)} onSearch={(kw) => setHusbandsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('husbands', name, val)} />
+        <MultiRelationshipField label="Wives" field="wives" hidden={fieldHidden(person, 'wives')} onToggleHidden={(checked) => updateHiddenField('relationships', 'wives', checked)} options={wivesOptions} valueArr={wivesArr} onChange={(val) => setRelMulti('wives', val)} onSearch={(kw) => setWivesSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('wives', name, val)} />
 
-        <MultiRel label="Step fathers" field="stepFathers" options={stepFathersOptions} searchSetter={setStepFathersSearch} valueArr={stepFathersArr} searchValue={stepFathersSearch} />
-        <MultiRel label="Step mothers" field="stepMothers" options={stepMothersOptions} searchSetter={setStepMothersSearch} valueArr={stepMothersArr} searchValue={stepMothersSearch} />
-        <MultiRel label="Foster parents" field="fosterParents" options={fosterParentsOptions} searchSetter={setFosterParentsSearch} valueArr={fosterParentsArr} searchValue={fosterParentsSearch} />
-        <MultiRel label="Foster children" field="fosterChildren" options={fosterChildrenOptions} searchSetter={setFosterChildrenSearch} valueArr={fosterChildrenArr} searchValue={fosterChildrenSearch} />
-        <MultiRel label="Adoptive parents" field="adoptiveParents" options={adoptiveParentsOptions} searchSetter={setAdoptiveParentsSearch} valueArr={adoptiveParentsArr} searchValue={adoptiveParentsSearch} />
-        <MultiRel label="Adopted children" field="adoptedChildren" options={adoptedChildrenOptions} searchSetter={setAdoptedChildrenSearch} valueArr={adoptedChildrenArr} searchValue={adoptedChildrenSearch} />
+        <MultiRelationshipField label="Step fathers" field="stepFathers" hidden={fieldHidden(person, 'stepFathers')} onToggleHidden={(checked) => updateHiddenField('relationships', 'stepFathers', checked)} options={stepFathersOptions} valueArr={stepFathersArr} onChange={(val) => setRelMulti('stepFathers', val)} onSearch={(kw) => setStepFathersSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('stepFathers', name, val)} />
+        <MultiRelationshipField label="Step mothers" field="stepMothers" hidden={fieldHidden(person, 'stepMothers')} onToggleHidden={(checked) => updateHiddenField('relationships', 'stepMothers', checked)} options={stepMothersOptions} valueArr={stepMothersArr} onChange={(val) => setRelMulti('stepMothers', val)} onSearch={(kw) => setStepMothersSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('stepMothers', name, val)} />
+        <MultiRelationshipField label="Foster parents" field="fosterParents" hidden={fieldHidden(person, 'fosterParents')} onToggleHidden={(checked) => updateHiddenField('relationships', 'fosterParents', checked)} options={fosterParentsOptions} valueArr={fosterParentsArr} onChange={(val) => setRelMulti('fosterParents', val)} onSearch={(kw) => setFosterParentsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('fosterParents', name, val)} />
+        <MultiRelationshipField label="Foster children" field="fosterChildren" hidden={fieldHidden(person, 'fosterChildren')} onToggleHidden={(checked) => updateHiddenField('relationships', 'fosterChildren', checked)} options={fosterChildrenOptions} valueArr={fosterChildrenArr} onChange={(val) => setRelMulti('fosterChildren', val)} onSearch={(kw) => setFosterChildrenSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('fosterChildren', name, val)} />
+        <MultiRelationshipField label="Adoptive parents" field="adoptiveParents" hidden={fieldHidden(person, 'adoptiveParents')} onToggleHidden={(checked) => updateHiddenField('relationships', 'adoptiveParents', checked)} options={adoptiveParentsOptions} valueArr={adoptiveParentsArr} onChange={(val) => setRelMulti('adoptiveParents', val)} onSearch={(kw) => setAdoptiveParentsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('adoptiveParents', name, val)} />
+        <MultiRelationshipField label="Adopted children" field="adoptedChildren" hidden={fieldHidden(person, 'adoptedChildren')} onToggleHidden={(checked) => updateHiddenField('relationships', 'adoptedChildren', checked)} options={adoptedChildrenOptions} valueArr={adoptedChildrenArr} onChange={(val) => setRelMulti('adoptedChildren', val)} onSearch={(kw) => setAdoptedChildrenSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('adoptedChildren', name, val)} />
 
         <Button
           appearance="primary"

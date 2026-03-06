@@ -1,8 +1,8 @@
 {
   "meta": {
-    "hash": "fe1b0808",
-    "exportedAt": "2026-03-06T22:31:45.153Z",
-    "appVersion": "1.9.6"
+    "hash": "2e613864",
+    "exportedAt": "2026-03-06T23:55:32.223Z",
+    "appVersion": "1.9.13"
   },
   "data": {
     "nodes": [
@@ -1567,7 +1567,7 @@
         "id": "node_a536uox5_mme44h15",
         "type": "familyNode",
         "position": {
-          "x": 389.99415683278573,
+          "x": 388.62380584806556,
           "y": -61.54205933765991
         },
         "data": {
@@ -1665,10 +1665,31 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Leonard Coetzee",
+                "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png"
+              },
+              {
+                "name": "Elien Mintoor",
+                "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+              },
+              {
+                "name": "Patrick Coetzee",
+                "photo": ""
+              },
+              {
+                "name": "Ricardo Coetzee",
+                "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
+              },
+              {
+                "name": "Mario Coetzee",
+                "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
+              "father": false,
+              "mother": false,
               "children": false,
               "girlfriends": true,
               "boyfriends": true,
@@ -1680,7 +1701,7 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true,
+              "siblings": false,
               "deathPlace": true,
               "burialPlace": true,
               "deathDate": true,
@@ -1704,7 +1725,7 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": 389.99415683278573,
+          "x": 388.62380584806556,
           "y": -61.54205933765991
         },
         "dragging": false,
@@ -2669,8 +2690,8 @@
         "id": "node_9dxd1tt9_mmf9c7po",
         "type": "familyNode",
         "position": {
-          "x": 913.7421511088855,
-          "y": 581.8895363012016
+          "x": 887.7054823992032,
+          "y": 584.6302382706418
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2782,8 +2803,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 913.7421511088855,
-          "y": 581.8895363012016
+          "x": 887.7054823992032,
+          "y": 584.6302382706418
         },
         "dragging": false
       },
@@ -2792,7 +2813,7 @@
         "type": "familyNode",
         "position": {
           "x": 1155.5054841379613,
-          "y": 331.5106066131835
+          "y": 330.4455655237435
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2808,7 +2829,7 @@
           "nodeRadius": 18,
           "handles": {
             "top": 0,
-            "right": 0,
+            "right": 2,
             "bottom": 1,
             "left": 0
           },
@@ -2818,8 +2839,8 @@
               "spread": 40
             },
             "right": {
-              "anchor": 50,
-              "spread": 40
+              "anchor": 47,
+              "spread": 9
             },
             "bottom": {
               "anchor": 50,
@@ -2861,11 +2882,25 @@
               "name": "Jackie Coetzee",
               "photo": "https://i.ibb.co/FbxXJM7M/Jackie-Coetzee.png"
             },
-            "children": [],
+            "children": [
+              {
+                "name": "Tracey-lee Coetzee",
+                "photo": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png"
+              },
+              {
+                "name": "Daminan Coetzee",
+                "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png"
+              }
+            ],
             "girlfriends": [],
             "boyfriends": [],
             "husbands": [],
-            "wives": [],
+            "wives": [
+              {
+                "name": "Daviana Coetzee",
+                "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+              }
+            ],
             "stepFathers": [],
             "stepMothers": [],
             "fosterParents": [],
@@ -2885,7 +2920,7 @@
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
-              "wives": true,
+              "wives": false,
               "stepFathers": true,
               "stepMothers": true,
               "fosterParents": true,
@@ -2909,7 +2944,7 @@
         "selected": true,
         "positionAbsolute": {
           "x": 1155.5054841379613,
-          "y": 331.5106066131835
+          "y": 330.4455655237435
         },
         "dragging": false
       },
@@ -3165,8 +3200,8 @@
         "id": "node_2j9lc61c_mmfaujna",
         "type": "familyNode",
         "position": {
-          "x": 1227.9681586574554,
-          "y": -345.3753479259192
+          "x": 1234.819913581056,
+          "y": -324.82008315511735
         },
         "data": {
           "nodeType": "persons",
@@ -3181,15 +3216,15 @@
           "nodeHeight": 325,
           "nodeRadius": 18,
           "handles": {
-            "top": 0,
-            "right": 0,
+            "top": 2,
+            "right": 2,
             "bottom": 1,
             "left": 0
           },
           "handleLayout": {
             "top": {
-              "anchor": 50,
-              "spread": 40
+              "anchor": 71,
+              "spread": 81
             },
             "right": {
               "anchor": 50,
@@ -3303,10 +3338,10 @@
         },
         "width": 325,
         "height": 325,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": 1227.9681586574554,
-          "y": -345.3753479259192
+          "x": 1234.819913581056,
+          "y": -324.82008315511735
         },
         "dragging": false
       },
@@ -4066,7 +4101,7 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
           "x": 745.9268490247982,
           "y": -55.64230100863796
@@ -4228,6 +4263,877 @@
           "x": -529.0421048258983,
           "y": -403.18402693479345
         }
+      },
+      {
+        "id": "node_6ozg7iqb_mmfik0te",
+        "type": "familyNode",
+        "position": {
+          "x": 1376.9453355156263,
+          "y": 102.30612222136489
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Damian Coetzee",
+          "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Daminan Coetzee",
+            "nickname": "",
+            "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "2013-06-11",
+            "birthPlace": "Cape Town",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "Emerice Leonardo Coetzee",
+              "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+            },
+            "mother": {
+              "name": "Daviana Coetzee",
+              "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true,
+              "occupation": true
+            },
+            "nodeMeta": {
+              "title": "Damian Coetzee",
+              "thumbnailPhoto": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1376.9453355156263,
+          "y": 102.30612222136489
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_66z0cfhk_mmfimi4x",
+        "type": "familyNode",
+        "position": {
+          "x": 1560.489103120414,
+          "y": 331.5706481888077
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Tracey-lee Coetzee",
+          "photo": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 1
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Tracey-lee Coetzee",
+            "nickname": "",
+            "photo": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "2016-11-11",
+            "birthPlace": "Cape Town",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "Emerice Leonardo Coetzee",
+              "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+            },
+            "mother": {
+              "name": "Daviana Coetzee",
+              "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [
+              {
+                "name": "Daminan Coetzee",
+                "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png"
+              }
+            ],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true,
+              "occupation": true
+            },
+            "nodeMeta": {
+              "title": "Tracey-lee Coetzee",
+              "thumbnailPhoto": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1560.489103120414,
+          "y": 331.5706481888077
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_rumxdxm7_mmfirslw",
+        "type": "familyNode",
+        "position": {
+          "x": 1372.1697348219384,
+          "y": -644.6914713583977
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Reegan Mintoor",
+          "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 1,
+            "right": 0,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Reegan Mintoor",
+            "nickname": "",
+            "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "",
+            "birthPlace": "Cape Town",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "Delphin Mintoor",
+              "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+            },
+            "mother": {
+              "name": "Elien Mintoor",
+              "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+            },
+            "children": [
+              {
+                "name": "Ree Shaun",
+                "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png"
+              }
+            ],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [
+              {
+                "name": "Owen Mintoor",
+                "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png"
+              },
+              {
+                "name": "Jene Mintoor",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "name": "Heinrich Mintoor",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              }
+            ],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": false,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": false,
+              "prefix": true,
+              "maidenName": true
+            },
+            "nodeMeta": {
+              "title": "Reegan Mintoor",
+              "thumbnailPhoto": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1372.1697348219384,
+          "y": -644.6914713583977
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_w5iglyia_mmfirvr4",
+        "type": "familyNode",
+        "position": {
+          "x": 1631.4258923771579,
+          "y": -636.2095440069606
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "New Family Node",
+          "photo": "",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "",
+            "nickname": "",
+            "photo": "",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "",
+            "birthPlace": "",
+            "stillAlive": false,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "",
+              "photo": ""
+            },
+            "mother": {
+              "name": "",
+              "photo": ""
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": true,
+              "mother": true,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true
+            },
+            "nodeMeta": {
+              "title": "",
+              "thumbnailPhoto": "",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1631.4258923771579,
+          "y": -636.2095440069606
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_3uk9aqs9_mmfirygi",
+        "type": "familyNode",
+        "position": {
+          "x": 1842.7197654671734,
+          "y": -397.5086512225427
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "New Family Node",
+          "photo": "",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 1
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "",
+            "nickname": "",
+            "photo": "",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "",
+            "birthPlace": "",
+            "stillAlive": false,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "",
+              "photo": ""
+            },
+            "mother": {
+              "name": "",
+              "photo": ""
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": true,
+              "mother": true,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true
+            },
+            "nodeMeta": {
+              "title": "",
+              "thumbnailPhoto": "",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1842.7197654671734,
+          "y": -397.5086512225427
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_76r72fdz_mmfirzob",
+        "type": "familyNode",
+        "position": {
+          "x": 1673.0560648049943,
+          "y": -136.88214268260293
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "New Family Node",
+          "photo": "",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 1
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "",
+            "nickname": "",
+            "photo": "",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "",
+            "birthPlace": "",
+            "stillAlive": false,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "",
+              "photo": ""
+            },
+            "mother": {
+              "name": "",
+              "photo": ""
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": true,
+              "mother": true,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true
+            },
+            "nodeMeta": {
+              "title": "",
+              "thumbnailPhoto": "",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1673.0560648049943,
+          "y": -136.88214268260293
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_hk6bkpec_mmfjjvh3",
+        "type": "familyNode",
+        "position": {
+          "x": 1446.6883308830572,
+          "y": -971.6857138202744
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Ree Shuan",
+          "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Ree Shaun",
+            "nickname": "",
+            "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "2019-07-24",
+            "birthPlace": "Cape Town",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "Reegan Mintoor",
+              "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+            },
+            "mother": {
+              "name": "",
+              "photo": ""
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": false,
+              "prefix": true,
+              "maidenName": true,
+              "occupation": true,
+              "contactNumber": true
+            },
+            "nodeMeta": {
+              "title": "Ree Shuan",
+              "thumbnailPhoto": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1446.6883308830572,
+          "y": -971.6857138202744
+        },
+        "dragging": false
       }
     ],
     "edges": [
@@ -4404,7 +5310,8 @@
         "sourceHandle": "right-1",
         "target": "node_2j9lc61c_mmfaujna",
         "targetHandle": "bottom-1",
-        "id": "edge_19stjoe8_mmfbr8y8"
+        "id": "edge_19stjoe8_mmfbr8y8",
+        "selected": true
       },
       {
         "type": "default",
@@ -4495,12 +5402,77 @@
         "target": "node_60wfgw6q_mmfbqtyn",
         "targetHandle": "bottom-1",
         "id": "edge_naytct5q_mmfgt269"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_b5se6njb_mmf9xch1",
+        "sourceHandle": "right-1",
+        "target": "node_6ozg7iqb_mmfik0te",
+        "targetHandle": "bottom-1",
+        "id": "edge_ucmklujz_mmfimfea",
+        "selected": true
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_b5se6njb_mmf9xch1",
+        "sourceHandle": "right-2",
+        "target": "node_66z0cfhk_mmfimi4x",
+        "targetHandle": "left-1",
+        "id": "edge_2s4uay53_mmfinmm5",
+        "selected": false
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_2j9lc61c_mmfaujna",
+        "sourceHandle": "top-1",
+        "target": "node_rumxdxm7_mmfirslw",
+        "targetHandle": "bottom-1",
+        "id": "edge_fzdxqvch_mmfjd07l"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_2j9lc61c_mmfaujna",
+        "sourceHandle": "top-2",
+        "target": "node_w5iglyia_mmfirvr4",
+        "targetHandle": "bottom-1",
+        "id": "edge_e6pj5kif_mmfjd1ni"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_2j9lc61c_mmfaujna",
+        "sourceHandle": "right-1",
+        "target": "node_3uk9aqs9_mmfirygi",
+        "targetHandle": "left-1",
+        "id": "edge_tsye912j_mmfjdh8t"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_2j9lc61c_mmfaujna",
+        "sourceHandle": "right-2",
+        "target": "node_76r72fdz_mmfirzob",
+        "targetHandle": "left-1",
+        "id": "edge_9157yb3g_mmfjdihh"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_rumxdxm7_mmfirslw",
+        "sourceHandle": "top-1",
+        "target": "node_hk6bkpec_mmfjjvh3",
+        "targetHandle": "bottom-1",
+        "id": "edge_w2v3y5uq_mmfjk7os"
       }
     ],
     "viewport": {
-      "x": -571.196751921826,
-      "y": 785.910616930574,
-      "zoom": 1.0650410894399633
+      "x": 515.7357558682231,
+      "y": 568.9010584111866,
+      "zoom": 0.5
     },
     "appSettings": {
       "backgroundColor": "#060a13",
@@ -4527,11 +5499,28 @@
         "occupation": "Retired",
         "moreInfo": "No information yet",
         "parents": [],
-        "children": [],
-        "id": "person_rkmu765x_mmbb4usc",
+        "children": [
+          {
+            "name": "Donovan Morta",
+            "photo": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png"
+          },
+          {
+            "name": "Luke Morta",
+            "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
+          },
+          {
+            "name": "Brandon Morta",
+            "photo": "https://i.ibb.co/xvpcfTp/Brandon-Morta.png"
+          },
+          {
+            "name": "Jason Morta",
+            "photo": "https://i.ibb.co/Hp3TvkYV/Jason-Morta.png"
+          }
+        ],
+        "id": "standard-person",
         "prefix": "Mr",
         "gender": "male",
-        "maidenName": "Clive",
+        "maidenName": "",
         "birthPlace": "",
         "deathPlace": "",
         "burialPlace": "",
@@ -4539,11 +5528,27 @@
         "confidence": "unconfirmed",
         "sources": "",
         "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
           "deathPlace": true,
           "burialPlace": true,
           "deathDate": true,
           "confidence": true,
-          "sources": true
+          "sources": true,
+          "maidenName": true,
+          "address": false
         },
         "relationshipToPrimary": "primary",
         "relationshipNotes": "",
@@ -4580,7 +5585,28 @@
         "fosterChildren": [],
         "adoptiveParents": [],
         "adoptedChildren": [],
-        "siblings": []
+        "siblings": [
+          {
+            "name": "Leonard Coetzee",
+            "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png"
+          },
+          {
+            "name": "Elien Mintoor",
+            "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+          },
+          {
+            "name": "Patrick Coetzee",
+            "photo": ""
+          },
+          {
+            "name": "Ricardo Coetzee",
+            "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
+          },
+          {
+            "name": "Mario Coetzee",
+            "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+          }
+        ]
       },
       {
         "fullName": "Eline Mintoor",
@@ -6192,11 +7218,25 @@
           "name": "Jackie Coetzee",
           "photo": "https://i.ibb.co/FbxXJM7M/Jackie-Coetzee.png"
         },
-        "children": [],
+        "children": [
+          {
+            "name": "Tracey-lee Coetzee",
+            "photo": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png"
+          },
+          {
+            "name": "Daminan Coetzee",
+            "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png"
+          }
+        ],
         "girlfriends": [],
         "boyfriends": [],
         "husbands": [],
-        "wives": [],
+        "wives": [
+          {
+            "name": "Daviana Coetzee",
+            "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+          }
+        ],
         "stepFathers": [],
         "stepMothers": [],
         "fosterParents": [],
@@ -6216,7 +7256,7 @@
           "girlfriends": true,
           "boyfriends": true,
           "husbands": true,
-          "wives": true,
+          "wives": false,
           "stepFathers": true,
           "stepMothers": true,
           "fosterParents": true,
@@ -6508,11 +7548,85 @@
         "relationshipToPrimary": "other"
       },
       {
-        "id": "person_cxdeea3n_mmfaw6ft",
+        "id": "standard-person",
         "fullName": "Reegan Mintoor",
         "nickname": "",
         "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png",
-        "relationshipToPrimary": "primary"
+        "relationshipToPrimary": "primary",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "",
+        "birthPlace": "Cape Town",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Delphin Mintoor",
+          "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+        },
+        "mother": {
+          "name": "Elien Mintoor",
+          "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+        },
+        "children": [
+          {
+            "name": "Ree Shaun",
+            "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png"
+          }
+        ],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Owen Mintoor",
+            "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png"
+          },
+          {
+            "name": "Jene Mintoor",
+            "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+          },
+          {
+            "name": "Heinrich Mintoor",
+            "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "prefix": true,
+          "maidenName": true
+        },
+        "nodeMeta": {
+          "title": "Reegan Mintoor",
+          "thumbnailPhoto": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
         "id": "person_8t7vsrh4_mmfaw8so",
@@ -6618,6 +7732,201 @@
         "nickname": "",
         "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
         "relationshipToPrimary": "other"
+      },
+      {
+        "fullName": "Tracey-lee Coetzee",
+        "photo": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png",
+        "id": "standard-person",
+        "nickname": "",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2016-11-11",
+        "birthPlace": "Cape Town",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Emerice Leonardo Coetzee",
+          "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+        },
+        "mother": {
+          "name": "Daviana Coetzee",
+          "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Daminan Coetzee",
+            "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": true,
+          "occupation": true
+        },
+        "nodeMeta": {
+          "title": "Tracey-lee Coetzee",
+          "thumbnailPhoto": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "fullName": "Daminan Coetzee",
+        "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
+        "id": "standard-person",
+        "nickname": "",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2013-06-11",
+        "birthPlace": "Cape Town",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Emerice Leonardo Coetzee",
+          "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+        },
+        "mother": {
+          "name": "Daviana Coetzee",
+          "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": true,
+          "occupation": true
+        },
+        "nodeMeta": {
+          "title": "Damian Coetzee",
+          "thumbnailPhoto": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "fullName": "Daviana Coetzee",
+        "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+      },
+      {
+        "fullName": "Ree Shaun",
+        "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+        "id": "standard-person",
+        "nickname": "",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2019-07-24",
+        "birthPlace": "Cape Town",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Reegan Mintoor",
+          "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+        },
+        "mother": {
+          "name": "",
+          "photo": ""
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "prefix": true,
+          "maidenName": true,
+          "occupation": true,
+          "contactNumber": true
+        },
+        "nodeMeta": {
+          "title": "Ree Shuan",
+          "thumbnailPhoto": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       }
     ]
   }

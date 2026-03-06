@@ -36,3 +36,35 @@
 .fullPagePanel {
   margin: 8px;
 }
+
+
+.fullPageButton {
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(3, 17, 49, 0.82);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.fullPageButton:hover,
+.fullPageButton:focus-visible {
+  background: rgba(10, 26, 68, 0.95);
+  border-color: #fff;
+}
+
+.fullPageIcon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

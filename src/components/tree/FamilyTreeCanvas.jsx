@@ -310,9 +310,20 @@ export default function FamilyTreeCanvas() {
           <Button
             size="sm"
             appearance="ghost"
+            className={styles.fullPageButton}
+            aria-label={state.isMapFullPage ? 'Exit full screen' : 'Enter full screen'}
+            title={state.isMapFullPage ? 'Exit full screen' : 'Enter full screen'}
             onClick={() => dispatch({ type: ACTIONS.TOGGLE_MAP_FULLPAGE })}
           >
-            {state.isMapFullPage ? 'Exit full page' : 'Full page'}
+            {state.isMapFullPage ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.fullPageIcon}>
+                <path d="M9 15H5v4M15 15h4v4M9 9H5V5M15 9h4V5" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.fullPageIcon}>
+                <path d="M9 3H5v4M15 3h4v4M9 21H5v-4M15 21h4v-4" />
+              </svg>
+            )}
           </Button>
         </Panel>
 

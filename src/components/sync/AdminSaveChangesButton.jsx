@@ -3,7 +3,7 @@ import { Button, Whisper, Tooltip } from 'rsuite';
 import styles from './AdminSaveChangesButton.module.css';
 import { useAppState } from '../../context/AppStateContext';
 import { ACTIONS } from '../../context/appReducer';
-import { getPersistedSnapshot, saveAppMeta } from '../../services/localStorageService';
+import { getPersistedSnapshot, saveAppData, saveAppMeta } from '../../services/localStorageService';
 import { hashObject } from '../../utils/stableHash';
 import { APP_METADATA } from '../../constants/defaults';
 import { saveLocalSnapshot } from '../../services/remoteStateService';
@@ -34,6 +34,10 @@ export default function AdminSaveChangesButton() {
     setIsSaving(true);
     setSaveError('');
 
+    // Keep the working browser copy up to date every time the manual save button is used,
+    // even if the caller changed something that the UI's dirty badge missed.
+    saveAppData(state);
+
     const snapshot = getPersistedSnapshot(state);
     const hash = hashObject(snapshot);
 
@@ -63,43 +67,38 @@ export default function AdminSaveChangesButton() {
     return null;
   }
 
-  if (!state.isDirty && !saveError) {
-    return null;
-  }
-
-  if (!canWriteLocally) {
-    return (
-      <Whisper placement="bottomEnd" trigger="hover" speaker={<Tooltip>Saving is disabled on the live site. Run the app locally to write the JSON file.</Tooltip>}>
-        <span>
-          <Button
-            appearance="primary"
-            disabled
-            className={styles.saveButton}
-            size="sm"
-          >
-            Save changes (local only)
-          </Button>
-        </span>
-      </Whisper>
-    );
-  }
+  const isDisabled = !canWriteLocally || isSaving;
+  const tooltipText = !canWriteLocally
+    ? 'Saving to the JSON file is available locally only.'
+    : saveError
+      ? saveError
+      : 'Write the current app state to the local JSON file.';
 
   return (
     <Whisper
       placement="bottomEnd"
-      trigger={saveError ? 'hover' : 'none'}
-      speaker={<Tooltip>{saveError || ' '}</Tooltip>}
+      trigger="hover"
+      speaker={<Tooltip>{tooltipText}</Tooltip>}
     >
-      <Button
-        appearance="primary"
-        color={saveError ? 'red' : 'green'}
-        className={styles.saveButton}
-        onClick={handleSave}
-        loading={isSaving}
-        size="sm"
-      >
-        {saveError ? 'Save failed' : isSaving ? 'Saving…' : 'Save changes'}
-      </Button>
+      <span>
+        <Button
+          appearance="primary"
+          color={saveError ? 'red' : state.isDirty ? 'green' : undefined}
+          className={styles.saveButton}
+          onClick={handleSave}
+          loading={isSaving}
+          disabled={isDisabled}
+          size="sm"
+        >
+          {!canWriteLocally
+            ? 'Save changes (local only)'
+            : saveError
+              ? 'Save failed'
+              : isSaving
+                ? 'Saving…'
+                : 'Save changes'}
+        </Button>
+      </span>
     </Whisper>
   );
 }

@@ -5,10 +5,13 @@ import { hashObject } from '../utils/stableHash';
 
 /**
  * Tracks whether the admin has made changes since the last exported snapshot.
- * This drives the "Save changes" button visibility.
+ * This now follows the full persisted snapshot so it does not miss savedPeople or other persisted edits.
  */
 export function useDirtyTracker(state, dispatch) {
-  const snapshotHash = useMemo(() => hashObject(getPersistedSnapshot(state)), [state.nodes, state.edges, state.viewport, state.appSettings]);
+  const snapshotHash = useMemo(
+    () => hashObject(getPersistedSnapshot(state)),
+    [state.nodes, state.edges, state.viewport, state.appSettings, state.savedPeople]
+  );
 
   const lastFlagRef = useRef(null);
 
