@@ -4,8 +4,9 @@ import { fetchRemoteSnapshot } from '../services/remoteStateService';
 import { getPersistedSnapshot, saveAppMeta } from '../services/localStorageService';
 import { hashObject } from '../utils/stableHash';
 
-// Paste your Google Drive "direct JSON" URL into VITE_REMOTE_STATE_URL in .env
-const REMOTE_URL = import.meta.env.VITE_REMOTE_STATE_URL || '';
+import { LOCAL_STATE_PATH } from '../services/remoteStateService';
+
+const REMOTE_URL = LOCAL_STATE_PATH;
 
 function shouldApplyRemote(localHash, remoteHash) {
   // If nothing exists locally, remote becomes the source of truth.
@@ -15,19 +16,16 @@ function shouldApplyRemote(localHash, remoteHash) {
 }
 
 /**
- * Keeps viewer clients in sync with a remote JSON "state snapshot" (hosted on Google Drive).
+ * Keeps viewer clients in sync with the bundled JSON state snapshot.
  *
- * - On load: fetch remote and compare to localStorage snapshot.
- * - If remote differs, apply remote snapshot and let the existing localStorage sync persist it.
+ * - On load: fetch the latest bundled JSON and compare to localStorage snapshot.
+ * - If the file differs, apply it and let the existing localStorage sync persist it.
  * - Exposes a manual refresh action with a 30s cooldown (for viewers).
  */
 export function useRemoteStateSync(state, dispatch) {
   const inFlightRef = useRef(false);
 
   const runSync = useCallback(async (reason = 'auto') => {
-    if (!REMOTE_URL) {
-      return { ok: false, skipped: true, reason: 'No remote URL configured.' };
-    }
     if (inFlightRef.current) {
       return { ok: false, skipped: true, reason: 'Sync already in progress.' };
     }
@@ -68,12 +66,9 @@ export function useRemoteStateSync(state, dispatch) {
     return { ok: true };
   }, [dispatch, state]);
 
-  // Auto-run on mount. This is what keeps public visitors up to date.
+  // Auto-run on mount so both local admins and live viewers start from the saved JSON file.
   useEffect(() => {
-    // Only auto-sync for viewers. Admins already have live local edits.
-    if (!state.isAdminAuthenticated) {
-      runSync('auto');
-    }
+    runSync('auto');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

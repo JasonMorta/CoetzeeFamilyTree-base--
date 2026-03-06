@@ -181,16 +181,11 @@ export default function NodeEditorDrawer() {
   }, []);
 
   const savePeopleSection = useCallback(() => {
-    updateNode({
-      title: draftNodeMeta.title,
-      people: draftPeople,
-      notes: draftSharedNotes
-    });
+    updateNode({ people: draftPeople, notes: draftSharedNotes });
     setCloseWarning('');
-    setNodeMetaStatus('idle');
     setPeopleStatus('saved');
     window.setTimeout(() => setPeopleStatus('idle'), 1200);
-  }, [draftNodeMeta.title, draftPeople, draftSharedNotes, updateNode]);
+  }, [draftPeople, draftSharedNotes, updateNode]);
 
   const saveStandardNodeMeta = useCallback(() => {
     updateNode({
@@ -417,16 +412,7 @@ export default function NodeEditorDrawer() {
               block
               data={titleOptions}
               value={draftNodeMeta.title}
-              onChange={(value) => {
-                if ((nodeData?.nodeType || NODE_TYPES.STANDARD) === NODE_TYPES.STANDARD) {
-                  setNodeMetaStatus('dirty');
-                } else {
-                  setNodeMetaStatus('idle');
-                  setPeopleStatus('dirty');
-                }
-                setCloseWarning('');
-                setDraftNodeMeta((prev) => ({ ...prev, title: value || '' }));
-              }}
+              onChange={(value) => { setNodeMetaStatus('dirty'); setCloseWarning(''); setDraftNodeMeta((prev) => ({ ...prev, title: value || '' })); }}
               placeholder="Type a title or pick a name"
               searchable
               creatable

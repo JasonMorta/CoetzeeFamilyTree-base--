@@ -32,6 +32,3 @@ yarn-error.log*
 .env.*
 !.env.example
 node_modules
-
-# zip files
-*.zip

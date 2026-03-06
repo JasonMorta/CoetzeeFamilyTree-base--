@@ -283,8 +283,8 @@ export default function FamilyTreeCanvas() {
         {state.appSettings.showMiniMap && <MiniMap />}
 
         {/*
-          Viewer-only remote sync status + manual refresh.
-          Placed above the MiniMap (bottom-right) so it fits into the UI just above the MAP.
+          Viewer-only saved-file sync status + manual refresh.
+          Placed above the MiniMap (bottom-right) so it fits into the UI just above the map.
         */}
         {!state.isAdminAuthenticated && (
           <Panel
@@ -295,7 +295,7 @@ export default function FamilyTreeCanvas() {
               isUpdating={state.isRemoteUpdating}
               cooldownUntil={state.remoteCooldownUntil}
               onRefresh={refreshWithCooldown}
-              description="Refresh available every 30s"
+              description="Reload saved JSON file every 30s"
             />
           </Panel>
         )}

@@ -2,16 +2,19 @@ import { DEFAULT_APP_STATE, DEFAULT_APP_SETTINGS } from '../constants/defaults';
 import { normalizeNodeData } from '../utils/nodeFactory';
 import { hashObject } from '../utils/stableHash';
 
+export const LOCAL_STATE_PATH = '/data/family-tree-state.json';
+export const LOCAL_SAVE_ROUTE = '/__local-state/save';
+
 /**
  * Expected JSON format:
  * {
  *   "meta": { "hash": "....", "exportedAt": "ISO", "appVersion": "x.y.z" },
- *   "data": { "nodes": [], "edges": [], "viewport": {}, "appSettings": {} }
+ *   "data": { "nodes": [], "edges": [], "viewport": {}, "appSettings": {}, "savedPeople": [] }
  * }
  *
  * We allow both:
  * - the above wrapper format, OR
- * - a raw persisted snapshot directly (nodes/edges/viewport/appSettings).
+ * - a raw persisted snapshot directly (nodes/edges/viewport/appSettings/savedPeople).
  */
 export function parseRemoteSnapshot(json) {
   if (!json || typeof json !== 'object') {
@@ -33,7 +36,8 @@ export function parseRemoteSnapshot(json) {
     appSettings: {
       ...DEFAULT_APP_SETTINGS,
       ...(snapshot.appSettings || {})
-    }
+    },
+    savedPeople: Array.isArray(snapshot.savedPeople) ? snapshot.savedPeople : []
   };
 
   const computedHash = hashObject(hydrated);
@@ -50,84 +54,55 @@ export function parseRemoteSnapshot(json) {
   };
 }
 
-function isGoogleDriveLikeUrl(value) {
-  try {
-    const url = new URL(value);
-    return url.hostname === 'drive.google.com' || url.hostname === 'docs.googleusercontent.com';
-  } catch {
-    return false;
-  }
-}
-
-function buildProxyUrl(remoteUrl) {
-  const params = new URLSearchParams({
-    url: remoteUrl,
-    cb: String(Date.now())
-  });
-  return `/.netlify/functions/remoteStateProxy?${params.toString()}`;
-}
-
 async function parseJsonResponse(res) {
   const contentType = res.headers.get('content-type') || '';
   const text = await res.text();
 
   if (!res.ok) {
-    throw new Error(`Remote fetch failed (${res.status})`);
+    throw new Error(`State fetch failed (${res.status})`);
   }
 
-  // Helpful guard so HTML error pages do not silently blow up as JSON parse errors.
   if (!contentType.includes('application/json') && text.trim().startsWith('<')) {
-    throw new Error('Remote response was HTML instead of JSON.');
+    throw new Error('State response was HTML instead of JSON.');
   }
 
   return JSON.parse(text);
 }
 
-export async function fetchRemoteSnapshot(remoteUrl) {
-  if (!remoteUrl) {
-    return { ok: false, error: 'Missing remote URL.' };
-  }
-
+export async function fetchRemoteSnapshot(remoteUrl = LOCAL_STATE_PATH) {
   try {
-    let json;
+    const cacheBustedUrl = remoteUrl.includes('?')
+      ? `${remoteUrl}&cb=${Date.now()}`
+      : `${remoteUrl}?cb=${Date.now()}`;
 
-    if (isGoogleDriveLikeUrl(remoteUrl)) {
-      // IMPORTANT:
-      // Do NOT hit Google Drive directly from the browser.
-      // Even publicly shared files often return 403 / CORS failures for JS fetch requests.
-      // Route Drive reads through the Netlify Function proxy only.
-      const proxiedUrl = buildProxyUrl(remoteUrl);
-      const res = await fetch(proxiedUrl, { cache: 'no-store' });
-      json = await parseJsonResponse(res);
-    } else {
-      // Non-Drive URLs can still try a direct browser fetch first.
-      const cacheBustedUrl = remoteUrl.includes('?')
-        ? `${remoteUrl}&cb=${Date.now()}`
-        : `${remoteUrl}?cb=${Date.now()}`;
-
-      let res;
-      try {
-        res = await fetch(cacheBustedUrl, { cache: 'no-store' });
-      } catch {
-        res = null;
-      }
-
-      if (!res) {
-        const proxiedUrl = buildProxyUrl(cacheBustedUrl);
-        res = await fetch(proxiedUrl, { cache: 'no-store' });
-      }
-
-      json = await parseJsonResponse(res);
-    }
+    const res = await fetch(cacheBustedUrl, { cache: 'no-store' });
+    const json = await parseJsonResponse(res);
 
     const parsed = parseRemoteSnapshot(json);
     if (!parsed) {
-      return { ok: false, error: 'Remote JSON was not in a supported format.' };
+      return { ok: false, error: 'State JSON was not in a supported format.' };
     }
 
     return { ok: true, ...parsed };
   } catch (error) {
-    console.error('Remote fetch error:', error);
-    return { ok: false, error: error?.message || 'Remote fetch error (see console).' };
+    console.error('State fetch error:', error);
+    return { ok: false, error: error?.message || 'State fetch error (see console).' };
+  }
+}
+
+export async function saveLocalSnapshot(payload) {
+  try {
+    const res = await fetch(LOCAL_SAVE_ROUTE, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const json = await parseJsonResponse(res);
+    return json?.ok ? { ok: true } : { ok: false, error: json?.error || 'Local save failed.' };
+  } catch (error) {
+    return { ok: false, error: error?.message || 'Local save failed.' };
   }
 }

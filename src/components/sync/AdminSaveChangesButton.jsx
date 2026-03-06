@@ -1,31 +1,39 @@
-import React, { useCallback } from 'react';
-import { Button } from 'rsuite';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Button, Whisper, Tooltip } from 'rsuite';
 import styles from './AdminSaveChangesButton.module.css';
 import { useAppState } from '../../context/AppStateContext';
 import { ACTIONS } from '../../context/appReducer';
 import { getPersistedSnapshot, saveAppMeta } from '../../services/localStorageService';
 import { hashObject } from '../../utils/stableHash';
 import { APP_METADATA } from '../../constants/defaults';
+import { saveLocalSnapshot } from '../../services/remoteStateService';
 
-function downloadJsonFile(filename, jsonObject) {
-  const blob = new Blob([JSON.stringify(jsonObject, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
+function isLocalRuntime() {
+  if (typeof window === 'undefined') return false;
 
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = filename;
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
-
-  // Let the browser start the download before releasing the blob.
-  window.setTimeout(() => URL.revokeObjectURL(url), 400);
+  const host = window.location.hostname;
+  return (
+    import.meta.env.DEV ||
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host === '[::1]'
+  );
 }
 
 export default function AdminSaveChangesButton() {
   const { state, dispatch } = useAppState();
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
+  const canWriteLocally = useMemo(() => isLocalRuntime(), []);
 
-  const handleExport = useCallback(() => {
+  const handleSave = useCallback(async () => {
+    if (!canWriteLocally || isSaving) {
+      return;
+    }
+
+    setIsSaving(true);
+    setSaveError('');
+
     const snapshot = getPersistedSnapshot(state);
     const hash = hashObject(snapshot);
 
@@ -38,34 +46,60 @@ export default function AdminSaveChangesButton() {
       data: snapshot
     };
 
-    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `family-tree-state_${stamp}.json`;
+    const result = await saveLocalSnapshot(payload);
 
-    downloadJsonFile(filename, payload);
+    if (!result.ok) {
+      setSaveError(result.error || 'Local save failed.');
+      setIsSaving(false);
+      return;
+    }
 
-    // Persist meta locally so the "dirty" tracker knows we've exported.
     saveAppMeta({ hash, exportedAt: payload.meta.exportedAt });
     dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: hash });
-  }, [dispatch, state]);
+    setIsSaving(false);
+  }, [canWriteLocally, dispatch, isSaving, state]);
 
   if (!state.isAdminAuthenticated) {
     return null;
   }
 
-  // Only show after a change has been made.
-  if (!state.isDirty) {
+  if (!state.isDirty && !saveError) {
     return null;
   }
 
+  if (!canWriteLocally) {
+    return (
+      <Whisper placement="bottomEnd" trigger="hover" speaker={<Tooltip>Saving is disabled on the live site. Run the app locally to write the JSON file.</Tooltip>}>
+        <span>
+          <Button
+            appearance="primary"
+            disabled
+            className={styles.saveButton}
+            size="sm"
+          >
+            Save changes (local only)
+          </Button>
+        </span>
+      </Whisper>
+    );
+  }
+
   return (
-    <Button
-      appearance="primary"
-      color="green"
-      className={styles.saveButton}
-      onClick={handleExport}
-      size="sm"
+    <Whisper
+      placement="bottomEnd"
+      trigger={saveError ? 'hover' : 'none'}
+      speaker={<Tooltip>{saveError || ' '}</Tooltip>}
     >
-      Save changes
-    </Button>
+      <Button
+        appearance="primary"
+        color={saveError ? 'red' : 'green'}
+        className={styles.saveButton}
+        onClick={handleSave}
+        loading={isSaving}
+        size="sm"
+      >
+        {saveError ? 'Save failed' : isSaving ? 'Saving…' : 'Save changes'}
+      </Button>
+    </Whisper>
   );
 }

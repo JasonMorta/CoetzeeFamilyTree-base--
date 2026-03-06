@@ -11,7 +11,7 @@ export default function RemoteRefreshPanel({
   isUpdating,
   cooldownUntil,
   onRefresh,
-  description = 'Refresh available every 30s'
+  description = 'Reload file available every 30s'
 }) {
   // Tick while cooldown is active so the countdown text updates.
   const [tick, setTick] = useState(0);
@@ -32,7 +32,7 @@ export default function RemoteRefreshPanel({
     <div className={styles.wrap} aria-live="polite">
       <div className={styles.row}>
         <span className={`${styles.dot} ${isUpdating ? styles.dotActive : ''}`} />
-        <span className={styles.label}>{isUpdating ? 'Updating' : 'Up to date'}</span>
+        <span className={styles.label}>{isUpdating ? 'Updating' : 'File loaded'}</span>
 
         <Button
           size="xs"
