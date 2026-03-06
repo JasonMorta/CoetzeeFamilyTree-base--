@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react';
+import React, { createContext, useContext, useMemo, useReducer, useEffect } from 'react';
 import { DEFAULT_APP_STATE } from '../constants/defaults';
-import { appReducer } from './appReducer';
-import { loadAppData, loadAppMeta } from '../services/localStorageService';
+import { appReducer, ACTIONS } from './appReducer';
+import { loadAppData, loadAppMeta, loadAppDataFromIndexedDb } from '../services/localStorageService';
 import { loadAuthState } from '../services/authService';
 import { useLocalStorageSync } from '../hooks/useLocalStorageSync';
 import { useDirtyTracker } from '../hooks/useDirtyTracker';
@@ -25,6 +25,17 @@ export function AppStateProvider({ children }) {
 
   useLocalStorageSync(state);
   useDirtyTracker(state, dispatch);
+
+  useEffect(() => {
+    const hasLocal = !!window.localStorage.getItem('familyTreeAppData');
+    if (hasLocal) return;
+    // If localStorage is empty, try IndexedDB snapshot
+    loadAppDataFromIndexedDb().then((snapshot) => {
+      if (!snapshot) return;
+      dispatch({ type: ACTIONS.APPLY_REMOTE_SNAPSHOT, payload: snapshot });
+    });
+  }, []);
+
 
   const value = useMemo(() => ({ state, dispatch }), [state]);
 

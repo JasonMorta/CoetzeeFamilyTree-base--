@@ -18,3 +18,160 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.grow {
+  min-width: 0;
+}
+
+.hideRow {
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+.inlineBox {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+}
+
+.inlineRow {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.inlineLabel {
+  font-size: 12px;
+  opacity: 0.9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hint {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 4px;
+}
+
+.userOption {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0;
+}
+
+.userOptionName {
+  font-size: 13px;
+}
+
+.userOptionMeta {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+
+/* Aliases for simplified components */
+.personCard {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 12px;
+  color: #f8fbff;
+}
+
+.personCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.personCardTitle {
+  font-weight: 700;
+}
+
+.sectionDivider {
+  margin: 10px 0;
+  opacity: 0.85;
+}
+
+.fieldRow {
+  margin-bottom: 12px;
+}
+
+.fieldHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hideCheck {
+  font-size: 12px;
+  opacity: 0.95;
+}
+
+.userOption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.userOptionName {
+  font-weight: 600;
+}
+
+.userOptionMeta {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.inlineChecks {
+  margin: 8px 0 14px;
+}
+
+.standardPersonWrap {
+  padding: 10px 4px;
+}
+
+
+.relationshipPhotos {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.relationshipPhotoRow {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .relationshipPhotoRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.relationshipPhotoName {
+  font-size: 12px;
+  opacity: 0.9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Save button state colors */
+.saveBtnDirty { background: #d9534f !important; border-color: #d9534f !important; color: #fff !important; }
+.saveBtnSaved { background: #5cb85c !important; border-color: #5cb85c !important; color: #fff !important; }
+
+/* Picker popup readability */
+:global(.rs-picker-popup) { color: #000; }
+:global(.rs-picker-popup .rs-picker-menu-item) { color: #000; }
+:global(.rs-picker-popup .rs-checkbox label) { color: #000; }
+:global(.rs-picker-search-input) { color: #000 !important; }

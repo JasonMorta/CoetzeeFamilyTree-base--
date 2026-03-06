@@ -37,7 +37,6 @@ export default function NodeInspector() {
         {(node.data.people || []).map((person) => (
           <div className={styles.person} key={person.id}>
             <strong>{person.fullName || 'Unnamed Person'}</strong><br />
-            <span className={styles.muted}>{person.relationLabel || 'No relation label'}</span><br />
             <span>{person.birthDate || '—'} {person.deathDate ? `to ${person.deathDate}` : ''}</span>
           </div>
         ))}

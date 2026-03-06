@@ -1,5 +1,5 @@
 import { createId } from '../utils/id';
-import { createDefaultHandles, createDefaultHandleLayout, NODE_TYPES, createDefaultImageSettings } from '../utils/nodeFactory';
+import { createDefaultHandles, createDefaultHandleLayout, NODE_TYPES, createDefaultImageSettings, createEmptyStandardPerson } from '../utils/nodeFactory';
 
 export const STORAGE_KEYS = {
   APP_DATA: 'familyTreeAppData',
@@ -9,7 +9,7 @@ export const STORAGE_KEYS = {
 
 export const APP_METADATA = {
   appName: 'Coetzee Family Tree',
-  version: '1.8.3',
+  version: '1.8.53',
   author: 'JasonM'
 };
 
@@ -50,13 +50,15 @@ export const DEFAULT_APP_STATE = {
         handles: createDefaultHandles(),
         handleLayout: createDefaultHandleLayout(),
         imageSettings: createDefaultImageSettings(),
-        people: []
-      }
+        people: [],
+        standardPerson: createEmptyStandardPerson()}
     }
   ],
   edges: [],
   viewport: DEFAULT_VIEWPORT,
   appSettings: DEFAULT_APP_SETTINGS,
+  savedPeople: [],
+  selectedNodeIds: [],
   selectedNodeId: null,
   selectedEdgeId: null,
   activeNodeId: null,
@@ -65,6 +67,7 @@ export const DEFAULT_APP_STATE = {
   isLoginOpen: false,
   isEditorOpen: false,
   isSettingsOpen: false,
+  isMapFullPage: false,
   // UI sync state
   isDirty: false,
   lastExportHash: null,

@@ -20,6 +20,7 @@ export const ACTIONS = {
   DELETE_EDGE: 'DELETE_EDGE',
   SELECT_NODE: 'SELECT_NODE',
   SELECT_EDGE: 'SELECT_EDGE',
+  SET_SELECTED_NODES: 'SET_SELECTED_NODES',
   CLEAR_SELECTION: 'CLEAR_SELECTION',
   OPEN_EDITOR: 'OPEN_EDITOR',
   CLOSE_EDITOR: 'CLOSE_EDITOR',
@@ -36,7 +37,9 @@ export const ACTIONS = {
   REMOTE_SYNC_START: 'REMOTE_SYNC_START',
   REMOTE_SYNC_END: 'REMOTE_SYNC_END',
   APPLY_REMOTE_SNAPSHOT: 'APPLY_REMOTE_SNAPSHOT',
-  SET_REMOTE_COOLDOWN: 'SET_REMOTE_COOLDOWN'
+  SET_REMOTE_COOLDOWN: 'SET_REMOTE_COOLDOWN',
+  SET_SAVED_PEOPLE: 'SET_SAVED_PEOPLE',
+  TOGGLE_MAP_FULLPAGE: 'TOGGLE_MAP_FULLPAGE'
 };
 
 function parseHandleId(handleId) {
@@ -172,15 +175,26 @@ export function appReducer(state, action) {
       };
     case ACTIONS.SET_REMOTE_COOLDOWN:
       return { ...state, remoteCooldownUntil: action.payload };
-    case ACTIONS.APPLY_REMOTE_SNAPSHOT:
+    case ACTIONS.APPLY_REMOTE_SNAPSHOT: {
       // Keep auth + UI modals as-is. Only replace persisted canvas data.
+      const payload = action.payload || {};
+      const nodes = (payload.nodes || []).map((node) => ({
+        ...node,
+        data: normalizeNodeData(node.data || {})
+      }));
+      const savedPeople = Array.isArray(payload.savedPeople) ? payload.savedPeople : [];
       return {
         ...state,
-        nodes: action.payload.nodes,
-        edges: action.payload.edges,
-        viewport: action.payload.viewport,
-        appSettings: action.payload.appSettings
+        nodes,
+        edges: payload.edges || [],
+        viewport: payload.viewport || state.viewport,
+        appSettings: {
+          ...DEFAULT_APP_SETTINGS,
+          ...(payload.appSettings || {})
+        },
+        savedPeople
       };
+    }
 
     case ACTIONS.SET_NODES:
       return { ...state, nodes: action.payload };
@@ -263,9 +277,20 @@ export function appReducer(state, action) {
         edges: state.edges.filter((edge) => edge.id !== action.payload),
         selectedEdgeId: state.selectedEdgeId === action.payload ? null : state.selectedEdgeId
       };
+    case ACTIONS.SET_SELECTED_NODES: {
+      const ids = Array.isArray(action.payload) ? action.payload : [];
+      return {
+        ...state,
+        selectedNodeIds: ids,
+        selectedNodeId: ids.length ? ids[ids.length - 1] : null,
+        selectedEdgeId: null
+      };
+    }
+
     case ACTIONS.SELECT_NODE:
       return {
         ...state,
+        selectedNodeIds: [action.payload],
         selectedNodeId: action.payload,
         selectedEdgeId: null,
         activeNodeId: action.payload
@@ -280,6 +305,7 @@ export function appReducer(state, action) {
     case ACTIONS.CLEAR_SELECTION:
       return {
         ...state,
+        selectedNodeIds: [],
         selectedNodeId: null,
         selectedEdgeId: null,
         isEditorOpen: false
@@ -289,6 +315,7 @@ export function appReducer(state, action) {
         ...state,
         isEditorOpen: true,
         isNodeModalOpen: false,
+        selectedNodeIds: [action.payload],
         selectedNodeId: action.payload,
         selectedEdgeId: null,
         activeNodeId: action.payload
@@ -300,6 +327,7 @@ export function appReducer(state, action) {
         ...state,
         isNodeModalOpen: true,
         activeNodeId: action.payload,
+        selectedNodeIds: [action.payload],
         selectedNodeId: action.payload,
         selectedEdgeId: null
       };
@@ -328,7 +356,10 @@ export function appReducer(state, action) {
         )
       };
     }
-    case ACTIONS.SET_VIEWPORT:
+      case ACTIONS.SET_SAVED_PEOPLE:
+    return { ...state, savedPeople: action.payload || [] };
+
+case ACTIONS.SET_VIEWPORT:
       return { ...state, viewport: action.payload };
     default:
       return state;

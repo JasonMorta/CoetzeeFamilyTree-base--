@@ -59,6 +59,8 @@ function renderHandles({ nodeId, side, count, layout, connectedSlotIds, showAllH
 
 function imageTileStyle(photo, imageSettings, size) {
   return {
+    width: size,
+    height: size,
     backgroundImage: photo ? `url(${photo})` : 'none',
     backgroundSize: imageSettings?.nodeImageSize || 'cover',
     backgroundRepeat: imageSettings?.nodeImageRepeat || 'no-repeat',
@@ -81,41 +83,12 @@ function renderPersonMiniCard(person, imageSettings) {
       {person.photo ? (
         <div className={styles.personTile} style={imageTileStyle(person.photo, imageSettings, `${thumbSize}px`)} />
       ) : (
-        <div className={styles.personPlaceholder} style={{ width: "thumbSize", height: thumbSize }}>No image</div>
+        <div className={styles.personPlaceholder} style={{ width: thumbSize, height: thumbSize }}>No image</div>
       )}
       <div className={styles.personMeta}>
         <div className={styles.personName}>{person.fullName || 'Unnamed person'}</div>
         {person.nickname && <div className={styles.personNick}>{person.nickname}</div>}
       </div>
-    </div>
-  );
-}
-
-function renderParentsArea(data) {
-  const imageSettings = data.imageSettings || {};
-  const primary = data.people?.[0];
-  const related = (data.people || []).slice(1);
-
-  if (!primary) {
-    return <div className={styles.placeholder}>No parents added yet</div>;
-  }
-
-  const partnerValues = new Set(['spouse', 'partner']);
-  const pairedPartner = related.find((person) => partnerValues.has(person.relationshipToPrimary));
-  const separateCards = related.filter((person) => person.id !== pairedPartner?.id);
-
-  return (
-    <div className={styles.parentsGrid}>
-      <div className={styles.parentPairCard}>
-        {renderPersonMiniCard(primary, imageSettings)}
-        {pairedPartner ? renderPersonMiniCard(pairedPartner, imageSettings) : <div className={styles.parentEmpty}>Add a spouse or partner</div>}
-      </div>
-      {separateCards.map((person) => (
-        <div key={person.id} className={styles.parentRelationCard}>
-          <div className={styles.parentRelationBadge}>{person.relationshipToPrimary || 'other'}</div>
-          {renderPersonMiniCard(person, imageSettings)}
-        </div>
-      ))}
     </div>
   );
 }
@@ -130,10 +103,6 @@ function renderImageArea(data) {
     ) : (
       <div className={styles.placeholder}>No image</div>
     );
-  }
-
-  if (nodeType === NODE_TYPES.PARENTS) {
-    return renderParentsArea(data);
   }
 
   const people = data.people || [];

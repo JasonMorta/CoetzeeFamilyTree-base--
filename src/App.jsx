@@ -21,15 +21,17 @@ export default function App() {
   );
 
   return (
-    <div className={styles.appShell}>
-      <AppHeader
-        isAdminAuthenticated={state.isAdminAuthenticated}
-        extraActions={<AdminSaveChangesButton />}
-        onLogin={() => dispatch({ type: ACTIONS.OPEN_LOGIN })}
-        onLogout={() => dispatch({ type: ACTIONS.LOGOUT })}
-        onAddNode={() => dispatch({ type: ACTIONS.ADD_NODE, payload: { x: 280, y: 220 } })}
-        onOpenSettings={() => dispatch({ type: ACTIONS.OPEN_SETTINGS })}
-      />
+    <div className={`${styles.appShell} ${state.isMapFullPage ? styles.mapFullPage : ''}`}>
+      {!state.isMapFullPage && (
+        <AppHeader
+          isAdminAuthenticated={state.isAdminAuthenticated}
+          extraActions={<AdminSaveChangesButton />}
+          onLogin={() => dispatch({ type: ACTIONS.OPEN_LOGIN })}
+          onLogout={() => dispatch({ type: ACTIONS.LOGOUT })}
+          onAddNode={() => dispatch({ type: ACTIONS.ADD_NODE, payload: { x: 280, y: 220 } })}
+          onOpenSettings={() => dispatch({ type: ACTIONS.OPEN_SETTINGS })}
+        />
+      )}
 
       <main className={styles.content}>
         <section className={styles.workspace} style={workspaceStyle}>

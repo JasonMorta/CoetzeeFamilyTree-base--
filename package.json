@@ -1,7 +1,7 @@
 {
   "name": "family-tree-app",
   "private": true,
-  "version": "1.8.3",
+  "version": "1.8.53",
   "type": "module",
   "scripts": {
     "dev": "vite",

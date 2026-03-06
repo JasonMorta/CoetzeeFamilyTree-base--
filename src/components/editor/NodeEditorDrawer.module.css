@@ -43,6 +43,11 @@
   line-height: 1.5;
 }
 
+.saveBtn {
+  margin: 10px 0 18px;
+  width: 100%;
+}
+
 .previewBlock {
   display: grid;
   gap: 10px;
@@ -98,4 +103,57 @@
   .footer {
     flex-direction: column;
   }
+}
+
+
+@media (max-width: 600px) {
+  .drawer :global(.rs-drawer-dialog) {
+    width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  .drawer :global(.rs-drawer-content) {
+    border-radius: 0 !important;
+  }
+}
+
+
+/* Picker menus: make text readable (black on white) */
+.drawer :global(.rs-picker-menu),
+.drawer :global(.rs-picker-select-menu),
+.drawer :global(.rs-picker-check-menu) {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+.drawer :global(.rs-picker-menu .rs-picker-select-menu-item),
+.drawer :global(.rs-picker-menu .rs-check-item),
+.drawer :global(.rs-picker-menu .rs-check-item-content),
+.drawer :global(.rs-picker-menu .rs-picker-menu-item),
+.drawer :global(.rs-picker-menu .rs-picker-menu-item-label),
+.drawer :global(.rs-picker-menu .rs-picker-check-menu-item) {
+  color: #111111 !important;
+  opacity: 1 !important;
+}
+
+.drawer :global(.rs-picker-search-input),
+.drawer :global(.rs-picker-search-input input),
+.drawer :global(.rs-picker-search-input .rs-input) {
+  color: #111111 !important;
+  opacity: 1 !important;
+}
+
+.drawer :global(.rs-picker-search-input input::placeholder) {
+  color: rgba(17, 17, 17, 0.65) !important;
+  opacity: 1 !important;
+}
+
+.warningNote {
+  color: #ffd7d7;
+  background: rgba(217, 83, 79, 0.16);
+  border: 1px solid rgba(217, 83, 79, 0.5);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  line-height: 1.45;
 }

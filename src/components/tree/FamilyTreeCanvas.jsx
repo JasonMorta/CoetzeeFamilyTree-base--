@@ -102,7 +102,7 @@ export default function FamilyTreeCanvas() {
       state.nodes.map((node) => ({
         ...node,
         draggable: state.isAdminAuthenticated,
-        selected: state.selectedNodeId === node.id,
+        selected: (state.selectedNodeIds || []).includes(node.id),
         data: {
           ...node.data,
           connectedSlotIds: connectedSlotsByNode.get(node.id) || [],
@@ -196,7 +196,9 @@ export default function FamilyTreeCanvas() {
 
   const onEdgeClick = useCallback(
     (event, edge) => {
+      event.preventDefault();
       event.stopPropagation();
+      event.nativeEvent?.stopImmediatePropagation?.();
       if (state.isAdminAuthenticated) {
         dispatch({ type: ACTIONS.SELECT_EDGE, payload: edge.id });
       }
@@ -204,7 +206,32 @@ export default function FamilyTreeCanvas() {
     [dispatch, state.isAdminAuthenticated]
   );
 
-  const onPaneClick = useCallback(() => {
+  const onSelectionChange = useCallback(
+    ({ nodes: selectedNodes, edges: selectedEdges }) => {
+      if (!state.isAdminAuthenticated) return;
+
+      const edgeIds = Array.isArray(selectedEdges) ? selectedEdges.map((edge) => edge.id).filter(Boolean) : [];
+      if (edgeIds.length) {
+        dispatch({ type: ACTIONS.SELECT_EDGE, payload: edgeIds[edgeIds.length - 1] });
+        return;
+      }
+
+      const nodeIds = Array.isArray(selectedNodes) ? selectedNodes.map((node) => node.id).filter(Boolean) : [];
+      if (nodeIds.length) {
+        dispatch({ type: ACTIONS.SET_SELECTED_NODES, payload: nodeIds });
+        return;
+      }
+
+      dispatch({ type: ACTIONS.CLEAR_SELECTION });
+    },
+    [dispatch, state.isAdminAuthenticated]
+  );
+
+  const onPaneClick = useCallback((event) => {
+    if (event?.defaultPrevented) return;
+    const cls = event?.target?.classList;
+    if (cls && (cls.contains('react-flow__edge-path') || cls.contains('react-flow__edge') || cls.contains('react-flow__edge-interaction'))) return;
+
     dispatch({ type: ACTIONS.CLEAR_SELECTION });
     dispatch({ type: ACTIONS.CLOSE_NODE_MODAL });
   }, [dispatch]);
@@ -229,9 +256,13 @@ export default function FamilyTreeCanvas() {
         nodesDraggable={state.isAdminAuthenticated}
         nodesConnectable={state.isAdminAuthenticated}
         elementsSelectable
+        selectionOnDrag={state.isAdminAuthenticated}
+        selectionKeyCode="Shift"
+        multiSelectionKeyCode="Shift"
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onSelectionChange={onSelectionChange}
         onNodeClick={onNodeClick}
         onEdgeClick={onEdgeClick}
         onPaneClick={onPaneClick}
@@ -239,6 +270,16 @@ export default function FamilyTreeCanvas() {
       >
         <Background variant={toBackgroundVariant(state.appSettings.backgroundVariant)} gap={18} size={1.2} color="rgba(255,255,255,0.25)" />
         <Controls />
+        <Panel position="top-right" className={styles.fullPagePanel}>
+          <Button
+            size="sm"
+            appearance="ghost"
+            onClick={() => dispatch({ type: ACTIONS.TOGGLE_MAP_FULLPAGE })}
+          >
+            {state.isMapFullPage ? 'Exit full page' : 'Full page'}
+          </Button>
+        </Panel>
+
         {state.appSettings.showMiniMap && <MiniMap />}
 
         {/*

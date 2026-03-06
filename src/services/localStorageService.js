@@ -1,3 +1,4 @@
+import { idbSet, idbGet } from './indexedDbService';
 import { DEFAULT_APP_STATE, DEFAULT_APP_SETTINGS, STORAGE_KEYS } from '../constants/defaults';
 import { normalizeNodeData } from '../utils/nodeFactory';
 
@@ -8,6 +9,7 @@ export function loadAppMeta() {
       return { hash: null, exportedAt: null };
     }
     const parsed = JSON.parse(raw);
+    const savedPeople = Array.isArray(parsed.savedPeople) ? parsed.savedPeople : [];
     return {
       hash: parsed.hash || null,
       exportedAt: parsed.exportedAt || null
@@ -35,18 +37,22 @@ export function getPersistedSnapshot(appState) {
     nodes: appState.nodes,
     edges: appState.edges,
     viewport: appState.viewport,
-    appSettings: appState.appSettings
+    appSettings: appState.appSettings,
+    savedPeople: appState.savedPeople || []
   };
 }
 
 export function loadAppData() {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEYS.APP_DATA);
+    const raw =
+      window.sessionStorage.getItem(STORAGE_KEYS.APP_DATA) ||
+      window.localStorage.getItem(STORAGE_KEYS.APP_DATA);
     if (!raw) {
       return DEFAULT_APP_STATE;
     }
 
     const parsed = JSON.parse(raw);
+    const savedPeople = Array.isArray(parsed.savedPeople) ? parsed.savedPeople : [];
     const nodes = (parsed.nodes || DEFAULT_APP_STATE.nodes).map((node) => ({
       ...node,
       data: normalizeNodeData(node.data || {})
@@ -59,7 +65,8 @@ export function loadAppData() {
       appSettings: {
         ...DEFAULT_APP_SETTINGS,
         ...(parsed.appSettings || {})
-      }
+      },
+      savedPeople
     };
   } catch (error) {
     console.error('Failed to load app data from localStorage:', error);
@@ -73,10 +80,24 @@ export function saveAppData(appState) {
       nodes: appState.nodes,
       edges: appState.edges,
       viewport: appState.viewport,
-      appSettings: appState.appSettings
+      appSettings: appState.appSettings,
+      savedPeople: appState.savedPeople || []
     };
     window.localStorage.setItem(STORAGE_KEYS.APP_DATA, JSON.stringify(persistedState));
+    window.sessionStorage.setItem(STORAGE_KEYS.APP_DATA, JSON.stringify(persistedState));
+    // Secondary persistence (IndexedDB) for larger payloads / redundancy
+    idbSet(STORAGE_KEYS.APP_DATA, persistedState).catch(() => {});
   } catch (error) {
     console.error('Failed to save app data to localStorage:', error);
+  }
+}
+
+
+export async function loadAppDataFromIndexedDb() {
+  try {
+    const data = await idbGet(STORAGE_KEYS.APP_DATA);
+    return data || null;
+  } catch {
+    return null;
   }
 }
