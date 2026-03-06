@@ -37,6 +37,7 @@
   padding: 0;
 }
 
+.workspaceFullPage,
 .mapFullPage .workspace {
   position: fixed;
   width: 100dvw;

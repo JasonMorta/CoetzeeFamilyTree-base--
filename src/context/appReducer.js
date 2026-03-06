@@ -394,9 +394,10 @@ export function appReducer(state, action) {
       };
     }
       case ACTIONS.SET_SAVED_PEOPLE:
-    return { ...state, savedPeople: action.payload || [] };
-
-case ACTIONS.SET_VIEWPORT:
+      return { ...state, savedPeople: action.payload || [] };
+    case ACTIONS.TOGGLE_MAP_FULLPAGE:
+      return { ...state, isMapFullPage: !state.isMapFullPage };
+    case ACTIONS.SET_VIEWPORT:
       return { ...state, viewport: action.payload };
     default:
       return state;

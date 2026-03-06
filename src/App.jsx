@@ -34,7 +34,7 @@ export default function App() {
       )}
 
       <main className={styles.content}>
-        <section className={styles.workspace} style={workspaceStyle}>
+        <section className={`${styles.workspace} ${state.isMapFullPage ? styles.workspaceFullPage : ''}`} style={workspaceStyle}>
           <FamilyTreeCanvas />
         </section>
       </main>

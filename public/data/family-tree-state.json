@@ -1,7 +1,7 @@
 {
   "meta": {
-    "hash": "2e613864",
-    "exportedAt": "2026-03-06T23:55:32.223Z",
+    "hash": "adbb5f30",
+    "exportedAt": "2026-03-06T23:56:41.155Z",
     "appVersion": "1.9.13"
   },
   "data": {
@@ -2690,8 +2690,8 @@
         "id": "node_9dxd1tt9_mmf9c7po",
         "type": "familyNode",
         "position": {
-          "x": 887.7054823992032,
-          "y": 584.6302382706418
+          "x": 893.7054823992032,
+          "y": 548.6302382706418
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2803,8 +2803,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 887.7054823992032,
-          "y": 584.6302382706418
+          "x": 893.7054823992032,
+          "y": 548.6302382706418
         },
         "dragging": false
       },
@@ -3200,8 +3200,8 @@
         "id": "node_2j9lc61c_mmfaujna",
         "type": "familyNode",
         "position": {
-          "x": 1234.819913581056,
-          "y": -324.82008315511735
+          "x": 1190.819913581056,
+          "y": -364.82008315511735
         },
         "data": {
           "nodeType": "persons",
@@ -3340,8 +3340,8 @@
         "height": 325,
         "selected": true,
         "positionAbsolute": {
-          "x": 1234.819913581056,
-          "y": -324.82008315511735
+          "x": 1190.819913581056,
+          "y": -364.82008315511735
         },
         "dragging": false
       },
@@ -3949,8 +3949,8 @@
         "id": "node_ouci43n2_mmfbla1v",
         "type": "familyNode",
         "position": {
-          "x": 745.9268490247982,
-          "y": -55.64230100863796
+          "x": 799.9268490247982,
+          "y": -19.642301008637958
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3980,7 +3980,7 @@
               "spread": 40
             },
             "bottom": {
-              "anchor": 50,
+              "anchor": 12,
               "spread": 40
             },
             "left": {
@@ -4103,8 +4103,8 @@
         "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 745.9268490247982,
-          "y": -55.64230100863796
+          "x": 799.9268490247982,
+          "y": -19.642301008637958
         },
         "dragging": false
       },
@@ -5470,8 +5470,8 @@
       }
     ],
     "viewport": {
-      "x": 515.7357558682231,
-      "y": 568.9010584111866,
+      "x": 1225.2357558682231,
+      "y": 323.90105841118657,
       "zoom": 0.5
     },
     "appSettings": {
@@ -7537,7 +7537,7 @@
         "id": "person_bhwvon8w_mmfaw9ka",
         "fullName": "Owen Mintoor",
         "nickname": "",
-        "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png",
+        "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
         "relationshipToPrimary": "other"
       },
       {
@@ -7647,12 +7647,12 @@
         "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
       },
       {
-        "id": "person_sgfulgr3_mmbb5bma",
+        "id": "standard-person",
         "fullName": "Elien Mintoor",
         "nickname": "Hata",
-        "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
-        "prefix": "",
-        "maidenName": "",
+        "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg",
+        "prefix": "Mrs",
+        "maidenName": "Coetzee",
         "birthDate": "",
         "birthPlace": "",
         "stillAlive": true,
@@ -7670,7 +7670,24 @@
           "name": "Grieta Coetzee",
           "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp"
         },
-        "children": [],
+        "children": [
+          {
+            "name": "Reegan Mintoor",
+            "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+          },
+          {
+            "name": "Heinrich Mintoor",
+            "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+          },
+          {
+            "name": "Gene Mintoor",
+            "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+          },
+          {
+            "name": "Owen Mintoor",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+          }
+        ],
         "girlfriends": [],
         "boyfriends": [],
         "husbands": [
@@ -7708,7 +7725,22 @@
             "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
           }
         ],
-        "hiddenFields": {},
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": false,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false
+        },
         "nodeMeta": {
           "title": "Elien Mintoor",
           "thumbnailPhoto": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
