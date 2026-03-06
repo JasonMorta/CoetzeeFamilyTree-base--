@@ -1,8 +1,8 @@
 {
   "meta": {
-    "hash": "61147208",
-    "exportedAt": "2026-03-06T20:42:12.526Z",
-    "appVersion": "1.8.53"
+    "hash": "d8bd8cfc",
+    "exportedAt": "2026-03-06T21:33:08.514Z",
+    "appVersion": "1.9.0"
   },
   "data": {
     "nodes": [
@@ -10,8 +10,8 @@
         "id": "node_i4c3kxp1_mmazde9b",
         "type": "familyNode",
         "position": {
-          "x": -1009.1390350767117,
-          "y": 866.1162605124122
+          "x": -1001.6837474506319,
+          "y": 874.636589227932
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -140,8 +140,8 @@
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
-          "x": -1009.1390350767117,
-          "y": 866.1162605124122
+          "x": -1001.6837474506319,
+          "y": 874.636589227932
         }
       },
       {
@@ -515,8 +515,8 @@
         "id": "node_30sqckxd_mmb8xqmn",
         "type": "familyNode",
         "position": {
-          "x": -1410.1524449036228,
-          "y": 416.8904888296749
+          "x": -1213.11984335723,
+          "y": 441.386433886794
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -628,8 +628,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -1410.1524449036228,
-          "y": 416.8904888296749
+          "x": -1213.11984335723,
+          "y": 441.386433886794
         },
         "dragging": false,
         "selected": true
@@ -760,8 +760,8 @@
         "id": "node_2bm1t8e8_mmb90z41",
         "type": "familyNode",
         "position": {
-          "x": -296.08632566867016,
-          "y": 543.8359417124983
+          "x": -264.13509298547126,
+          "y": 468.21802436226096
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -871,10 +871,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": -296.08632566867016,
-          "y": 543.8359417124983
+          "x": -264.13509298547126,
+          "y": 468.21802436226096
         },
         "dragging": false
       },
@@ -1038,8 +1038,8 @@
         "id": "node_lj8aj66f_mmb9jq6r",
         "type": "familyNode",
         "position": {
-          "x": -884.2954036833902,
-          "y": 332.13119232298203
+          "x": -839.5636779269119,
+          "y": 416.26943838873893
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1151,8 +1151,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -884.2954036833902,
-          "y": 332.13119232298203
+          "x": -839.5636779269119,
+          "y": 416.26943838873893
         },
         "dragging": false,
         "selected": true
@@ -1161,8 +1161,8 @@
         "id": "node_2zmy7je0_mmbb4odt",
         "type": "familyNode",
         "position": {
-          "x": 424.4333170233544,
-          "y": 251.28899241563272
+          "x": 618.4333170233542,
+          "y": 337.2889924156327
         },
         "data": {
           "nodeType": "persons",
@@ -1430,18 +1430,18 @@
         "width": 446,
         "height": 446,
         "positionAbsolute": {
-          "x": 424.4333170233544,
-          "y": 251.28899241563272
+          "x": 618.4333170233542,
+          "y": 337.2889924156327
         },
         "dragging": false,
-        "selected": false
+        "selected": true
       },
       {
         "id": "node_2uut8aax_mmcngoza",
         "type": "familyNode",
         "position": {
-          "x": 756.5332014145608,
-          "y": -618.645663720479
+          "x": 1184.5332014145608,
+          "y": -1148.6456637204788
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1558,8 +1558,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 756.5332014145608,
-          "y": -618.645663720479
+          "x": 1184.5332014145608,
+          "y": -1148.6456637204788
         },
         "dragging": false
       },
@@ -1567,8 +1567,8 @@
         "id": "node_a536uox5_mme44h15",
         "type": "familyNode",
         "position": {
-          "x": 389.99415683278573,
-          "y": -61.54205933765991
+          "x": 879.9941568327856,
+          "y": -179.54205933765985
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1704,18 +1704,18 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": 389.99415683278573,
-          "y": -61.54205933765991
+          "x": 879.9941568327856,
+          "y": -179.54205933765985
         },
         "dragging": false,
-        "selected": false
+        "selected": true
       },
       {
         "id": "node_td8wzvae_mme7cdvz",
         "type": "familyNode",
         "position": {
-          "x": 388.8390160248812,
-          "y": -487.3892750299466
+          "x": 846.8390160248812,
+          "y": -547.3892750299465
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1856,18 +1856,18 @@
         "width": 300,
         "height": 300,
         "positionAbsolute": {
-          "x": 388.8390160248812,
-          "y": -487.3892750299466
+          "x": 846.8390160248812,
+          "y": -547.3892750299465
         },
         "dragging": false,
-        "selected": false
+        "selected": true
       },
       {
         "id": "node_xmsm2vly_mme7m01y",
         "type": "familyNode",
         "position": {
-          "x": 125.92227792585513,
-          "y": -640.8699609884313
+          "x": 633.9222779258549,
+          "y": -1046.869960988431
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1982,10 +1982,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": 125.92227792585513,
-          "y": -640.8699609884313
+          "x": 633.9222779258549,
+          "y": -1046.869960988431
         },
         "dragging": false
       },
@@ -1993,8 +1993,8 @@
         "id": "node_mgrf6btg_mme7u73g",
         "type": "familyNode",
         "position": {
-          "x": 334.3066451249522,
-          "y": -849.9579192966853
+          "x": 814.3066451249522,
+          "y": -805.9579192966853
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2109,10 +2109,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": 334.3066451249522,
-          "y": -849.9579192966853
+          "x": 814.3066451249522,
+          "y": -805.9579192966853
         },
         "dragging": false
       },
@@ -2120,8 +2120,8 @@
         "id": "node_dgjwi773_mme95tfj",
         "type": "familyNode",
         "position": {
-          "x": 600.1102888878224,
-          "y": -860.0322473825541
+          "x": 1022.1102888878223,
+          "y": -898.032247382554
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2238,8 +2238,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 600.1102888878224,
-          "y": -860.0322473825541
+          "x": 1022.1102888878223,
+          "y": -898.032247382554
         },
         "dragging": false
       },
@@ -2247,8 +2247,8 @@
         "id": "node_hptk6sjk_mmea8q9e",
         "type": "familyNode",
         "position": {
-          "x": -43.043897630740304,
-          "y": 658.65558408115
+          "x": 30.4439375406171,
+          "y": 611.7937761457916
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2416,8 +2416,8 @@
         "height": 177,
         "selected": true,
         "positionAbsolute": {
-          "x": -43.043897630740304,
-          "y": 658.65558408115
+          "x": 30.4439375406171,
+          "y": 611.7937761457916
         },
         "dragging": false
       },
@@ -2545,8 +2545,8 @@
         "id": "node_6lyh90p0_mmf7l3qp",
         "type": "familyNode",
         "position": {
-          "x": 959.4914512889163,
-          "y": -815.4411389577895
+          "x": 1323.4914512889163,
+          "y": -1445.4411389577895
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2658,10 +2658,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": 959.4914512889163,
-          "y": -815.4411389577895
+          "x": 1323.4914512889163,
+          "y": -1445.4411389577895
         },
         "dragging": false
       },
@@ -2669,8 +2669,8 @@
         "id": "node_9dxd1tt9_mmf9c7po",
         "type": "familyNode",
         "position": {
-          "x": 1115.7421511088855,
-          "y": 567.8895363012016
+          "x": 1251.7421511088855,
+          "y": 571.8895363012016
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2782,8 +2782,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1115.7421511088855,
-          "y": 567.8895363012016
+          "x": 1251.7421511088855,
+          "y": 571.8895363012016
         },
         "dragging": false
       },
@@ -2791,7 +2791,7 @@
         "id": "node_b5se6njb_mmf9xch1",
         "type": "familyNode",
         "position": {
-          "x": 1327.5054841379613,
+          "x": 1553.505484137961,
           "y": 307.5106066131835
         },
         "data": {
@@ -2908,7 +2908,7 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1327.5054841379613,
+          "x": 1553.505484137961,
           "y": 307.5106066131835
         },
         "dragging": false
@@ -2917,8 +2917,8 @@
         "id": "node_7ciodjxr_mmfa2rzi",
         "type": "familyNode",
         "position": {
-          "x": 645.2258367272916,
-          "y": -1151.973002284832
+          "x": 971.2258367272916,
+          "y": -1467.973002284832
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3032,8 +3032,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 645.2258367272916,
-          "y": -1151.973002284832
+          "x": 971.2258367272916,
+          "y": -1467.973002284832
         },
         "dragging": false
       },
@@ -3041,8 +3041,8 @@
         "id": "node_9woqxfyn_mmfadybv",
         "type": "familyNode",
         "position": {
-          "x": 1456.575184278671,
-          "y": 586.736514668987
+          "x": 1532.575184278671,
+          "y": 670.736514668987
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3156,8 +3156,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1456.575184278671,
-          "y": 586.736514668987
+          "x": 1532.575184278671,
+          "y": 670.736514668987
         },
         "dragging": false
       },
@@ -3165,8 +3165,8 @@
         "id": "node_2j9lc61c_mmfaujna",
         "type": "familyNode",
         "position": {
-          "x": 1323.9681586574554,
-          "y": -509.37534792591924
+          "x": 1557.9681586574554,
+          "y": -423.3753479259193
         },
         "data": {
           "nodeType": "persons",
@@ -3303,10 +3303,10 @@
         },
         "width": 325,
         "height": 325,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": 1323.9681586574554,
-          "y": -509.37534792591924
+          "x": 1557.9681586574554,
+          "y": -423.3753479259193
         },
         "dragging": false
       },
@@ -3914,8 +3914,8 @@
         "id": "node_ouci43n2_mmfbla1v",
         "type": "familyNode",
         "position": {
-          "x": 979.9268490247982,
-          "y": -139.6423010086379
+          "x": 1161.9268490247982,
+          "y": -65.64230100863796
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -4068,8 +4068,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 979.9268490247982,
-          "y": -139.6423010086379
+          "x": 1161.9268490247982,
+          "y": -65.64230100863796
         },
         "dragging": false
       },
@@ -4271,63 +4271,6 @@
         "type": "default"
       },
       {
-        "type": "bezier",
-        "animated": true,
-        "source": "node_2bm1t8e8_mmb90z41",
-        "sourceHandle": "bottom-1",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "right-1",
-        "id": "edge_ulqw443x_mmb91wup",
-        "selected": true
-      },
-      {
-        "type": "bezier",
-        "animated": true,
-        "source": "node_30sqckxd_mmb8xqmn",
-        "sourceHandle": "bottom-1",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "top-1",
-        "id": "edge_6plnd5ts_mmb9bp5e"
-      },
-      {
-        "type": "bezier",
-        "animated": true,
-        "source": "node_4v0225g0_mmb8xy8r",
-        "sourceHandle": "bottom-1",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "top-3",
-        "id": "edge_1bynvb19_mmb9jc23",
-        "selected": true
-      },
-      {
-        "type": "bezier",
-        "animated": true,
-        "source": "node_lj8aj66f_mmb9jq6r",
-        "sourceHandle": "bottom-1",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "top-2",
-        "id": "edge_cdjzvs7y_mmb9jxlx",
-        "selected": true
-      },
-      {
-        "type": "bezier",
-        "animated": true,
-        "source": "node_1u3w2l43_mmb91ckp",
-        "sourceHandle": "left-1",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "right-3",
-        "id": "edge_1h3ouu8s_mmbbsqb3"
-      },
-      {
-        "type": "bezier",
-        "animated": true,
-        "source": "node_5qwwykwa_mmb8uizn",
-        "sourceHandle": "right-1",
-        "target": "node_i4c3kxp1_mmazde9b",
-        "targetHandle": "left-3",
-        "id": "edge_7izyi2cw_mmcmcc41"
-      },
-      {
         "type": "default",
         "animated": true,
         "source": "node_2zmy7je0_mmbb4odt",
@@ -4335,7 +4278,7 @@
         "target": "node_a536uox5_mme44h15",
         "targetHandle": "bottom-1",
         "id": "edge_yxb3br2p_mme46i36",
-        "selected": false
+        "selected": true
       },
       {
         "type": "default",
@@ -4385,16 +4328,6 @@
         "target": "node_dgjwi773_mme95tfj",
         "targetHandle": "bottom-1",
         "id": "edge_67mt60v5_mme9a1dl",
-        "selected": true
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_i4c3kxp1_mmazde9b",
-        "sourceHandle": "right-2",
-        "target": "node_hptk6sjk_mmea8q9e",
-        "targetHandle": "left-1",
-        "id": "edge_jj3xd3k0_mmea8wnj",
         "selected": true
       },
       {
@@ -4465,7 +4398,7 @@
         "target": "node_7ciodjxr_mmfa2rzi",
         "targetHandle": "bottom-1",
         "id": "edge_s0bjavqn_mmfbdw3i",
-        "selected": false
+        "selected": true
       },
       {
         "type": "default",
@@ -4474,7 +4407,8 @@
         "sourceHandle": "top-2",
         "target": "node_ouci43n2_mmfbla1v",
         "targetHandle": "bottom-1",
-        "id": "edge_jiopx3r8_mmfbo2k3"
+        "id": "edge_jiopx3r8_mmfbo2k3",
+        "selected": true
       },
       {
         "type": "default",
@@ -4493,7 +4427,8 @@
         "sourceHandle": "right-1",
         "target": "node_2j9lc61c_mmfaujna",
         "targetHandle": "bottom-1",
-        "id": "edge_19stjoe8_mmfbr8y8"
+        "id": "edge_19stjoe8_mmfbr8y8",
+        "selected": false
       },
       {
         "type": "default",
@@ -4512,12 +4447,76 @@
         "target": "node_67f3wycj_mmb8svip",
         "targetHandle": "right-1",
         "id": "edge_iu8h5gxc_mmfd1254"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "left-3",
+        "target": "node_5qwwykwa_mmb8uizn",
+        "targetHandle": "right-1",
+        "id": "edge_kva6kmzh_mmfefix3"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "right-1",
+        "target": "node_2bm1t8e8_mmb90z41",
+        "targetHandle": "bottom-1",
+        "id": "edge_onzxmw2p_mmfeqtye"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "right-2",
+        "target": "node_hptk6sjk_mmea8q9e",
+        "targetHandle": "left-1",
+        "id": "edge_bpxr89qv_mmfer7ky",
+        "selected": false
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "right-3",
+        "target": "node_1u3w2l43_mmb91ckp",
+        "targetHandle": "left-1",
+        "id": "edge_c0zpt3fq_mmfer9fo"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "top-1",
+        "target": "node_30sqckxd_mmb8xqmn",
+        "targetHandle": "bottom-1",
+        "id": "edge_bs6nfz75_mmfesh76"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "top-2",
+        "target": "node_lj8aj66f_mmb9jq6r",
+        "targetHandle": "bottom-1",
+        "id": "edge_5mtox352_mmfesxfc"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4c3kxp1_mmazde9b",
+        "sourceHandle": "top-3",
+        "target": "node_4v0225g0_mmb8xy8r",
+        "targetHandle": "bottom-1",
+        "id": "edge_1paipb2h_mmfesz1y"
       }
     ],
     "viewport": {
-      "x": 1186.2406939831944,
-      "y": 335.94209910586915,
-      "zoom": 0.5
+      "x": 996.7010346576726,
+      "y": 618.3176696353005,
+      "zoom": 0.5000000000000001
     },
     "appSettings": {
       "backgroundColor": "#060a13",
@@ -5362,19 +5361,24 @@
         "adoptiveFathers": [],
         "adoptiveMothers": [],
         "hiddenFields": {
+          "father": true,
+          "mother": true,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": true,
           "adoptiveMothers": true,
           "adoptiveFathers": true,
           "fosterMothers": true,
           "fosterFathers": true,
-          "stepMothers": true,
-          "husbands": true,
-          "wives": true,
-          "stepFathers": true,
-          "boyfriends": true,
-          "girlfriends": true,
-          "children": false,
-          "mother": true,
-          "father": true,
           "nickname": true,
           "photo": false,
           "prefix": true,
@@ -5386,11 +5390,7 @@
           "occupation": true,
           "address": true,
           "contactNumber": true,
-          "moreInfo": true,
-          "adoptedChildren": true,
-          "adoptiveParents": true,
-          "fosterChildren": true,
-          "fosterParents": true
+          "moreInfo": true
         },
         "nodeMeta": {
           "title": "Coetzee Root Family",
@@ -5404,7 +5404,8 @@
         "fosterParents": [],
         "fosterChildren": [],
         "adoptiveParents": [],
-        "adoptedChildren": []
+        "adoptedChildren": [],
+        "siblings": []
       },
       {
         "id": "standard-person",
