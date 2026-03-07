@@ -1,16 +1,16 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Button, Whisper, Tooltip } from 'rsuite';
-import styles from './AdminSaveChangesButton.module.css';
 import { useAppState } from '../../context/AppStateContext';
-import { persistSnapshot, isLocalRuntime } from './saveStateHelpers';
+import { isLocalRuntime, persistSnapshot } from './saveStateHelpers';
+import styles from './AdminSaveChangesButton.module.css';
 
-export default function AdminSaveChangesButton() {
+export default function AdminSaveViewButton() {
   const { state, dispatch } = useAppState();
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
   const canWriteLocally = useMemo(() => isLocalRuntime(), []);
 
-  const handleSave = useCallback(async () => {
+  const handleSaveView = useCallback(async () => {
     if (!canWriteLocally || isSaving) {
       return;
     }
@@ -21,7 +21,7 @@ export default function AdminSaveChangesButton() {
     const result = await persistSnapshot(state, dispatch);
 
     if (!result.ok) {
-      setSaveError(result.error || 'Local save failed.');
+      setSaveError(result.error || 'View save failed.');
       setIsSaving(false);
       return;
     }
@@ -35,10 +35,10 @@ export default function AdminSaveChangesButton() {
 
   const isDisabled = !canWriteLocally || isSaving;
   const tooltipText = !canWriteLocally
-    ? 'Saving to the JSON file is available locally only.'
+    ? 'Saving the startup map view is available locally only.'
     : saveError
       ? saveError
-      : 'Write the current app state to the local JSON file.';
+      : 'Save the current pan and zoom as the startup map view.';
 
   return (
     <Whisper
@@ -48,21 +48,21 @@ export default function AdminSaveChangesButton() {
     >
       <span>
         <Button
-          appearance="primary"
-          color={saveError ? 'red' : state.isDirty ? 'green' : undefined}
+          appearance="ghost"
+          color={saveError ? 'red' : state.isDirty ? 'yellow' : undefined}
           className={styles.saveButton}
-          onClick={handleSave}
+          onClick={handleSaveView}
           loading={isSaving}
           disabled={isDisabled}
           size="sm"
         >
           {!canWriteLocally
-            ? 'Save changes (local only)'
+            ? 'Save map view (local only)'
             : saveError
-              ? 'Save failed'
+              ? 'View save failed'
               : isSaving
-                ? 'Saving…'
-                : 'Save changes'}
+                ? 'Saving view…'
+                : 'Save map view'}
         </Button>
       </span>
     </Whisper>

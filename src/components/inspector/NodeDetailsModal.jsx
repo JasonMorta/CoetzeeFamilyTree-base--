@@ -276,8 +276,8 @@ export default function NodeDetailsModal() {
     ].filter(Boolean);
 
     const relationshipItems = [
-      !isHidden(person, 'father') ? <RelationshipBlock key="father" label="Father" value={person.father} placeholderKey="father" /> : null,
       !isHidden(person, 'mother') ? <RelationshipBlock key="mother" label="Mother" value={person.mother} placeholderKey="mother" /> : null,
+      !isHidden(person, 'father') ? <RelationshipBlock key="father" label="Father" value={person.father} placeholderKey="father" /> : null,
       !isHidden(person, 'children') ? <RelationshipList key="children" label="Children" values={person.children} placeholderKey="children" /> : null,
       !isHidden(person, 'siblings') ? <RelationshipList key="siblings" label="Siblings" values={person.siblings} placeholderKey="siblings" /> : null,
       !isHidden(person, 'girlfriends') ? <RelationshipList key="girlfriends" label="Girlfriends" values={person.girlfriends} placeholderKey="girlfriends" /> : null,

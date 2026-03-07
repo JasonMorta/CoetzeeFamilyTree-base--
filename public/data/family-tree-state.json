@@ -1,8 +1,8 @@
 {
   "meta": {
-    "hash": "adbb5f30",
-    "exportedAt": "2026-03-06T23:56:41.155Z",
-    "appVersion": "1.9.13"
+    "hash": "945cefc8",
+    "exportedAt": "2026-03-07T04:47:09.618Z",
+    "appVersion": "1.10.0"
   },
   "data": {
     "nodes": [
@@ -1434,13 +1434,13 @@
           "y": 345.2889924156327
         },
         "dragging": false,
-        "selected": true
+        "selected": false
       },
       {
         "id": "node_2uut8aax_mmcngoza",
         "type": "familyNode",
         "position": {
-          "x": 756.5332014145608,
+          "x": 757.5982425040008,
           "y": -618.645663720479
         },
         "data": {
@@ -1514,7 +1514,12 @@
             "girlfriends": [],
             "boyfriends": [],
             "husbands": [],
-            "wives": [],
+            "wives": [
+              {
+                "name": "Lacey Davies",
+                "photo": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png"
+              }
+            ],
             "stepFathers": [],
             "stepMothers": [],
             "fosterParents": [],
@@ -1529,7 +1534,7 @@
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
-              "wives": true,
+              "wives": false,
               "stepFathers": true,
               "stepMothers": true,
               "fosterParents": true,
@@ -1556,9 +1561,9 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 756.5332014145608,
+          "x": 757.5982425040008,
           "y": -618.645663720479
         },
         "dragging": false
@@ -2211,11 +2216,21 @@
               "name": "Joan Morta",
               "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png"
             },
-            "children": [],
+            "children": [
+              {
+                "name": "Jonas Luke Morta",
+                "photo": "https://i.ibb.co/MytdK5BG/Jonas-luke-Morta-04-01-2025.png"
+              }
+            ],
             "girlfriends": [],
             "boyfriends": [],
             "husbands": [],
-            "wives": [],
+            "wives": [
+              {
+                "name": "Thaamira Morta",
+                "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png"
+              }
+            ],
             "stepFathers": [],
             "stepMothers": [],
             "fosterParents": [],
@@ -2230,7 +2245,7 @@
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
-              "wives": true,
+              "wives": false,
               "stepFathers": true,
               "stepMothers": true,
               "fosterParents": true,
@@ -2257,7 +2272,7 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
           "x": 600.1102888878224,
           "y": -860.0322473825541
@@ -2435,7 +2450,7 @@
         },
         "width": 177,
         "height": 177,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
           "x": -43.043897630740304,
           "y": 658.65558408115
@@ -2679,7 +2694,7 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
           "x": 959.4914512889163,
           "y": -815.4411389577895
@@ -3015,12 +3030,12 @@
             "contactNumber": "",
             "moreInfo": "",
             "father": {
-              "name": "Luke Morta",
-              "photo": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png"
+              "name": "Luke Peter Morta",
+              "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
             },
             "mother": {
-              "name": "",
-              "photo": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png"
+              "name": "Thaamira Morta",
+              "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png"
             },
             "children": [],
             "girlfriends": [],
@@ -3065,7 +3080,7 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
           "x": 645.2258367272916,
           "y": -1151.973002284832
@@ -5470,9 +5485,9 @@
       }
     ],
     "viewport": {
-      "x": 1225.2357558682231,
-      "y": 323.90105841118657,
-      "zoom": 0.5
+      "x": 1117.6349827357212,
+      "y": -78.72231564403376,
+      "zoom": 0.8277532798848112
     },
     "appSettings": {
       "backgroundColor": "#060a13",
@@ -6008,7 +6023,7 @@
           "girlfriends": true,
           "boyfriends": true,
           "husbands": true,
-          "wives": true,
+          "wives": false,
           "stepFathers": true,
           "stepMothers": true,
           "fosterParents": true,
@@ -6044,7 +6059,12 @@
         "girlfriends": [],
         "boyfriends": [],
         "husbands": [],
-        "wives": [],
+        "wives": [
+          {
+            "name": "Lacey Davies",
+            "photo": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png"
+          }
+        ],
         "stepFathers": [],
         "stepMothers": [],
         "fosterParents": [],
@@ -6288,11 +6308,21 @@
           "name": "Joan Morta",
           "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png"
         },
-        "children": [],
+        "children": [
+          {
+            "name": "Jonas Luke Morta",
+            "photo": "https://i.ibb.co/MytdK5BG/Jonas-luke-Morta-04-01-2025.png"
+          }
+        ],
         "girlfriends": [],
         "boyfriends": [],
         "husbands": [],
-        "wives": [],
+        "wives": [
+          {
+            "name": "Thaamira Morta",
+            "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png"
+          }
+        ],
         "stepFathers": [],
         "stepMothers": [],
         "fosterFathers": [],
@@ -6306,7 +6336,7 @@
           "girlfriends": true,
           "boyfriends": true,
           "husbands": true,
-          "wives": true,
+          "wives": false,
           "stepFathers": true,
           "stepMothers": true,
           "fosterParents": true,
@@ -7394,12 +7424,12 @@
         "contactNumber": "",
         "moreInfo": "",
         "father": {
-          "name": "Luke Morta",
-          "photo": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png"
+          "name": "Luke Peter Morta",
+          "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
         },
         "mother": {
-          "name": "",
-          "photo": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png"
+          "name": "Thaamira Morta",
+          "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png"
         },
         "children": [],
         "girlfriends": [],
@@ -7959,6 +7989,10 @@
           "eventDate": "",
           "location": ""
         }
+      },
+      {
+        "fullName": "Thaamira Morta",
+        "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png"
       }
     ]
   }

@@ -9,7 +9,7 @@ export const STORAGE_KEYS = {
 
 export const APP_METADATA = {
   appName: 'Coetzee Family Tree',
-  version: '1.9.14',
+  version: '1.10.0',
   author: 'JasonM'
 };
 
@@ -74,5 +74,6 @@ export const DEFAULT_APP_STATE = {
   isRemoteUpdating: false,
   remoteSyncError: null,
   lastRemoteSyncAt: null,
-  remoteCooldownUntil: 0
+  remoteCooldownUntil: 0,
+  hasInitialRemoteSyncCompleted: false
 };

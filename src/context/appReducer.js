@@ -199,7 +199,8 @@ export function appReducer(state, action) {
         ...state,
         isRemoteUpdating: false,
         remoteSyncError: action.payload?.error || null,
-        lastRemoteSyncAt: action.payload?.syncedAt || state.lastRemoteSyncAt
+        lastRemoteSyncAt: action.payload?.syncedAt || state.lastRemoteSyncAt,
+        hasInitialRemoteSyncCompleted: true
       };
     case ACTIONS.SET_REMOTE_COOLDOWN:
       return { ...state, remoteCooldownUntil: action.payload };

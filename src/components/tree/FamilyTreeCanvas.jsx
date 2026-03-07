@@ -13,7 +13,6 @@ import { Button, ButtonGroup } from 'rsuite';
 import styles from './FamilyTreeCanvas.module.css';
 import FamilyNode from './FamilyNode';
 import { useAppState } from '../../context/AppStateContext';
-import { useRemoteStateSync } from '../../hooks/useRemoteStateSync';
 import RemoteRefreshPanel from '../sync/RemoteRefreshPanel';
 import { ACTIONS } from '../../context/appReducer';
 
@@ -120,9 +119,8 @@ function sanitizeRenderableEdges(edges, nodes) {
   });
 }
 
-export default function FamilyTreeCanvas() {
+export default function FamilyTreeCanvas({ refreshWithCooldown }) {
   const { state, dispatch } = useAppState();
-  const { refreshWithCooldown } = useRemoteStateSync(state, dispatch);
   const { connectedSlotsByNode, handleUsage } = useMemo(() => buildConnectedHandleMaps(state.edges), [state.edges]);
 
   const handleEdit = useCallback((nodeId) => dispatch({ type: ACTIONS.OPEN_EDITOR, payload: nodeId }), [dispatch]);
@@ -283,7 +281,6 @@ export default function FamilyTreeCanvas() {
         edges={edges}
         nodeTypes={nodeTypes}
         defaultViewport={state.viewport}
-        fitView
         defaultEdgeOptions={defaultEdgeOptions}
         connectionMode={ConnectionMode.Loose}
         connectionLineType={toConnectionLineType(state.appSettings.edgeType)}
