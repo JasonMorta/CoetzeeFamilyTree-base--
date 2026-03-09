@@ -54,7 +54,7 @@ export default function AdminSaveViewButton() {
           onClick={handleSaveView}
           loading={isSaving}
           disabled={isDisabled}
-          size="sm"
+          size="m"
         >
           {!canWriteLocally
             ? 'Save map view (local only)'

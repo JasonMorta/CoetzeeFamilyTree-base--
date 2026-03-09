@@ -54,7 +54,7 @@ export default function AdminSaveChangesButton() {
           onClick={handleSave}
           loading={isSaving}
           disabled={isDisabled}
-          size="sm"
+          size="m"
         >
           {!canWriteLocally
             ? 'Save changes (local only)'

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "hash": "cae19756",
-    "exportedAt": "2026-03-09T03:07:49.094Z",
+    "hash": "8d54d818",
+    "exportedAt": "2026-03-09T03:11:35.368Z",
     "appVersion": "1.14.5"
   },
   "data": {
@@ -708,7 +708,12 @@
               "name": "",
               "photo": ""
             },
-            "children": [],
+            "children": [
+              {
+                "name": "Lydia Joan v/d Heuvel Solomons",
+                "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+              }
+            ],
             "girlfriends": [],
             "boyfriends": [],
             "husbands": [],
@@ -721,9 +726,9 @@
             "adoptedChildren": [],
             "siblings": [],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
+              "father": false,
+              "mother": false,
+              "children": false,
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
@@ -734,7 +739,9 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": true,
+              "maidenName": false,
+              "prefix": true
             },
             "nodeMeta": {
               "title": "Dina",
@@ -754,7 +761,7 @@
           "y": 419.81513424262823
         },
         "dragging": false,
-        "selected": false
+        "selected": true
       },
       {
         "id": "node_2bm1t8e8_mmb90z41",
@@ -6349,9 +6356,9 @@
       }
     ],
     "viewport": {
-      "x": 653.1012161949227,
-      "y": 306.91318500528575,
-      "zoom": 0.2918960211362893
+      "x": 1091.3514477214349,
+      "y": 160.24415404365482,
+      "zoom": 0.6622026239078488
     },
     "appSettings": {
       "backgroundColor": "#060a13",
@@ -7934,7 +7941,12 @@
           "name": "",
           "photo": ""
         },
-        "children": [],
+        "children": [
+          {
+            "name": "Lydia Joan v/d Heuvel Solomons",
+            "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+          }
+        ],
         "girlfriends": [],
         "boyfriends": [],
         "husbands": [],
@@ -7947,9 +7959,9 @@
         "adoptedChildren": [],
         "siblings": [],
         "hiddenFields": {
-          "father": true,
-          "mother": true,
-          "children": true,
+          "father": false,
+          "mother": false,
+          "children": false,
           "girlfriends": true,
           "boyfriends": true,
           "husbands": true,
@@ -7960,7 +7972,9 @@
           "fosterChildren": true,
           "adoptiveParents": true,
           "adoptedChildren": true,
-          "siblings": true
+          "siblings": true,
+          "maidenName": false,
+          "prefix": true
         },
         "nodeMeta": {
           "title": "Dina",
