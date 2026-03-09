@@ -47,6 +47,11 @@ export default function SettingsDrawer() {
           <Form.Group><Form.ControlLabel>Node accent colour</Form.ControlLabel><Input type="color" value={settings.nodeAccent} onChange={(value) => updateSettings({ nodeAccent: value })} /></Form.Group>
           <Form.Group className={styles.toggleRow}><span>Node glow</span><Toggle checked={Boolean(settings.nodeGlow)} onChange={(value) => updateSettings({ nodeGlow: value })} /></Form.Group>
           <Form.Group className={styles.toggleRow}><span>Show minimap</span><Toggle checked={Boolean(settings.showMiniMap)} onChange={(value) => updateSettings({ showMiniMap: value })} /></Form.Group>
+          <SliderField label="Minimum zoom out" value={settings.minZoom} min={0.1} max={1} step={0.05} onChange={(value) => updateSettings({ minZoom: Number(value.toFixed(2)) })} help="Lower values let you zoom further out on the map." />
+          <div className={styles.actionGroup}>
+            <Button appearance="ghost" block onClick={() => dispatch({ type: ACTIONS.SAVE_STARTUP_VIEWPORT })}>Save current view position</Button>
+            <div className={styles.help}>Stores the current map pan and zoom as the startup view used when the page loads.</div>
+          </div>
           <Button appearance="primary" block onClick={() => dispatch({ type: ACTIONS.CLOSE_SETTINGS })}>Done</Button>
         </Form>
       </Drawer.Body>

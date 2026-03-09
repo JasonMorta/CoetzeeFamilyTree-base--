@@ -65,7 +65,6 @@ function imageTileStyle(photo, imageSettings, size) {
     backgroundSize: imageSettings?.nodeImageSize || 'cover',
     backgroundRepeat: imageSettings?.nodeImageRepeat || 'no-repeat',
     backgroundPosition: imageSettings?.nodeImagePosition || 'center center',
-    width: '100%',
     // height: '150px'
   };
 }

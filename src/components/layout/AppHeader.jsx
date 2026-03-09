@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Tag } from 'rsuite';
 import styles from './AppHeader.module.css';
 import { APP_METADATA } from '../../constants/defaults';
 
-export default function AppHeader({ isAdminAuthenticated, onLogin, onLogout, onAddNode, onOpenSettings, extraActions }) {
+export default function AppHeader({ isAdminAuthenticated, isDrawNodeMode, onLogin, onLogout, onAddNode, onToggleDrawNodeMode, onOpenSettings, extraActions }) {
   return (
     <header className={styles.header}>
       <div className={styles.brand}>
@@ -27,7 +27,10 @@ export default function AppHeader({ isAdminAuthenticated, onLogin, onLogout, onA
               <Button appearance="primary" color="violet" onClick={onAddNode}>
                 Add Node
               </Button>
-                {extraActions}
+              <Button appearance={isDrawNodeMode ? 'primary' : 'ghost'} color="cyan" onClick={onToggleDrawNodeMode}>
+                {isDrawNodeMode ? 'Cancel Draw Node' : 'Draw Node'}
+              </Button>
+              {extraActions}
             </>
             
             

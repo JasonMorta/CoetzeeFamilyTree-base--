@@ -28,13 +28,15 @@ export default function App() {
       {!state.isMapFullPage && (
         <AppHeader
           isAdminAuthenticated={state.isAdminAuthenticated}
+          isDrawNodeMode={state.isDrawNodeMode}
           extraActions={<>
             <AdminSaveViewButton />
             <AdminSaveChangesButton />
           </>}
           onLogin={() => dispatch({ type: ACTIONS.OPEN_LOGIN })}
           onLogout={() => dispatch({ type: ACTIONS.LOGOUT })}
-          onAddNode={() => dispatch({ type: ACTIONS.ADD_NODE, payload: { x: 280, y: 220 } })}
+          onAddNode={() => dispatch({ type: ACTIONS.ADD_NODE, payload: { position: state.viewportCenter } })}
+          onToggleDrawNodeMode={() => dispatch({ type: ACTIONS.TOGGLE_DRAW_NODE_MODE })}
           onOpenSettings={() => dispatch({ type: ACTIONS.OPEN_SETTINGS })}
         />
       )}

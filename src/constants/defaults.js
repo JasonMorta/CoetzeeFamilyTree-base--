@@ -9,16 +9,17 @@ export const STORAGE_KEYS = {
 
 export const APP_METADATA = {
   appName: 'Coetzee Family Tree',
-  version: '1.10.0',
+  version: '1.14.3',
   author: 'JasonM'
 };
 
-export const DEFAULT_VIEWPORT = { x: 0, y: 0, zoom: 0.9 };
+export const DEFAULT_VIEWPORT = { x: 0, y: 0, zoom: 3 };
 
 // Global settings stay focused on canvas-wide appearance only.
 // Per-node image layout now lives on each node so mixed node types stay manageable.
 export const DEFAULT_APP_SETTINGS = {
   backgroundColor: '#031131',
+  minZoom: 0.2,
   backgroundVariant: 'dots',
   edgeType: 'bezier',
   edgeAnimated: true,
@@ -26,7 +27,8 @@ export const DEFAULT_APP_SETTINGS = {
   edgeWidth: 2,
   nodeAccent: '#22d3ee',
   nodeGlow: true,
-  showMiniMap: true
+  showMiniMap: true,
+  startupViewport: DEFAULT_VIEWPORT
 };
 
 export const DEFAULT_APP_STATE = {
@@ -75,5 +77,7 @@ export const DEFAULT_APP_STATE = {
   remoteSyncError: null,
   lastRemoteSyncAt: null,
   remoteCooldownUntil: 0,
-  hasInitialRemoteSyncCompleted: false
+  hasInitialRemoteSyncCompleted: false,
+  viewportCenter: { x: 0, y: 0 },
+  isDrawNodeMode: false
 };

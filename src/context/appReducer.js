@@ -28,6 +28,7 @@ export const ACTIONS = {
   CLOSE_NODE_MODAL: 'CLOSE_NODE_MODAL',
   UPDATE_NODE_DATA: 'UPDATE_NODE_DATA',
   SET_VIEWPORT: 'SET_VIEWPORT',
+  SET_VIEWPORT_CENTER: 'SET_VIEWPORT_CENTER',
   OPEN_SETTINGS: 'OPEN_SETTINGS',
   CLOSE_SETTINGS: 'CLOSE_SETTINGS',
   UPDATE_APP_SETTINGS: 'UPDATE_APP_SETTINGS',
@@ -39,7 +40,10 @@ export const ACTIONS = {
   APPLY_REMOTE_SNAPSHOT: 'APPLY_REMOTE_SNAPSHOT',
   SET_REMOTE_COOLDOWN: 'SET_REMOTE_COOLDOWN',
   SET_SAVED_PEOPLE: 'SET_SAVED_PEOPLE',
-  TOGGLE_MAP_FULLPAGE: 'TOGGLE_MAP_FULLPAGE'
+  TOGGLE_MAP_FULLPAGE: 'TOGGLE_MAP_FULLPAGE',
+  TOGGLE_DRAW_NODE_MODE: 'TOGGLE_DRAW_NODE_MODE',
+  SET_DRAW_NODE_MODE: 'SET_DRAW_NODE_MODE',
+  SAVE_STARTUP_VIEWPORT: 'SAVE_STARTUP_VIEWPORT'
 };
 
 function parseHandleId(handleId) {
@@ -223,7 +227,8 @@ export function appReducer(state, action) {
           ...(payload.appSettings || {})
         },
         savedPeople,
-        selectedEdgeId: edges.some((edge) => edge.id === state.selectedEdgeId) ? state.selectedEdgeId : null
+        selectedEdgeId: edges.some((edge) => edge.id === state.selectedEdgeId) ? state.selectedEdgeId : null,
+        viewportCenter: payload.viewportCenter || state.viewportCenter
       };
     }
 
@@ -248,7 +253,9 @@ export function appReducer(state, action) {
         )
       };
     case ACTIONS.ADD_NODE: {
-      const node = createFamilyNode(action.payload);
+      const position = action.payload?.position || action.payload || state.viewportCenter || { x: 250, y: 180 };
+      const dataOverrides = action.payload?.dataOverrides || {};
+      const node = createFamilyNode(position, dataOverrides);
       return {
         ...state,
         nodes: [...state.nodes, node],
@@ -256,7 +263,9 @@ export function appReducer(state, action) {
         selectedEdgeId: null,
         activeNodeId: node.id,
         isNodeModalOpen: false,
-        isEditorOpen: true
+        isEditorOpen: true,
+        selectedNodeIds: [node.id],
+        isDrawNodeMode: false
       };
     }
     case ACTIONS.DUPLICATE_NODE: {
@@ -286,7 +295,9 @@ export function appReducer(state, action) {
         selectedEdgeId: null,
         activeNodeId: duplicatedNode.id,
         isNodeModalOpen: false,
-        isEditorOpen: true
+        isEditorOpen: true,
+        selectedNodeIds: [node.id],
+        isDrawNodeMode: false
       };
     }
     case ACTIONS.DELETE_NODE: {
@@ -346,6 +357,7 @@ export function appReducer(state, action) {
         ...state,
         isEditorOpen: true,
         isNodeModalOpen: false,
+        isDrawNodeMode: false,
         selectedNodeIds: [action.payload],
         selectedNodeId: action.payload,
         selectedEdgeId: null,
@@ -398,8 +410,23 @@ export function appReducer(state, action) {
       return { ...state, savedPeople: action.payload || [] };
     case ACTIONS.TOGGLE_MAP_FULLPAGE:
       return { ...state, isMapFullPage: !state.isMapFullPage };
+    case ACTIONS.SET_DRAW_NODE_MODE:
+      return { ...state, isDrawNodeMode: Boolean(action.payload) };
+    case ACTIONS.TOGGLE_DRAW_NODE_MODE:
+      return { ...state, isDrawNodeMode: !state.isDrawNodeMode };
+    case ACTIONS.SAVE_STARTUP_VIEWPORT:
+      return {
+        ...state,
+        appSettings: {
+          ...DEFAULT_APP_SETTINGS,
+          ...state.appSettings,
+          startupViewport: state.viewport
+        }
+      };
     case ACTIONS.SET_VIEWPORT:
       return { ...state, viewport: action.payload };
+    case ACTIONS.SET_VIEWPORT_CENTER:
+      return { ...state, viewportCenter: action.payload || state.viewportCenter };
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useRef, useState, useEffect } from 'react';
 import ReactFlow, {
   Background,
   Controls,
@@ -15,6 +15,7 @@ import FamilyNode from './FamilyNode';
 import { useAppState } from '../../context/AppStateContext';
 import RemoteRefreshPanel from '../sync/RemoteRefreshPanel';
 import { ACTIONS } from '../../context/appReducer';
+import { createDefaultHandles } from '../../utils/nodeFactory';
 
 const nodeTypes = {
   familyNode: React.memo(FamilyNode)
@@ -56,18 +57,13 @@ function toBackgroundVariant(value) {
 function toConnectionLineType(value) {
   if (value === 'smoothstep') return ConnectionLineType.SmoothStep;
   if (value === 'straight') return ConnectionLineType.Straight;
-  // Treat both "bezier" (legacy UI value) and "default" as the same visual connection style.
   return ConnectionLineType.Bezier;
 }
 
-// React Flow edge "type" values differ from the connection line style selector.
-// - React Flow expects "default" for bezier edges (NOT "bezier").
-// - Our UI stores "bezier" for readability.
 function toReactFlowEdgeType(value) {
   if (value === 'bezier') return 'default';
   if (value === 'smoothstep') return 'smoothstep';
   if (value === 'straight') return 'straight';
-  // Safe fallback.
   return 'default';
 }
 
@@ -82,7 +78,6 @@ function isHandleAvailable(edgeList, nodeId, handleId) {
       (edge.target === nodeId && edge.targetHandle === handleId)
   );
 }
-
 
 function isHandleDefinedOnNode(node, handleId) {
   const match = String(handleId || '').match(/^(top|right|bottom|left)-(\d+)$/);
@@ -119,9 +114,30 @@ function sanitizeRenderableEdges(edges, nodes) {
   });
 }
 
+function getClientPoint(event) {
+  if (!event) return { x: 0, y: 0 };
+  if (event.touches?.[0]) {
+    return { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  }
+  return { x: event.clientX, y: event.clientY };
+}
+
+function normalizeRect(start, end) {
+  const left = Math.min(start.x, end.x);
+  const top = Math.min(start.y, end.y);
+  const width = Math.abs(end.x - start.x);
+  const height = Math.abs(end.y - start.y);
+
+  return { left, top, width, height };
+}
+
 export default function FamilyTreeCanvas({ refreshWithCooldown }) {
   const { state, dispatch } = useAppState();
   const { connectedSlotsByNode, handleUsage } = useMemo(() => buildConnectedHandleMaps(state.edges), [state.edges]);
+  const flowWrapperRef = useRef(null);
+  const reactFlowRef = useRef(null);
+  const [draftRect, setDraftRect] = useState(null);
+  const dragStartRef = useRef(null);
 
   const handleEdit = useCallback((nodeId) => dispatch({ type: ACTIONS.OPEN_EDITOR, payload: nodeId }), [dispatch]);
   const handleDuplicate = useCallback((nodeId) => dispatch({ type: ACTIONS.DUPLICATE_NODE, payload: nodeId }), [dispatch]);
@@ -130,6 +146,45 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
       dispatch({ type: ACTIONS.DELETE_NODE, payload: nodeId });
     }
   }, [dispatch]);
+
+  const syncViewportCenter = useCallback(() => {
+    if (!reactFlowRef.current || !flowWrapperRef.current) {
+      return;
+    }
+
+    const bounds = flowWrapperRef.current.getBoundingClientRect();
+    if (!bounds || (!bounds.width && !bounds.height)) {
+      return;
+    }
+
+    const center = reactFlowRef.current.screenToFlowPosition({
+      x: bounds.left + bounds.width / 2,
+      y: bounds.top + bounds.height / 2
+    });
+
+    dispatch({ type: ACTIONS.SET_VIEWPORT_CENTER, payload: center });
+  }, [dispatch]);
+
+  useEffect(() => {
+    syncViewportCenter();
+  }, [syncViewportCenter, state.viewport, state.hasInitialRemoteSyncCompleted]);
+
+  useEffect(() => {
+    if (!flowWrapperRef.current || typeof ResizeObserver === 'undefined') {
+      return undefined;
+    }
+
+    const observer = new ResizeObserver(() => syncViewportCenter());
+    observer.observe(flowWrapperRef.current);
+    return () => observer.disconnect();
+  }, [syncViewportCenter]);
+
+  useEffect(() => {
+    if (!state.isDrawNodeMode) {
+      setDraftRect(null);
+      dragStartRef.current = null;
+    }
+  }, [state.isDrawNodeMode]);
 
   const nodes = useMemo(
     () =>
@@ -153,15 +208,13 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
           onDelete: handleDelete
         }
       })),
-    [state.nodes, state.isAdminAuthenticated, state.selectedNodeId, connectedSlotsByNode, handleUsage, state.appSettings, handleEdit, handleDuplicate, handleDelete]
+    [state.nodes, state.isAdminAuthenticated, state.selectedNodeIds, connectedSlotsByNode, handleUsage, state.appSettings, handleEdit, handleDuplicate, handleDelete]
   );
 
   const edges = useMemo(
     () =>
       sanitizeRenderableEdges(state.edges, state.nodes).map((edge) => ({
         ...edge,
-        // IMPORTANT: React Flow does not recognise "bezier" as an edge type.
-        // Using "bezier" here causes warning spam (and can slow down the app).
         type: toReactFlowEdgeType(state.appSettings.edgeType),
         animated: state.appSettings.edgeAnimated,
         selected: state.selectedEdgeId === edge.id,
@@ -222,10 +275,11 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
 
   const onNodeClick = useCallback(
     (_, node) => {
+      if (state.isDrawNodeMode) return;
       dispatch({ type: ACTIONS.SELECT_NODE, payload: node.id });
       dispatch({ type: ACTIONS.OPEN_NODE_MODAL, payload: node.id });
     },
-    [dispatch]
+    [dispatch, state.isDrawNodeMode]
   );
 
   const onEdgeClick = useCallback(
@@ -233,22 +287,16 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
       event.preventDefault();
       event.stopPropagation();
       event.nativeEvent?.stopImmediatePropagation?.();
-      if (state.isAdminAuthenticated) {
+      if (state.isAdminAuthenticated && !state.isDrawNodeMode) {
         dispatch({ type: ACTIONS.SELECT_EDGE, payload: edge.id });
       }
     },
-    [dispatch, state.isAdminAuthenticated]
+    [dispatch, state.isAdminAuthenticated, state.isDrawNodeMode]
   );
 
   const onSelectionChange = useCallback(
     ({ nodes: selectedNodes, edges: selectedEdges }) => {
-      if (!state.isAdminAuthenticated) return;
-
-      const edgeIds = Array.isArray(selectedEdges) ? selectedEdges.map((edge) => edge.id).filter(Boolean) : [];
-      if (edgeIds.length) {
-        dispatch({ type: ACTIONS.SELECT_EDGE, payload: edgeIds[edgeIds.length - 1] });
-        return;
-      }
+      if (!state.isAdminAuthenticated || state.isDrawNodeMode) return;
 
       const nodeIds = Array.isArray(selectedNodes) ? selectedNodes.map((node) => node.id).filter(Boolean) : [];
       if (nodeIds.length) {
@@ -256,42 +304,142 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
         return;
       }
 
+      const edgeIds = Array.isArray(selectedEdges) ? selectedEdges.map((edge) => edge.id).filter(Boolean) : [];
+      if (edgeIds.length) {
+        dispatch({ type: ACTIONS.SELECT_EDGE, payload: edgeIds[edgeIds.length - 1] });
+        return;
+      }
+
       dispatch({ type: ACTIONS.CLEAR_SELECTION });
     },
-    [dispatch, state.isAdminAuthenticated]
+    [dispatch, state.isAdminAuthenticated, state.isDrawNodeMode]
   );
 
   const onPaneClick = useCallback((event) => {
-    if (event?.defaultPrevented) return;
+    if (state.isDrawNodeMode || event?.defaultPrevented) return;
     const cls = event?.target?.classList;
     if (cls && (cls.contains('react-flow__edge-path') || cls.contains('react-flow__edge') || cls.contains('react-flow__edge-interaction'))) return;
 
     dispatch({ type: ACTIONS.CLEAR_SELECTION });
     dispatch({ type: ACTIONS.CLOSE_NODE_MODAL });
-  }, [dispatch]);
+  }, [dispatch, state.isDrawNodeMode]);
 
   const onMoveEnd = useCallback((_, viewport) => {
     dispatch({ type: ACTIONS.SET_VIEWPORT, payload: viewport });
+    window.requestAnimationFrame(syncViewportCenter);
+  }, [dispatch, syncViewportCenter]);
+
+  const onInit = useCallback((instance) => {
+    reactFlowRef.current = instance;
+    window.requestAnimationFrame(syncViewportCenter);
+  }, [syncViewportCenter]);
+
+  const createDrawnNode = useCallback((clientStart, clientEnd) => {
+    if (!reactFlowRef.current || !flowWrapperRef.current) {
+      return;
+    }
+
+    const startFlow = reactFlowRef.current.screenToFlowPosition(clientStart);
+    const endFlow = reactFlowRef.current.screenToFlowPosition(clientEnd);
+
+    const width = Math.max(100, Math.round(Math.abs(endFlow.x - startFlow.x)));
+    const height = Math.max(100, Math.round(Math.abs(endFlow.y - startFlow.y)));
+    const position = {
+      x: Math.min(startFlow.x, endFlow.x),
+      y: Math.min(startFlow.y, endFlow.y)
+    };
+
+    dispatch({
+      type: ACTIONS.ADD_NODE,
+      payload: {
+        position,
+        dataOverrides: {
+          nodeWidth: width,
+          nodeHeight: height,
+          handles: createDefaultHandles()
+        }
+      }
+    });
+
+    dispatch({ type: ACTIONS.SET_DRAW_NODE_MODE, payload: false });
+    setDraftRect(null);
+    dragStartRef.current = null;
   }, [dispatch]);
 
+  const handleDrawStart = useCallback((event) => {
+    if (!state.isAdminAuthenticated || !state.isDrawNodeMode) {
+      return;
+    }
+    const point = getClientPoint(event);
+    dragStartRef.current = point;
+    setDraftRect(normalizeRect(point, point));
+    event.preventDefault();
+    event.stopPropagation();
+  }, [state.isAdminAuthenticated, state.isDrawNodeMode]);
+
+  const handleDrawMove = useCallback((event) => {
+    if (!dragStartRef.current) {
+      return;
+    }
+    const point = getClientPoint(event);
+    setDraftRect(normalizeRect(dragStartRef.current, point));
+    event.preventDefault();
+    event.stopPropagation();
+  }, []);
+
+  const handleDrawEnd = useCallback((event) => {
+    if (!dragStartRef.current) {
+      return;
+    }
+
+    const point = getClientPoint(event);
+    const rect = normalizeRect(dragStartRef.current, point);
+    const start = dragStartRef.current;
+    dragStartRef.current = null;
+
+    if (rect.width < 12 || rect.height < 12) {
+      setDraftRect(null);
+      dispatch({
+        type: ACTIONS.ADD_NODE,
+        payload: {
+          position: state.viewportCenter,
+          dataOverrides: {
+            handles: createDefaultHandles()
+          }
+        }
+      });
+      dispatch({ type: ACTIONS.SET_DRAW_NODE_MODE, payload: false });
+      return;
+    }
+
+    createDrawnNode(start, point);
+    event.preventDefault();
+    event.stopPropagation();
+  }, [createDrawnNode, dispatch, state.viewportCenter]);
+
+  const initialViewport = state.appSettings?.startupViewport || state.viewport;
+
   return (
-    <div className={styles.canvas}>
+    <div className={styles.canvas} ref={flowWrapperRef}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
-        defaultViewport={state.viewport}
+        defaultViewport={initialViewport}
         defaultEdgeOptions={defaultEdgeOptions}
         connectionMode={ConnectionMode.Loose}
         connectionLineType={toConnectionLineType(state.appSettings.edgeType)}
         connectionLineStyle={{ stroke: state.appSettings.edgeColor, strokeWidth: state.appSettings.edgeWidth }}
         isValidConnection={validateConnection}
-        nodesDraggable={state.isAdminAuthenticated}
-        nodesConnectable={state.isAdminAuthenticated}
-        elementsSelectable
-        selectionOnDrag={state.isAdminAuthenticated}
+        nodesDraggable={state.isAdminAuthenticated && !state.isDrawNodeMode}
+        nodesConnectable={state.isAdminAuthenticated && !state.isDrawNodeMode}
+        elementsSelectable={!state.isDrawNodeMode}
+        selectionOnDrag={state.isAdminAuthenticated && !state.isDrawNodeMode}
+        panOnDrag={!state.isDrawNodeMode}
         selectionKeyCode="Shift"
         multiSelectionKeyCode="Shift"
+        minZoom={Number(state.appSettings.minZoom) || 0.2}
+        onInit={onInit}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
@@ -326,10 +474,6 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
 
         {state.appSettings.showMiniMap && <MiniMap />}
 
-        {/*
-          Viewer-only saved-file sync status + manual refresh.
-          Placed above the MiniMap (bottom-right) so it fits into the UI just above the map.
-        */}
         {!state.isAdminAuthenticated && (
           <Panel
             position="bottom-right"
@@ -344,15 +488,7 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
           </Panel>
         )}
 
-        {/* <Panel position="top-left">
-          <div className={styles.tipPanel}>
-            {state.isAdminAuthenticated
-              ? 'Admin: click a node to preview it, use Edit on the node to open the side editor, and click a connection to remove it.'
-              : 'Viewer: click a node to open its details modal.'}
-          </div>
-        </Panel> */}
-
-        {state.isAdminAuthenticated && state.selectedEdgeId && (
+        {state.isAdminAuthenticated && state.selectedEdgeId && !state.isDrawNodeMode && (
           <Panel position="top-right">
             <div className={styles.edgePanel}>
               <div className={styles.edgeText}>Connection selected</div>
@@ -373,6 +509,29 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
           </Panel>
         )}
       </ReactFlow>
+
+      {state.isAdminAuthenticated && state.isDrawNodeMode && (
+        <div
+          className={styles.drawOverlay}
+          onMouseDown={handleDrawStart}
+          onMouseMove={handleDrawMove}
+          onMouseUp={handleDrawEnd}
+          onMouseLeave={handleDrawEnd}
+        >
+          <div className={styles.drawHint}>Drag on the map to draw a new node rectangle.</div>
+          {draftRect && (
+            <div
+              className={styles.drawPreview}
+              style={{
+                left: `${draftRect.left}px`,
+                top: `${draftRect.top}px`,
+                width: `${draftRect.width}px`,
+                height: `${draftRect.height}px`
+              }}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

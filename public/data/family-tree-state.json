@@ -1,8 +1,8 @@
 {
   "meta": {
-    "hash": "673812dc",
-    "exportedAt": "2026-03-07T05:14:11.595Z",
-    "appVersion": "1.10.0"
+    "hash": "3f345a38",
+    "exportedAt": "2026-03-09T02:28:39.859Z",
+    "appVersion": "1.14.3"
   },
   "data": {
     "nodes": [
@@ -10,8 +10,8 @@
         "id": "node_i4c3kxp1_mmazde9b",
         "type": "familyNode",
         "position": {
-          "x": -1009.1390350767117,
-          "y": 866.1162605124122
+          "x": -970.5312955845131,
+          "y": 775.587767910015
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -137,19 +137,19 @@
         },
         "width": 627,
         "height": 627,
-        "selected": false,
+        "selected": true,
         "dragging": false,
         "positionAbsolute": {
-          "x": -1009.1390350767117,
-          "y": 866.1162605124122
+          "x": -970.5312955845131,
+          "y": 775.587767910015
         }
       },
       {
         "id": "node_67f3wycj_mmb8svip",
         "type": "familyNode",
         "position": {
-          "x": -1890.4051470828438,
-          "y": 973.0484664710169
+          "x": -1482.4051470828438,
+          "y": 639.0484664710169
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -261,8 +261,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -1890.4051470828438,
-          "y": 973.0484664710169
+          "x": -1482.4051470828438,
+          "y": 639.0484664710169
         },
         "dragging": false,
         "selected": true
@@ -271,8 +271,8 @@
         "id": "node_5qwwykwa_mmb8uizn",
         "type": "familyNode",
         "position": {
-          "x": -1883.109692091066,
-          "y": 1296.789198248003
+          "x": -1547.109692091066,
+          "y": 876.789198248003
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -383,8 +383,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -1883.109692091066,
-          "y": 1296.789198248003
+          "x": -1547.109692091066,
+          "y": 876.789198248003
         },
         "dragging": false,
         "selected": true
@@ -393,8 +393,8 @@
         "id": "node_epcks337_mmb8wcv0",
         "type": "familyNode",
         "position": {
-          "x": -1729.5171441837338,
-          "y": 678.5611269785677
+          "x": -1241.5171441837338,
+          "y": 538.5611269785677
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -505,18 +505,18 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -1729.5171441837338,
-          "y": 678.5611269785677
+          "x": -1241.5171441837338,
+          "y": 538.5611269785677
         },
         "dragging": false,
-        "selected": false
+        "selected": true
       },
       {
         "id": "node_30sqckxd_mmb8xqmn",
         "type": "familyNode",
         "position": {
-          "x": -1410.1524449036228,
-          "y": 416.8904888296749
+          "x": -1020.1524449036228,
+          "y": 326.8904888296749
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -628,8 +628,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -1410.1524449036228,
-          "y": 416.8904888296749
+          "x": -1020.1524449036228,
+          "y": 326.8904888296749
         },
         "dragging": false,
         "selected": true
@@ -1038,8 +1038,8 @@
         "id": "node_lj8aj66f_mmb9jq6r",
         "type": "familyNode",
         "position": {
-          "x": -884.2954036833902,
-          "y": 332.13119232298203
+          "x": -778.2954036833902,
+          "y": 260.13119232298203
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1151,8 +1151,8 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": -884.2954036833902,
-          "y": 332.13119232298203
+          "x": -778.2954036833902,
+          "y": 260.13119232298203
         },
         "dragging": false,
         "selected": true
@@ -1440,8 +1440,8 @@
         "id": "node_2uut8aax_mmcngoza",
         "type": "familyNode",
         "position": {
-          "x": 757.5982425040008,
-          "y": -618.645663720479
+          "x": 871.5982425040008,
+          "y": -1188.645663720479
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1457,8 +1457,8 @@
           "nodeRadius": 18,
           "handles": {
             "top": 0,
-            "right": 1,
-            "bottom": 1,
+            "right": 2,
+            "bottom": 0,
             "left": 0
           },
           "handleLayout": {
@@ -1563,8 +1563,8 @@
         "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 757.5982425040008,
-          "y": -618.645663720479
+          "x": 871.5982425040008,
+          "y": -1188.645663720479
         },
         "dragging": false
       },
@@ -1572,8 +1572,8 @@
         "id": "node_a536uox5_mme44h15",
         "type": "familyNode",
         "position": {
-          "x": 388.62380584806556,
-          "y": -61.54205933765991
+          "x": 616.6238058480656,
+          "y": -107.54205933765991
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1730,18 +1730,18 @@
         "width": 200,
         "height": 200,
         "positionAbsolute": {
-          "x": 388.62380584806556,
-          "y": -61.54205933765991
+          "x": 616.6238058480656,
+          "y": -107.54205933765991
         },
         "dragging": false,
-        "selected": false
+        "selected": true
       },
       {
         "id": "node_td8wzvae_mme7cdvz",
         "type": "familyNode",
         "position": {
-          "x": 388.8390160248812,
-          "y": -487.3892750299466
+          "x": 664.8390160248812,
+          "y": -624.443828252603
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -1763,7 +1763,7 @@
           },
           "handleLayout": {
             "top": {
-              "anchor": 50,
+              "anchor": 54,
               "spread": 31
             },
             "right": {
@@ -1882,8 +1882,8 @@
         "width": 300,
         "height": 300,
         "positionAbsolute": {
-          "x": 388.8390160248812,
-          "y": -487.3892750299466
+          "x": 664.8390160248812,
+          "y": -624.443828252603
         },
         "dragging": false,
         "selected": false
@@ -1892,8 +1892,8 @@
         "id": "node_xmsm2vly_mme7m01y",
         "type": "familyNode",
         "position": {
-          "x": 125.92227792585513,
-          "y": -640.8699609884313
+          "x": 497.92227792585516,
+          "y": -870.8699609884313
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2008,10 +2008,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
-          "x": 125.92227792585513,
-          "y": -640.8699609884313
+          "x": 497.92227792585516,
+          "y": -870.8699609884313
         },
         "dragging": false
       },
@@ -2019,8 +2019,8 @@
         "id": "node_mgrf6btg_mme7u73g",
         "type": "familyNode",
         "position": {
-          "x": 334.3066451249522,
-          "y": -849.9579192966853
+          "x": 830.3066451249522,
+          "y": -949.9579192966853
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2137,8 +2137,8 @@
         "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 334.3066451249522,
-          "y": -849.9579192966853
+          "x": 830.3066451249522,
+          "y": -949.9579192966853
         },
         "dragging": false
       },
@@ -2146,8 +2146,8 @@
         "id": "node_dgjwi773_mme95tfj",
         "type": "familyNode",
         "position": {
-          "x": 600.1102888878224,
-          "y": -860.0322473825541
+          "x": 614.1102888878224,
+          "y": -1112.032247382554
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2274,8 +2274,8 @@
         "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 600.1102888878224,
-          "y": -860.0322473825541
+          "x": 614.1102888878224,
+          "y": -1112.032247382554
         },
         "dragging": false
       },
@@ -2461,8 +2461,8 @@
         "id": "node_ivecs8z4_mmf6h215",
         "type": "familyNode",
         "position": {
-          "x": -457.05446299369027,
-          "y": 64.60405489737187
+          "x": -477.05446299369027,
+          "y": 74.60405489737184
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2572,8 +2572,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": -457.05446299369027,
-          "y": 64.60405489737187
+          "x": -477.05446299369027,
+          "y": 74.60405489737184
         },
         "dragging": false
       },
@@ -2581,8 +2581,8 @@
         "id": "node_6lyh90p0_mmf7l3qp",
         "type": "familyNode",
         "position": {
-          "x": 959.4914512889163,
-          "y": -815.4411389577895
+          "x": 1067.4914512889163,
+          "y": -1389.4411389577895
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -2694,10 +2694,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 959.4914512889163,
-          "y": -815.4411389577895
+          "x": 1067.4914512889163,
+          "y": -1389.4411389577895
         },
         "dragging": false
       },
@@ -2967,8 +2967,8 @@
         "id": "node_7ciodjxr_mmfa2rzi",
         "type": "familyNode",
         "position": {
-          "x": 645.2258367272916,
-          "y": -1151.973002284832
+          "x": 607.2258367272916,
+          "y": -1383.973002284832
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3082,8 +3082,8 @@
         "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 645.2258367272916,
-          "y": -1151.973002284832
+          "x": 607.2258367272916,
+          "y": -1383.973002284832
         },
         "dragging": false
       },
@@ -3091,8 +3091,8 @@
         "id": "node_9woqxfyn_mmfadybv",
         "type": "familyNode",
         "position": {
-          "x": 1174.5751842786713,
-          "y": 666.736514668987
+          "x": 1198.700151116348,
+          "y": 613.661587626098
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3206,8 +3206,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1174.5751842786713,
-          "y": 666.736514668987
+          "x": 1198.700151116348,
+          "y": 613.661587626098
         },
         "dragging": false
       },
@@ -3215,8 +3215,8 @@
         "id": "node_2j9lc61c_mmfaujna",
         "type": "familyNode",
         "position": {
-          "x": 1190.819913581056,
-          "y": -364.82008315511735
+          "x": 1282.819913581056,
+          "y": -420.82008315511735
         },
         "data": {
           "nodeType": "persons",
@@ -3355,8 +3355,8 @@
         "height": 325,
         "selected": true,
         "positionAbsolute": {
-          "x": 1190.819913581056,
-          "y": -364.82008315511735
+          "x": 1282.819913581056,
+          "y": -420.82008315511735
         },
         "dragging": false
       },
@@ -3364,13 +3364,13 @@
         "id": "node_i4ud60oi_mmfav444",
         "type": "familyNode",
         "position": {
-          "x": -814.6138451179199,
-          "y": -639.0909179053215
+          "x": -467.8102278937378,
+          "y": -732.4788823587253
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
+          "title": "Olivia Lucille Solomns",
+          "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -3380,7 +3380,7 @@
           "nodeHeight": 200,
           "nodeRadius": 18,
           "handles": {
-            "top": 0,
+            "top": 1,
             "right": 0,
             "bottom": 1,
             "left": 0
@@ -3412,14 +3412,14 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
-            "nickname": "",
-            "photo": "",
+            "fullName": "Olivia Lucille Solomns",
+            "nickname": "Livi",
+            "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
             "prefix": "",
             "maidenName": "",
-            "birthDate": "",
+            "birthDate": "1981-12-19",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
@@ -3431,8 +3431,8 @@
               "photo": ""
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Lydia Joan v/d Heuvel Solomons",
+              "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
             },
             "children": [],
             "girlfriends": [],
@@ -3445,11 +3445,28 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Jerico Lawrence Samson",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "name": "Peter Kenneth Solomons",
+                "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+              },
+              {
+                "name": "Jaylynn Joan Samson",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "name": "Stephanie Elmareze Samson",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
+              "father": false,
+              "mother": false,
+              "children": false,
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
@@ -3460,11 +3477,13 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": false,
+              "maidenName": true,
+              "prefix": true
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "Olivia Lucille Solomns",
+              "thumbnailPhoto": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -3473,10 +3492,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": -814.6138451179199,
-          "y": -639.0909179053215
+          "x": -467.8102278937378,
+          "y": -732.4788823587253
         },
         "dragging": false
       },
@@ -3484,13 +3503,13 @@
         "id": "node_ykbzsba5_mmfav5bg",
         "type": "familyNode",
         "position": {
-          "x": -851.3547820607367,
-          "y": -348.9302454309491
+          "x": -756.5107176145324,
+          "y": -708.311830432029
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
+          "title": "Jerico Lawrence Samson",
+          "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -3500,7 +3519,7 @@
           "nodeHeight": 200,
           "nodeRadius": 18,
           "handles": {
-            "top": 0,
+            "top": 1,
             "right": 0,
             "bottom": 1,
             "left": 0
@@ -3532,14 +3551,14 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
+            "fullName": "Jerico Lawrence Samson",
             "nickname": "",
-            "photo": "",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
             "prefix": "",
             "maidenName": "",
-            "birthDate": "",
+            "birthDate": "1995-04-09",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
@@ -3551,10 +3570,15 @@
               "photo": ""
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Lydia Joan v/d Heuvel Solomons",
+              "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
             },
-            "children": [],
+            "children": [
+              {
+                "name": "Isiah Samson",
+                "photo": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp"
+              }
+            ],
             "girlfriends": [],
             "boyfriends": [],
             "husbands": [],
@@ -3565,11 +3589,28 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Olivia Lucille Solomns",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              },
+              {
+                "name": "Luke Peter Morta",
+                "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
+              },
+              {
+                "name": "Jaylynn Joan Samson",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "name": "Stephanie Elmareze Samson",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
+              "father": false,
+              "mother": false,
+              "children": false,
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
@@ -3580,11 +3621,13 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": false,
+              "prefix": true,
+              "maidenName": true
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "Jerico Lawrence Samson",
+              "thumbnailPhoto": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -3593,10 +3636,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": -851.3547820607367,
-          "y": -348.9302454309491
+          "x": -756.5107176145324,
+          "y": -708.311830432029
         },
         "dragging": false
       },
@@ -3604,13 +3647,13 @@
         "id": "node_0xqdt77j_mmfb1zwm",
         "type": "familyNode",
         "position": {
-          "x": -599.1911748578179,
-          "y": -784.6118556938272
+          "x": 38.628950133182656,
+          "y": -502.5256340335202
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
+          "title": "Uriah Zeneth Samson",
+          "photo": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -3652,14 +3695,14 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
+            "fullName": "Uriah Zeneth Samson",
             "nickname": "",
-            "photo": "",
+            "photo": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp",
             "prefix": "",
             "maidenName": "",
-            "birthDate": "",
+            "birthDate": "2002-09-14",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
@@ -3671,8 +3714,8 @@
               "photo": ""
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Stephanie Elmareze Samson",
+              "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
             },
             "children": [],
             "girlfriends": [],
@@ -3687,8 +3730,8 @@
             "adoptedChildren": [],
             "siblings": [],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
+              "father": false,
+              "mother": false,
               "children": true,
               "girlfriends": true,
               "boyfriends": true,
@@ -3700,11 +3743,14 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": false,
+              "maidenName": true,
+              "prefix": true,
+              "birthPlace": false
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "Uriah Zeneth Samson",
+              "thumbnailPhoto": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -3715,8 +3761,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": -599.1911748578179,
-          "y": -784.6118556938272
+          "x": 38.628950133182656,
+          "y": -502.5256340335202
         },
         "dragging": false
       },
@@ -3724,13 +3770,13 @@
         "id": "node_83tkg82d_mmfb22j8",
         "type": "familyNode",
         "position": {
-          "x": -363.91680043444524,
-          "y": -787.6162910714403
+          "x": -833.0619345903422,
+          "y": -364.135505089107
         },
         "data": {
           "nodeType": "standardPhoto",
           "title": "New Family Node",
-          "photo": "",
+          "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -3741,8 +3787,8 @@
           "nodeRadius": 18,
           "handles": {
             "top": 0,
-            "right": 0,
-            "bottom": 1,
+            "right": 1,
+            "bottom": 0,
             "left": 0
           },
           "handleLayout": {
@@ -3772,14 +3818,14 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
+            "fullName": "Jaylynn Joan Samson",
             "nickname": "",
-            "photo": "",
+            "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
             "prefix": "",
             "maidenName": "",
-            "birthDate": "",
+            "birthDate": "2000-04-25",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
@@ -3791,8 +3837,8 @@
               "photo": ""
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Lydia Joan v/d Heuvel Solomons",
+              "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
             },
             "children": [],
             "girlfriends": [],
@@ -3805,10 +3851,27 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Olivia Lucille Solomns",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              },
+              {
+                "name": "Peter Kenneth Solomons",
+                "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+              },
+              {
+                "name": "Jerico Lawrence Samson",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "name": "Stephanie Elmareze Samson",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
+              "father": false,
+              "mother": false,
               "children": true,
               "girlfriends": true,
               "boyfriends": true,
@@ -3820,11 +3883,13 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": false,
+              "maidenName": true,
+              "prefix": true
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "New Family Node",
+              "thumbnailPhoto": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -3833,10 +3898,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": -363.91680043444524,
-          "y": -787.6162910714403
+          "x": -833.0619345903422,
+          "y": -364.135505089107
         },
         "dragging": false
       },
@@ -3844,13 +3909,13 @@
         "id": "node_o0ju7wdx_mmfb258c",
         "type": "familyNode",
         "position": {
-          "x": -153.96202633077922,
-          "y": -637.8436644549463
+          "x": -35.96929707593682,
+          "y": -239.62288741347368
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
+          "title": "Stephanie Elmareze Samson",
+          "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -3860,10 +3925,10 @@
           "nodeHeight": 200,
           "nodeRadius": 18,
           "handles": {
-            "top": 0,
+            "top": 1,
             "right": 0,
-            "bottom": 1,
-            "left": 0
+            "bottom": 0,
+            "left": 1
           },
           "handleLayout": {
             "top": {
@@ -3892,14 +3957,14 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
+            "fullName": "Stephanie Elmareze Samson",
             "nickname": "",
-            "photo": "",
+            "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
             "prefix": "",
             "maidenName": "",
             "birthDate": "",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
@@ -3911,10 +3976,15 @@
               "photo": ""
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Lydia Joan v/d Heuvel Solomons",
+              "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
             },
-            "children": [],
+            "children": [
+              {
+                "name": "Uriah Zeneth Samson",
+                "photo": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp"
+              }
+            ],
             "girlfriends": [],
             "boyfriends": [],
             "husbands": [],
@@ -3925,11 +3995,28 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Jaylynn Joan Samson",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "name": "Peter Kenneth Solomons",
+                "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+              },
+              {
+                "name": "Jerico Lawrence Samson",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "name": "Olivia Lucille Solomns",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
+              "father": false,
+              "mother": false,
+              "children": false,
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
@@ -3940,11 +4027,13 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": false,
+              "maidenName": true,
+              "prefix": true
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "Stephanie Elmareze Samson",
+              "thumbnailPhoto": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -3955,8 +4044,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": -153.96202633077922,
-          "y": -637.8436644549463
+          "x": -35.96929707593682,
+          "y": -239.62288741347368
         },
         "dragging": false
       },
@@ -3964,8 +4053,8 @@
         "id": "node_ouci43n2_mmfbla1v",
         "type": "familyNode",
         "position": {
-          "x": 799.9268490247982,
-          "y": -19.642301008637958
+          "x": 947.9268490247982,
+          "y": -15.642301008637958
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -4118,8 +4207,8 @@
         "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 799.9268490247982,
-          "y": -19.642301008637958
+          "x": 947.9268490247982,
+          "y": -15.642301008637958
         },
         "dragging": false
       },
@@ -4128,7 +4217,7 @@
         "type": "familyNode",
         "position": {
           "x": -529.0421048258983,
-          "y": -403.18402693479345
+          "y": -401.18402693479345
         },
         "data": {
           "nodeType": "persons",
@@ -4143,26 +4232,26 @@
           "nodeHeight": 369,
           "nodeRadius": 18,
           "handles": {
-            "top": 0,
-            "right": 0,
+            "top": 3,
+            "right": 1,
             "bottom": 1,
-            "left": 0
+            "left": 1
           },
           "handleLayout": {
             "top": {
               "anchor": 50,
-              "spread": 40
+              "spread": 64
             },
             "right": {
-              "anchor": 50,
-              "spread": 40
+              "anchor": 67,
+              "spread": 39
             },
             "bottom": {
               "anchor": 50,
               "spread": 40
             },
             "left": {
-              "anchor": 50,
+              "anchor": 69,
               "spread": 40
             }
           },
@@ -4203,7 +4292,7 @@
             },
             {
               "id": "person_f5bduna0_mmfbqtyn",
-              "fullName": "Sthephanie Elmareze Samson",
+              "fullName": "Stephanie Elmareze Samson",
               "nickname": "",
               "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
               "relationshipToPrimary": "other"
@@ -4273,17 +4362,17 @@
         "width": 369,
         "height": 369,
         "dragging": false,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
           "x": -529.0421048258983,
-          "y": -403.18402693479345
+          "y": -401.18402693479345
         }
       },
       {
         "id": "node_6ozg7iqb_mmfik0te",
         "type": "familyNode",
         "position": {
-          "x": 1376.9453355156263,
+          "x": 1378.1534249600309,
           "y": 102.30612222136489
         },
         "data": {
@@ -4347,7 +4436,7 @@
             "moreInfo": "",
             "father": {
               "name": "Emerice Leonardo Coetzee",
-              "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+              "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png"
             },
             "mother": {
               "name": "Daviana Coetzee",
@@ -4393,9 +4482,9 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 1376.9453355156263,
+          "x": 1378.1534249600309,
           "y": 102.30612222136489
         },
         "dragging": false
@@ -4468,7 +4557,7 @@
             "moreInfo": "",
             "father": {
               "name": "Emerice Leonardo Coetzee",
-              "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+              "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png"
             },
             "mother": {
               "name": "Daviana Coetzee",
@@ -4519,7 +4608,7 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
           "x": 1560.489103120414,
           "y": 331.5706481888077
@@ -4530,8 +4619,8 @@
         "id": "node_rumxdxm7_mmfirslw",
         "type": "familyNode",
         "position": {
-          "x": 1372.1697348219384,
-          "y": -644.6914713583977
+          "x": 1377.539613154432,
+          "y": -745.8591135807799
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -4661,8 +4750,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1372.1697348219384,
-          "y": -644.6914713583977
+          "x": 1377.539613154432,
+          "y": -745.8591135807799
         },
         "dragging": false
       },
@@ -4670,13 +4759,13 @@
         "id": "node_w5iglyia_mmfirvr4",
         "type": "familyNode",
         "position": {
-          "x": 1631.4258923771579,
-          "y": -636.2095440069606
+          "x": 1644.4721929334733,
+          "y": -771.9147067842184
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
+          "title": "Gene Mintoor",
+          "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -4686,14 +4775,14 @@
           "nodeHeight": 200,
           "nodeRadius": 18,
           "handles": {
-            "top": 0,
+            "top": 1,
             "right": 0,
             "bottom": 1,
             "left": 0
           },
           "handleLayout": {
             "top": {
-              "anchor": 50,
+              "anchor": 100,
               "spread": 40
             },
             "right": {
@@ -4718,29 +4807,34 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
+            "fullName": "Gene Mintoor",
             "nickname": "",
-            "photo": "",
+            "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
             "prefix": "",
             "maidenName": "",
             "birthDate": "",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
-            "address": "",
+            "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
             "contactNumber": "",
             "moreInfo": "",
             "father": {
-              "name": "",
-              "photo": ""
+              "name": "Delphin Mintoor",
+              "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Eline Mintoor",
+              "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg"
             },
-            "children": [],
+            "children": [
+              {
+                "name": "Zoey Mintoor",
+                "photo": "https://i.ibb.co/mrGCzxjT/Zoey.webp"
+              }
+            ],
             "girlfriends": [],
             "boyfriends": [],
             "husbands": [],
@@ -4751,11 +4845,24 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Heinrich Mintoor",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              },
+              {
+                "name": "Owen Mintoor",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "name": "Reegan Mintoor",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
+              "father": false,
+              "mother": false,
+              "children": false,
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
@@ -4766,11 +4873,13 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": false,
+              "prefix": true,
+              "maidenName": true
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "Gene Mintoor",
+              "thumbnailPhoto": "https://i.ibb.co/d4F0qVWg/Gene.webp",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -4781,8 +4890,8 @@
         "height": 200,
         "selected": true,
         "positionAbsolute": {
-          "x": 1631.4258923771579,
-          "y": -636.2095440069606
+          "x": 1644.4721929334733,
+          "y": -771.9147067842184
         },
         "dragging": false
       },
@@ -4790,13 +4899,13 @@
         "id": "node_3uk9aqs9_mmfirygi",
         "type": "familyNode",
         "position": {
-          "x": 1842.7197654671734,
-          "y": -397.5086512225427
+          "x": 1796.7197654671734,
+          "y": -455.5086512225427
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
+          "title": "Owen Mintoor",
+          "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -4838,18 +4947,18 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
+            "fullName": "Owen Mintoor",
             "nickname": "",
-            "photo": "",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
             "prefix": "",
             "maidenName": "",
             "birthDate": "",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
-            "address": "",
+            "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
             "contactNumber": "",
             "moreInfo": "",
             "father": {
@@ -4886,131 +4995,13 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": true,
+              "maidenName": true,
+              "prefix": true
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
-              "photoCaption": "",
-              "eventDate": "",
-              "location": ""
-            }
-          }
-        },
-        "width": 200,
-        "height": 200,
-        "selected": true,
-        "positionAbsolute": {
-          "x": 1842.7197654671734,
-          "y": -397.5086512225427
-        },
-        "dragging": false
-      },
-      {
-        "id": "node_76r72fdz_mmfirzob",
-        "type": "familyNode",
-        "position": {
-          "x": 1673.0560648049943,
-          "y": -136.88214268260293
-        },
-        "data": {
-          "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
-          "photoCaption": "",
-          "location": "",
-          "eventDate": "",
-          "notes": "",
-          "tags": "",
-          "nodeWidth": 200,
-          "nodeHeight": 200,
-          "nodeRadius": 18,
-          "handles": {
-            "top": 0,
-            "right": 0,
-            "bottom": 0,
-            "left": 1
-          },
-          "handleLayout": {
-            "top": {
-              "anchor": 50,
-              "spread": 40
-            },
-            "right": {
-              "anchor": 50,
-              "spread": 40
-            },
-            "bottom": {
-              "anchor": 50,
-              "spread": 40
-            },
-            "left": {
-              "anchor": 50,
-              "spread": 40
-            }
-          },
-          "imageSettings": {
-            "nodeImageSize": "cover",
-            "nodeImageRepeat": "no-repeat",
-            "nodeImagePosition": "center center",
-            "personImageSize": 72
-          },
-          "people": [],
-          "standardPerson": {
-            "id": "standard-person",
-            "fullName": "",
-            "nickname": "",
-            "photo": "",
-            "prefix": "",
-            "maidenName": "",
-            "birthDate": "",
-            "birthPlace": "",
-            "stillAlive": false,
-            "deathDate": "",
-            "deathPlace": "",
-            "occupation": "",
-            "address": "",
-            "contactNumber": "",
-            "moreInfo": "",
-            "father": {
-              "name": "",
-              "photo": ""
-            },
-            "mother": {
-              "name": "",
-              "photo": ""
-            },
-            "children": [],
-            "girlfriends": [],
-            "boyfriends": [],
-            "husbands": [],
-            "wives": [],
-            "stepFathers": [],
-            "stepMothers": [],
-            "fosterParents": [],
-            "fosterChildren": [],
-            "adoptiveParents": [],
-            "adoptedChildren": [],
-            "siblings": [],
-            "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
-              "girlfriends": true,
-              "boyfriends": true,
-              "husbands": true,
-              "wives": true,
-              "stepFathers": true,
-              "stepMothers": true,
-              "fosterParents": true,
-              "fosterChildren": true,
-              "adoptiveParents": true,
-              "adoptedChildren": true,
-              "siblings": true
-            },
-            "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "Owen Mintoor",
+              "thumbnailPhoto": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -5021,8 +5012,128 @@
         "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 1673.0560648049943,
-          "y": -136.88214268260293
+          "x": 1796.7197654671734,
+          "y": -455.5086512225427
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_76r72fdz_mmfirzob",
+        "type": "familyNode",
+        "position": {
+          "x": 1801.0560648049943,
+          "y": -198.88214268260293
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "New Family Node",
+          "photo": "",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 1
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "",
+            "nickname": "",
+            "photo": "",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "",
+            "birthPlace": "",
+            "stillAlive": false,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "",
+              "photo": ""
+            },
+            "mother": {
+              "name": "",
+              "photo": ""
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": true,
+              "mother": true,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true
+            },
+            "nodeMeta": {
+              "title": "",
+              "thumbnailPhoto": "",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1801.0560648049943,
+          "y": -198.88214268260293
         },
         "dragging": false
       },
@@ -5030,8 +5141,8 @@
         "id": "node_hk6bkpec_mmfjjvh3",
         "type": "familyNode",
         "position": {
-          "x": 1446.6883308830572,
-          "y": -971.6857138202744
+          "x": 1538.6883308830572,
+          "y": -1045.6857138202745
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -5143,10 +5254,647 @@
         },
         "width": 200,
         "height": 200,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1538.6883308830572,
+          "y": -1045.6857138202745
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_zwofzqry_mmhuzyu1",
+        "type": "familyNode",
+        "position": {
+          "x": -199.48132290129732,
+          "y": -734.7620129128809
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Peter Kenneth Solomons",
+          "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Peter Kenneth Solomons",
+            "nickname": "",
+            "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "1984-11-17",
+            "birthPlace": "",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "",
+              "photo": ""
+            },
+            "mother": {
+              "name": "Lydia Joan v/d Heuvel Solomons",
+              "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [
+              {
+                "name": "Jerico Lawrence Samson",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "name": "Olivia Lucille Solomns",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              },
+              {
+                "name": "Jaylynn Joan Samson",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "name": "Stephanie Elmareze Samson",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": false,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": false,
+              "maidenName": true,
+              "prefix": true
+            },
+            "nodeMeta": {
+              "title": "Peter Kenneth Solomons",
+              "thumbnailPhoto": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
         "selected": false,
         "positionAbsolute": {
-          "x": 1446.6883308830572,
-          "y": -971.6857138202744
+          "x": -199.48132290129732,
+          "y": -734.7620129128809
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_4rvofkfc_mmhvuxc1",
+        "type": "familyNode",
+        "position": {
+          "x": -441.4624794451244,
+          "y": -1057.3980903337615
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Declin Zegan Miller",
+          "photo": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 220,
+          "nodeHeight": 220,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 1,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Declin Zegan Miller",
+            "nickname": "",
+            "photo": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "2001-10-05",
+            "birthPlace": "",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "",
+              "photo": ""
+            },
+            "mother": {
+              "name": "Olivia Lucille Solomns",
+              "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+            },
+            "children": [
+              {
+                "name": "Emma Joan Adams",
+                "photo": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp"
+              }
+            ],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": false,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true,
+              "prefix": true,
+              "maidenName": true
+            },
+            "nodeMeta": {
+              "title": "Declin Zegan Miller",
+              "thumbnailPhoto": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 220,
+        "height": 220,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -441.4624794451244,
+          "y": -1057.3980903337615
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_euqqipii_mmhvv1wz",
+        "type": "familyNode",
+        "position": {
+          "x": -222.5087800014399,
+          "y": -1274.218741442793
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Emma Joan Adams",
+          "photo": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 220,
+          "nodeHeight": 220,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Emma Joan Adams",
+            "nickname": "",
+            "photo": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "2017-10-24",
+            "birthPlace": "",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "Declin Zegan Miller",
+              "photo": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp"
+            },
+            "mother": {
+              "name": "",
+              "photo": ""
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": false,
+              "prefix": true,
+              "maidenName": true,
+              "occupation": true,
+              "address": true,
+              "contactNumber": true
+            },
+            "nodeMeta": {
+              "title": "Emma Joan Adams",
+              "thumbnailPhoto": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 220,
+        "height": 220,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -222.5087800014399,
+          "y": -1274.218741442793
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_k4yrg90a_mmhvvk9q",
+        "type": "familyNode",
+        "position": {
+          "x": -792.6226899791213,
+          "y": -1028.8030886720144
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Isiah Samson",
+          "photo": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 220,
+          "nodeHeight": 220,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 1,
+            "left": 0
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Isiah Samson",
+            "nickname": "",
+            "photo": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "2024-07-31",
+            "birthPlace": "",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "",
+            "address": "",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "Jerico Lawrence Samson",
+              "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+            },
+            "mother": {
+              "name": "",
+              "photo": ""
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true,
+              "prefix": true,
+              "maidenName": true,
+              "occupation": true,
+              "contactNumber": true
+            },
+            "nodeMeta": {
+              "title": "Isiah Samson",
+              "thumbnailPhoto": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 220,
+        "height": 220,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -792.6226899791213,
+          "y": -1028.8030886720144
+        },
+        "dragging": false
+      },
+      {
+        "id": "node_uw5g2p1q_mmhzkwn5",
+        "type": "familyNode",
+        "position": {
+          "x": 1920.0779371310805,
+          "y": -980.894511203824
+        },
+        "data": {
+          "nodeType": "standardPhoto",
+          "title": "Zoey Mintoor",
+          "photo": "https://i.ibb.co/mrGCzxjT/Zoey.webp",
+          "photoCaption": "",
+          "location": "",
+          "eventDate": "",
+          "notes": "",
+          "tags": "",
+          "nodeWidth": 200,
+          "nodeHeight": 200,
+          "nodeRadius": 18,
+          "handles": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 1
+          },
+          "handleLayout": {
+            "top": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "right": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "bottom": {
+              "anchor": 50,
+              "spread": 40
+            },
+            "left": {
+              "anchor": 50,
+              "spread": 40
+            }
+          },
+          "imageSettings": {
+            "nodeImageSize": "cover",
+            "nodeImageRepeat": "no-repeat",
+            "nodeImagePosition": "center center",
+            "personImageSize": 72
+          },
+          "people": [],
+          "standardPerson": {
+            "id": "standard-person",
+            "fullName": "Zoey Mintoor",
+            "nickname": "",
+            "photo": "https://i.ibb.co/mrGCzxjT/Zoey.webp",
+            "prefix": "",
+            "maidenName": "",
+            "birthDate": "",
+            "birthPlace": "",
+            "stillAlive": true,
+            "deathDate": "",
+            "deathPlace": "",
+            "occupation": "In School",
+            "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+            "contactNumber": "",
+            "moreInfo": "",
+            "father": {
+              "name": "",
+              "photo": ""
+            },
+            "mother": {
+              "name": "Gene Mintoor",
+              "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+            },
+            "children": [],
+            "girlfriends": [],
+            "boyfriends": [],
+            "husbands": [],
+            "wives": [],
+            "stepFathers": [],
+            "stepMothers": [],
+            "fosterParents": [],
+            "fosterChildren": [],
+            "adoptiveParents": [],
+            "adoptedChildren": [],
+            "siblings": [],
+            "hiddenFields": {
+              "father": false,
+              "mother": false,
+              "children": true,
+              "girlfriends": true,
+              "boyfriends": true,
+              "husbands": true,
+              "wives": true,
+              "stepFathers": true,
+              "stepMothers": true,
+              "fosterParents": true,
+              "fosterChildren": true,
+              "adoptiveParents": true,
+              "adoptedChildren": true,
+              "siblings": true,
+              "prefix": true,
+              "maidenName": true
+            },
+            "nodeMeta": {
+              "title": "Zoey Mintoor",
+              "thumbnailPhoto": "https://i.ibb.co/mrGCzxjT/Zoey.webp",
+              "photoCaption": "",
+              "eventDate": "",
+              "location": ""
+            }
+          }
+        },
+        "width": 200,
+        "height": 200,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1920.0779371310805,
+          "y": -980.894511203824
         },
         "dragging": false
       }
@@ -5203,40 +5951,10 @@
         "type": "default",
         "animated": true,
         "source": "node_td8wzvae_mme7cdvz",
-        "sourceHandle": "right-1",
-        "target": "node_2uut8aax_mmcngoza",
-        "targetHandle": "bottom-1",
-        "id": "edge_pipaz2pc_mme7lurb",
-        "selected": true
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_td8wzvae_mme7cdvz",
         "sourceHandle": "left-1",
         "target": "node_xmsm2vly_mme7m01y",
         "targetHandle": "bottom-1",
         "id": "edge_3adq93nt_mme7m6jm",
-        "selected": true
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_td8wzvae_mme7cdvz",
-        "sourceHandle": "top-1",
-        "target": "node_mgrf6btg_mme7u73g",
-        "targetHandle": "bottom-1",
-        "id": "edge_kj1wwdpl_mme7uic5",
-        "selected": true
-      },
-      {
-        "type": "default",
-        "animated": true,
-        "source": "node_td8wzvae_mme7cdvz",
-        "sourceHandle": "top-2",
-        "target": "node_dgjwi773_mme95tfj",
-        "targetHandle": "bottom-1",
-        "id": "edge_67mt60v5_mme9a1dl",
         "selected": true
       },
       {
@@ -5482,15 +6200,134 @@
         "target": "node_hk6bkpec_mmfjjvh3",
         "targetHandle": "bottom-1",
         "id": "edge_w2v3y5uq_mmfjk7os"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_60wfgw6q_mmfbqtyn",
+        "sourceHandle": "right-1",
+        "target": "node_o0ju7wdx_mmfb258c",
+        "targetHandle": "left-1",
+        "id": "edge_2lmxe9iv_mmhuwp5v"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_o0ju7wdx_mmfb258c",
+        "sourceHandle": "top-1",
+        "target": "node_0xqdt77j_mmfb1zwm",
+        "targetHandle": "bottom-1",
+        "id": "edge_cp0xoaw1_mmhuztfo"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_60wfgw6q_mmfbqtyn",
+        "sourceHandle": "top-3",
+        "target": "node_zwofzqry_mmhuzyu1",
+        "targetHandle": "bottom-1",
+        "id": "edge_o5dl1im6_mmhv01lm"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_60wfgw6q_mmfbqtyn",
+        "sourceHandle": "top-2",
+        "target": "node_i4ud60oi_mmfav444",
+        "targetHandle": "bottom-1",
+        "id": "edge_ve8lactq_mmhv02kh"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_60wfgw6q_mmfbqtyn",
+        "sourceHandle": "top-1",
+        "target": "node_ykbzsba5_mmfav5bg",
+        "targetHandle": "bottom-1",
+        "id": "edge_hhetgfdy_mmhv03il"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_60wfgw6q_mmfbqtyn",
+        "sourceHandle": "left-1",
+        "target": "node_83tkg82d_mmfb22j8",
+        "targetHandle": "right-1",
+        "id": "edge_40t3yu59_mmhv09uy"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_i4ud60oi_mmfav444",
+        "sourceHandle": "top-1",
+        "target": "node_4rvofkfc_mmhvuxc1",
+        "targetHandle": "bottom-1",
+        "id": "edge_wywek6pz_mmhvvahu"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_4rvofkfc_mmhvuxc1",
+        "sourceHandle": "right-1",
+        "target": "node_euqqipii_mmhvv1wz",
+        "targetHandle": "bottom-1",
+        "id": "edge_txfdikwa_mmhvvie4"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_ykbzsba5_mmfav5bg",
+        "sourceHandle": "top-1",
+        "target": "node_k4yrg90a_mmhvvk9q",
+        "targetHandle": "bottom-1",
+        "id": "edge_37sie0mo_mmhvwbv1"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_td8wzvae_mme7cdvz",
+        "sourceHandle": "right-1",
+        "target": "node_2uut8aax_mmcngoza",
+        "targetHandle": "right-2",
+        "id": "edge_6ehit56v_mmhwcv5v",
+        "selected": false
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_td8wzvae_mme7cdvz",
+        "sourceHandle": "top-2",
+        "target": "node_mgrf6btg_mme7u73g",
+        "targetHandle": "bottom-1",
+        "id": "edge_5as6s5il_mmhwdlxg"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_td8wzvae_mme7cdvz",
+        "sourceHandle": "top-1",
+        "target": "node_dgjwi773_mme95tfj",
+        "targetHandle": "bottom-1",
+        "id": "edge_cp1fv6wv_mmhwdvgw"
+      },
+      {
+        "type": "default",
+        "animated": true,
+        "source": "node_w5iglyia_mmfirvr4",
+        "sourceHandle": "top-1",
+        "target": "node_uw5g2p1q_mmhzkwn5",
+        "targetHandle": "left-1",
+        "id": "edge_2jzjx05p_mmhzlat7"
       }
     ],
     "viewport": {
-      "x": 483.5117689036513,
-      "y": 615.7823643586619,
-      "zoom": 0.5
+      "x": 1335.2710460575133,
+      "y": -212.47293980693962,
+      "zoom": 0.7052730039968177
     },
     "appSettings": {
       "backgroundColor": "#060a13",
+      "minZoom": 0.2,
       "backgroundVariant": "dots",
       "edgeType": "bezier",
       "edgeAnimated": true,
@@ -5499,6 +6336,11 @@
       "nodeAccent": "#22d3ee",
       "nodeGlow": true,
       "showMiniMap": false,
+      "startupViewport": {
+        "x": 1396.9727102799147,
+        "y": -282.54132197607066,
+        "zoom": 0.7511447285293653
+      },
       "nodeImageSize": "auto",
       "nodeImageRepeat": "no-repeat",
       "nodeImagePosition": "center center",
@@ -7228,7 +8070,7 @@
         "id": "standard-person",
         "fullName": "Emerice Leonardo Coetzee",
         "nickname": "Emmie",
-        "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png",
+        "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png",
         "prefix": "Mr",
         "maidenName": "",
         "birthDate": "1988-12-18",
@@ -7373,32 +8215,329 @@
         }
       },
       {
-        "id": "person_wrcjeoum_mmfbqtyn",
+        "id": "standard-person",
         "fullName": "Jerico Lawrence Samson",
         "nickname": "",
         "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
-        "relationshipToPrimary": "primary"
+        "relationshipToPrimary": "primary",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "1995-04-09",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Lydia Joan v/d Heuvel Solomons",
+          "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+        },
+        "children": [
+          {
+            "name": "Isiah Samson",
+            "photo": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp"
+          }
+        ],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Olivia Lucille Solomns",
+            "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+          },
+          {
+            "name": "Luke Peter Morta",
+            "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
+          },
+          {
+            "name": "Jaylynn Joan Samson",
+            "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+          },
+          {
+            "name": "Stephanie Elmareze Samson",
+            "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "prefix": true,
+          "maidenName": true
+        },
+        "nodeMeta": {
+          "title": "Jerico Lawrence Samson",
+          "thumbnailPhoto": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
-        "id": "person_7ndfeoff_mmfbqtyn",
+        "id": "standard-person",
         "fullName": "Olivia Lucille Solomns",
-        "nickname": "",
+        "nickname": "Livi",
         "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
-        "relationshipToPrimary": "other"
+        "relationshipToPrimary": "other",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "1981-12-19",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Lydia Joan v/d Heuvel Solomons",
+          "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Jerico Lawrence Samson",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+          },
+          {
+            "name": "Peter Kenneth Solomons",
+            "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+          },
+          {
+            "name": "Jaylynn Joan Samson",
+            "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+          },
+          {
+            "name": "Stephanie Elmareze Samson",
+            "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "maidenName": true,
+          "prefix": true
+        },
+        "nodeMeta": {
+          "title": "Olivia Lucille Solomns",
+          "thumbnailPhoto": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
-        "id": "person_pxbgz15d_mmfbqtyn",
+        "id": "standard-person",
         "fullName": "Peter Kenneth Solomons",
         "nickname": "",
         "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
-        "relationshipToPrimary": "other"
+        "relationshipToPrimary": "other",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "1984-11-17",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Lydia Joan v/d Heuvel Solomons",
+          "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Jerico Lawrence Samson",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+          },
+          {
+            "name": "Olivia Lucille Solomns",
+            "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+          },
+          {
+            "name": "Jaylynn Joan Samson",
+            "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+          },
+          {
+            "name": "Stephanie Elmareze Samson",
+            "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "maidenName": true,
+          "prefix": true
+        },
+        "nodeMeta": {
+          "title": "Peter Kenneth Solomons",
+          "thumbnailPhoto": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
-        "id": "person_wo2ufbjb_mmfbqtyn",
+        "id": "standard-person",
         "fullName": "Jaylynn Joan Samson",
         "nickname": "",
         "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
-        "relationshipToPrimary": "other"
+        "relationshipToPrimary": "other",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2000-04-25",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Lydia Joan v/d Heuvel Solomons",
+          "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Olivia Lucille Solomns",
+            "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+          },
+          {
+            "name": "Peter Kenneth Solomons",
+            "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+          },
+          {
+            "name": "Jerico Lawrence Samson",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+          },
+          {
+            "name": "Stephanie Elmareze Samson",
+            "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "maidenName": true,
+          "prefix": true
+        },
+        "nodeMeta": {
+          "title": "New Family Node",
+          "thumbnailPhoto": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
         "id": "person_f5bduna0_mmfbqtyn",
@@ -7564,18 +8703,148 @@
         "relationshipNotes": ""
       },
       {
-        "id": "person_bhwvon8w_mmfaw9ka",
+        "id": "standard-person",
         "fullName": "Owen Mintoor",
         "nickname": "",
         "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
-        "relationshipToPrimary": "other"
+        "relationshipToPrimary": "other",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "",
+          "photo": ""
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": true,
+          "mother": true,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": true,
+          "maidenName": true,
+          "prefix": true
+        },
+        "nodeMeta": {
+          "title": "Owen Mintoor",
+          "thumbnailPhoto": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
-        "id": "person_5nu9u487_mmfaw80c",
+        "id": "standard-person",
         "fullName": "Gene Mintoor",
         "nickname": "",
         "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
-        "relationshipToPrimary": "other"
+        "relationshipToPrimary": "other",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Delphin Mintoor",
+          "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+        },
+        "mother": {
+          "name": "Eline Mintoor",
+          "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg"
+        },
+        "children": [
+          {
+            "name": "Zoey Mintoor",
+            "photo": "https://i.ibb.co/mrGCzxjT/Zoey.webp"
+          }
+        ],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Heinrich Mintoor",
+            "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+          },
+          {
+            "name": "Owen Mintoor",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+          },
+          {
+            "name": "Reegan Mintoor",
+            "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "prefix": true,
+          "maidenName": true
+        },
+        "nodeMeta": {
+          "title": "Gene Mintoor",
+          "thumbnailPhoto": "https://i.ibb.co/d4F0qVWg/Gene.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
         "id": "standard-person",
@@ -7813,7 +9082,7 @@
         "moreInfo": "",
         "father": {
           "name": "Emerice Leonardo Coetzee",
-          "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+          "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png"
         },
         "mother": {
           "name": "Daviana Coetzee",
@@ -7879,7 +9148,7 @@
         "moreInfo": "",
         "father": {
           "name": "Emerice Leonardo Coetzee",
-          "photo": "https://i.ibb.co/xtvDrJYV/Emerice-and-Satiro-Coetzee.png"
+          "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png"
         },
         "mother": {
           "name": "Daviana Coetzee",
@@ -8053,6 +9322,412 @@
         "nodeMeta": {
           "title": "Ree Zhaun",
           "thumbnailPhoto": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "id": "standard-person",
+        "fullName": "Stephanie Elmareze Samson",
+        "nickname": "",
+        "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
+        "relationshipToPrimary": "other",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Lydia Joan v/d Heuvel Solomons",
+          "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+        },
+        "children": [
+          {
+            "name": "Uriah Zeneth Samson",
+            "photo": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp"
+          }
+        ],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Jaylynn Joan Samson",
+            "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+          },
+          {
+            "name": "Peter Kenneth Solomons",
+            "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+          },
+          {
+            "name": "Jerico Lawrence Samson",
+            "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+          },
+          {
+            "name": "Olivia Lucille Solomns",
+            "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "maidenName": true,
+          "prefix": true
+        },
+        "nodeMeta": {
+          "title": "Stephanie Elmareze Samson",
+          "thumbnailPhoto": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "fullName": "Uriah Zeneth Samson",
+        "photo": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp",
+        "id": "standard-person",
+        "nickname": "",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2002-09-14",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Stephanie Elmareze Samson",
+          "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "maidenName": true,
+          "prefix": true,
+          "birthPlace": false
+        },
+        "nodeMeta": {
+          "title": "Uriah Zeneth Samson",
+          "thumbnailPhoto": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "fullName": "Isiah Samson",
+        "photo": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp",
+        "id": "standard-person",
+        "nickname": "",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2024-07-31",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Jerico Lawrence Samson",
+          "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+        },
+        "mother": {
+          "name": "",
+          "photo": ""
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": true,
+          "prefix": true,
+          "maidenName": true,
+          "occupation": true,
+          "contactNumber": true
+        },
+        "nodeMeta": {
+          "title": "Isiah Samson",
+          "thumbnailPhoto": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "id": "standard-person",
+        "fullName": "Declin Zegan Miller",
+        "nickname": "",
+        "photo": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2001-10-05",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Olivia Lucille Solomns",
+          "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+        },
+        "children": [
+          {
+            "name": "Emma Joan Adams",
+            "photo": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp"
+          }
+        ],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": true,
+          "prefix": true,
+          "maidenName": true
+        },
+        "nodeMeta": {
+          "title": "Declin Zegan Miller",
+          "thumbnailPhoto": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "fullName": "Emma Joan Adams",
+        "photo": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp",
+        "id": "standard-person",
+        "nickname": "",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "2017-10-24",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Declin Zegan Miller",
+          "photo": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp"
+        },
+        "mother": {
+          "name": "",
+          "photo": ""
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "prefix": true,
+          "maidenName": true,
+          "occupation": true,
+          "address": true,
+          "contactNumber": true
+        },
+        "nodeMeta": {
+          "title": "Emma Joan Adams",
+          "thumbnailPhoto": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
+      },
+      {
+        "fullName": "Zoey Mintoor",
+        "photo": "https://i.ibb.co/mrGCzxjT/Zoey.webp",
+        "id": "standard-person",
+        "nickname": "",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "In School",
+        "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "",
+          "photo": ""
+        },
+        "mother": {
+          "name": "Gene Mintoor",
+          "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": true,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": true,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": true,
+          "prefix": true,
+          "maidenName": true
+        },
+        "nodeMeta": {
+          "title": "Zoey Mintoor",
+          "thumbnailPhoto": "https://i.ibb.co/mrGCzxjT/Zoey.webp",
           "photoCaption": "",
           "eventDate": "",
           "location": ""

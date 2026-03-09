@@ -115,6 +115,7 @@
 
 .personTile {
   height: 150px;
+  min-height: 100px;
 }
 .personTile,
 .personPlaceholder {

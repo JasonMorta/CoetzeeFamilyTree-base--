@@ -111,10 +111,10 @@ export function createDefaultPeopleByType(nodeType = NODE_TYPES.STANDARD) {
 
 export function createDefaultHandles() {
   return {
-    top: 0,
-    right: 0,
+    top: 1,
+    right: 1,
     bottom: 1,
-    left: 0
+    left: 1
   };
 }
 
@@ -359,11 +359,12 @@ export function normalizeNodeData(data = {}) {
 }
 
 export function createFamilyNode(position = { x: 250, y: 180 }, dataOverrides = {}) {
+  const normalized = normalizeNodeData(dataOverrides);
   return {
     id: createId('node'),
     type: 'familyNode',
     position,
-    data: normalizeNodeData(dataOverrides)
+    data: normalized
   };
 }
 
