@@ -93,6 +93,11 @@ export default function NodeEditorDrawer() {
   const [draftPeople, setDraftPeople] = useState([]);
   const [draftSharedNotes, setDraftSharedNotes] = useState('');
 
+  useEffect(() => {
+    if (!state.isEditorOpen) return;
+    dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: anyUnsaved });
+  }, [anyUnsaved, dispatch, state.isEditorOpen]);
+
   const updateNode = useCallback((patch) => {
     if (!selectedNode) return;
     dispatch({ type: ACTIONS.UPDATE_NODE_DATA, payload: { id: selectedNode.id, data: patch } });
@@ -344,6 +349,7 @@ export default function NodeEditorDrawer() {
       dispatch({ type: ACTIONS.SET_SAVED_PEOPLE, payload: nextLibrary });
     }
 
+    dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
     dispatch({ type: ACTIONS.CLOSE_EDITOR });
   }, [anyUnsaved, dispatch, nodeData, selectedNode, state.savedPeople]);
 
@@ -376,7 +382,8 @@ export default function NodeEditorDrawer() {
     setPeopleStatus('idle');
     setStandardStatus({ personal: 'idle', about: 'idle', relationships: 'idle' });
     setCloseWarning('');
-  }, [selectedNode?.id, nodeData?.nodeType, state.isEditorOpen]);
+    dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
+  }, [dispatch, selectedNode?.id, nodeData?.nodeType, state.isEditorOpen]);
 
     const titleOptions = useMemo(() => {
     const opts = (state.savedPeople || [])
@@ -395,7 +402,14 @@ export default function NodeEditorDrawer() {
   const primaryLabel = nodeData?.people?.[0]?.fullName || 'the primary person';
 
   return (
-    <Drawer open={state.isEditorOpen} onClose={handleClose} size="sm" className={styles.drawer}>
+    <Drawer
+      open={state.isEditorOpen}
+      onClose={handleClose}
+      keyboard={!anyUnsaved}
+      backdrop={anyUnsaved ? 'static' : true}
+      size="sm"
+      className={styles.drawer}
+    >
       <Drawer.Header><Drawer.Title>Edit Family Node</Drawer.Title></Drawer.Header>
       <Drawer.Body className={styles.body}>
         <div className={styles.note}>Type freely. Use the Save buttons at the bottom of each section to apply changes.</div>

@@ -43,7 +43,8 @@ export const ACTIONS = {
   TOGGLE_MAP_FULLPAGE: 'TOGGLE_MAP_FULLPAGE',
   TOGGLE_DRAW_NODE_MODE: 'TOGGLE_DRAW_NODE_MODE',
   SET_DRAW_NODE_MODE: 'SET_DRAW_NODE_MODE',
-  SAVE_STARTUP_VIEWPORT: 'SAVE_STARTUP_VIEWPORT'
+  SAVE_STARTUP_VIEWPORT: 'SAVE_STARTUP_VIEWPORT',
+  SET_EDITOR_UNSAVED_CHANGES: 'SET_EDITOR_UNSAVED_CHANGES'
 };
 
 function parseHandleId(handleId) {
@@ -321,6 +322,13 @@ export function appReducer(state, action) {
       };
     case ACTIONS.SET_SELECTED_NODES: {
       const ids = Array.isArray(action.payload) ? action.payload : [];
+      if (state.isEditorOpen && state.editorHasUnsavedChanges) {
+        const currentId = state.selectedNodeId;
+        const onlyCurrentNodeSelected = ids.length === 1 && ids[0] === currentId;
+        if (!onlyCurrentNodeSelected) {
+          return state;
+        }
+      }
       return {
         ...state,
         selectedNodeIds: ids,
@@ -330,6 +338,9 @@ export function appReducer(state, action) {
     }
 
     case ACTIONS.SELECT_NODE:
+      if (state.isEditorOpen && state.editorHasUnsavedChanges && state.selectedNodeId !== action.payload) {
+        return state;
+      }
       return {
         ...state,
         selectedNodeIds: [action.payload],
@@ -338,21 +349,32 @@ export function appReducer(state, action) {
         activeNodeId: action.payload
       };
     case ACTIONS.SELECT_EDGE:
+      if (state.isEditorOpen && state.editorHasUnsavedChanges) {
+        return state;
+      }
       return {
         ...state,
         selectedEdgeId: action.payload,
         selectedNodeId: null,
-        isEditorOpen: false
+        isEditorOpen: false,
+        editorHasUnsavedChanges: false
       };
     case ACTIONS.CLEAR_SELECTION:
+      if (state.isEditorOpen && state.editorHasUnsavedChanges) {
+        return state;
+      }
       return {
         ...state,
         selectedNodeIds: [],
         selectedNodeId: null,
         selectedEdgeId: null,
-        isEditorOpen: false
+        isEditorOpen: false,
+        editorHasUnsavedChanges: false
       };
     case ACTIONS.OPEN_EDITOR:
+      if (state.isEditorOpen && state.editorHasUnsavedChanges && state.selectedNodeId !== action.payload) {
+        return state;
+      }
       return {
         ...state,
         isEditorOpen: true,
@@ -361,11 +383,18 @@ export function appReducer(state, action) {
         selectedNodeIds: [action.payload],
         selectedNodeId: action.payload,
         selectedEdgeId: null,
-        activeNodeId: action.payload
+        activeNodeId: action.payload,
+        editorHasUnsavedChanges: false
       };
     case ACTIONS.CLOSE_EDITOR:
-      return { ...state, isEditorOpen: false };
+      if (state.editorHasUnsavedChanges) {
+        return state;
+      }
+      return { ...state, isEditorOpen: false, editorHasUnsavedChanges: false };
     case ACTIONS.OPEN_NODE_MODAL:
+      if (state.isEditorOpen && state.editorHasUnsavedChanges && state.selectedNodeId !== action.payload) {
+        return state;
+      }
       return {
         ...state,
         isNodeModalOpen: true,
@@ -376,6 +405,8 @@ export function appReducer(state, action) {
       };
     case ACTIONS.CLOSE_NODE_MODAL:
       return { ...state, isNodeModalOpen: false };
+    case ACTIONS.SET_EDITOR_UNSAVED_CHANGES:
+      return { ...state, editorHasUnsavedChanges: Boolean(action.payload) };
     case ACTIONS.UPDATE_NODE_DATA: {
       const { id, data } = action.payload;
       const targetNode = getNodeById(state.nodes, id);

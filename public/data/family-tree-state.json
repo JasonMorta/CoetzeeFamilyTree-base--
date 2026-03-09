@@ -1,8 +1,8 @@
 {
   "meta": {
-    "hash": "9754c7d8",
-    "exportedAt": "2026-03-09T02:30:37.855Z",
-    "appVersion": "1.14.3"
+    "hash": "cae19756",
+    "exportedAt": "2026-03-09T03:07:49.094Z",
+    "appVersion": "1.14.5"
   },
   "data": {
     "nodes": [
@@ -4958,16 +4958,16 @@
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
-            "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+            "address": "6 Magaliesberg Cres, Tafelsig, Cape Town",
             "contactNumber": "",
             "moreInfo": "",
             "father": {
-              "name": "",
-              "photo": ""
+              "name": "Delphin Mintoor",
+              "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Eline Mintoor",
+              "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
             },
             "children": [],
             "girlfriends": [],
@@ -4980,12 +4980,25 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Gene Mintoor",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "name": "Heinrich Mintoor",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              },
+              {
+                "name": "Reegan Mintoor",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
-              "girlfriends": true,
+              "father": false,
+              "mother": false,
+              "children": false,
+              "girlfriends": false,
               "boyfriends": true,
               "husbands": true,
               "wives": true,
@@ -4995,7 +5008,7 @@
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true,
+              "siblings": false,
               "maidenName": true,
               "prefix": true
             },
@@ -5010,7 +5023,7 @@
         },
         "width": 200,
         "height": 200,
-        "selected": false,
+        "selected": true,
         "positionAbsolute": {
           "x": 1796.7197654671734,
           "y": -455.5086512225427
@@ -5021,13 +5034,13 @@
         "id": "node_76r72fdz_mmfirzob",
         "type": "familyNode",
         "position": {
-          "x": 1801.0560648049943,
-          "y": -198.88214268260293
+          "x": 1798.3934620813943,
+          "y": -193.55693723540313
         },
         "data": {
           "nodeType": "standardPhoto",
-          "title": "New Family Node",
-          "photo": "",
+          "title": "Heinrich Mintoor",
+          "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
           "photoCaption": "",
           "location": "",
           "eventDate": "",
@@ -5069,14 +5082,14 @@
           "people": [],
           "standardPerson": {
             "id": "standard-person",
-            "fullName": "",
-            "nickname": "",
-            "photo": "",
+            "fullName": "Heinrich Mintoor",
+            "nickname": "Heinie",
+            "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
             "prefix": "",
             "maidenName": "",
             "birthDate": "",
             "birthPlace": "",
-            "stillAlive": false,
+            "stillAlive": true,
             "deathDate": "",
             "deathPlace": "",
             "occupation": "",
@@ -5084,12 +5097,12 @@
             "contactNumber": "",
             "moreInfo": "",
             "father": {
-              "name": "",
-              "photo": ""
+              "name": "Delphin Mintoor",
+              "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
             },
             "mother": {
-              "name": "",
-              "photo": ""
+              "name": "Eline Mintoor",
+              "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg"
             },
             "children": [],
             "girlfriends": [],
@@ -5102,26 +5115,41 @@
             "fosterChildren": [],
             "adoptiveParents": [],
             "adoptedChildren": [],
-            "siblings": [],
+            "siblings": [
+              {
+                "name": "Gene Mintoor",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "name": "Reegan Mintoor",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              },
+              {
+                "name": "Owen Mintoor",
+                "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png"
+              }
+            ],
             "hiddenFields": {
-              "father": true,
-              "mother": true,
-              "children": true,
+              "father": false,
+              "mother": false,
+              "children": false,
               "girlfriends": true,
               "boyfriends": true,
               "husbands": true,
-              "wives": true,
+              "wives": false,
               "stepFathers": true,
               "stepMothers": true,
               "fosterParents": true,
               "fosterChildren": true,
               "adoptiveParents": true,
               "adoptedChildren": true,
-              "siblings": true
+              "siblings": false,
+              "prefix": true,
+              "maidenName": true
             },
             "nodeMeta": {
-              "title": "",
-              "thumbnailPhoto": "",
+              "title": "Heinrich Mintoor",
+              "thumbnailPhoto": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
               "photoCaption": "",
               "eventDate": "",
               "location": ""
@@ -5130,10 +5158,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 1801.0560648049943,
-          "y": -198.88214268260293
+          "x": 1798.3934620813943,
+          "y": -193.55693723540313
         },
         "dragging": false
       },
@@ -6321,9 +6349,9 @@
       }
     ],
     "viewport": {
-      "x": -229.49178355264053,
-      "y": 614.2051250579912,
-      "zoom": 0.6217625127083685
+      "x": 653.1012161949227,
+      "y": 306.91318500528575,
+      "zoom": 0.2918960211362893
     },
     "appSettings": {
       "backgroundColor": "#060a13",
@@ -6468,7 +6496,7 @@
       {
         "fullName": "Eline Mintoor",
         "nickname": "Hata",
-        "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg",
+        "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
         "birthDate": "",
         "deathDate": "",
         "occupation": "",
@@ -8716,16 +8744,16 @@
         "deathDate": "",
         "deathPlace": "",
         "occupation": "",
-        "address": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+        "address": "6 Magaliesberg Cres, Tafelsig, Cape Town",
         "contactNumber": "",
         "moreInfo": "",
         "father": {
-          "name": "",
-          "photo": ""
+          "name": "Delphin Mintoor",
+          "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
         },
         "mother": {
-          "name": "",
-          "photo": ""
+          "name": "Eline Mintoor",
+          "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
         },
         "children": [],
         "girlfriends": [],
@@ -8738,12 +8766,25 @@
         "fosterChildren": [],
         "adoptiveParents": [],
         "adoptedChildren": [],
-        "siblings": [],
+        "siblings": [
+          {
+            "name": "Gene Mintoor",
+            "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+          },
+          {
+            "name": "Heinrich Mintoor",
+            "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+          },
+          {
+            "name": "Reegan Mintoor",
+            "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+          }
+        ],
         "hiddenFields": {
-          "father": true,
-          "mother": true,
-          "children": true,
-          "girlfriends": true,
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": false,
           "boyfriends": true,
           "husbands": true,
           "wives": true,
@@ -8753,7 +8794,7 @@
           "fosterChildren": true,
           "adoptiveParents": true,
           "adoptedChildren": true,
-          "siblings": true,
+          "siblings": false,
           "maidenName": true,
           "prefix": true
         },
@@ -8928,11 +8969,80 @@
         }
       },
       {
-        "id": "person_8t7vsrh4_mmfaw8so",
+        "id": "standard-person",
         "fullName": "Heinrich Mintoor",
         "nickname": "Heinie",
         "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
-        "relationshipToPrimary": "other"
+        "relationshipToPrimary": "other",
+        "prefix": "",
+        "maidenName": "",
+        "birthDate": "",
+        "birthPlace": "",
+        "stillAlive": true,
+        "deathDate": "",
+        "deathPlace": "",
+        "occupation": "",
+        "address": "",
+        "contactNumber": "",
+        "moreInfo": "",
+        "father": {
+          "name": "Delphin Mintoor",
+          "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+        },
+        "mother": {
+          "name": "Eline Mintoor",
+          "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg"
+        },
+        "children": [],
+        "girlfriends": [],
+        "boyfriends": [],
+        "husbands": [],
+        "wives": [],
+        "stepFathers": [],
+        "stepMothers": [],
+        "fosterParents": [],
+        "fosterChildren": [],
+        "adoptiveParents": [],
+        "adoptedChildren": [],
+        "siblings": [
+          {
+            "name": "Gene Mintoor",
+            "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+          },
+          {
+            "name": "Reegan Mintoor",
+            "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+          },
+          {
+            "name": "Owen Mintoor",
+            "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png"
+          }
+        ],
+        "hiddenFields": {
+          "father": false,
+          "mother": false,
+          "children": false,
+          "girlfriends": true,
+          "boyfriends": true,
+          "husbands": true,
+          "wives": false,
+          "stepFathers": true,
+          "stepMothers": true,
+          "fosterParents": true,
+          "fosterChildren": true,
+          "adoptiveParents": true,
+          "adoptedChildren": true,
+          "siblings": false,
+          "prefix": true,
+          "maidenName": true
+        },
+        "nodeMeta": {
+          "title": "Heinrich Mintoor",
+          "thumbnailPhoto": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
+          "photoCaption": "",
+          "eventDate": "",
+          "location": ""
+        }
       },
       {
         "id": "person_bhwvon8w_mmfaw9ka",
