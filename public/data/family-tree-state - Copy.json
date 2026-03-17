@@ -1,8 +1,8 @@
 {
   "meta": {
-    "hash": "d2a60a6c",
-    "exportedAt": "2026-03-16T00:46:01.031Z",
-    "appVersion": "2.17.5"
+    "hash": "8d54d818",
+    "exportedAt": "2026-03-09T03:11:35.368Z",
+    "appVersion": "1.14.5"
   },
   "data": {
     "nodes": [
@@ -99,7 +99,7 @@
                 "imageCaption": "Example starter node",
                 "eventDate": "1998-04-14",
                 "location": "Cape Town",
-                "notes": "Click Login to edit this tree."
+                "notes": ""
               }
             },
             "relationships": {
@@ -114,7 +114,7 @@
               "imageCaption": "Example starter node",
               "eventDate": "1998-04-14",
               "location": "Cape Town",
-              "notes": "Click Login to edit this tree."
+              "notes": ""
             },
             "submissionMeta": {
               "submittedAt": "",
@@ -158,7 +158,7 @@
               "photoCaption": "Example starter node",
               "eventDate": "1998-04-14",
               "location": "Cape Town",
-              "notes": "Click Login to edit this tree."
+              "notes": ""
             }
           }
         },
@@ -1726,7 +1726,7 @@
                 "partners": []
               },
               "node": {
-                "title": "Grieta Coetzee's children",
+                "title": "",
                 "coverImage": "",
                 "imageCaption": "",
                 "eventDate": "",
@@ -1741,7 +1741,7 @@
               "partners": []
             },
             "node": {
-              "title": "Grieta Coetzee's children",
+              "title": "",
               "coverImage": "",
               "imageCaption": "",
               "eventDate": "",
@@ -1769,7 +1769,7 @@
               "siblings": true
             },
             "nodeMeta": {
-              "title": "Grieta Coetzee's children",
+              "title": "",
               "thumbnailPhoto": "",
               "photoCaption": "",
               "eventDate": "",
@@ -3059,8 +3059,8 @@
         "id": "node_hptk6sjk_mmea8q9e",
         "type": "familyNode",
         "position": {
-          "x": -38.79022567250733,
-          "y": 652.9840214701726
+          "x": -43.043897630740304,
+          "y": 658.65558408115
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -3359,10 +3359,10 @@
         },
         "width": 177,
         "height": 177,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": -38.79022567250733,
-          "y": 652.9840214701726
+          "x": -43.043897630740304,
+          "y": 658.65558408115
         },
         "dragging": false
       },
@@ -4451,8 +4451,8 @@
         "id": "node_2j9lc61c_mmfaujna",
         "type": "familyNode",
         "position": {
-          "x": 1307.4668499859258,
-          "y": -392.65215583526617
+          "x": 1282.819913581056,
+          "y": -420.82008315511735
         },
         "data": {
           "nodeType": "persons",
@@ -4564,7 +4564,7 @@
                 "partners": []
               },
               "node": {
-                "title": "Eline's Children",
+                "title": "",
                 "coverImage": "",
                 "imageCaption": "",
                 "eventDate": "",
@@ -4579,7 +4579,7 @@
               "partners": []
             },
             "node": {
-              "title": "Eline's Children",
+              "title": "",
               "coverImage": "",
               "imageCaption": "",
               "eventDate": "",
@@ -4607,7 +4607,7 @@
               "siblings": true
             },
             "nodeMeta": {
-              "title": "Eline's Children",
+              "title": "",
               "thumbnailPhoto": "",
               "photoCaption": "",
               "eventDate": "",
@@ -4620,8 +4620,8 @@
         "height": 325,
         "selected": true,
         "positionAbsolute": {
-          "x": 1307.4668499859258,
-          "y": -392.65215583526617
+          "x": 1282.819913581056,
+          "y": -420.82008315511735
         },
         "dragging": false
       },
@@ -6092,7 +6092,7 @@
                 "partners": []
               },
               "node": {
-                "title": "New Family Node",
+                "title": "",
                 "coverImage": "",
                 "imageCaption": "",
                 "eventDate": "",
@@ -6107,7 +6107,7 @@
               "partners": []
             },
             "node": {
-              "title": "New Family Node",
+              "title": "",
               "coverImage": "",
               "imageCaption": "",
               "eventDate": "",
@@ -6135,7 +6135,7 @@
               "siblings": true
             },
             "nodeMeta": {
-              "title": "New Family Node",
+              "title": "",
               "thumbnailPhoto": "",
               "photoCaption": "",
               "eventDate": "",
@@ -8307,8 +8307,8 @@
         "id": "node_uw5g2p1q_mmhzkwn5",
         "type": "familyNode",
         "position": {
-          "x": 1942.7641875749896,
-          "y": -945.4472448852159
+          "x": 1920.0779371310805,
+          "y": -980.894511203824
         },
         "data": {
           "nodeType": "standardPhoto",
@@ -8461,10 +8461,10 @@
         },
         "width": 200,
         "height": 200,
-        "selected": true,
+        "selected": false,
         "positionAbsolute": {
-          "x": 1942.7641875749896,
-          "y": -945.4472448852159
+          "x": 1920.0779371310805,
+          "y": -980.894511203824
         },
         "dragging": false
       }
@@ -8632,8 +8632,7 @@
         "sourceHandle": "top-2",
         "target": "node_lj8aj66f_mmb9jq6r",
         "targetHandle": "bottom-1",
-        "id": "edge_1qvqevww_mmfgs65n",
-        "selected": false
+        "id": "edge_1qvqevww_mmfgs65n"
       },
       {
         "type": "default",
@@ -8892,9 +8891,9 @@
       }
     ],
     "viewport": {
-      "x": 958.9727102799147,
-      "y": -58.541321976070634,
-      "zoom": 0.7511447285293653
+      "x": 1091.3514477214349,
+      "y": 160.24415404365482,
+      "zoom": 0.6622026239078488
     },
     "appSettings": {
       "backgroundColor": "#060a13",
@@ -9163,7 +9162,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -9209,7 +9208,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -9255,7 +9254,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -9301,7 +9300,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -9497,7 +9496,7 @@
           },
           "node": {
             "title": "Grieta Coetzee",
-            "coverImage": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp",
+            "coverImage": "https://i.ibb.co/TMDrbNtV/8.webp",
             "imageCaption": "",
             "eventDate": "",
             "location": "",
@@ -9621,7 +9620,7 @@
             "partners": []
           },
           "node": {
-            "title": "Luke Morta",
+            "title": "Luke Peter Morta",
             "coverImage": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png",
             "imageCaption": "",
             "eventDate": "",
@@ -9762,7 +9761,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -9808,7 +9807,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -9950,11 +9949,11 @@
             "partners": []
           },
           "node": {
-            "title": "Coetzee Family",
+            "title": "Coetzee Root Family",
             "coverImage": "https://i.ibb.co/3m3xbf5T/IMG-20260221-WA0013-jpg.webp",
-            "imageCaption": "",
-            "eventDate": "",
-            "location": "",
+            "imageCaption": "Example starter node",
+            "eventDate": "1998-04-14",
+            "location": "Cape Town",
             "notes": ""
           }
         }
@@ -9996,7 +9995,7 @@
             "partners": []
           },
           "node": {
-            "title": "Lydia Joan v/d Heuvel Solomons",
+            "title": "Lydia Solomons",
             "coverImage": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp",
             "imageCaption": "",
             "eventDate": "",
@@ -10181,7 +10180,7 @@
           },
           "node": {
             "title": "Poppie",
-            "coverImage": "https://i.ibb.co/PzNy00Nm/1.webp",
+            "coverImage": "https://i.ibb.co/YBjVmz6S/3.webp",
             "imageCaption": "",
             "eventDate": "",
             "location": "",
@@ -10538,20 +10537,20 @@
         "firebaseDocumentId": "",
         "person": {
           "name": "Marion Arthur  Coetzee",
-          "birthDate": "1988-06-02",
+          "birthDate": "",
           "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png",
           "nickname": "Ankel",
-          "prefix": "Mr",
+          "prefix": "",
           "maidenName": "",
           "gender": "unknown",
-          "birthPlace": "Cape Town",
+          "birthPlace": "",
           "currentLocation": "Lived in: Delft, Cape Town",
           "contactNumber": "",
           "heritage": "",
           "isAlive": true,
           "deathDate": "",
           "deathPlace": "",
-          "occupation": "High School Jenitor",
+          "occupation": "",
           "education": "",
           "maritalStatus": "",
           "languages": "",
@@ -10578,7 +10577,7 @@
             "partners": []
           },
           "node": {
-            "title": "Marion Arthur  Coetzee",
+            "title": "Mario Coetzee",
             "coverImage": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png",
             "imageCaption": "",
             "eventDate": "",
@@ -10601,7 +10600,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -10733,7 +10732,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -11134,7 +11133,7 @@
             "partners": []
           },
           "node": {
-            "title": "Jaylynn Joan Samson",
+            "title": "New Family Node",
             "coverImage": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
             "imageCaption": "",
             "eventDate": "",
@@ -11157,7 +11156,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -11310,7 +11309,7 @@
             "partners": []
           },
           "node": {
-            "title": "Morta's",
+            "title": "Clive Morta's Children",
             "coverImage": "https://i.ibb.co/k620xcFf/Whats-App-Image-2026-02-22-at-12-44-30-4-AM.webp",
             "imageCaption": "",
             "eventDate": "",
@@ -11659,7 +11658,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -11705,7 +11704,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -11845,7 +11844,7 @@
           },
           "node": {
             "title": "Elien Mintoor",
-            "coverImage": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg",
+            "coverImage": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
             "imageCaption": "",
             "eventDate": "",
             "location": "",
@@ -11867,7 +11866,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -12015,7 +12014,7 @@
             "partners": []
           },
           "node": {
-            "title": "Daminan Coetzee",
+            "title": "Damian Coetzee",
             "coverImage": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
             "imageCaption": "",
             "eventDate": "",
@@ -12038,7 +12037,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",
@@ -12114,7 +12113,7 @@
             "partners": []
           },
           "node": {
-            "title": "Ree Shaun",
+            "title": "Ree Shuan",
             "coverImage": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
             "imageCaption": "",
             "eventDate": "",
@@ -12137,7 +12136,7 @@
           "currentLocation": "",
           "contactNumber": "",
           "heritage": "",
-          "isAlive": true,
+          "isAlive": "",
           "deathDate": "",
           "deathPlace": "",
           "occupation": "",

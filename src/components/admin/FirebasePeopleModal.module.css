@@ -1,0 +1,221 @@
+.modal :global(.rs-modal-content) {
+  background: #0c1628;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.58);
+  color: #ecf4ff;
+}
+
+.modal :global(.rs-modal-header),
+.modal :global(.rs-modal-footer) {
+  background: #0c1628;
+}
+
+.modal :global(.rs-modal-title) {
+  color: #f8fbff;
+}
+
+.modal :global(.rs-modal-body) {
+  background: #0c1628;
+}
+
+.modal :global(.rs-input),
+.modal :global(.rs-input-group),
+.modal :global(.rs-input-number-input),
+.modal :global(.rs-picker-toggle),
+.modal :global(.rs-picker-default .rs-picker-toggle),
+.modal :global(.rs-input-group-addon) {
+  background: #14233a;
+  color: #f8fbff;
+  border-color: rgba(148, 163, 184, 0.26);
+}
+
+.modal :global(.rs-input::placeholder),
+.modal :global(.rs-picker-toggle-placeholder),
+.modal :global(.rs-picker-toggle-value) {
+  color: rgba(236, 244, 255, 0.78);
+}
+
+.modal :global(.rs-btn-subtle) {
+  color: #e8f3ff;
+}
+
+.modal :global(.rs-btn-subtle:hover),
+.modal :global(.rs-btn-subtle:focus-visible) {
+  background: rgba(56, 189, 248, 0.14);
+  color: #ffffff;
+}
+
+.modal :global(.rs-pagination),
+.modal :global(.rs-pagination-group) {
+  color: #e8f3ff;
+}
+
+.modal :global(.rs-pagination-btn),
+.modal :global(.rs-pagination-btn.rs-btn),
+.modal :global(.rs-pagination-group .rs-input),
+.modal :global(.rs-pagination-group .rs-picker-toggle) {
+  background: #14233a;
+  color: #f8fbff;
+  border-color: rgba(148, 163, 184, 0.26);
+}
+
+.modal :global(.rs-pagination-btn:hover),
+.modal :global(.rs-pagination-btn.rs-btn:hover) {
+  background: #1a2f4d;
+}
+
+.modal :global(.rs-loader) {
+  color: #f8fbff;
+}
+
+.body,
+.editBody {
+  display: grid;
+  gap: 16px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.searchInput {
+  flex: 1;
+}
+
+.helperText,
+.editHint,
+.statusText {
+  color: rgba(236, 244, 255, 0.9);
+  font-size: 13px;
+}
+
+.errorText {
+  color: #ffb4b4;
+  font-size: 13px;
+}
+
+.tableWrap {
+  overflow: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: #122036;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(236, 244, 255, 0.82);
+  background: #162844;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.row {
+  cursor: pointer;
+}
+
+.row:hover {
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.table td {
+  padding: 12px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  color: #eff6ff;
+}
+
+.photoCol {
+  width: 92px;
+}
+
+.actionsCol,
+.actionsCell {
+  width: 92px;
+  text-align: right;
+}
+
+.thumb,
+.thumbFallback {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  object-fit: cover;
+  background: #1a2f4d;
+  color: rgba(236, 244, 255, 0.84);
+  font-size: 11px;
+}
+
+.rowName {
+  font-weight: 600;
+  color: #f8fbff;
+}
+
+.iconButton {
+  min-width: 32px;
+  margin-left: 4px;
+}
+
+.loadingCell,
+.emptyCell {
+  padding: 28px 14px !important;
+  text-align: center;
+  color: rgba(236, 244, 255, 0.8);
+}
+
+.paginationRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.linkPanel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: #12223a;
+}
+
+.linkPanelTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f8fbff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.linkPanelText,
+.linkStatus {
+  color: rgba(236, 244, 255, 0.86);
+  font-size: 13px;
+}
+
+.linkRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.linkInput {
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .linkRow {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,39 @@
+.modal :global(.rs-modal-content) {
+  background: linear-gradient(180deg, rgba(10, 16, 30, 0.98), rgba(12, 20, 36, 0.98));
+  color: #f8fbff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bodyCopy p {
+  margin: 0 0 12px;
+  line-height: 1.45;
+}
+
+.warning {
+  color: #ffd4d4;
+}
+
+.previewListWrap {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.previewTitle {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(198, 223, 255, 0.82);
+  margin-bottom: 8px;
+}
+
+.previewList {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.previewList li + li {
+  margin-top: 6px;
+}

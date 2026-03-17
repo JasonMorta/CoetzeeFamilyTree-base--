@@ -1,7 +1,7 @@
 {
   "name": "family-tree-app",
   "private": true,
-  "version": "1.14.5",
+  "version": "2.29.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "reactflow": "^11.11.4",
-    "rsuite": "^5.70.0"
+    "rsuite": "^5.70.0",
+    "firebase": "^10.14.1"
   },
   "devDependencies": {
     "vite": "^5.4.10"

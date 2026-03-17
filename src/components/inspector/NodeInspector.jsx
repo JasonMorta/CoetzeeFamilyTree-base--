@@ -3,48 +3,45 @@ import styles from './NodeInspector.module.css';
 import { Button } from 'rsuite';
 import { useAppState } from '../../context/AppStateContext';
 import { ACTIONS } from '../../context/appReducer';
+import { createStandardPersonWrapper, getRecordName } from '../../utils/family3Schema';
 
 export default function NodeInspector() {
   const { state, dispatch } = useAppState();
   const node = state.nodes.find((item) => item.id === state.inspectorNodeId);
 
-  if (!node) {
-    return null;
-  }
+  if (!node) return null;
+
+  const standard = createStandardPersonWrapper(node.data?.standardPerson || {});
 
   return (
     <aside className={styles.card}>
-      <div className={styles.title}>{node.data.title || 'Untitled Node'}</div>
+      <div className={styles.title}>{standard.node?.title || node.data.title || getRecordName(standard) || 'Untitled Node'}</div>
 
-      {node.data.photo && (
+      {(standard.node?.coverImage || node.data.photo) && (
         <div className={styles.section}>
-          <img src={node.data.photo} alt={node.data.title} style={{ width: '100%', borderRadius: 12 }} />
+          <img src={standard.node?.coverImage || node.data.photo} alt={standard.node?.title || node.data.title} style={{ width: '100%', borderRadius: 12 }} />
         </div>
       )}
 
       <div className={styles.section}>
         <div className={styles.muted}>Photo Caption</div>
-        <div>{node.data.photoCaption || '—'}</div>
+        <div>{standard.node?.imageCaption || node.data.photoCaption || '—'}</div>
       </div>
 
       <div className={styles.section}>
         <div className={styles.muted}>Location / Event Date</div>
-        <div>{node.data.location || '—'} {node.data.eventDate ? `• ${node.data.eventDate}` : ''}</div>
+        <div>{standard.node?.location || node.data.location || '—'} {(standard.node?.eventDate || node.data.eventDate) ? `• ${standard.node?.eventDate || node.data.eventDate}` : ''}</div>
       </div>
 
       <div className={styles.section}>
-        <div className={styles.muted}>People</div>
-        {(node.data.people || []).map((person) => (
-          <div className={styles.person} key={person.id}>
-            <strong>{person.fullName || 'Unnamed Person'}</strong><br />
-            <span>{person.birthDate || '—'} {person.deathDate ? `to ${person.deathDate}` : ''}</span>
-          </div>
-        ))}
+        <div className={styles.muted}>Primary person</div>
+        <div><strong>{getRecordName(standard) || 'Unnamed Person'}</strong></div>
+        <div>{standard.person?.birthDate || '—'} {standard.person?.deathDate ? `to ${standard.person.deathDate}` : ''}</div>
       </div>
 
       <div className={styles.section}>
         <div className={styles.muted}>Notes</div>
-        <div>{node.data.notes || '—'}</div>
+        <div>{standard.node?.notes || node.data.notes || '—'}</div>
       </div>
 
       {state.isAdminAuthenticated && (

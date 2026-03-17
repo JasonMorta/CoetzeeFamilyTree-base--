@@ -1,117 +1,74 @@
-.card {
-  padding: 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 12px;
-  color: #f8fbff;
-}
-
-.row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-@media (max-width: 767px) {
-  .row {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-.grow {
-  min-width: 0;
-}
-
-.hideRow {
-  margin-top: 6px;
-  opacity: 0.9;
-}
-
-.inlineBox {
-  margin-top: 10px;
-  padding: 10px;
+.card,
+.personCard,
+.glassPanel,
+.relationshipCard {
+  padding: 18px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(22, 28, 45, 0.78), rgba(11, 16, 30, 0.72));
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-}
-
-.inlineRow {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 10px;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.inlineLabel {
-  font-size: 12px;
-  opacity: 0.9;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.hint {
-  font-size: 12px;
-  opacity: 0.75;
-  margin-top: 4px;
-}
-
-.userOption {
-  display: flex;
-  flex-direction: column;
-  padding: 2px 0;
-}
-
-.userOptionName {
-  font-size: 13px;
-}
-
-.userOptionMeta {
-  font-size: 12px;
-  opacity: 0.75;
-}
-
-
-/* Aliases for simplified components */
-.personCard {
-  padding: 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 12px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  margin-bottom: 14px;
   color: #f8fbff;
 }
 
-.personCardHeader {
+.standardPersonWrap {
+  padding: 6px 2px 16px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.formGridSingle {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.relationshipGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.fullSpan {
+  grid-column: 1 / -1;
+}
+
+.personCardHeader,
+.relationshipHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .personCardTitle {
   font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .sectionDivider {
-  margin: 10px 0;
-  opacity: 0.85;
+  margin: 16px 0 12px;
+  opacity: 0.92;
 }
 
-.fieldRow {
-  margin-bottom: 12px;
+.relationshipSection {
+  margin-bottom: 16px;
 }
 
-.fieldHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.emptyState {
+  color: rgba(226, 236, 255, 0.7);
+  font-size: 0.92rem;
+  padding: 8px 2px 4px;
 }
 
-.hideCheck {
-  font-size: 12px;
-  opacity: 0.95;
+.saveBarButton {
+  margin-top: 10px;
 }
 
 .userOption {
@@ -133,11 +90,6 @@
   margin: 8px 0 14px;
 }
 
-.standardPersonWrap {
-  padding: 10px 4px;
-}
-
-
 .relationshipPhotos {
   margin-top: 10px;
   display: flex;
@@ -152,12 +104,6 @@
   align-items: center;
 }
 
-@media (max-width: 767px) {
-  .relationshipPhotoRow {
-    grid-template-columns: 1fr;
-  }
-}
-
 .relationshipPhotoName {
   font-size: 12px;
   opacity: 0.9;
@@ -166,12 +112,19 @@
   white-space: nowrap;
 }
 
-/* Save button state colors */
-.saveBtnDirty { background: #d9534f !important; border-color: #d9534f !important; color: #fff !important; }
-.saveBtnSaved { background: #5cb85c !important; border-color: #5cb85c !important; color: #fff !important; }
+.saveBtnDirty { background: linear-gradient(180deg, #ef4444, #dc2626) !important; border-color: transparent !important; color: #fff !important; }
+.saveBtnSaved { background: linear-gradient(180deg, #22c55e, #16a34a) !important; border-color: transparent !important; color: #fff !important; }
 
-/* Picker popup readability */
 :global(.rs-picker-popup) { color: #000; }
 :global(.rs-picker-popup .rs-picker-menu-item) { color: #000; }
 :global(.rs-picker-popup .rs-checkbox label) { color: #000; }
 :global(.rs-picker-search-input) { color: #000 !important; }
+
+@media (max-width: 767px) {
+  .formGrid,
+  .relationshipGrid,
+  .row,
+  .relationshipPhotoRow {
+    grid-template-columns: 1fr;
+  }
+}

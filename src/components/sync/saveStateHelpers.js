@@ -1,8 +1,9 @@
 import { getPersistedSnapshot, saveAppData, saveAppMeta } from '../../services/localStorageService';
 import { hashObject } from '../../utils/stableHash';
 import { APP_METADATA } from '../../constants/defaults';
-import { saveLocalSnapshot } from '../../services/remoteStateService';
 import { ACTIONS } from '../../context/appReducer';
+import { saveFirebaseAppStateSnapshot } from '../../services/firebaseAppStateService';
+import { requireAdminSession } from '../../services/authService';
 
 export function isLocalRuntime() {
   if (typeof window === 'undefined') return false;
@@ -17,30 +18,43 @@ export function isLocalRuntime() {
 }
 
 export async function persistSnapshot(state, dispatch) {
-  // Keep the working browser copy up to date before exporting.
+  try {
+    requireAdminSession();
+  } catch (error) {
+    return { ok: false, error: error?.message || 'Admin session required.' };
+  }
+
   saveAppData(state);
 
   const snapshot = getPersistedSnapshot(state);
   const hash = hashObject(snapshot);
   const exportedAt = new Date().toISOString();
 
-  const payload = {
-    meta: {
+  try {
+    const result = await saveFirebaseAppStateSnapshot(snapshot, {
       hash,
       exportedAt,
       appVersion: APP_METADATA.version
-    },
-    data: snapshot
-  };
+    });
 
-  const result = await saveLocalSnapshot(payload);
+    if (!result.ok) {
+      return { ok: false, error: result.error || 'Firebase save failed.' };
+    }
 
-  if (!result.ok) {
-    return { ok: false, error: result.error || 'Local save failed.' };
+    saveAppMeta({ hash, exportedAt });
+    dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: hash });
+    dispatch({
+      type: ACTIONS.SET_REMOTE_SNAPSHOT_META,
+      payload: {
+        hash,
+        computedHash: hash,
+        exportedAt,
+        appVersion: APP_METADATA.version
+      }
+    });
+
+    return { ok: true, hash, exportedAt };
+  } catch (error) {
+    return { ok: false, error: error?.message || 'Firebase save failed.' };
   }
-
-  saveAppMeta({ hash, exportedAt });
-  dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: hash });
-
-  return { ok: true };
 }

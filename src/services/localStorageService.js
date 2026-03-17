@@ -1,44 +1,43 @@
 import { idbSet, idbGet } from './indexedDbService';
 import { DEFAULT_APP_STATE, DEFAULT_APP_SETTINGS, STORAGE_KEYS } from '../constants/defaults';
 import { normalizeNodeData } from '../utils/nodeFactory';
+import { normalizeSavedPeopleCollection } from '../utils/family3Schema';
 
 export function loadAppMeta() {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEYS.APP_DATA_META);
     if (!raw) {
-      return { hash: null, exportedAt: null };
+      return { hash: null, exportedAt: null, lastRemoteFetchAt: null, nextRemoteFetchAllowedAt: null };
     }
     const parsed = JSON.parse(raw);
-    const savedPeople = Array.isArray(parsed.savedPeople) ? parsed.savedPeople : [];
     return {
       hash: parsed.hash || null,
-      exportedAt: parsed.exportedAt || null
+      exportedAt: parsed.exportedAt || null,
+      lastRemoteFetchAt: parsed.lastRemoteFetchAt ? Number(parsed.lastRemoteFetchAt) || null : null,
+      nextRemoteFetchAllowedAt: parsed.nextRemoteFetchAllowedAt ? Number(parsed.nextRemoteFetchAllowedAt) || null : null
     };
   } catch (error) {
     console.warn('Failed to load app meta from localStorage:', error);
-    return { hash: null, exportedAt: null };
+    return { hash: null, exportedAt: null, lastRemoteFetchAt: null, nextRemoteFetchAllowedAt: null };
   }
 }
 
 export function saveAppMeta(meta) {
   try {
-    window.localStorage.setItem(STORAGE_KEYS.APP_DATA_META, JSON.stringify(meta));
+    const currentMeta = loadAppMeta();
+    window.localStorage.setItem(STORAGE_KEYS.APP_DATA_META, JSON.stringify({ ...currentMeta, ...meta }));
   } catch (error) {
     console.warn('Failed to save app meta to localStorage:', error);
   }
 }
 
-/**
- * Returns the exact subset of state we persist (and therefore export/import).
- * Keep this in sync with saveAppData().
- */
 export function getPersistedSnapshot(appState) {
   return {
     nodes: appState.nodes,
     edges: appState.edges,
     viewport: appState.viewport,
     appSettings: appState.appSettings,
-    savedPeople: appState.savedPeople || []
+    savedPeople: normalizeSavedPeopleCollection(appState.savedPeople || [])
   };
 }
 
@@ -52,7 +51,7 @@ export function loadAppData() {
     }
 
     const parsed = JSON.parse(raw);
-    const savedPeople = Array.isArray(parsed.savedPeople) ? parsed.savedPeople : [];
+    const savedPeople = normalizeSavedPeopleCollection(parsed.savedPeople || []);
     const nodes = (parsed.nodes || DEFAULT_APP_STATE.nodes).map((node) => ({
       ...node,
       data: normalizeNodeData(node.data || {})
@@ -81,17 +80,15 @@ export function saveAppData(appState) {
       edges: appState.edges,
       viewport: appState.viewport,
       appSettings: appState.appSettings,
-      savedPeople: appState.savedPeople || []
+      savedPeople: normalizeSavedPeopleCollection(appState.savedPeople || [])
     };
     window.localStorage.setItem(STORAGE_KEYS.APP_DATA, JSON.stringify(persistedState));
     window.sessionStorage.setItem(STORAGE_KEYS.APP_DATA, JSON.stringify(persistedState));
-    // Secondary persistence (IndexedDB) for larger payloads / redundancy
     idbSet(STORAGE_KEYS.APP_DATA, persistedState).catch(() => {});
   } catch (error) {
     console.error('Failed to save app data to localStorage:', error);
   }
 }
-
 
 export async function loadAppDataFromIndexedDb() {
   try {
@@ -99,5 +96,13 @@ export async function loadAppDataFromIndexedDb() {
     return data || null;
   } catch {
     return null;
+  }
+}
+
+export function hasPersistedAppData() {
+  try {
+    return Boolean(window.sessionStorage.getItem(STORAGE_KEYS.APP_DATA) || window.localStorage.getItem(STORAGE_KEYS.APP_DATA));
+  } catch {
+    return false;
   }
 }

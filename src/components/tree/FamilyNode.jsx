@@ -1,8 +1,9 @@
-import React, { useEffect, memo, useMemo } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import { Handle, Position, useUpdateNodeInternals } from 'reactflow';
 import { Button } from 'rsuite';
 import styles from './FamilyNode.module.css';
 import { NODE_TYPES } from '../../utils/nodeFactory';
+import { createStandardPersonWrapper, getRecordName, getRecordNickname } from '../../utils/family3Schema';
 
 const SIDE_CONFIG = {
   top: { position: Position.Top, axis: 'left' },
@@ -64,14 +65,8 @@ function imageTileStyle(photo, imageSettings, size) {
     backgroundImage: photo ? `url(${photo})` : 'none',
     backgroundSize: imageSettings?.nodeImageSize || 'cover',
     backgroundRepeat: imageSettings?.nodeImageRepeat || 'no-repeat',
-    backgroundPosition: imageSettings?.nodeImagePosition || 'center center',
-    // height: '150px'
+    backgroundPosition: imageSettings?.nodeImagePosition || 'center center'
   };
-}
-
-function displayName(person) {
-  const full = person?.fullName || 'Unnamed person';
-  return person?.nickname ? `${full} ${person.nickname}` : full;
 }
 
 function renderPersonMiniCard(person, imageSettings) {
@@ -79,14 +74,10 @@ function renderPersonMiniCard(person, imageSettings) {
 
   return (
     <div key={person.id} className={styles.personCardMini}>
-      {person.photo ? (
-        <div className={styles.personTile} style={imageTileStyle(person.photo, imageSettings, `${thumbSize}px`)} />
-      ) : (
-        <div className={styles.personPlaceholder} style={{ width: thumbSize, height: thumbSize }}>No image</div>
-      )}
+      {person.photo ? <div className={styles.personTile} style={imageTileStyle(person.photo, imageSettings, `${thumbSize}px`)} /> : <div className={styles.personPlaceholder} style={{ width: thumbSize, height: thumbSize }}>No image</div>}
       <div className={styles.personMeta}>
         <div className={styles.personName}>{person.fullName || 'Unnamed person'}</div>
-        {person.nickname && <div className={styles.personNick}>{person.nickname}</div>}
+        {person.nickname ? <div className={styles.personNick}>{person.nickname}</div> : null}
       </div>
     </div>
   );
@@ -97,19 +88,32 @@ function renderImageArea(data) {
   const imageSettings = data.imageSettings || {};
 
   if (nodeType === NODE_TYPES.STANDARD) {
-    return data.photo ? (
-      <div className={styles.heroImage} style={imageTileStyle(data.photo, imageSettings, '100%')} />
-    ) : (
-      <div className={styles.placeholder}>No image</div>
+    const standard = createStandardPersonWrapper(data.standardPerson || {});
+    const photo = standard.node?.coverImage || standard.person?.photo || data.photo;
+    return photo ? <div className={styles.heroImage} style={imageTileStyle(photo, imageSettings, '100%')} /> : <div className={styles.placeholder}>No image</div>;
+  }
+
+  if (data.peopleNodeDisplaySingleImage && data.peopleNodeSingleImageUrl) {
+    return (
+      <div className={styles.singleImageWrap}>
+        <div className={styles.heroImage} style={imageTileStyle(data.peopleNodeSingleImageUrl, imageSettings, '100%')} />
+        {data.peopleNodeSingleImageTitle ? <div className={styles.singleImageTitle}>{data.peopleNodeSingleImageTitle}</div> : null}
+      </div>
     );
   }
 
   const people = data.people || [];
+  return <div className={styles.peopleGrid}>{people.length === 0 ? <div className={styles.placeholder}>No people yet</div> : people.map((person) => renderPersonMiniCard(person, imageSettings))}</div>;
+}
 
+function renderStandardSummary(data) {
+  const standard = createStandardPersonWrapper(data.standardPerson || {});
+  const person = standard.person || {};
   return (
-    <div className={styles.peopleGrid}>
-      {people.length === 0 && <div className={styles.placeholder}>No people yet</div>}
-      {people.map((person) => renderPersonMiniCard(person, imageSettings))}
+    <div className={styles.standardMeta}>
+      <div className={styles.standardName}>{standard.node?.title || getRecordName(standard) || data.title || 'Unnamed person'}</div>
+      {getRecordNickname(standard) ? <div className={styles.standardNick}>{getRecordNickname(standard)}</div> : null}
+   
     </div>
   );
 }
@@ -123,9 +127,12 @@ function FamilyNode({ id, data, selected }) {
     nodeHeight: data.nodeHeight,
     nodeType: data.nodeType,
     peopleCount: Array.isArray(data.people) ? data.people.length : 0,
+    peopleNodeDisplaySingleImage: Boolean(data.peopleNodeDisplaySingleImage),
+    peopleNodeSingleImageUrl: data.peopleNodeSingleImageUrl || '',
+    peopleNodeSingleImageTitle: data.peopleNodeSingleImageTitle || '',
     connectedSlotIds: Array.isArray(data.connectedSlotIds) ? [...data.connectedSlotIds].sort() : [],
     handleUsage: data.handleUsage || {}
-  }), [data.handles, data.handleLayout, data.nodeWidth, data.nodeHeight, data.nodeType, data.people, data.connectedSlotIds, data.handleUsage]);
+  }), [data.handles, data.handleLayout, data.nodeWidth, data.nodeHeight, data.nodeType, data.people, data.peopleNodeDisplaySingleImage, data.peopleNodeSingleImageUrl, data.peopleNodeSingleImageTitle, data.connectedSlotIds, data.handleUsage]);
 
   useEffect(() => {
     updateNodeInternals(id);
@@ -141,11 +148,7 @@ function FamilyNode({ id, data, selected }) {
   const accent = data.nodeAccent || '#22d3ee';
 
   return (
-    <div
-      className={`${styles.node} ${selected ? styles.selected : ''}`}
-      style={{ width, height, borderRadius: radius, '--node-accent': accent, '--node-glow-opacity': data.nodeGlow ? 1 : 0 }}
-      data-admin={data.isAdminAuthenticated ? 'true' : 'false'}
-    >
+    <div className={`${styles.node} ${selected ? styles.selected : ''}`} style={{ width, height, borderRadius: radius, '--node-accent': accent, '--node-glow-opacity': data.nodeGlow ? 1 : 0 }} data-admin={data.isAdminAuthenticated ? 'true' : 'false'}>
       {renderHandles({ nodeId: id, side: 'top', count: handles.top, layout: handleLayout.top, connectedSlotIds, showAllHandles, handleUsage: data.handleUsage, accent })}
       {renderHandles({ nodeId: id, side: 'right', count: handles.right, layout: handleLayout.right, connectedSlotIds, showAllHandles, handleUsage: data.handleUsage, accent })}
       {renderHandles({ nodeId: id, side: 'bottom', count: handles.bottom, layout: handleLayout.bottom, connectedSlotIds, showAllHandles, handleUsage: data.handleUsage, accent })}
@@ -160,7 +163,13 @@ function FamilyNode({ id, data, selected }) {
       )}
 
       <div className={styles.imageWrap}>{renderImageArea(data)}</div>
-      <div className={styles.title}>{data.title || 'Untitled Node'}</div>
+      {data.nodeType === NODE_TYPES.STANDARD ? renderStandardSummary(data) : null}
+
+      {data.isAdminAuthenticated ? (
+        <div className={`${styles.dragHandle} dragHandle`} title="Drag node" aria-label="Drag node">
+          <span className={styles.dragHandleGrip} />
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,0 +1,3672 @@
+{
+  "meta": {
+    "hash": "8d54d818",
+    "exportedAt": "2026-03-09T03:11:35.368Z",
+    "appVersion": "1.14.5"
+  },
+  "data": {
+    "savedPeople": [
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Clive Ivon Morta",
+          "birthDate": "1961-04-02",
+          "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png",
+          "nickname": "Boeta Clive",
+          "prefix": "Mr",
+          "maidenName": "",
+          "gender": "male",
+          "birthPlace": "",
+          "currentLocation": "Hopefield, 4 Vlei street ",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "Unknown",
+          "deathPlace": "",
+          "occupation": "Retired",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "No information yet",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Arthur Henry Charles Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VctKFkt6/Arthur-Henry-Charles-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Grieta Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Donovan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Luke Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Brandon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/xvpcfTp/Brandon-Morta.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Jason Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Hp3TvkYV/Jason-Morta.png"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Leonard Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Elien Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Patrick Coetzee",
+                "birthDate": "",
+                "photo": ""
+              },
+              {
+                "type": "Full sibling",
+                "name": "Ricardo Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Mario Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Clive Ivon Morta",
+            "coverImage": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Eline Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
+          "nickname": "Hata",
+          "prefix": "Mrs",
+          "maidenName": "Coetzee",
+          "gender": "unknown",
+          "birthPlace": "",
+          "currentLocation": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Grieta Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Reegan Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Heinrich Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Gene Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "type": "Biological child",
+                "name": "Owen Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Leonard Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Patrick Coetzee",
+                "birthDate": "",
+                "photo": ""
+              },
+              {
+                "type": "Full sibling",
+                "name": "Mario Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Ricardo Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
+              }
+            ],
+            "partners": [
+              {
+                "type": "Spouse",
+                "name": "Delphin Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+              }
+            ]
+          },
+          "node": {
+            "title": "Eline Mintoor",
+            "coverImage": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Leonard Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png",
+          "nickname": "Boeta",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "unknown",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Leonard Coetzee",
+            "coverImage": "https://i.ibb.co/6JTpdzXK/Leanard.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Mario Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png",
+          "nickname": "Ankel",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "unknown",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Mario Coetzee",
+            "coverImage": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Patrick Coetzee",
+          "birthDate": "",
+          "photo": "",
+          "nickname": "Pet",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "unknown",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Patrick Coetzee",
+            "coverImage": "",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Ricardo Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp",
+          "nickname": "Ka",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "unknown",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Ricardo Coetzee",
+            "coverImage": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Unknown",
+          "birthDate": "Unknown",
+          "photo": "No image provided",
+          "nickname": "Unknown",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "Unknown",
+          "deathPlace": "",
+          "occupation": "Unknown",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "No information yet",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Unknown",
+            "coverImage": "No image provided",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Grieta Coetzee",
+          "birthDate": "1940-08-15",
+          "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp",
+          "nickname": "Mama",
+          "prefix": "Mrs",
+          "maidenName": "",
+          "gender": "female",
+          "birthPlace": "",
+          "currentLocation": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Eline Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+              },
+              {
+                "type": "Biological child",
+                "name": "Leonard Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Mario Coetzee",
+                "birthDate": "",
+                "photo": ""
+              },
+              {
+                "type": "Biological child",
+                "name": "Patrick Coetzee",
+                "birthDate": "",
+                "photo": ""
+              },
+              {
+                "type": "Biological child",
+                "name": "Ricardo Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Poppie",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/PzNy00Nm/1.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Katta Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rR5k8mfm/2.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Stenna Linnert",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YBjVmz6S/3.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "William Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/y7nCgqm/4.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Koos Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/j7GKwXc/5.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Ousis",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/hR7gBrZy/6.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Tietie Kleintjie",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/8DxgF1cJ/7.webp"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Grieta Coetzee",
+            "coverImage": "https://i.ibb.co/TMDrbNtV/8.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Donovan Morta",
+          "birthDate": "1984-07-17",
+          "photo": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png",
+          "nickname": "Donie/Don",
+          "prefix": "Mr",
+          "maidenName": "Coetzee",
+          "gender": "unknown",
+          "birthPlace": "Cape Town",
+          "currentLocation": "Indio California, USA",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "Electrician",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Joan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": [
+              {
+                "type": "Spouse",
+                "name": "Lacey Davies",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png"
+              }
+            ]
+          },
+          "node": {
+            "title": "Donovan Morta",
+            "coverImage": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Luke Morta",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png",
+          "nickname": "Brendin",
+          "prefix": "Mr",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "7 Njalaboom\nDelft",
+          "contactNumber": "123456789",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "Code 14 Truck Driver",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Joan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Luke Peter Morta",
+            "coverImage": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Brandon Morta",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/xvpcfTp/Brandon-Morta.png",
+          "nickname": "Brendin",
+          "prefix": "Mr",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "7 Njalaboom\nDelft",
+          "contactNumber": "123456789",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "Code 14 Truck Driver",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Joan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Brandon Morta",
+            "coverImage": "https://i.ibb.co/xvpcfTp/Brandon-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Jason Morta",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/Hp3TvkYV/Jason-Morta.png",
+          "nickname": "Brendin",
+          "prefix": "Mr",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "7 Njalaboom\nDelft",
+          "contactNumber": "123456789",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "Code 14 Truck Driver",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Joan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Jason Morta",
+            "coverImage": "https://i.ibb.co/Hp3TvkYV/Jason-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Joan Morta",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Joan Morta",
+            "coverImage": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Arthur Henry Charles Morta",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/VctKFkt6/Arthur-Henry-Charles-Morta.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Arthur Henry Charles Morta",
+            "coverImage": "https://i.ibb.co/VctKFkt6/Arthur-Henry-Charles-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Luke Peter Morta",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png",
+          "nickname": "Lukie",
+          "prefix": "Mr",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "7 Njalaboom\nDelft",
+          "contactNumber": "123456789",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "?",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Joan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B58n8KF9/Joan-Jeniffer-Morta.png"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Jonas Luke Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/MytdK5BG/Jonas-luke-Morta-04-01-2025.png"
+              }
+            ],
+            "siblings": [],
+            "partners": [
+              {
+                "type": "Spouse",
+                "name": "Thaamira Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png"
+              }
+            ]
+          },
+          "node": {
+            "title": "Luke Peter Morta",
+            "coverImage": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Coetzee Family",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/3m3xbf5T/IMG-20260221-WA0013-jpg.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Coetzee Root Family",
+            "coverImage": "https://i.ibb.co/3m3xbf5T/IMG-20260221-WA0013-jpg.webp",
+            "imageCaption": "Example starter node",
+            "eventDate": "1998-04-14",
+            "location": "Cape Town",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Lydia Joan v/d Heuvel Solomons",
+          "birthDate": "1959-08-25",
+          "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp",
+          "nickname": "",
+          "prefix": "Mrs",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Lydia Solomons",
+            "coverImage": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Katta Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/rR5k8mfm/2.webp",
+          "nickname": "Katta",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Katta Coetzee",
+            "coverImage": "https://i.ibb.co/rR5k8mfm/2.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Koos Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/j7GKwXc/5.webp",
+          "nickname": "Koos",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Koos Coetzee",
+            "coverImage": "https://i.ibb.co/j7GKwXc/5.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Stenna Linnert",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/YBjVmz6S/3.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Stenna Linnert",
+            "coverImage": "https://i.ibb.co/YBjVmz6S/3.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Poppie",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/PzNy00Nm/1.webp",
+          "nickname": "Poppie",
+          "prefix": "",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Poppie",
+            "coverImage": "https://i.ibb.co/YBjVmz6S/3.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "William Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/y7nCgqm/4.webp",
+          "nickname": "Willim",
+          "prefix": "Mr",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "William Coetzee",
+            "coverImage": "https://i.ibb.co/y7nCgqm/4.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Ousis",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/hR7gBrZy/6.webp",
+          "nickname": "Ousis",
+          "prefix": "",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Ousis",
+            "coverImage": "https://i.ibb.co/hR7gBrZy/6.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Tietie Kleintjie",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/8DxgF1cJ/7.webp",
+          "nickname": "Tietie",
+          "prefix": "",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Tietie Kleintjie",
+            "coverImage": "https://i.ibb.co/8DxgF1cJ/7.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Annie Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/RG4MrXFp/9.webp",
+          "nickname": "Annie Mammie",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "Kersefontein ,Hopefield, 7355",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Tietie Kleintjie",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/8DxgF1cJ/7.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Koos Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/j7GKwXc/5.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Poppie",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/PzNy00Nm/1.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Grieta Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Ousis",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/hR7gBrZy/6.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "William Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/y7nCgqm/4.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Stenna Linnert",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YBjVmz6S/3.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Katta Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rR5k8mfm/2.webp"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Annie Coetzee",
+            "coverImage": "https://i.ibb.co/RG4MrXFp/9.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Dina",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/hR7gBrZy/6.webp",
+          "nickname": "Ousis",
+          "prefix": "",
+          "maidenName": "Coetzee",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Lydia Joan v/d Heuvel Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+              }
+            ],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Dina",
+            "coverImage": "https://i.ibb.co/hR7gBrZy/6.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Sophia Morta",
+          "birthDate": "2019-11-08",
+          "photo": "https://i.ibb.co/JRYc4wk0/Sophia-Morta-8-11-2019.png",
+          "nickname": "Sophie",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "USA",
+          "currentLocation": "USA",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Donovan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Lacey Davies",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Sophia Morta",
+            "coverImage": "https://i.ibb.co/JRYc4wk0/Sophia-Morta-8-11-2019.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Marion Arthur  Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png",
+          "nickname": "Ankel",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "unknown",
+          "birthPlace": "",
+          "currentLocation": "Lived in: Delft, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Grieta Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Mario Coetzee",
+            "coverImage": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Lacey Davies",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Lacey Davies",
+            "coverImage": "https://i.ibb.co/yFnBXh59/Lacey-Davies.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Emerice Leonardo Coetzee",
+          "birthDate": "1988-12-18",
+          "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png",
+          "nickname": "Emmie",
+          "prefix": "Mr",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Mario Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Jackie Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/FbxXJM7M/Jackie-Coetzee.png"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Tracey-lee Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Daminan Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Satiero Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/TqcWv9W6/Satiro-Coetzee.png"
+              }
+            ],
+            "partners": [
+              {
+                "type": "Spouse",
+                "name": "Daviana Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+              }
+            ]
+          },
+          "node": {
+            "title": "Emerice Leonardo Coetzee",
+            "coverImage": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Jackie Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/FbxXJM7M/Jackie-Coetzee.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Jackie Coetzee",
+            "coverImage": "https://i.ibb.co/FbxXJM7M/Jackie-Coetzee.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Satiero Coetzee",
+          "birthDate": "1994-12-20",
+          "photo": "https://i.ibb.co/TqcWv9W6/Satiro-Coetzee.png",
+          "nickname": "Tiro",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "Delft, Capw Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Mario Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Jackie Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/FbxXJM7M/Jackie-Coetzee.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Satiero Coetzee",
+            "coverImage": "https://i.ibb.co/TqcWv9W6/Satiro-Coetzee.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Jerico Lawrence Samson",
+          "birthDate": "1995-04-09",
+          "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Lydia Joan v/d Heuvel Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Isiah Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Olivia Lucille Solomns",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Luke Peter Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Jaylynn Joan Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Stephanie Elmareze Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Jerico Lawrence Samson",
+            "coverImage": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Olivia Lucille Solomns",
+          "birthDate": "1981-12-19",
+          "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
+          "nickname": "Livi",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Lydia Joan v/d Heuvel Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Jerico Lawrence Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Peter Kenneth Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Jaylynn Joan Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Stephanie Elmareze Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Olivia Lucille Solomns",
+            "coverImage": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Peter Kenneth Solomons",
+          "birthDate": "1984-11-17",
+          "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Lydia Joan v/d Heuvel Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Jerico Lawrence Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Olivia Lucille Solomns",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Jaylynn Joan Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Stephanie Elmareze Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Peter Kenneth Solomons",
+            "coverImage": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Jaylynn Joan Samson",
+          "birthDate": "2000-04-25",
+          "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Lydia Joan v/d Heuvel Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Olivia Lucille Solomns",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Peter Kenneth Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Jerico Lawrence Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Stephanie Elmareze Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "New Family Node",
+            "coverImage": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Sthephanie Elmareze Samson",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Sthephanie Elmareze Samson",
+            "coverImage": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Jonas Luke Morta",
+          "birthDate": "2025-01-04",
+          "photo": "https://i.ibb.co/MytdK5BG/Jonas-luke-Morta-04-01-2025.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "Delft, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Luke Peter Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Thaamira Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Jonas Luke Morta",
+            "coverImage": "https://i.ibb.co/MytdK5BG/Jonas-luke-Morta-04-01-2025.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Morta's",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/k620xcFf/Whats-App-Image-2026-02-22-at-12-44-30-4-AM.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": false,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Donovan Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/ycHF2pgJ/Donavan-Morta.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Luke Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VY8cQhRs/Luke-Peter-Morta.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Brandon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/xvpcfTp/Brandon-Morta.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Jason Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Hp3TvkYV/Jason-Morta.png"
+              }
+            ],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Clive Morta's Children",
+            "coverImage": "https://i.ibb.co/k620xcFf/Whats-App-Image-2026-02-22-at-12-44-30-4-AM.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Owen Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "6 Magaliesberg Cres, Tafelsig, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Delphin Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Eline Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Gene Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Heinrich Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Reegan Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Owen Mintoor",
+            "coverImage": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Gene Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Delphin Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Eline Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Zoey Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/mrGCzxjT/Zoey.webp"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Heinrich Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Owen Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Reegan Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Gene Mintoor",
+            "coverImage": "https://i.ibb.co/d4F0qVWg/Gene.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Reegan Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Delphin Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Elien Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Ree Shaun",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Owen Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Jene Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Heinrich Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Reegan Mintoor",
+            "coverImage": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Heinrich Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
+          "nickname": "Heinie",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Delphin Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Eline Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg"
+              }
+            ],
+            "children": [],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Gene Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Reegan Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Owen Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Heinrich Mintoor",
+            "coverImage": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Own Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Own Mintoor",
+            "coverImage": "https://i.ibb.co/8p5zQV2/Owen-Mintoor.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Delphin Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Delphin Mintoor",
+            "coverImage": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Elien Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/0p2pgBRS/Delphine-Reegan-Eline-Owen-Jene-Grieta-Heinie.jpg",
+          "nickname": "Hata",
+          "prefix": "Mrs",
+          "maidenName": "Coetzee",
+          "gender": "unknown",
+          "birthPlace": "",
+          "currentLocation": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Grieta Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4gMMRCq7/Grieta-Coetzee.webp"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Reegan Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Heinrich Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/gL7t9sWx/Heinrich-Mintoor.png"
+              },
+              {
+                "type": "Biological child",
+                "name": "Gene Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              },
+              {
+                "type": "Biological child",
+                "name": "Owen Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Clive Ivon Morta",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/vvgvy6Df/Clive-Ivon-Morta.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Leonard Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/6JTpdzXK/Leanard.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Patrick Coetzee",
+                "birthDate": "",
+                "photo": ""
+              },
+              {
+                "type": "Full sibling",
+                "name": "Mario Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/60r95mpD/Mario-Arthur-Coetzee-2.png"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Ricardo Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/Kc4J97M6/Ricardo-Coetzee.webp"
+              }
+            ],
+            "partners": [
+              {
+                "type": "Spouse",
+                "name": "Delphin Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/4nM8grFV/Delphine-Mintoor.webp"
+              }
+            ]
+          },
+          "node": {
+            "title": "Elien Mintoor",
+            "coverImage": "https://i.ibb.co/60H3XKg0/Eline-Mintoor.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Jene Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Jene Mintoor",
+            "coverImage": "https://i.ibb.co/d4F0qVWg/Gene.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Tracey-lee Coetzee",
+          "birthDate": "2016-11-11",
+          "photo": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Emerice Leonardo Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Daviana Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+              }
+            ],
+            "children": [],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Daminan Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Tracey-lee Coetzee",
+            "coverImage": "https://i.ibb.co/Gf2XvPZr/Tracey-lee-11-11-2016.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Daminan Coetzee",
+          "birthDate": "2013-06-11",
+          "photo": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Emerice Leonardo Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/v4StR2kF/Emerice-Leonardo-Coetzee-18-12-1988.png"
+              },
+              {
+                "type": "Biological parent",
+                "name": "Daviana Coetzee",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Damian Coetzee",
+            "coverImage": "https://i.ibb.co/k2VdjSdr/Damian-11-06-2013.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Daviana Coetzee",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Daviana Coetzee",
+            "coverImage": "https://i.ibb.co/MvV4sJD/Daviana-Coetzee-30-06-1986.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Ree Shaun",
+          "birthDate": "2019-07-24",
+          "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Reegan Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Ree Shuan",
+            "coverImage": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Thaamira Morta",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": "",
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Thaamira Morta",
+            "coverImage": "https://i.ibb.co/1f32h80g/Thaamira-Morta-19-01-2002-jpeg.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Ree Zhaun",
+          "birthDate": "2019-07-24",
+          "photo": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "Cape Town",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Reegan Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YTNt66zX/Reegan-Mintoor.png"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Ree Zhaun",
+            "coverImage": "https://i.ibb.co/Qvd5K37S/Face-Template-200x200.png",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Stephanie Elmareze Samson",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Lydia Joan v/d Heuvel Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/S7yF8j7D/Lydia-Joan-vd-Heuvel-Solomons-25-08-1959.webp"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Uriah Zeneth Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp"
+              }
+            ],
+            "siblings": [
+              {
+                "type": "Full sibling",
+                "name": "Jaylynn Joan Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/hRQ9BQYJ/Jaylynn-Joan-Samson-25-04-2000.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Peter Kenneth Solomons",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/VcNf1SHr/Peter-Kenneth-Solomons-17-11-1984.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Jerico Lawrence Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              },
+              {
+                "type": "Full sibling",
+                "name": "Olivia Lucille Solomns",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              }
+            ],
+            "partners": []
+          },
+          "node": {
+            "title": "Stephanie Elmareze Samson",
+            "coverImage": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Uriah Zeneth Samson",
+          "birthDate": "2002-09-14",
+          "photo": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Stephanie Elmareze Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/RGTjYGRF/Stephanie-Elmareze-Samson-14-09-2002.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Uriah Zeneth Samson",
+            "coverImage": "https://i.ibb.co/8n3p4XHc/Uriah-Zeneth-Samson-06-09-2023.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Isiah Samson",
+          "birthDate": "2024-07-31",
+          "photo": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Jerico Lawrence Samson",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/rfXKBpL8/Jerico-Lawrence-Samson-09-04-1995.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Isiah Samson",
+            "coverImage": "https://i.ibb.co/S4YprQFV/Isaiah-Samson-31-07-2024.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Declin Zegan Miller",
+          "birthDate": "2001-10-05",
+          "photo": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Olivia Lucille Solomns",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/B5HwGV63/Olivia-Lucille-Solomons.webp"
+              }
+            ],
+            "children": [
+              {
+                "type": "Biological child",
+                "name": "Emma Joan Adams",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp"
+              }
+            ],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Declin Zegan Miller",
+            "coverImage": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Emma Joan Adams",
+          "birthDate": "2017-10-24",
+          "photo": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Declin Zegan Miller",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/YBsCZbxT/Daclin-Z-gan-Miller.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Emma Joan Adams",
+            "coverImage": "https://i.ibb.co/MFVqv0P/Emma-Joan-Adams-24-10-2017.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      },
+      {
+        "firebaseDocumentId": "",
+        "person": {
+          "name": "Zoey Mintoor",
+          "birthDate": "",
+          "photo": "https://i.ibb.co/mrGCzxjT/Zoey.webp",
+          "nickname": "",
+          "prefix": "",
+          "maidenName": "",
+          "gender": "",
+          "birthPlace": "",
+          "currentLocation": "7 Magaliesberg Cres, Tafelsig, Cape Town",
+          "contactNumber": "",
+          "heritage": "",
+          "isAlive": true,
+          "deathDate": "",
+          "deathPlace": "",
+          "occupation": "In School",
+          "education": "",
+          "maritalStatus": "",
+          "languages": "",
+          "biography": "",
+          "achievements": "",
+          "interests": "",
+          "personality": "",
+          "familyNotes": "",
+          "submissionMeta": {
+            "submittedAt": "",
+            "status": "pending"
+          },
+          "relationships": {
+            "parents": [
+              {
+                "type": "Biological parent",
+                "name": "Gene Mintoor",
+                "birthDate": "",
+                "photo": "https://i.ibb.co/d4F0qVWg/Gene.webp"
+              }
+            ],
+            "children": [],
+            "siblings": [],
+            "partners": []
+          },
+          "node": {
+            "title": "Zoey Mintoor",
+            "coverImage": "https://i.ibb.co/mrGCzxjT/Zoey.webp",
+            "imageCaption": "",
+            "eventDate": "",
+            "location": "",
+            "notes": ""
+          }
+        }
+      }
+    ]
+  }
+}

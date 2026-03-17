@@ -1,38 +1,31 @@
 import React, { memo, useMemo } from 'react';
 import { Form, Button, Input, InputPicker, Divider } from 'rsuite';
 import styles from './PersonFields.module.css';
+import { getRecordNickname } from '../../utils/family3Schema';
+import { buildSavedPeopleOptions, resolveSavedPersonSelection } from './savedPeopleOptions';
 
-function buildSavedPeopleOptions(savedPeople = []) {
-  return (savedPeople || [])
-    .filter((p) => (p?.fullName || '').trim().length > 0)
-    .map((p) => ({
-      label: p.fullName,
-      value: p.fullName,
-      person: p
-    }));
-}
 
 function renderPersonOption(label, item) {
   const person = item?.person;
   return (
     <div className={styles.userOption}>
       <div className={styles.userOptionName}>{label}</div>
-      {person?.nickname ? <div className={styles.userOptionMeta}>{person.nickname}</div> : null}
+      {getRecordNickname(person) ? <div className={styles.userOptionMeta}>{getRecordNickname(person)}</div> : null}
     </div>
   );
 }
 
 function PersonFields({ person, index, onChange, onRemove, canRemove, savedPeople = [], onAutofillPerson }) {
   const savedPeopleOptions = useMemo(() => buildSavedPeopleOptions(savedPeople), [savedPeople]);
-  const pickerOptions = useMemo(() => savedPeopleOptions.slice(0, 15), [savedPeopleOptions]);
 
   const handleNameSelect = (value, item) => {
-    // Allow free typing always. Selecting an existing person should autofill minimal fields.
-    if (item?.person && onAutofillPerson) {
-      onAutofillPerson(person.id, item.person);
-    } else {
-      onChange(person.id, 'fullName', value || '');
+    const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, value, item);
+    if (matched && onAutofillPerson) {
+      onAutofillPerson(person.id, matched);
+      return;
     }
+
+    onChange(person.id, 'fullName', value || '');
   };
 
   return (
@@ -52,9 +45,9 @@ function PersonFields({ person, index, onChange, onRemove, canRemove, savedPeopl
         <Form.Group controlId={`person-${person.id}-fullName`}>
           <Form.ControlLabel>Name &amp; Surname</Form.ControlLabel>
           <InputPicker
-            data={pickerOptions}
+            data={savedPeopleOptions}
             value={person.fullName || ''}
-            onChange={(val) => onChange(person.id, 'fullName', val || '')}
+            onChange={(val) => handleNameSelect(val, null)}
             onSelect={handleNameSelect}
             placeholder="Type a name or select an existing person"
             searchable

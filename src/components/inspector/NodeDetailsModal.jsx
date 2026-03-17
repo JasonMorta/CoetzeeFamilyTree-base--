@@ -1,144 +1,108 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Modal, Button, Divider } from 'rsuite';
 import styles from './NodeDetailsModal.module.css';
 import { useAppState } from '../../context/AppStateContext';
 import { ACTIONS } from '../../context/appReducer';
 import { NODE_TYPES } from '../../utils/nodeFactory';
+import { createStandardPersonWrapper, getRecordCurrentLocation, getRecordName, getRecordNickname } from '../../utils/family3Schema';
 
-function isHidden(person, field) {
-  return !!(person?.hiddenFields && person.hiddenFields[field]);
+function hasValue(value) {
+  return !(value == null || String(value).trim() === '');
 }
 
-function placeholderFor(field) {
-  const placeholders = {
-    fullName: 'Unknown',
-    photo: 'No image provided',
-    nickname: 'Unknown',
-    prefix: 'Unknown',
-    maidenName: 'Unknown',
-    birthDate: 'Unknown',
-    birthPlace: 'Unknown',
-    deathDate: 'Unknown',
-    deathPlace: 'Unknown',
-    occupation: 'Unknown',
-    address: 'No address provided',
-    contactNumber: 'No contact number provided',
-    father: 'Unknown',
-    mother: 'Unknown',
-    children: 'None listed',
-    siblings: 'None listed',
-    girlfriends: 'None listed',
-    boyfriends: 'None listed',
-    husbands: 'None listed',
-    wives: 'None listed',
-    stepFathers: 'None listed',
-    stepMothers: 'None listed',
-    fosterParents: 'None listed',
-    fosterChildren: 'None listed',
-    adoptiveParents: 'None listed',
-    adoptedChildren: 'None listed',
-    moreInfo: 'No information yet'
-  };
-  return placeholders[field] || 'Unknown';
-}
-
-function displayValue(person, field) {
-  const v = person?.[field];
-
-  const multiRelFields = new Set(['children','siblings','girlfriends','boyfriends','husbands','wives','stepFathers','stepMothers','fosterParents','fosterChildren','adoptiveParents','adoptedChildren']);
-  if (multiRelFields.has(field)) {
-    return Array.isArray(v) ? v : [];
+function calculateAgeOnDate(birthDate, endDate) {
+  if (!birthDate || !endDate) return null;
+  const birth = new Date(`${birthDate}T00:00:00`);
+  const end = new Date(`${endDate}T00:00:00`);
+  if (Number.isNaN(birth.getTime()) || Number.isNaN(end.getTime()) || end < birth) return null;
+  let age = end.getFullYear() - birth.getFullYear();
+  const monthDelta = end.getMonth() - birth.getMonth();
+  if (monthDelta < 0 || (monthDelta === 0 && end.getDate() < birth.getDate())) {
+    age -= 1;
   }
-
-  if (v === null || v === undefined || String(v).trim() === '') {
-    return placeholderFor(field);
-  }
-
-  return v;
+  return age;
 }
 
-async function copyToClipboard(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch (err) {
-    // Fallback for older browsers
+function calculateCurrentAge(birthDate) {
+  if (!birthDate) return null;
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  return calculateAgeOnDate(birthDate, `${yyyy}-${mm}-${dd}`);
+}
+
+function CopyButton({ value, label }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = useCallback(async () => {
+    if (!hasValue(value) || !navigator?.clipboard?.writeText) return;
     try {
-      const el = document.createElement('textarea');
-      el.value = text;
-      el.setAttribute('readonly', '');
-      el.style.position = 'absolute';
-      el.style.left = '-9999px';
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      return true;
+      await navigator.clipboard.writeText(String(value));
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1200);
     } catch {
-      return false;
+      setCopied(false);
     }
-  }
-}
+  }, [value]);
 
-function MapLinkButton({ address }) {
-  const query = encodeURIComponent(address || '');
-  const href = `https://www.google.com/maps/search/?api=1&query=${query}`;
+  if (!hasValue(value)) return null;
 
   return (
-    <a className={styles.mapLink} href={href} target="_blank" rel="noreferrer">
-      📍
+    <Button
+      size="xs"
+      appearance="subtle"
+      className={styles.copyButton}
+      onClick={handleCopy}
+      title={copied ? `${label} copied` : `Copy ${label.toLowerCase()}`}
+      aria-label={copied ? `${label} copied` : `Copy ${label.toLowerCase()}`}
+    >
+      {copied ? 'Copied' : 'Copy'}
+    </Button>
+  );
+}
+
+function FieldLine({ label, children, action = null }) {
+  return (
+    <div className={styles.fieldLine}>
+      <div className={styles.fieldLabel}>{label}</div>
+      <div className={styles.fieldValueRow}>
+        <div className={styles.fieldValue}>{children || <span className={styles.emptyValue}>—</span>}</div>
+        {action}
+      </div>
+    </div>
+  );
+}
+
+function LinkValue({ href, children }) {
+  if (!hasValue(children) || !hasValue(href)) {
+    return children || null;
+  }
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className={styles.fieldLink}>
+      {children}
     </a>
   );
 }
 
-function FieldLine({ label, children }) {
-  return (
-    <div className={styles.fieldLine}>
-      <div className={styles.fieldLabel}>{label}</div>
-      <div className={styles.fieldValue}>{children}</div>
-    </div>
-  );
-}
-
-function RelationshipThumb({ name, photo }) {
-  if (!name) return null;
+function RelationshipTile({ entry }) {
+  if (!entry?.name) return null;
   return (
     <div className={styles.relTile}>
-      {photo ? <img src={photo} alt={name} className={styles.relImg} /> : <div className={styles.relImgPlaceholder} />}
-      <div className={styles.relName}>{name}</div>
+      {entry.photo ? <img className={styles.relImg} src={entry.photo} alt={entry.name} /> : <div className={styles.relImgPlaceholder}>No image</div>}
+      <div className={styles.relType}>{entry.type || 'Relationship'}</div>
+      <div className={styles.relName}>{entry.name}</div>
+      {entry.birthDate ? <div className={styles.relMeta}>{entry.birthDate}</div> : null}
     </div>
   );
 }
 
-function RelationshipBlock({ label, value, placeholderKey }) {
-  const v = value && typeof value === 'object' ? value : { name: String(value || ''), photo: '' };
-  const name = String(v.name || '').trim();
-  const photo = String(v.photo || '').trim();
+function RelationshipSection({ title, entries }) {
+  const list = Array.isArray(entries) ? entries.filter((entry) => entry?.name) : [];
   return (
-    <FieldLine label={label}>
-      {name ? <RelationshipThumb name={name} photo={photo} /> : <span>{placeholderFor(placeholderKey || label.toLowerCase())}</span>}
-    </FieldLine>
-  );
-}
-
-function RelationshipList({ label, values, placeholderKey }) {
-  const list = Array.isArray(values) ? values : [];
-  return (
-    <FieldLine label={label}>
-      {list.length ? (
-        <div className={styles.relList}>
-          {list.map((v) => {
-            const obj = v && typeof v === 'object' ? v : { name: String(v || ''), photo: '' };
-            const name = String(obj.name || '').trim();
-            const photo = String(obj.photo || '').trim();
-            if (!name) return null;
-            return <RelationshipThumb key={`${label}-${name}`} name={name} photo={photo} />;
-          })}
-        </div>
-      ) : (
-        <span>{placeholderFor(placeholderKey || label.toLowerCase())}</span>
-      )}
-    </FieldLine>
+    <div className={styles.section}>
+      <div className={styles.sectionTitle}>{title}</div>
+      {list.length ? <div className={styles.relList}>{list.map((entry, index) => <RelationshipTile key={`${title}-${entry.name}-${index}`} entry={entry} />)}</div> : <div className={styles.emptyState}>No {title.toLowerCase()} added yet.</div>}
+    </div>
   );
 }
 
@@ -146,22 +110,15 @@ export default function NodeDetailsModal() {
   const { state, dispatch } = useAppState();
   const node = state.nodes.find((item) => item.id === state.activeNodeId);
 
-  const [copiedKey, setCopiedKey] = useState(null);
-
-  const close = useCallback(() => {
+  const close = () => {
     dispatch({ type: ACTIONS.CLOSE_NODE_MODAL });
-  }, [dispatch]);
+  };
 
-  const markCopied = useCallback((key) => {
-    setCopiedKey(key);
-    window.setTimeout(() => setCopiedKey(null), 900);
-  }, []);
-
-  const handleCopy = useCallback(async (key, text) => {
-    if (!text) return;
-    const ok = await copyToClipboard(text);
-    if (ok) markCopied(key);
-  }, [markCopied]);
+  const handleEdit = () => {
+    if (!node) return;
+    dispatch({ type: ACTIONS.OPEN_EDITOR, payload: node.id });
+    dispatch({ type: ACTIONS.CLOSE_NODE_MODAL });
+  };
 
   const content = useMemo(() => {
     if (!node) return null;
@@ -170,178 +127,128 @@ export default function NodeDetailsModal() {
 
     if (nodeType === NODE_TYPES.PERSONS) {
       const people = Array.isArray(data.people) ? data.people : [];
+      const showSingleImage = Boolean(data.peopleNodeDisplaySingleImage && data.peopleNodeSingleImageUrl);
+      const singleImageTitle = data.peopleNodeSingleImageTitle || data.title || 'Persons node';
       return (
         <>
-          <div className={styles.title}>{data.title || 'Persons node'}</div>
+          <div className={styles.title}>{showSingleImage ? singleImageTitle : data.title || 'Persons node'}</div>
           {data.photoCaption ? <div className={styles.caption}>{data.photoCaption}</div> : null}
 
-          <Divider />
+          {showSingleImage ? (
+            <div className={styles.peopleHeroWrap}>
+              <img
+                className={styles.peopleHeroImage}
+                src={data.peopleNodeSingleImageUrl}
+                alt={singleImageTitle || 'Persons node image'}
+              />
+            </div>
+          ) : null}
 
-          <div className={styles.peopleList}>
-            {people.length === 0 && <div className={styles.muted}>No people yet</div>}
+          <Divider />
+          <div className={styles.peopleGridList}>
             {people.map((p) => (
-              <div key={p.id} className={styles.personRow}>
-                {p.photo ? (
-                  <img className={styles.personThumb} src={p.photo} alt={p.fullName || 'Person'} />
-                ) : (
-                  <div className={styles.personThumbFallback}>?</div>
-                )}
-                <div className={styles.personText}>
-                  <div className={styles.personName}>{p.fullName || 'Unknown'}</div>
-                  {p.nickname ? <div className={styles.personNick}>{p.nickname}</div> : null}
-                </div>
+              <div key={p.id} className={styles.personGridCard}>
+                {p.photo ? <img className={styles.personGridThumb} src={p.photo} alt={p.fullName || 'Person'} /> : <div className={styles.personGridThumbFallback}>?</div>}
+                <div className={styles.personGridName}>{p.fullName || 'Unnamed person'}</div>
+                {p.nickname ? <div className={styles.personGridNick}>{p.nickname}</div> : null}
               </div>
             ))}
+            {!people.length ? <div className={styles.emptyState}>No people added yet.</div> : null}
           </div>
         </>
       );
     }
 
-    const person = data.standardPerson || {};
-    const stillAlive = Boolean(person.stillAlive);
-
-    const renderIfVisible = (field, label, renderFn) => {
-      if (isHidden(person, field)) return null;
-      const raw = person?.[field];
-      const value = displayValue(person, field);
-
-      if (renderFn) {
-        return (
-          <FieldLine key={field} label={label}>
-            {renderFn(value, raw)}
-          </FieldLine>
-        );
-      }
-
-      if (field === 'moreInfo') {
-        return (
-          <FieldLine key={field} label={label}>
-            <div className={styles.preWrap}>{String(value)}</div>
-          </FieldLine>
-        );
-      }
-
-      return (
-        <FieldLine key={field} label={label}>
-          {String(value)}
-        </FieldLine>
-      );
-    };
-
-    const personalItems = [
-      renderIfVisible('prefix', 'Title / Prefix'),
-      renderIfVisible('maidenName', 'Maiden name / Birth surname')
-    ].filter(Boolean);
-
-    const aboutItems = [
-      renderIfVisible('birthDate', 'Birth date'),
-      renderIfVisible('birthPlace', 'Birth place'),
-      ...(stillAlive ? [] : [renderIfVisible('deathDate', 'Death date'), renderIfVisible('deathPlace', 'Death place')]),
-      renderIfVisible('occupation', 'Occupation'),
-      renderIfVisible('address', 'Address', (value) => {
-        const address = String(value || '');
-        const isValid = address && address !== placeholderFor('address');
-        return (
-          <div className={styles.copyLine}>
-            <div className={styles.preWrap}>{address}</div>
-            {isValid ? (
-              <div className={styles.copyActions}>
-                <MapLinkButton address={address} />
-                <Button size="xs" appearance="ghost" onClick={() => handleCopy('address', address)}>
-                  {copiedKey === 'address' ? 'Copied' : 'Copy'}
-                </Button>
-              </div>
-            ) : null}
-          </div>
-        );
-      }),
-      renderIfVisible('contactNumber', 'Contact number', (value) => {
-        const num = String(value || '');
-        const isValid = num && num !== placeholderFor('contactNumber');
-        if (!isValid) {
-          return <span>{placeholderFor('contactNumber')}</span>;
-        }
-        return (
-          <Button
-            size="xs"
-            appearance="ghost"
-            className={styles.copyNumber}
-            onClick={() => handleCopy('contactNumber', num)}
-          >
-            {copiedKey === 'contactNumber' ? 'Copied' : num}
-          </Button>
-        );
-      }),
-      renderIfVisible('moreInfo', 'More information')
-    ].filter(Boolean);
-
-    const relationshipItems = [
-      !isHidden(person, 'mother') ? <RelationshipBlock key="mother" label="Mother" value={person.mother} placeholderKey="mother" /> : null,
-      !isHidden(person, 'father') ? <RelationshipBlock key="father" label="Father" value={person.father} placeholderKey="father" /> : null,
-      !isHidden(person, 'children') ? <RelationshipList key="children" label="Children" values={person.children} placeholderKey="children" /> : null,
-      !isHidden(person, 'siblings') ? <RelationshipList key="siblings" label="Siblings" values={person.siblings} placeholderKey="siblings" /> : null,
-      !isHidden(person, 'girlfriends') ? <RelationshipList key="girlfriends" label="Girlfriends" values={person.girlfriends} placeholderKey="girlfriends" /> : null,
-      !isHidden(person, 'boyfriends') ? <RelationshipList key="boyfriends" label="Boyfriends" values={person.boyfriends} placeholderKey="boyfriends" /> : null,
-      !isHidden(person, 'husbands') ? <RelationshipList key="husbands" label="Husbands" values={person.husbands} placeholderKey="husbands" /> : null,
-      !isHidden(person, 'wives') ? <RelationshipList key="wives" label="Wives" values={person.wives} placeholderKey="wives" /> : null,
-      !isHidden(person, 'stepFathers') ? <RelationshipList key="stepFathers" label="Step fathers" values={person.stepFathers} placeholderKey="stepFathers" /> : null,
-      !isHidden(person, 'stepMothers') ? <RelationshipList key="stepMothers" label="Step mothers" values={person.stepMothers} placeholderKey="stepMothers" /> : null,
-      !isHidden(person, 'fosterParents') ? <RelationshipList key="fosterParents" label="Foster parents" values={person.fosterParents} placeholderKey="fosterParents" /> : null,
-      !isHidden(person, 'fosterChildren') ? <RelationshipList key="fosterChildren" label="Foster children" values={person.fosterChildren} placeholderKey="fosterChildren" /> : null,
-      !isHidden(person, 'adoptiveParents') ? <RelationshipList key="adoptiveParents" label="Adoptive parents" values={person.adoptiveParents} placeholderKey="adoptiveParents" /> : null,
-      !isHidden(person, 'adoptedChildren') ? <RelationshipList key="adoptedChildren" label="Adopted children" values={person.adoptedChildren} placeholderKey="adoptedChildren" /> : null
-    ].filter(Boolean);
+    const standard = createStandardPersonWrapper(data.standardPerson || {});
+    const person = standard.person || {};
+    const relationships = standard.person?.relationships || standard.relationships || {};
+    const nodeInfo = standard.person?.node || standard.node || {};
+    const currentLocation = getRecordCurrentLocation(standard);
+    const mapLocation = currentLocation || nodeInfo.location || '';
+    const contactNumber = person.contactNumber || '';
+    const showMaidenName = hasValue(person.maidenName) && (!hasValue(person.gender) || person.gender === 'Female');
+    const currentAge = person.isAlive === true ? calculateCurrentAge(person.birthDate) : null;
+    const ageAtDeath = person.isAlive === false ? calculateAgeOnDate(person.birthDate, person.deathDate) : null;
 
     return (
       <>
-        <div className={styles.title}>{data.title || 'Standard person node'}</div>
+        <div className={styles.title}>{nodeInfo.title || getRecordName(standard) || 'Person details'}</div>
+        {nodeInfo.imageCaption ? <div className={styles.caption}>{nodeInfo.imageCaption}</div> : null}
 
         <div className={styles.hero}>
-          {person.photo ? (
-            <img className={styles.heroImg} src={person.photo} alt={person.fullName || 'Person'} />
-          ) : (
-            <div className={styles.heroFallback}>No image provided</div>
-          )}
+          {nodeInfo.coverImage ? <img className={styles.heroImg} src={nodeInfo.coverImage} alt={nodeInfo.title || getRecordName(standard) || 'Person'} /> : <div className={styles.heroFallback}>No image</div>}
           <div className={styles.heroMeta}>
-            <div className={styles.heroName}>{displayValue(person, 'fullName')}</div>
-            {String(displayValue(person, 'nickname')) !== 'Unknown' ? (
-              <div className={styles.heroNick}>{displayValue(person, 'nickname')}</div>
-            ) : null}
+            <div className={styles.heroName}>{getRecordName(standard) || 'Unnamed person'}</div>
+            {getRecordNickname(standard) ? <div className={styles.heroNick}>{getRecordNickname(standard)}</div> : null}
+            <div className={styles.heroBadges}>
+              {nodeInfo.eventDate ? <span className={styles.badge}>{nodeInfo.eventDate}</span> : (person.birthDate ? <span className={styles.badge}>{person.birthDate}</span> : null)}
+              <span className={styles.badge}>{person.isAlive === true ? 'Living' : person.isAlive === false ? 'Passed away' : 'Life status unknown'}</span>
+              {nodeInfo.location ? <span className={styles.badge}>{nodeInfo.location}</span> : null}
+            </div>
           </div>
         </div>
 
-        {personalItems.length ? (
-          <>
-            <Divider />
-            <div className={styles.section}>
-              <div className={styles.sectionTitle}>Personal details</div>
-              {personalItems}
-            </div>
-          </>
-        ) : null}
+        <Divider />
+        <div className={styles.section}>
+          <div className={styles.sectionTitle}>Person details</div>
+          <FieldLine label="Full name">{person.name}</FieldLine>
+          <FieldLine label="Birth date">{person.birthDate}</FieldLine>
+          {currentAge != null ? <FieldLine label="Current age">{String(currentAge)}</FieldLine> : null}
+          <FieldLine label="Nickname">{person.nickname}</FieldLine>
+          <FieldLine label="Title or prefix">{person.prefix}</FieldLine>
+          {showMaidenName ? <FieldLine label="Maiden name">{person.maidenName}</FieldLine> : null}
+          <FieldLine label="Gender">{person.gender}</FieldLine>
+          <FieldLine label="Birth place">{person.birthPlace}</FieldLine>
+          <FieldLine
+            label="Current location"
+            action={<CopyButton value={mapLocation} label="Current location" />}
+          >
+            <LinkValue href={mapLocation ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapLocation)}` : ''}>{mapLocation}</LinkValue>
+          </FieldLine>
+          <FieldLine
+            label="Contact number"
+            action={<CopyButton value={contactNumber} label="Phone number" />}
+          >
+            <LinkValue href={contactNumber ? `tel:${String(contactNumber).replace(/\s+/g, '')}` : ''}>{contactNumber}</LinkValue>
+          </FieldLine>
+          <FieldLine label="Heritage">{person.heritage}</FieldLine>
+          <FieldLine label="Occupation">{person.occupation}</FieldLine>
+          <FieldLine label="Education">{person.education}</FieldLine>
+          <FieldLine label="Marital status">{person.maritalStatus}</FieldLine>
+          <FieldLine label="Languages">{person.languages}</FieldLine>
+          {person.isAlive === false ? <FieldLine label="Death date">{person.deathDate}</FieldLine> : null}
+          {person.isAlive === false ? <FieldLine label="Death place">{person.deathPlace}</FieldLine> : null}
+          {ageAtDeath != null ? <FieldLine label="Died at age">{String(ageAtDeath)}</FieldLine> : null}
+          <FieldLine label="Biography"><div className={styles.preWrap}>{person.biography}</div></FieldLine>
+          <FieldLine label="Achievements"><div className={styles.preWrap}>{person.achievements}</div></FieldLine>
+          <FieldLine label="Interests"><div className={styles.preWrap}>{person.interests}</div></FieldLine>
+          <FieldLine label="Personality"><div className={styles.preWrap}>{person.personality}</div></FieldLine>
+          <FieldLine label="Family notes"><div className={styles.preWrap}>{person.familyNotes}</div></FieldLine>
+        </div>
 
-        {aboutItems.length ? (
-          <>
-            <Divider />
-            <div className={styles.section}>
-              <div className={styles.sectionTitle}>About this person</div>
-              {aboutItems}
-            </div>
-          </>
-        ) : null}
+        <Divider />
+        <div className={styles.section}>
+          <div className={styles.sectionTitle}>Node details</div>
+          <FieldLine label="Node title">{nodeInfo.title}</FieldLine>
+          <FieldLine label="Image caption">{nodeInfo.imageCaption}</FieldLine>
+          <FieldLine label="Event date">{nodeInfo.eventDate}</FieldLine>
+          <FieldLine
+            label="Location"
+            action={<CopyButton value={nodeInfo.location} label="Location" />}
+          >
+            <LinkValue href={nodeInfo.location ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nodeInfo.location)}` : ''}>{nodeInfo.location}</LinkValue>
+          </FieldLine>
+          <FieldLine label="Notes"><div className={styles.preWrap}>{nodeInfo.notes}</div></FieldLine>
+        </div>
 
-        {relationshipItems.length ? (
-          <>
-            <Divider />
-            <div className={styles.section}>
-              <div className={styles.sectionTitle}>Relationships</div>
-              {relationshipItems}
-            </div>
-          </>
-        ) : null}
+        <Divider />
+        <RelationshipSection title="Parents" entries={relationships.parents} />
+        <RelationshipSection title="Children" entries={relationships.children} />
+        <RelationshipSection title="Siblings" entries={relationships.siblings} />
+        <RelationshipSection title="Partners" entries={relationships.partners} />
       </>
     );
-  }, [node, copiedKey, handleCopy, state.nodes]);
+  }, [node]);
 
   if (!state.isNodeModalOpen || !node) return null;
 
@@ -350,11 +257,10 @@ export default function NodeDetailsModal() {
       <Modal.Header>
         <Modal.Title>Node details</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{content}</Modal.Body>
+      <Modal.Body className={styles.body}>{content}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={close} appearance="primary">
-          Close
-        </Button>
+        {state.isAdminAuthenticated ? <Button appearance="ghost" onClick={handleEdit}>Edit Node</Button> : null}
+        <Button onClick={close} appearance="primary">Close</Button>
       </Modal.Footer>
     </Modal>
   );

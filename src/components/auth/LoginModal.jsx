@@ -3,7 +3,7 @@ import { Modal, Button, Form, Message } from 'rsuite';
 import styles from './LoginModal.module.css';
 import { useAppState } from '../../context/AppStateContext';
 import { ACTIONS } from '../../context/appReducer';
-import { loginAdmin } from '../../services/authService';
+import { loginAdmin, getAdminLockoutStatus } from '../../services/authService';
 import { getPersistedSnapshot, saveAppMeta } from '../../services/localStorageService';
 import { hashObject } from '../../utils/stableHash';
 import { hasConfiguredAdminCredentials } from '../../constants/auth';
@@ -13,6 +13,7 @@ export default function LoginModal() {
   const [formValue, setFormValue] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const isConfigured = hasConfiguredAdminCredentials();
+  const lockout = getAdminLockoutStatus();
 
   function handleLogin() {
     if (!isConfigured) {
@@ -20,10 +21,21 @@ export default function LoginModal() {
       return;
     }
 
-    const isValid = loginAdmin(formValue.username, formValue.password);
+    const result = loginAdmin(formValue.username, formValue.password);
 
-    if (!isValid) {
-      setErrorMessage('Invalid admin credentials.');
+    if (!result.ok) {
+      if (result.lockoutUntil) {
+        const remainingMinutes = Math.max(1, Math.ceil((result.remainingMs || 0) / 60000));
+        setErrorMessage(`Admin login locked. Try again in about ${remainingMinutes} minute${remainingMinutes === 1 ? '' : 's'}.`);
+        return;
+      }
+
+      if (typeof result.remainingAttempts === 'number' && result.remainingAttempts > 0) {
+        setErrorMessage(`${result.error} ${result.remainingAttempts} attempt${result.remainingAttempts === 1 ? '' : 's'} remaining.`);
+        return;
+      }
+
+      setErrorMessage(result.error || 'Invalid admin credentials.');
       return;
     }
 
@@ -35,7 +47,7 @@ export default function LoginModal() {
     saveAppMeta({ hash: baselineHash, exportedAt: new Date().toISOString() });
     dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: baselineHash });
 
-    dispatch({ type: ACTIONS.LOGIN_SUCCESS });
+    dispatch({ type: ACTIONS.LOGIN_SUCCESS, payload: result.authState });
   }
 
   return (
@@ -58,6 +70,12 @@ export default function LoginModal() {
         <div className={styles.note}>
           This is still a front-end-only demo login. On Netlify, these values are injected at build time and are not a secure replacement for real backend authentication.
         </div>
+
+        {lockout.isLocked && (
+          <Message type="warning" showIcon>
+            Admin login is temporarily locked after repeated failed attempts.
+          </Message>
+        )}
 
         {!isConfigured && (
           <Message type="warning" showIcon>

@@ -1,4 +1,5 @@
 import { createId } from '../utils/id';
+import { getFamilyAppTitle } from '../config/familyConfig';
 import { createDefaultHandles, createDefaultHandleLayout, NODE_TYPES, createDefaultImageSettings, createEmptyStandardPerson } from '../utils/nodeFactory';
 
 export const STORAGE_KEYS = {
@@ -8,8 +9,8 @@ export const STORAGE_KEYS = {
 };
 
 export const APP_METADATA = {
-  appName: 'Coetzee Family Tree',
-  version: '1.14.5',
+  appName: getFamilyAppTitle(),
+  version: '2.29.1',
   author: 'JasonM'
 };
 
@@ -28,7 +29,9 @@ export const DEFAULT_APP_SETTINGS = {
   nodeAccent: '#22d3ee',
   nodeGlow: true,
   showMiniMap: true,
-  startupViewport: DEFAULT_VIEWPORT
+  startupViewport: DEFAULT_VIEWPORT,
+  startupViewportDesktop: DEFAULT_VIEWPORT,
+  startupViewportMobile: DEFAULT_VIEWPORT
 };
 
 export const DEFAULT_APP_STATE = {
@@ -77,6 +80,8 @@ export const DEFAULT_APP_STATE = {
   remoteSyncError: null,
   lastRemoteSyncAt: null,
   remoteCooldownUntil: 0,
+  remoteSnapshotHash: null,
+  remoteSnapshotExportedAt: null,
   hasInitialRemoteSyncCompleted: false,
   viewportCenter: { x: 0, y: 0 },
   isDrawNodeMode: false,

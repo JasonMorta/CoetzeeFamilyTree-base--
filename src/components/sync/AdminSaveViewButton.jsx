@@ -1,44 +1,58 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, Whisper, Tooltip } from 'rsuite';
 import { useAppState } from '../../context/AppStateContext';
-import { isLocalRuntime, persistSnapshot } from './saveStateHelpers';
+import { persistSnapshot } from './saveStateHelpers';
+import { ACTIONS } from '../../context/appReducer';
+import { getCurrentViewportProfile, VIEWPORT_PROFILES } from '../../utils/viewportProfiles';
 import styles from './AdminSaveChangesButton.module.css';
 
 export default function AdminSaveViewButton() {
   const { state, dispatch } = useAppState();
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
-  const canWriteLocally = useMemo(() => isLocalRuntime(), []);
 
   const handleSaveView = useCallback(async () => {
-    if (!canWriteLocally || isSaving) {
+    if (isSaving) {
       return;
     }
 
     setIsSaving(true);
     setSaveError('');
 
-    const result = await persistSnapshot(state, dispatch);
+    const currentProfile = getCurrentViewportProfile();
+    const nextState = {
+      ...state,
+      appSettings: {
+        ...state.appSettings,
+        startupViewport: state.viewport,
+        ...(currentProfile === VIEWPORT_PROFILES.MOBILE
+          ? { startupViewportMobile: state.viewport }
+          : { startupViewportDesktop: state.viewport })
+      }
+    };
+
+    dispatch({ type: ACTIONS.SAVE_STARTUP_VIEWPORT, payload: { profile: currentProfile } });
+    const result = await persistSnapshot(nextState, dispatch);
 
     if (!result.ok) {
-      setSaveError(result.error || 'View save failed.');
+      setSaveError(result.error || 'Firebase view save failed.');
       setIsSaving(false);
       return;
     }
 
     setIsSaving(false);
-  }, [canWriteLocally, dispatch, isSaving, state]);
+  }, [dispatch, isSaving, state]);
 
   if (!state.isAdminAuthenticated) {
     return null;
   }
 
-  const isDisabled = !canWriteLocally || isSaving;
-  const tooltipText = !canWriteLocally
-    ? 'Saving the startup map view is available locally only.'
-    : saveError
-      ? saveError
-      : 'Save the current pan and zoom as the startup map view.';
+  const currentProfile = getCurrentViewportProfile();
+  const tooltipText = saveError
+    ? saveError
+    : currentProfile === VIEWPORT_PROFILES.MOBILE
+      ? 'Save the current pan and zoom as the default mobile startup view in Firebase.'
+      : 'Save the current pan and zoom as the default desktop startup view in Firebase.';
 
   return (
     <Whisper
@@ -53,16 +67,14 @@ export default function AdminSaveViewButton() {
           className={styles.saveButton}
           onClick={handleSaveView}
           loading={isSaving}
-          disabled={isDisabled}
-          size="m"
+          disabled={isSaving}
+          size="xs"
         >
-          {!canWriteLocally
-            ? 'Save map view (local only)'
-            : saveError
-              ? 'View save failed'
-              : isSaving
-                ? 'Saving view…'
-                : 'Save map view'}
+          {saveError
+            ? 'View save failed'
+            : isSaving
+              ? 'Saving view…'
+              : 'Save map view'}
         </Button>
       </span>
     </Whisper>

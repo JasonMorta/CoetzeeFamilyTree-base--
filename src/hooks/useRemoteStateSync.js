@@ -1,74 +1,136 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { ACTIONS } from '../context/appReducer';
-import { fetchRemoteSnapshot } from '../services/remoteStateService';
-import { saveAppMeta } from '../services/localStorageService';
+import { fetchFirebaseAppStateSnapshot, isFirebaseAppStateConfigured } from '../services/firebaseAppStateService';
+import { hasPersistedAppData, loadAppMeta, saveAppData, saveAppMeta } from '../services/localStorageService';
 
-import { LOCAL_STATE_PATH } from '../services/remoteStateService';
-
-const REMOTE_URL = LOCAL_STATE_PATH;
+const AUTO_REFRESH_INTERVAL_MS = 120_000;
+const NON_ADMIN_FETCH_COOLDOWN_MS = 60_000;
 
 /**
- * Keeps viewer clients in sync with the bundled JSON state snapshot.
+ * Keeps clients in sync with the Firebase-backed app snapshot.
  *
- * - On load: fetch the latest bundled JSON and always apply it as the startup source of truth.
- * - Logged-in admins can then keep working from in-memory state, with localStorage acting as a session cache only after the JSON has loaded.
- * - Exposes a manual refresh action with a 30s cooldown (for viewers).
+ * - On load: fetch the latest Firebase snapshot before rendering the canvas.
+ * - During idle viewing: poll every 2 minutes.
+ * - For non-admin viewers, suppress repeated remote fetches for 1 minute across reloads and use the cached local snapshot instead.
+ * - Re-apply state only when the remote snapshot hash changes.
  */
 export function useRemoteStateSync(state, dispatch) {
   const inFlightRef = useRef(false);
+  const latestHashRef = useRef(state.remoteSnapshotHash || state.lastExportHash || null);
+  const hasInitialSyncCompletedRef = useRef(state.hasInitialRemoteSyncCompleted);
+
+  useEffect(() => {
+    latestHashRef.current = state.remoteSnapshotHash || state.lastExportHash || null;
+  }, [state.remoteSnapshotHash, state.lastExportHash]);
+
+  useEffect(() => {
+    hasInitialSyncCompletedRef.current = state.hasInitialRemoteSyncCompleted;
+  }, [state.hasInitialRemoteSyncCompleted]);
 
   const runSync = useCallback(async (reason = 'auto') => {
     if (inFlightRef.current) {
       return { ok: false, skipped: true, reason: 'Sync already in progress.' };
     }
 
+    if (!isFirebaseAppStateConfigured()) {
+      const error = 'Firebase app-state sync is not configured. Add the VITE_FIREBASE_* values to .env first.';
+      dispatch({
+        type: ACTIONS.REMOTE_SYNC_END,
+        payload: { error, syncedAt: Date.now(), reason }
+      });
+      return { ok: false, error };
+    }
+
+    const isAdminRequest = Boolean(state.isAdminAuthenticated);
+    const cacheMeta = loadAppMeta();
+    const hasCachedSnapshot = hasPersistedAppData();
+    const cooldownActive = !isAdminRequest
+      && Boolean(cacheMeta.nextRemoteFetchAllowedAt)
+      && Date.now() < cacheMeta.nextRemoteFetchAllowedAt;
+
+    if (cooldownActive && hasCachedSnapshot) {
+      dispatch({
+        type: ACTIONS.REMOTE_SYNC_END,
+        payload: { error: null, syncedAt: cacheMeta.lastRemoteFetchAt || Date.now(), reason: `${reason}-cache-hit` }
+      });
+      return { ok: true, skipped: true, usedCache: true };
+    }
+
     inFlightRef.current = true;
     dispatch({ type: ACTIONS.REMOTE_SYNC_START, payload: { reason } });
 
-    const result = await fetchRemoteSnapshot(REMOTE_URL);
+    try {
+      const result = await fetchFirebaseAppStateSnapshot();
+      if (!result.ok) {
+        dispatch({
+          type: ACTIONS.REMOTE_SYNC_END,
+          payload: { error: result.error, syncedAt: Date.now(), reason }
+        });
+        return result;
+      }
 
-    if (!result.ok) {
+      const remoteHash = result.meta.hash || result.meta.computedHash;
+      const didChange = Boolean(remoteHash) && remoteHash !== latestHashRef.current;
+
+      if (didChange || !hasInitialSyncCompletedRef.current) {
+        dispatch({
+          type: ACTIONS.APPLY_REMOTE_SNAPSHOT,
+          payload: {
+            ...result.snapshot,
+            meta: result.meta
+          }
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.SET_REMOTE_SNAPSHOT_META,
+          payload: result.meta
+        });
+      }
+
+      latestHashRef.current = remoteHash;
+      saveAppData(result.snapshot);
+
+      const fetchedAt = Date.now();
+      saveAppMeta({
+        hash: remoteHash,
+        exportedAt: result.meta.exportedAt || new Date().toISOString(),
+        lastRemoteFetchAt: fetchedAt,
+        nextRemoteFetchAllowedAt: isAdminRequest ? fetchedAt : fetchedAt + NON_ADMIN_FETCH_COOLDOWN_MS
+      });
+
       dispatch({
         type: ACTIONS.REMOTE_SYNC_END,
-        payload: { error: result.error, syncedAt: Date.now(), reason }
+        payload: { error: null, syncedAt: Date.now(), reason }
       });
+
+      return { ok: true, changed: didChange };
+    } catch (error) {
+      const message = error?.message || 'Firebase sync failed.';
+      dispatch({
+        type: ACTIONS.REMOTE_SYNC_END,
+        payload: { error: message, syncedAt: Date.now(), reason }
+      });
+      return { ok: false, error: message };
+    } finally {
       inFlightRef.current = false;
-      return result;
     }
+  }, [dispatch, state.isAdminAuthenticated]);
 
-    const remoteHash = result.meta.hash || result.meta.computedHash;
-
-    dispatch({ type: ACTIONS.APPLY_REMOTE_SNAPSHOT, payload: result.snapshot });
-
-    // Save meta so admins can see what was last pulled/exported.
-    saveAppMeta({ hash: remoteHash, exportedAt: result.meta.exportedAt || new Date().toISOString() });
-    dispatch({ type: ACTIONS.SET_EXPORT_HASH, payload: remoteHash });
-
-    dispatch({
-      type: ACTIONS.REMOTE_SYNC_END,
-      payload: { error: null, syncedAt: Date.now(), reason }
-    });
-
-    inFlightRef.current = false;
-    return { ok: true };
-  }, [dispatch]);
-
-  // Auto-run on mount so both local admins and live viewers start from the saved JSON file.
   useEffect(() => {
-    runSync('auto');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    void runSync('startup');
+  }, [runSync]);
 
-  const refreshWithCooldown = useCallback(async () => {
-    const now = Date.now();
-    if (state.remoteCooldownUntil && now < state.remoteCooldownUntil) {
-      return { ok: false, skipped: true, reason: 'Cooldown active.' };
-    }
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      void runSync('interval');
+    }, AUTO_REFRESH_INTERVAL_MS);
 
-    // 30 second cooldown
-    dispatch({ type: ACTIONS.SET_REMOTE_COOLDOWN, payload: now + 30_000 });
-    return runSync('manual');
-  }, [dispatch, runSync, state.remoteCooldownUntil]);
+    return () => window.clearInterval(intervalId);
+  }, [runSync]);
 
-  return { refreshWithCooldown, runSync, remoteUrl: REMOTE_URL };
+  return {
+    runSync,
+    autoRefreshIntervalMs: AUTO_REFRESH_INTERVAL_MS,
+    nonAdminFetchCooldownMs: NON_ADMIN_FETCH_COOLDOWN_MS
+  };
 }

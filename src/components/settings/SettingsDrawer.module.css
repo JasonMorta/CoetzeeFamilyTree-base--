@@ -1,3 +1,11 @@
+.drawer :global(.rs-drawer) {
+  z-index: 1100 !important;
+}
+
+.drawer :global(.rs-drawer-backdrop) {
+  z-index: 1090 !important;
+}
+
 .drawer :global(.rs-drawer-content) {
   background: #0f172a;
   color: #e6eef9;

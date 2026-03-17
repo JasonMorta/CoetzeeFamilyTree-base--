@@ -1,19 +1,27 @@
-import React, { memo, useMemo, useState, useCallback, useEffect } from 'react';
-import { Form, Input, InputPicker, TagPicker, Checkbox, Divider, Button } from 'rsuite';
+import React, { memo, useEffect, useMemo, useState } from 'react';
+import { Button, Divider, Form, Input, InputPicker, SelectPicker } from 'rsuite';
 import styles from './PersonFields.module.css';
+import {
+  RELATIONSHIP_OPTIONS,
+  createEmptyRelationshipEntry,
+  createStandardPersonWrapper,
+  getDynamicPersonFieldKeys,
+  getPersonFieldMeta,
+  getRecordName,
+  getRecordNickname,
+  getRecordBirthDate,
+  getRecordPhoto,
+  syncNodeDetailsWithPerson,
+  personRecordToLinkedDraft
+} from '../../utils/family3Schema';
+import { buildSavedPeopleOptions, resolveSavedPersonSelection } from './savedPeopleOptions';
 
-function fieldHidden(person, key) {
-  return !!(person.hiddenFields && person.hiddenFields[key]);
+function pickerData(values = []) {
+  return values.map((value) => ({ label: value, value }));
 }
 
-function buildSavedPeopleOptions(savedPeople = []) {
-  return (savedPeople || [])
-    .filter((p) => (p?.fullName || '').trim().length > 0)
-    .map((p) => ({
-      label: p.fullName,
-      value: p.fullName,
-      person: p
-    }));
+function buildTypeOptions(groupKey) {
+  return pickerData(RELATIONSHIP_OPTIONS[groupKey] || []);
 }
 
 function renderPersonOption(label, item) {
@@ -21,115 +29,212 @@ function renderPersonOption(label, item) {
   return (
     <div className={styles.userOption}>
       <div className={styles.userOptionName}>{label}</div>
-      <div className={styles.userOptionMeta}>{person?.nickname ? person.nickname : ''}</div>
+      {getRecordNickname(person) ? <div className={styles.userOptionMeta}>{getRecordNickname(person)}</div> : null}
     </div>
   );
 }
 
-function FieldRow({ label, hidden, onToggleHidden, children }) {
+function RelationshipCard({ groupKey, label, entry, index, onChange, onRemove, savedPeopleOptions, savedPeople = [] }) {
+  const applyPerson = (record, fallbackValue = '') => {
+    const linked = personRecordToLinkedDraft(record, { fullName: getRecordName(record) || fallbackValue || '' });
+    onChange({
+      ...entry,
+      ...linked,
+      name: linked.fullName || fallbackValue || '',
+      birthDate: getRecordBirthDate(record) || linked.birthDate || entry.birthDate || '',
+      photo: getRecordPhoto(record) || linked.photo || entry.photo || ''
+    });
+  };
+
+  const handleSelect = (value, item) => {
+    const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, value, item);
+    if (matched) {
+      applyPerson(matched, value);
+      return;
+    }
+
+    onChange({ ...entry, name: value || '' });
+  };
+
+  const handleNameChange = (value, item) => {
+    const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, value, item);
+    if (matched) {
+      applyPerson(matched, value);
+      return;
+    }
+
+    onChange({ ...entry, name: value || '' });
+  };
+
   return (
-    <div className={styles.fieldRow}>
-      <div className={styles.fieldHeader}>
-        <Form.ControlLabel>{label}</Form.ControlLabel>
-        <Checkbox checked={hidden} onChange={(_, checked) => onToggleHidden(checked)} className={styles.hideCheck}>
-          Hide
-        </Checkbox>
+    <div className={styles.relationshipCard}>
+      <div className={styles.personCardHeader}>
+        <div className={styles.personCardTitle}>{label} {index + 1}</div>
+        <Button appearance="subtle" color="red" size="xs" onClick={onRemove}>Remove</Button>
       </div>
-      {children}
+      <div className={styles.relationshipGrid}>
+        <Form.Group>
+          <Form.ControlLabel>Relationship type</Form.ControlLabel>
+          <SelectPicker
+            block
+            cleanable={false}
+            searchable={false}
+            data={buildTypeOptions(groupKey)}
+            value={entry.type || ''}
+            onChange={(value) => onChange({ ...entry, type: value || '' })}
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.ControlLabel>Full name</Form.ControlLabel>
+          <InputPicker
+            block
+            data={savedPeopleOptions}
+            value={entry.name || ''}
+            onChange={(value, item) => handleNameChange(value, item)}
+            onSelect={handleSelect}
+            placeholder="Type a name or select an existing person"
+            searchable
+            cleanable
+            creatable
+            renderMenuItem={renderPersonOption}
+          />
+        </Form.Group>
+
+        {groupKey === 'parents' ? (
+          <Form.Group>
+            <Form.ControlLabel>Birth date</Form.ControlLabel>
+            <Input type="date" value={entry.birthDate || ''} onChange={(value) => onChange({ ...entry, birthDate: value || '' })} />
+          </Form.Group>
+        ) : null}
+
+        <Form.Group>
+          <Form.ControlLabel>Photo</Form.ControlLabel>
+          <Input value={entry.photo || ''} onChange={(value) => onChange({ ...entry, photo: value || '' })} placeholder="Paste an image URL" />
+        </Form.Group>
+      </div>
     </div>
   );
 }
 
-const MultiRelationshipField = memo(function MultiRelationshipField({
-  label,
-  field,
-  hidden,
-  onToggleHidden,
-  options,
-  valueArr,
-  onChange,
-  onSearch,
-  onPhotoChange
-}) {
+function DynamicPersonField({ fieldKey, value, onChange, savedPeopleOptions, savedPeople = [], onAutofillPerson }) {
+  const meta = getPersonFieldMeta(fieldKey, value);
+  const isFullSpan = meta.inputType === 'textarea';
+
+  if (meta.inputType === 'person-name') {
+    return (
+      <Form.Group className={isFullSpan ? styles.fullSpan : ''}>
+        <Form.ControlLabel>{meta.label}</Form.ControlLabel>
+        <InputPicker
+          block
+          data={savedPeopleOptions}
+          value={value || ''}
+          onChange={(nextValue) => {
+            const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, nextValue, null);
+            if (matched && onAutofillPerson) {
+              onAutofillPerson(null, matched);
+              return;
+            }
+            onChange(nextValue || '');
+          }}
+          onSelect={(nextValue, item) => {
+            const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, nextValue, item);
+            if (matched && onAutofillPerson) {
+              onAutofillPerson(null, matched);
+              return;
+            }
+            onChange(nextValue || '');
+          }}
+          placeholder={meta.placeholder || 'Type a name or select an existing person'}
+          searchable
+          cleanable
+          creatable
+          renderMenuItem={renderPersonOption}
+        />
+      </Form.Group>
+    );
+  }
+
+  if (meta.inputType === 'select') {
+    const normalizedValue = fieldKey === 'isAlive'
+      ? (value === true ? 'Yes' : value === false ? 'No' : String(value || ''))
+      : (value || '');
+
+    return (
+      <Form.Group className={isFullSpan ? styles.fullSpan : ''}>
+        <Form.ControlLabel>{meta.label}</Form.ControlLabel>
+        <SelectPicker
+          block
+          cleanable
+          searchable={false}
+          data={pickerData(meta.options || [])}
+          value={normalizedValue}
+          onChange={(nextValue) => {
+            if (fieldKey === 'isAlive') {
+              if (nextValue === 'Yes') onChange('true');
+              else if (nextValue === 'No') onChange('false');
+              else if (nextValue === 'Not sure') onChange('unknown');
+              else onChange('');
+              return;
+            }
+            onChange(nextValue || '');
+          }}
+        />
+      </Form.Group>
+    );
+  }
+
+  if (meta.inputType === 'date') {
+    return (
+      <Form.Group className={isFullSpan ? styles.fullSpan : ''}>
+        <Form.ControlLabel>{meta.label}</Form.ControlLabel>
+        <Input type="date" value={value || ''} onChange={(nextValue) => onChange(nextValue || '')} />
+      </Form.Group>
+    );
+  }
+
+  if (meta.inputType === 'textarea') {
+    return (
+      <Form.Group className={styles.fullSpan}>
+        <Form.ControlLabel>{meta.label}</Form.ControlLabel>
+        <Input as="textarea" rows={meta.rows || 4} value={value || ''} onChange={(nextValue) => onChange(nextValue || '')} placeholder={meta.placeholder || ''} />
+      </Form.Group>
+    );
+  }
+
   return (
-    <FieldRow label={label} hidden={hidden} onToggleHidden={onToggleHidden}>
-      <TagPicker
-        data={options}
-        value={valueArr.map((x) => x.name)}
-        onChange={onChange}
-        onSearch={onSearch}
-        placeholder="Type or select"
-        searchable
-        cleanable
-        creatable
-        block
-        renderMenuItem={renderPersonOption}
-      />
-      {valueArr.length ? (
-        <div className={styles.relationshipPhotos}>
-          {valueArr.map((x) => (
-            <div key={`${field}-${x.name}`} className={styles.relationshipPhotoRow}>
-              <div className={styles.relationshipPhotoName}>{x.name}</div>
-              <Input
-                value={x.photo || ''}
-                onChange={(val) => onPhotoChange(x.name, val)}
-                placeholder="Image URL (optional)"
-              />
-            </div>
-          ))}
-        </div>
-      ) : null}
-    </FieldRow>
+    <Form.Group className={isFullSpan ? styles.fullSpan : ''}>
+      <Form.ControlLabel>{meta.label}</Form.ControlLabel>
+      <Input value={value || ''} onChange={(nextValue) => onChange(nextValue || '')} placeholder={meta.placeholder || ''} />
+    </Form.Group>
   );
-});
-
-function buildHybridList(savedPeopleOptions, keyword, selected = []) {
-  const kw = (keyword || '').trim().toLowerCase();
-  const filtered = !kw ? savedPeopleOptions : savedPeopleOptions.filter((o) => o.value.toLowerCase().includes(kw));
-  const base = filtered.slice(0, 15).map((o) => ({ label: o.label, value: o.value, person: o.person }));
-
-  // Ensure selected values are always present so pickers can display them even if not in top 15
-  const selectedSet = new Set((selected || []).filter(Boolean));
-  selectedSet.forEach((val) => {
-    if (!base.some((o) => o.value === val)) base.unshift({ label: val, value: val });
-  });
-
-  return base;
 }
 
-function normalizeRelSingle(value) {
-  if (!value) return { name: '', photo: '' };
-  if (typeof value === 'string') return { name: value, photo: '' };
-  return { name: value?.name || '', photo: value?.photo || '' };
-}
+function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillPerson, onSaveSection, onStatusChange, showSectionSaveButtons = true }) {
+  const [saveStatus, setSaveStatus] = useState({ personal: 'idle', node: 'idle', relationships: 'idle' });
 
-function normalizeRelMulti(value) {
-  const arr = Array.isArray(value) ? value : [];
-  return arr
-    .map((v) => {
-      if (!v) return null;
-      if (typeof v === 'string') return { name: v, photo: '' };
-      return { name: v?.name || '', photo: v?.photo || '' };
-    })
-    .filter(Boolean)
-    .filter((v) => String(v.name || '').trim().length > 0);
-}
-
-function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillPerson, onSaveSection, onStatusChange }) {
-  const [saveStatus, setSaveStatus] = useState({ personal: 'idle', about: 'idle', relationships: 'idle' });
   useEffect(() => {
-    const next = { personal: 'idle', about: 'idle', relationships: 'idle' };
+    const next = { personal: 'idle', node: 'idle', relationships: 'idle' };
     setSaveStatus(next);
     onStatusChange?.(next);
   }, [onStatusChange, person?.id]);
-  const markDirty = useCallback((section) => {
+
+  const savedPeopleOptions = useMemo(() => buildSavedPeopleOptions(savedPeople), [savedPeople]);
+  const draft = useMemo(() => createStandardPersonWrapper(person), [person]);
+  const personData = draft.person || {};
+  const relationshipData = draft.person?.relationships || draft.relationships || {};
+  const nodeData = draft.person?.node || draft.node || {};
+  const dynamicPersonKeys = useMemo(() => getDynamicPersonFieldKeys(personData), [personData]);
+
+  const markDirty = (section) => {
     setSaveStatus((prev) => {
-      const next = (prev?.[section] === 'dirty') ? (prev || {}) : { ...(prev || {}), [section]: 'dirty' };
+      const next = { ...(prev || {}), [section]: 'dirty' };
       onStatusChange?.(next);
       return next;
     });
-  }, [onStatusChange]);
-  const markSaved = useCallback((section) => {
+  };
+
+  const markSaved = (section) => {
     setSaveStatus((prev) => {
       const next = { ...(prev || {}), [section]: 'saved' };
       onStatusChange?.(next);
@@ -142,426 +247,182 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
         return next;
       });
     }, 1200);
-  }, [onStatusChange]);
-  const sectionBtnClass = useCallback((section) => {
+  };
+
+  const sectionBtnClass = (section) => {
     const s = saveStatus?.[section] || 'idle';
     if (s === 'dirty') return styles.saveBtnDirty;
     if (s === 'saved') return styles.saveBtnSaved;
     return '';
-  }, [saveStatus]);
-  const sectionBtnLabel = useCallback((section, base) => {
-    return (saveStatus?.[section] === 'saved') ? 'Saved ✓' : base;
-  }, [saveStatus]);
-  const [nameSearch, setNameSearch] = useState('');
+  };
 
-  const [fatherSearch, setFatherSearch] = useState('');
-  const [motherSearch, setMotherSearch] = useState('');
-  const [childrenSearch, setChildrenSearch] = useState('');
-  const [siblingsSearch, setSiblingsSearch] = useState('');
-
-  const [girlfriendsSearch, setGirlfriendsSearch] = useState('');
-  const [boyfriendsSearch, setBoyfriendsSearch] = useState('');
-  const [husbandsSearch, setHusbandsSearch] = useState('');
-  const [wivesSearch, setWivesSearch] = useState('');
-
-  const [stepFathersSearch, setStepFathersSearch] = useState('');
-  const [stepMothersSearch, setStepMothersSearch] = useState('');
-  const [fosterParentsSearch, setFosterParentsSearch] = useState('');
-  const [fosterChildrenSearch, setFosterChildrenSearch] = useState('');
-  const [adoptiveParentsSearch, setAdoptiveParentsSearch] = useState('');
-  const [adoptedChildrenSearch, setAdoptedChildrenSearch] = useState('');
-
-  const setPersonPersonal = useCallback((updater) => { markDirty('personal'); setPerson(updater); }, [markDirty, setPerson]);
-  const setPersonAbout = useCallback((updater) => { markDirty('about'); setPerson(updater); }, [markDirty, setPerson]);
-  const setPersonRelationships = useCallback((updater) => { markDirty('relationships'); setPerson(updater); }, [markDirty, setPerson]);
-
-  const savedPeopleOptions = useMemo(() => buildSavedPeopleOptions(savedPeople), [savedPeople]);
-  const savedPeopleMap = useMemo(() => {
-    const map = new Map();
-    (savedPeople || []).forEach((p) => {
-      const key = String(p?.fullName || '').trim().toLowerCase();
-      if (key) map.set(key, p);
-    });
-    return map;
-  }, [savedPeople]);
-
-  const currentFather = useMemo(() => normalizeRelSingle(person.father), [person.father]);
-  const currentMother = useMemo(() => normalizeRelSingle(person.mother), [person.mother]);
-
-  const childrenArr = useMemo(() => normalizeRelMulti(person.children), [person.children]);
-  const siblingsArr = useMemo(() => normalizeRelMulti(person.siblings), [person.siblings]);
-  const girlfriendsArr = useMemo(() => normalizeRelMulti(person.girlfriends), [person.girlfriends]);
-  const boyfriendsArr = useMemo(() => normalizeRelMulti(person.boyfriends), [person.boyfriends]);
-  const husbandsArr = useMemo(() => normalizeRelMulti(person.husbands), [person.husbands]);
-  const wivesArr = useMemo(() => normalizeRelMulti(person.wives), [person.wives]);
-
-  const stepFathersArr = useMemo(() => normalizeRelMulti(person.stepFathers), [person.stepFathers]);
-  const stepMothersArr = useMemo(() => normalizeRelMulti(person.stepMothers), [person.stepMothers]);
-  const fosterParentsArr = useMemo(() => normalizeRelMulti(person.fosterParents), [person.fosterParents]);
-  const fosterChildrenArr = useMemo(() => normalizeRelMulti(person.fosterChildren), [person.fosterChildren]);
-  const adoptiveParentsArr = useMemo(() => normalizeRelMulti(person.adoptiveParents), [person.adoptiveParents]);
-  const adoptedChildrenArr = useMemo(() => normalizeRelMulti(person.adoptedChildren), [person.adoptedChildren]);
-
-  const updateField = useCallback((section, field, value) => {
+  const updateWrapper = (updater, section) => {
     markDirty(section);
-    setPerson((prev) => ({ ...(prev || {}), [field]: value }));
-  }, [markDirty, setPerson]);
+    setPerson((prev) => createStandardPersonWrapper(updater(createStandardPersonWrapper(prev))));
+  };
 
-  const updateHiddenField = useCallback((section, field, hidden) => {
-    markDirty(section);
-    setPerson((prev) => {
-      const current = prev || {};
-      const nextHidden = { ...(current.hiddenFields || {}), [field]: hidden };
-      return { ...current, hiddenFields: nextHidden };
-    });
-  }, [markDirty, setPerson]);
+  const updatePersonField = (field, value, section) => {
+    updateWrapper((prev) => {
+      const nextPerson = { ...(prev?.person || {}), [field]: value };
+      const nextNode = syncNodeDetailsWithPerson(prev?.person?.node || prev?.node || {}, nextPerson);
+      return {
+        ...prev,
+        person: {
+          ...nextPerson,
+          node: nextNode
+        },
+        node: nextNode
+      };
+    }, section);
+  };
 
-  const handleNameSelect = useCallback((value, item) => {
-    if (item?.person && onAutofillPerson) {
-      markDirty('personal');
-      onAutofillPerson(person.id, item.person);
-      return;
-    }
-    updateField('personal', 'fullName', value || '');
-  }, [onAutofillPerson, person.id, updateField]);
+  const updateNodeField = (field, value) => {
+    updateWrapper((prev) => ({
+      ...prev,
+      person: {
+        ...(prev?.person || {}),
+        node: {
+          ...(prev?.person?.node || prev?.node || {}),
+          [field]: value
+        }
+      },
+      node: {
+        ...(prev?.person?.node || prev?.node || {}),
+        [field]: value
+      }
+    }), 'node');
+  };
 
-  const stillAlive = Boolean(person.stillAlive);
+  const updateRelationshipGroup = (groupKey, nextEntries) => {
+    updateWrapper((prev) => ({
+      ...prev,
+      person: {
+        ...(prev?.person || {}),
+        relationships: {
+          ...(prev?.person?.relationships || prev?.relationships || {}),
+          [groupKey]: nextEntries
+        }
+      },
+      relationships: {
+        ...(prev?.person?.relationships || prev?.relationships || {}),
+        [groupKey]: nextEntries
+      }
+    }), 'relationships');
+  };
 
-  const getSavedPhoto = useCallback((name) => {
-    const key = String(name || '').trim().toLowerCase();
-    const p = savedPeopleMap.get(key);
-    return p?.photo || '';
-  }, [savedPeopleMap]);
+  const addRelationship = (groupKey) => {
+    const next = [...(relationshipData?.[groupKey] || []), createEmptyRelationshipEntry()];
+    updateRelationshipGroup(groupKey, next);
+  };
 
-  const setRelSingle = useCallback((field, name) => {
-    const prev = normalizeRelSingle(person[field]);
-    const nextName = String(name || '');
-    const nextPhoto = prev.photo || getSavedPhoto(nextName) || '';
-    updateField('relationships', field, { name: nextName, photo: nextPhoto });
-  }, [getSavedPhoto, person, updateField]);
+  const updateRelationship = (groupKey, index, nextEntry) => {
+    const next = [...(relationshipData?.[groupKey] || [])];
+    next[index] = createEmptyRelationshipEntry(nextEntry);
+    updateRelationshipGroup(groupKey, next);
+  };
 
-  const setRelSinglePhoto = useCallback((field, photo) => {
-    const prev = normalizeRelSingle(person[field]);
-    updateField('relationships', field, { ...prev, photo: String(photo || '') });
-  }, [person, updateField]);
-
-  const setRelMulti = useCallback((field, names) => {
-    const nextNames = Array.isArray(names) ? names : [];
-    const prevArr = normalizeRelMulti(person[field]);
-    const prevMap = new Map(prevArr.map((x) => [String(x.name).toLowerCase(), x]));
-    const nextArr = nextNames
-      .filter(Boolean)
-      .map((nm) => {
-        const key = String(nm).toLowerCase();
-        const existing = prevMap.get(key);
-        return {
-          name: nm,
-          photo: existing?.photo || getSavedPhoto(nm) || ''
-        };
-      });
-    updateField('relationships', field, nextArr);
-  }, [getSavedPhoto, person, updateField]);
-
-  const setRelMultiPhoto = useCallback((field, name, photo) => {
-    const arr = normalizeRelMulti(person[field]);
-    const next = arr.map((x) => (String(x.name).toLowerCase() === String(name).toLowerCase() ? { ...x, photo: String(photo || '') } : x));
-    updateField('relationships', field, next);
-  }, [person, updateField]);
-
-  // Picker data lists (max 15 + ensure selection is visible)
-  const nameOptions = useMemo(() => buildHybridList(savedPeopleOptions, nameSearch, [person.fullName || '']), [savedPeopleOptions, nameSearch, person.fullName]);
-
-  const fatherOptions = useMemo(() => buildHybridList(savedPeopleOptions, fatherSearch, [currentFather.name]), [savedPeopleOptions, fatherSearch, currentFather.name]);
-  const motherOptions = useMemo(() => buildHybridList(savedPeopleOptions, motherSearch, [currentMother.name]), [savedPeopleOptions, motherSearch, currentMother.name]);
-
-  const childrenOptions = useMemo(() => buildHybridList(savedPeopleOptions, childrenSearch, childrenArr.map((c) => c.name)), [savedPeopleOptions, childrenSearch, childrenArr]);
-  const siblingsOptions = useMemo(() => buildHybridList(savedPeopleOptions, siblingsSearch, siblingsArr.map((c) => c.name)), [savedPeopleOptions, siblingsSearch, siblingsArr]);
-  const girlfriendsOptions = useMemo(() => buildHybridList(savedPeopleOptions, girlfriendsSearch, girlfriendsArr.map((c) => c.name)), [savedPeopleOptions, girlfriendsSearch, girlfriendsArr]);
-  const boyfriendsOptions = useMemo(() => buildHybridList(savedPeopleOptions, boyfriendsSearch, boyfriendsArr.map((c) => c.name)), [savedPeopleOptions, boyfriendsSearch, boyfriendsArr]);
-  const husbandsOptions = useMemo(() => buildHybridList(savedPeopleOptions, husbandsSearch, husbandsArr.map((c) => c.name)), [savedPeopleOptions, husbandsSearch, husbandsArr]);
-  const wivesOptions = useMemo(() => buildHybridList(savedPeopleOptions, wivesSearch, wivesArr.map((c) => c.name)), [savedPeopleOptions, wivesSearch, wivesArr]);
-
-  const stepFathersOptions = useMemo(() => buildHybridList(savedPeopleOptions, stepFathersSearch, stepFathersArr.map((c) => c.name)), [savedPeopleOptions, stepFathersSearch, stepFathersArr]);
-  const stepMothersOptions = useMemo(() => buildHybridList(savedPeopleOptions, stepMothersSearch, stepMothersArr.map((c) => c.name)), [savedPeopleOptions, stepMothersSearch, stepMothersArr]);
-  const fosterParentsOptions = useMemo(() => buildHybridList(savedPeopleOptions, fosterParentsSearch, fosterParentsArr.map((c) => c.name)), [savedPeopleOptions, fosterParentsSearch, fosterParentsArr]);
-  const fosterChildrenOptions = useMemo(() => buildHybridList(savedPeopleOptions, fosterChildrenSearch, fosterChildrenArr.map((c) => c.name)), [savedPeopleOptions, fosterChildrenSearch, fosterChildrenArr]);
-  const adoptiveParentsOptions = useMemo(() => buildHybridList(savedPeopleOptions, adoptiveParentsSearch, adoptiveParentsArr.map((c) => c.name)), [savedPeopleOptions, adoptiveParentsSearch, adoptiveParentsArr]);
-  const adoptedChildrenOptions = useMemo(() => buildHybridList(savedPeopleOptions, adoptedChildrenSearch, adoptedChildrenArr.map((c) => c.name)), [savedPeopleOptions, adoptedChildrenSearch, adoptedChildrenArr]);
-
+  const removeRelationship = (groupKey, index) => {
+    const next = [...(relationshipData?.[groupKey] || [])];
+    next.splice(index, 1);
+    updateRelationshipGroup(groupKey, next);
+  };
 
   return (
     <div className={styles.standardPersonWrap}>
-      <Divider className={styles.sectionDivider}>Personal details</Divider>
-
-      <Form fluid>
-        <FieldRow
-          label="Name & Surname"
-          hidden={fieldHidden(person, 'fullName')}
-          onToggleHidden={(checked) => updateHiddenField('personal', 'fullName', checked)}
-        >
-          <InputPicker
-            data={nameOptions}
-            value={person.fullName || ''}
-            onChange={(val) => updateField('personal', 'fullName', val || '')}
-            onSelect={handleNameSelect}
-            onSearch={(kw) => setNameSearch(kw)}
-            placeholder="Type a name or select an existing person"
-            searchable
-            creatable
-            renderMenuItem={renderPersonOption}
-            cleanable
-            block
-          />
-        </FieldRow>
-
-        <FieldRow
-          label="Nickname"
-          hidden={fieldHidden(person, 'nickname')}
-          onToggleHidden={(checked) => updateHiddenField('personal', 'nickname', checked)}
-        >
-          <Input value={person.nickname || ''} onChange={(val) => updateField('personal', 'nickname', val)} placeholder="Optional" />
-        </FieldRow>
-
-        <FieldRow
-          label="Image URL"
-          hidden={fieldHidden(person, 'photo')}
-          onToggleHidden={(checked) => updateHiddenField('personal', 'photo', checked)}
-        >
-          <Input value={person.photo || ''} onChange={(val) => updateField('personal', 'photo', val)} placeholder="Paste an image URL" />
-        </FieldRow>
-
-        <FieldRow
-          label="Title / Prefix"
-          hidden={fieldHidden(person, 'prefix')}
-          onToggleHidden={(checked) => updateHiddenField('personal', 'prefix', checked)}
-        >
-          <Input value={person.prefix || ''} onChange={(val) => updateField('personal', 'prefix', val)} placeholder="e.g., Mr, Mrs, Dr" />
-        </FieldRow>
-
-        <FieldRow
-          label="Maiden name / Birth surname"
-          hidden={fieldHidden(person, 'maidenName')}
-          onToggleHidden={(checked) => updateHiddenField('personal', 'maidenName', checked)}
-        >
-          <Input value={person.maidenName || ''} onChange={(val) => updateField('personal', 'maidenName', val)} placeholder="Optional" />
-        </FieldRow>
-
-        <Button
-          appearance="primary"
-          className={sectionBtnClass('personal')}
-          block
-          onClick={() => {
-            onSaveSection?.({
-              fullName: person.fullName,
-              nickname: person.nickname,
-              photo: person.photo,
-              prefix: person.prefix,
-              maidenName: person.maidenName,
-              hiddenFields: person.hiddenFields
-            });
-            markSaved('personal');
-          }}
-        >
-          {sectionBtnLabel('personal','Save personal details')}
-        </Button>
-
-        <Divider className={styles.sectionDivider}>About this person</Divider>
-
-        <FieldRow
-          label="Birth date"
-          hidden={fieldHidden(person, 'birthDate')}
-          onToggleHidden={(checked) => updateHiddenField('about', 'birthDate', checked)}
-        >
-          <Input value={person.birthDate || ''} onChange={(val) => updateField('about', 'birthDate', val)} placeholder="YYYY-MM-DD" />
-        </FieldRow>
-
-        <FieldRow
-          label="Birth place"
-          hidden={fieldHidden(person, 'birthPlace')}
-          onToggleHidden={(checked) => updateHiddenField('about', 'birthPlace', checked)}
-        >
-          <Input value={person.birthPlace || ''} onChange={(val) => updateField('about', 'birthPlace', val)} placeholder="Town / City / Country" />
-        </FieldRow>
-
-        <div className={styles.inlineChecks}>
-          <Checkbox checked={stillAlive} onChange={(_, checked) => updateField('about', 'stillAlive', checked)}>
-            Still alive
-          </Checkbox>
+      <Divider className={styles.sectionDivider}>Person details</Divider>
+      <div className={styles.glassPanel}>
+        <div className={styles.formGrid}>
+          {dynamicPersonKeys.map((fieldKey) => (
+            <DynamicPersonField
+              key={fieldKey}
+              fieldKey={fieldKey}
+              value={personData?.[fieldKey]}
+              onChange={(value) => updatePersonField(fieldKey, value, 'personal')}
+              savedPeopleOptions={savedPeopleOptions}
+              savedPeople={savedPeople}
+              onAutofillPerson={(value, selectedPerson) => {
+                markDirty('personal');
+                onAutofillPerson?.(value, selectedPerson);
+              }}
+            />
+          ))}
         </div>
+        {showSectionSaveButtons ? (
+          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('personal')}`} block onClick={() => { onSaveSection?.(draft); markSaved('personal'); }}>
+            {saveStatus.personal === 'saved' ? 'Saved ✓' : 'Save person details'}
+          </Button>
+        ) : null}
+      </div>
 
-        {!stillAlive && (
-          <>
-            <FieldRow
-              label="Death date"
-              hidden={fieldHidden(person, 'deathDate')}
-              onToggleHidden={(checked) => updateHiddenField('about', 'deathDate', checked)}
-            >
-              <Input value={person.deathDate || ''} onChange={(val) => updateField('about', 'deathDate', val)} placeholder="YYYY-MM-DD" />
-            </FieldRow>
+      <Divider className={styles.sectionDivider}>Node details</Divider>
+      <div className={styles.glassPanel}>
+        <div className={styles.formGrid}>
+          <Form.Group>
+            <Form.ControlLabel>Title</Form.ControlLabel>
+            <Input value={nodeData.title || ''} onChange={(value) => updateNodeField('title', value || '')} />
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Node cover image</Form.ControlLabel>
+            <Input value={nodeData.coverImage || ''} onChange={(value) => updateNodeField('coverImage', value || '')} />
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Image caption</Form.ControlLabel>
+            <Input value={nodeData.imageCaption || ''} onChange={(value) => updateNodeField('imageCaption', value || '')} />
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Event date</Form.ControlLabel>
+            <Input type="date" value={nodeData.eventDate || ''} onChange={(value) => updateNodeField('eventDate', value || '')} />
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Location</Form.ControlLabel>
+            <Input value={nodeData.location || ''} onChange={(value) => updateNodeField('location', value || '')} />
+          </Form.Group>
+          <Form.Group className={styles.fullSpan}>
+            <Form.ControlLabel>Notes</Form.ControlLabel>
+            <Input as="textarea" rows={4} value={nodeData.notes || ''} onChange={(value) => updateNodeField('notes', value || '')} />
+          </Form.Group>
+        </div>
+        {showSectionSaveButtons ? (
+          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('node')}`} block onClick={() => { onSaveSection?.(draft); markSaved('node'); }}>
+            {saveStatus.node === 'saved' ? 'Saved ✓' : 'Save node details'}
+          </Button>
+        ) : null}
+      </div>
 
-            <FieldRow
-              label="Death place"
-              hidden={fieldHidden(person, 'deathPlace')}
-              onToggleHidden={(checked) => updateHiddenField('about', 'deathPlace', checked)}
-            >
-              <Input value={person.deathPlace || ''} onChange={(val) => updateField('about', 'deathPlace', val)} placeholder="Town / City / Country" />
-            </FieldRow>
-          </>
-        )}
-
-        <FieldRow
-          label="Occupation"
-          hidden={fieldHidden(person, 'occupation')}
-          onToggleHidden={(checked) => updateHiddenField('about', 'occupation', checked)}
-        >
-          <Input value={person.occupation || ''} onChange={(val) => updateField('about', 'occupation', val)} placeholder="Optional" />
-        </FieldRow>
-
-        <FieldRow
-          label="Address"
-          hidden={fieldHidden(person, 'address')}
-          onToggleHidden={(checked) => updateHiddenField('about', 'address', checked)}
-        >
-          <Input as="textarea" rows={3} value={person.address || ''} onChange={(val) => updateField('about', 'address', val)} placeholder="Enter an address (multi-line)" />
-        </FieldRow>
-
-        <FieldRow
-          label="Contact number"
-          hidden={fieldHidden(person, 'contactNumber')}
-          onToggleHidden={(checked) => updateHiddenField('about', 'contactNumber', checked)}
-        >
-          <Input value={person.contactNumber || ''} onChange={(val) => updateField('about', 'contactNumber', val)} placeholder="Optional" />
-        </FieldRow>
-
-        <FieldRow
-          label="More information about this person"
-          hidden={fieldHidden(person, 'moreInfo')}
-          onToggleHidden={(checked) => updateHiddenField('about', 'moreInfo', checked)}
-        >
-          <Input as="textarea" rows={4} value={person.moreInfo || ''} onChange={(val) => updateField('about', 'moreInfo', val)} placeholder="No information yet" />
-        </FieldRow>
-
-        <Button
-          appearance="primary"
-          className={sectionBtnClass('about')}
-          block
-          onClick={() => {
-            onSaveSection?.({
-              birthDate: person.birthDate,
-              birthPlace: person.birthPlace,
-              stillAlive: Boolean(person.stillAlive),
-              deathDate: person.deathDate,
-              deathPlace: person.deathPlace,
-              occupation: person.occupation,
-              address: person.address,
-              contactNumber: person.contactNumber,
-              moreInfo: person.moreInfo,
-              hiddenFields: person.hiddenFields
-            });
-            markSaved('about');
-          }}
-        >
-          {sectionBtnLabel('about','Save about this person')}
-        </Button>
-
-        <Divider className={styles.sectionDivider}>Relationships</Divider>
-
-        <FieldRow
-          label="Father"
-          hidden={fieldHidden(person, 'father')}
-          onToggleHidden={(checked) => updateHiddenField('relationships', 'father', checked)}
-        >
-          <InputPicker
-            data={fatherOptions}
-            value={currentFather.name || ''}
-            onChange={(val) => setRelSingle('father', val)}
-            onSearch={(kw) => setFatherSearch(kw)}
-            placeholder="Type or select"
-            searchable
-            cleanable
-            creatable
-            block
-            renderMenuItem={renderPersonOption}
-          />
-          {currentFather.name ? (
-            <div className={styles.relationshipPhotos}>
-              <div className={styles.relationshipPhotoRow}>
-                <div className={styles.relationshipPhotoName}>{currentFather.name}</div>
-                <Input value={currentFather.photo || ''} onChange={(val) => setRelSinglePhoto('father', val)} placeholder="Image URL (optional)" />
+      <Divider className={styles.sectionDivider}>Relationships</Divider>
+      <div className={styles.glassPanel}>
+        {['parents', 'children', 'siblings', 'partners'].map((groupKey) => {
+          const title = groupKey.charAt(0).toUpperCase() + groupKey.slice(1);
+          const entries = relationshipData[groupKey] || [];
+          return (
+            <div key={groupKey} className={styles.relationshipSection}>
+              <div className={styles.relationshipHeader}>
+                <div className={styles.personCardTitle}>{title}</div>
+                <Button appearance="ghost" size="sm" onClick={() => addRelationship(groupKey)}>Add {groupKey.slice(0, -1) || groupKey}</Button>
               </div>
+              {!entries.length ? <div className={styles.emptyState}>No {groupKey} added yet.</div> : null}
+              {entries.map((entry, index) => (
+                <RelationshipCard
+                  key={`${groupKey}-${index}`}
+                  groupKey={groupKey}
+                  label={title.slice(0, -1) || title}
+                  entry={entry}
+                  index={index}
+                  onChange={(nextEntry) => updateRelationship(groupKey, index, nextEntry)}
+                  onRemove={() => removeRelationship(groupKey, index)}
+                  savedPeopleOptions={savedPeopleOptions}
+                  savedPeople={savedPeople}
+                />
+              ))}
             </div>
-          ) : null}
-        </FieldRow>
-
-        <FieldRow
-          label="Mother"
-          hidden={fieldHidden(person, 'mother')}
-          onToggleHidden={(checked) => updateHiddenField('relationships', 'mother', checked)}
-        >
-          <InputPicker
-            data={motherOptions}
-            value={currentMother.name || ''}
-            onChange={(val) => setRelSingle('mother', val)}
-            onSearch={(kw) => setMotherSearch(kw)}
-            placeholder="Type or select"
-            searchable
-            cleanable
-            creatable
-            block
-            renderMenuItem={renderPersonOption}
-          />
-          {currentMother.name ? (
-            <div className={styles.relationshipPhotos}>
-              <div className={styles.relationshipPhotoRow}>
-                <div className={styles.relationshipPhotoName}>{currentMother.name}</div>
-                <Input value={currentMother.photo || ''} onChange={(val) => setRelSinglePhoto('mother', val)} placeholder="Image URL (optional)" />
-              </div>
-            </div>
-          ) : null}
-        </FieldRow>
-
-        <MultiRelationshipField label="Children" field="children" hidden={fieldHidden(person, 'children')} onToggleHidden={(checked) => updateHiddenField('relationships', 'children', checked)} options={childrenOptions} valueArr={childrenArr} onChange={(val) => setRelMulti('children', val)} onSearch={(kw) => setChildrenSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('children', name, val)} />
-        <MultiRelationshipField label="Siblings" field="siblings" hidden={fieldHidden(person, 'siblings')} onToggleHidden={(checked) => updateHiddenField('relationships', 'siblings', checked)} options={siblingsOptions} valueArr={siblingsArr} onChange={(val) => setRelMulti('siblings', val)} onSearch={(kw) => setSiblingsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('siblings', name, val)} />
-        <MultiRelationshipField label="Girlfriends" field="girlfriends" hidden={fieldHidden(person, 'girlfriends')} onToggleHidden={(checked) => updateHiddenField('relationships', 'girlfriends', checked)} options={girlfriendsOptions} valueArr={girlfriendsArr} onChange={(val) => setRelMulti('girlfriends', val)} onSearch={(kw) => setGirlfriendsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('girlfriends', name, val)} />
-        <MultiRelationshipField label="Boyfriends" field="boyfriends" hidden={fieldHidden(person, 'boyfriends')} onToggleHidden={(checked) => updateHiddenField('relationships', 'boyfriends', checked)} options={boyfriendsOptions} valueArr={boyfriendsArr} onChange={(val) => setRelMulti('boyfriends', val)} onSearch={(kw) => setBoyfriendsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('boyfriends', name, val)} />
-        <MultiRelationshipField label="Husbands" field="husbands" hidden={fieldHidden(person, 'husbands')} onToggleHidden={(checked) => updateHiddenField('relationships', 'husbands', checked)} options={husbandsOptions} valueArr={husbandsArr} onChange={(val) => setRelMulti('husbands', val)} onSearch={(kw) => setHusbandsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('husbands', name, val)} />
-        <MultiRelationshipField label="Wives" field="wives" hidden={fieldHidden(person, 'wives')} onToggleHidden={(checked) => updateHiddenField('relationships', 'wives', checked)} options={wivesOptions} valueArr={wivesArr} onChange={(val) => setRelMulti('wives', val)} onSearch={(kw) => setWivesSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('wives', name, val)} />
-
-        <MultiRelationshipField label="Step fathers" field="stepFathers" hidden={fieldHidden(person, 'stepFathers')} onToggleHidden={(checked) => updateHiddenField('relationships', 'stepFathers', checked)} options={stepFathersOptions} valueArr={stepFathersArr} onChange={(val) => setRelMulti('stepFathers', val)} onSearch={(kw) => setStepFathersSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('stepFathers', name, val)} />
-        <MultiRelationshipField label="Step mothers" field="stepMothers" hidden={fieldHidden(person, 'stepMothers')} onToggleHidden={(checked) => updateHiddenField('relationships', 'stepMothers', checked)} options={stepMothersOptions} valueArr={stepMothersArr} onChange={(val) => setRelMulti('stepMothers', val)} onSearch={(kw) => setStepMothersSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('stepMothers', name, val)} />
-        <MultiRelationshipField label="Foster parents" field="fosterParents" hidden={fieldHidden(person, 'fosterParents')} onToggleHidden={(checked) => updateHiddenField('relationships', 'fosterParents', checked)} options={fosterParentsOptions} valueArr={fosterParentsArr} onChange={(val) => setRelMulti('fosterParents', val)} onSearch={(kw) => setFosterParentsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('fosterParents', name, val)} />
-        <MultiRelationshipField label="Foster children" field="fosterChildren" hidden={fieldHidden(person, 'fosterChildren')} onToggleHidden={(checked) => updateHiddenField('relationships', 'fosterChildren', checked)} options={fosterChildrenOptions} valueArr={fosterChildrenArr} onChange={(val) => setRelMulti('fosterChildren', val)} onSearch={(kw) => setFosterChildrenSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('fosterChildren', name, val)} />
-        <MultiRelationshipField label="Adoptive parents" field="adoptiveParents" hidden={fieldHidden(person, 'adoptiveParents')} onToggleHidden={(checked) => updateHiddenField('relationships', 'adoptiveParents', checked)} options={adoptiveParentsOptions} valueArr={adoptiveParentsArr} onChange={(val) => setRelMulti('adoptiveParents', val)} onSearch={(kw) => setAdoptiveParentsSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('adoptiveParents', name, val)} />
-        <MultiRelationshipField label="Adopted children" field="adoptedChildren" hidden={fieldHidden(person, 'adoptedChildren')} onToggleHidden={(checked) => updateHiddenField('relationships', 'adoptedChildren', checked)} options={adoptedChildrenOptions} valueArr={adoptedChildrenArr} onChange={(val) => setRelMulti('adoptedChildren', val)} onSearch={(kw) => setAdoptedChildrenSearch(kw)} onPhotoChange={(name, val) => setRelMultiPhoto('adoptedChildren', name, val)} />
-
-        <Button
-          appearance="primary"
-          className={sectionBtnClass('relationships')}
-          block
-          onClick={() => {
-            onSaveSection?.({
-              father: person.father,
-              mother: person.mother,
-              children: person.children,
-              siblings: person.siblings,
-              girlfriends: person.girlfriends,
-              boyfriends: person.boyfriends,
-              husbands: person.husbands,
-              wives: person.wives,
-              stepFathers: person.stepFathers,
-              stepMothers: person.stepMothers,
-              fosterParents: person.fosterParents,
-              fosterChildren: person.fosterChildren,
-              adoptiveParents: person.adoptiveParents,
-              adoptedChildren: person.adoptedChildren,
-              hiddenFields: person.hiddenFields
-            });
-            markSaved('relationships');
-          }}
-        >
-          {sectionBtnLabel('relationships','Save relationships')}
-        </Button>
-      </Form>
+          );
+        })}
+        {showSectionSaveButtons ? (
+          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('relationships')}`} block onClick={() => { onSaveSection?.(draft); markSaved('relationships'); }}>
+            {saveStatus.relationships === 'saved' ? 'Saved ✓' : 'Save relationships'}
+          </Button>
+        ) : null}
+      </div>
     </div>
   );
 }

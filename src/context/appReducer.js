@@ -1,8 +1,11 @@
 import { applyNodeChanges, applyEdgeChanges, addEdge } from 'reactflow';
 import { createFamilyNode, duplicateFamilyNode, sanitizeHandleCounts, sanitizeHandleLayout, normalizeNodeData } from '../utils/nodeFactory';
-import { logoutAdmin } from '../services/authService';
+import { normalizeSavedPeopleCollection } from '../utils/family3Schema';
+import { isAdminSessionValid, logoutAdmin } from '../services/authService';
 import { createId } from '../utils/id';
 import { DEFAULT_APP_SETTINGS } from '../constants/defaults';
+import { createStartupViewportPatch, VIEWPORT_PROFILES } from '../utils/viewportProfiles';
+import { hashObject } from '../utils/stableHash';
 
 export const ACTIONS = {
   OPEN_LOGIN: 'OPEN_LOGIN',
@@ -13,10 +16,12 @@ export const ACTIONS = {
   SET_EDGES: 'SET_EDGES',
   APPLY_NODE_CHANGES: 'APPLY_NODE_CHANGES',
   APPLY_EDGE_CHANGES: 'APPLY_EDGE_CHANGES',
+  APPLY_NODE_POSITIONS: 'APPLY_NODE_POSITIONS',
   CONNECT_EDGE: 'CONNECT_EDGE',
   ADD_NODE: 'ADD_NODE',
   DUPLICATE_NODE: 'DUPLICATE_NODE',
   DELETE_NODE: 'DELETE_NODE',
+  DELETE_SELECTION: 'DELETE_SELECTION',
   DELETE_EDGE: 'DELETE_EDGE',
   SELECT_NODE: 'SELECT_NODE',
   SELECT_EDGE: 'SELECT_EDGE',
@@ -39,6 +44,7 @@ export const ACTIONS = {
   REMOTE_SYNC_END: 'REMOTE_SYNC_END',
   APPLY_REMOTE_SNAPSHOT: 'APPLY_REMOTE_SNAPSHOT',
   SET_REMOTE_COOLDOWN: 'SET_REMOTE_COOLDOWN',
+  SET_REMOTE_SNAPSHOT_META: 'SET_REMOTE_SNAPSHOT_META',
   SET_SAVED_PEOPLE: 'SET_SAVED_PEOPLE',
   TOGGLE_MAP_FULLPAGE: 'TOGGLE_MAP_FULLPAGE',
   TOGGLE_DRAW_NODE_MODE: 'TOGGLE_DRAW_NODE_MODE',
@@ -159,6 +165,24 @@ function getNodeById(nodes, nodeId) {
   return nodes.find((node) => node.id === nodeId);
 }
 
+function preserveReferenceIfEqual(currentValue, nextValue) {
+  const currentHash = hashObject(currentValue);
+  const nextHash = hashObject(nextValue);
+  return currentHash === nextHash ? currentValue : nextValue;
+}
+
+
+function canAdminMutate(state) {
+  return Boolean(state?.isAdminAuthenticated) && isAdminSessionValid();
+}
+
+function denyAdminMutation(state, action) {
+  if (import.meta.env.DEV) {
+    console.warn(`Blocked admin-only action without a valid admin session: ${action?.type || 'UNKNOWN_ACTION'}`);
+  }
+  return state;
+}
+
 export function appReducer(state, action) {
   switch (action.type) {
     case ACTIONS.OPEN_LOGIN:
@@ -166,7 +190,7 @@ export function appReducer(state, action) {
     case ACTIONS.CLOSE_LOGIN:
       return { ...state, isLoginOpen: false };
     case ACTIONS.LOGIN_SUCCESS:
-      return { ...state, isAdminAuthenticated: true, isLoginOpen: false };
+      return { ...state, ...action.payload, isAdminAuthenticated: true, isLoginOpen: false };
     case ACTIONS.LOGOUT:
       logoutAdmin();
       return {
@@ -175,13 +199,19 @@ export function appReducer(state, action) {
         isEditorOpen: false,
         selectedNodeId: null,
         selectedEdgeId: null,
-        isSettingsOpen: false
+        isSettingsOpen: false,
+        authVersion: null,
+        authenticatedAt: null,
+        lastActivityAt: null,
+        expiresAt: null
       };
     case ACTIONS.OPEN_SETTINGS:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return { ...state, isSettingsOpen: true };
     case ACTIONS.CLOSE_SETTINGS:
       return { ...state, isSettingsOpen: false };
     case ACTIONS.UPDATE_APP_SETTINGS:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return {
         ...state,
         appSettings: {
@@ -209,25 +239,41 @@ export function appReducer(state, action) {
       };
     case ACTIONS.SET_REMOTE_COOLDOWN:
       return { ...state, remoteCooldownUntil: action.payload };
+    case ACTIONS.SET_REMOTE_SNAPSHOT_META:
+      return {
+        ...state,
+        remoteSnapshotHash: action.payload?.hash || action.payload?.computedHash || state.remoteSnapshotHash,
+        remoteSnapshotExportedAt: action.payload?.exportedAt || state.remoteSnapshotExportedAt
+      };
     case ACTIONS.APPLY_REMOTE_SNAPSHOT: {
       // Keep auth + UI modals as-is. Only replace persisted canvas data.
       const payload = action.payload || {};
-      const nodes = (payload.nodes || []).map((node) => ({
+      const nextNodes = (payload.nodes || []).map((node) => ({
         ...node,
         data: normalizeNodeData(node.data || {})
       }));
-      const edges = sanitizeEdgesForNodes(payload.edges || [], nodes);
-      const savedPeople = Array.isArray(payload.savedPeople) ? payload.savedPeople : [];
+      const nextEdges = sanitizeEdgesForNodes(payload.edges || [], nextNodes);
+      const nextSavedPeople = normalizeSavedPeopleCollection(payload.savedPeople || []);
+      const nextViewport = payload.viewport || state.viewport;
+      const nextAppSettings = {
+        ...DEFAULT_APP_SETTINGS,
+        ...(payload.appSettings || {})
+      };
+      const nodes = preserveReferenceIfEqual(state.nodes, nextNodes);
+      const edges = preserveReferenceIfEqual(state.edges, nextEdges);
+      const savedPeople = preserveReferenceIfEqual(state.savedPeople, nextSavedPeople);
+      const viewport = preserveReferenceIfEqual(state.viewport, nextViewport);
+      const appSettings = preserveReferenceIfEqual(state.appSettings, nextAppSettings);
+
       return {
         ...state,
         nodes,
         edges,
-        viewport: payload.viewport || state.viewport,
-        appSettings: {
-          ...DEFAULT_APP_SETTINGS,
-          ...(payload.appSettings || {})
-        },
+        viewport,
+        appSettings,
         savedPeople,
+        remoteSnapshotHash: payload.meta?.hash || payload.meta?.computedHash || state.remoteSnapshotHash,
+        remoteSnapshotExportedAt: payload.meta?.exportedAt || state.remoteSnapshotExportedAt,
         selectedEdgeId: edges.some((edge) => edge.id === state.selectedEdgeId) ? state.selectedEdgeId : null,
         viewportCenter: payload.viewportCenter || state.viewportCenter
       };
@@ -238,10 +284,46 @@ export function appReducer(state, action) {
     case ACTIONS.SET_EDGES:
       return { ...state, edges: action.payload };
     case ACTIONS.APPLY_NODE_CHANGES:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return { ...state, nodes: applyNodeChanges(action.payload, state.nodes) };
     case ACTIONS.APPLY_EDGE_CHANGES:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return { ...state, edges: applyEdgeChanges(action.payload, state.edges) };
+    case ACTIONS.APPLY_NODE_POSITIONS: {
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
+      const updates = Array.isArray(action.payload) ? action.payload.filter((item) => item?.id && item?.position) : [];
+      if (!updates.length) {
+        return state;
+      }
+
+      const updateById = new Map(updates.map((item) => [item.id, item.position]));
+      let hasAnyChange = false;
+      const nextNodes = state.nodes.map((node) => {
+        const nextPosition = updateById.get(node.id);
+        if (!nextPosition) {
+          return node;
+        }
+
+        const sameX = Number(node.position?.x) === Number(nextPosition.x);
+        const sameY = Number(node.position?.y) === Number(nextPosition.y);
+        if (sameX && sameY) {
+          return node;
+        }
+
+        hasAnyChange = true;
+        return {
+          ...node,
+          position: {
+            x: Number(nextPosition.x) || 0,
+            y: Number(nextPosition.y) || 0
+          }
+        };
+      });
+
+      return hasAnyChange ? { ...state, nodes: nextNodes } : state;
+    }
     case ACTIONS.CONNECT_EDGE:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return {
         ...state,
         selectedEdgeId: null,
@@ -254,6 +336,7 @@ export function appReducer(state, action) {
         )
       };
     case ACTIONS.ADD_NODE: {
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       const position = action.payload?.position || action.payload || state.viewportCenter || { x: 250, y: 180 };
       const dataOverrides = action.payload?.dataOverrides || {};
       const node = createFamilyNode(position, dataOverrides);
@@ -270,6 +353,7 @@ export function appReducer(state, action) {
       };
     }
     case ACTIONS.DUPLICATE_NODE: {
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       const originalNode = state.nodes.find((node) => node.id === action.payload);
       if (!originalNode) {
         return state;
@@ -297,24 +381,64 @@ export function appReducer(state, action) {
         activeNodeId: duplicatedNode.id,
         isNodeModalOpen: false,
         isEditorOpen: true,
-        selectedNodeIds: [node.id],
+        selectedNodeIds: [duplicatedNode.id],
         isDrawNodeMode: false
       };
     }
     case ACTIONS.DELETE_NODE: {
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       const nodeId = action.payload;
+      const nextEdges = state.edges.filter((edge) => edge.source !== nodeId && edge.target !== nodeId);
+      const nextSelectedNodeIds = (state.selectedNodeIds || []).filter((id) => id !== nodeId);
+      const selectedEdgeStillExists = nextEdges.some((edge) => edge.id === state.selectedEdgeId);
       return {
         ...state,
         nodes: state.nodes.filter((node) => node.id !== nodeId),
-        edges: state.edges.filter((edge) => edge.source !== nodeId && edge.target !== nodeId),
+        edges: nextEdges,
+        selectedNodeIds: nextSelectedNodeIds,
         selectedNodeId: state.selectedNodeId === nodeId ? null : state.selectedNodeId,
-        selectedEdgeId: null,
+        selectedEdgeId: selectedEdgeStillExists ? state.selectedEdgeId : null,
         activeNodeId: state.activeNodeId === nodeId ? null : state.activeNodeId,
         isNodeModalOpen: state.activeNodeId === nodeId ? false : state.isNodeModalOpen,
-        isEditorOpen: state.selectedNodeId === nodeId ? false : state.isEditorOpen
+        isEditorOpen: state.selectedNodeId === nodeId ? false : state.isEditorOpen,
+        editorHasUnsavedChanges: state.selectedNodeId === nodeId ? false : state.editorHasUnsavedChanges
+      };
+    }
+    case ACTIONS.DELETE_SELECTION: {
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
+      const payload = action.payload || {};
+      const nodeIds = new Set(Array.isArray(payload.nodeIds) ? payload.nodeIds.filter(Boolean) : []);
+      const edgeIds = new Set(Array.isArray(payload.edgeIds) ? payload.edgeIds.filter(Boolean) : []);
+      if (!nodeIds.size && !edgeIds.size) {
+        return state;
+      }
+
+      const nextNodes = state.nodes.filter((node) => !nodeIds.has(node.id));
+      const nextEdges = state.edges.filter((edge) => {
+        if (edgeIds.has(edge.id)) return false;
+        if (nodeIds.has(edge.source) || nodeIds.has(edge.target)) return false;
+        return true;
+      });
+      const nextSelectedNodeIds = (state.selectedNodeIds || []).filter((id) => !nodeIds.has(id));
+      const nextSelectedNodeId = nextSelectedNodeIds.length ? nextSelectedNodeIds[nextSelectedNodeIds.length - 1] : null;
+      const isDeletingActiveNode = state.activeNodeId && nodeIds.has(state.activeNodeId);
+      const selectedEdgeStillExists = nextEdges.some((edge) => edge.id === state.selectedEdgeId);
+
+      return {
+        ...state,
+        nodes: nextNodes,
+        edges: nextEdges,
+        selectedNodeIds: nextSelectedNodeIds,
+        selectedNodeId: nextSelectedNodeId,
+        selectedEdgeId: selectedEdgeStillExists ? state.selectedEdgeId : null,
+        activeNodeId: isDeletingActiveNode ? null : state.activeNodeId,
+        isNodeModalOpen: isDeletingActiveNode ? false : state.isNodeModalOpen,
+        isEditorOpen: isDeletingActiveNode ? false : state.isEditorOpen,
+        editorHasUnsavedChanges: isDeletingActiveNode ? false : state.editorHasUnsavedChanges
       };
     }
     case ACTIONS.DELETE_EDGE:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return {
         ...state,
         edges: state.edges.filter((edge) => edge.id !== action.payload),
@@ -372,6 +496,7 @@ export function appReducer(state, action) {
         editorHasUnsavedChanges: false
       };
     case ACTIONS.OPEN_EDITOR:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       if (state.isEditorOpen && state.editorHasUnsavedChanges && state.selectedNodeId !== action.payload) {
         return state;
       }
@@ -408,6 +533,7 @@ export function appReducer(state, action) {
     case ACTIONS.SET_EDITOR_UNSAVED_CHANGES:
       return { ...state, editorHasUnsavedChanges: Boolean(action.payload) };
     case ACTIONS.UPDATE_NODE_DATA: {
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       const { id, data } = action.payload;
       const targetNode = getNodeById(state.nodes, id);
       if (!targetNode) {
@@ -437,27 +563,45 @@ export function appReducer(state, action) {
         )
       };
     }
-      case ACTIONS.SET_SAVED_PEOPLE:
-      return { ...state, savedPeople: action.payload || [] };
+    case ACTIONS.SET_SAVED_PEOPLE:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
+      return { ...state, savedPeople: normalizeSavedPeopleCollection(action.payload || []) };
     case ACTIONS.TOGGLE_MAP_FULLPAGE:
       return { ...state, isMapFullPage: !state.isMapFullPage };
     case ACTIONS.SET_DRAW_NODE_MODE:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return { ...state, isDrawNodeMode: Boolean(action.payload) };
     case ACTIONS.TOGGLE_DRAW_NODE_MODE:
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
       return { ...state, isDrawNodeMode: !state.isDrawNodeMode };
-    case ACTIONS.SAVE_STARTUP_VIEWPORT:
+    case ACTIONS.SAVE_STARTUP_VIEWPORT: {
+      if (!canAdminMutate(state)) return denyAdminMutation(state, action);
+      const profile = action.payload?.profile === VIEWPORT_PROFILES.MOBILE
+        ? VIEWPORT_PROFILES.MOBILE
+        : VIEWPORT_PROFILES.DESKTOP;
       return {
         ...state,
         appSettings: {
           ...DEFAULT_APP_SETTINGS,
           ...state.appSettings,
-          startupViewport: state.viewport
+          ...createStartupViewportPatch(profile, state.viewport)
         }
       };
-    case ACTIONS.SET_VIEWPORT:
-      return { ...state, viewport: action.payload };
-    case ACTIONS.SET_VIEWPORT_CENTER:
-      return { ...state, viewportCenter: action.payload || state.viewportCenter };
+    }
+    case ACTIONS.SET_VIEWPORT: {
+      const nextViewport = action.payload || state.viewport;
+      if (hashObject(nextViewport) === hashObject(state.viewport)) {
+        return state;
+      }
+      return { ...state, viewport: nextViewport };
+    }
+    case ACTIONS.SET_VIEWPORT_CENTER: {
+      const nextViewportCenter = action.payload || state.viewportCenter;
+      if (hashObject(nextViewportCenter) === hashObject(state.viewportCenter)) {
+        return state;
+      }
+      return { ...state, viewportCenter: nextViewportCenter };
+    }
     default:
       return state;
   }

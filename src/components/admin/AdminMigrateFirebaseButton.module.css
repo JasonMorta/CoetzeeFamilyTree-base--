@@ -1,0 +1,48 @@
+.button {
+  min-height: 38px;
+}
+
+.modal :global(.rs-modal-content) {
+  background: rgba(7, 16, 33, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ecf4ff;
+}
+
+.body {
+  display: grid;
+  gap: 14px;
+}
+
+.text {
+  color: rgba(236, 244, 255, 0.84);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.metaCard {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 13px;
+}
+
+.status {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ecf4ff;
+  font-size: 13px;
+}
+
+.success {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+}

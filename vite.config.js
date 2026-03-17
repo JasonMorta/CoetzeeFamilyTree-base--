@@ -3,6 +3,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const LOCAL_STATE_ROUTE = '/__local-state/save';
+const LOCAL_CONFIG_FILE = path.resolve(process.cwd(), 'public/data/familytree.config.json');
+const LOCAL_SAVED_PEOPLE_FILE = path.resolve(process.cwd(), 'public/data/savedPeople.json');
 const LOCAL_STATE_FILE = path.resolve(process.cwd(), 'public/data/family-tree-state.json');
 
 function localStateWriterPlugin() {
@@ -26,12 +28,30 @@ function localStateWriterPlugin() {
           });
 
           const payload = JSON.parse(body || '{}');
-          await fs.mkdir(path.dirname(LOCAL_STATE_FILE), { recursive: true });
-          await fs.writeFile(LOCAL_STATE_FILE, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+          const configPayload = payload.configPayload || payload;
+          const savedPeoplePayload = payload.savedPeoplePayload || {
+            meta: configPayload.meta || {},
+            data: { savedPeople: configPayload?.data?.savedPeople || [] }
+          };
+          const legacyCombinedPayload = payload.legacyCombinedPayload || payload;
+
+          await fs.mkdir(path.dirname(LOCAL_CONFIG_FILE), { recursive: true });
+          await Promise.all([
+            fs.writeFile(LOCAL_CONFIG_FILE, `${JSON.stringify(configPayload, null, 2)}\n`, 'utf8'),
+            fs.writeFile(LOCAL_SAVED_PEOPLE_FILE, `${JSON.stringify(savedPeoplePayload, null, 2)}\n`, 'utf8'),
+            fs.writeFile(LOCAL_STATE_FILE, `${JSON.stringify(legacyCombinedPayload, null, 2)}\n`, 'utf8')
+          ]);
 
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ ok: true, path: 'public/data/family-tree-state.json' }));
+          res.end(JSON.stringify({
+            ok: true,
+            paths: [
+              'public/data/familytree.config.json',
+              'public/data/savedPeople.json',
+              'public/data/family-tree-state.json'
+            ]
+          }));
         } catch (error) {
           res.statusCode = 500;
           res.setHeader('Content-Type', 'application/json');

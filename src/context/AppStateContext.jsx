@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 import { DEFAULT_APP_STATE } from '../constants/defaults';
-import { appReducer } from './appReducer';
-import { loadAppMeta } from '../services/localStorageService';
-import { loadAuthState } from '../services/authService';
+import { ACTIONS, appReducer } from './appReducer';
+import { hasPersistedAppData, loadAppData, loadAppMeta } from '../services/localStorageService';
+import { loadAuthState, logoutAdmin, touchAdminSession, isAdminSessionValid } from '../services/authService';
 import { useLocalStorageSync } from '../hooks/useLocalStorageSync';
 import { useDirtyTracker } from '../hooks/useDirtyTracker';
 
@@ -11,11 +11,15 @@ const AppStateContext = createContext(null);
 function createInitialState() {
   const meta = loadAppMeta();
   const authState = loadAuthState();
+  const hasCachedAppData = hasPersistedAppData();
+  const cachedAppData = hasCachedAppData ? loadAppData() : null;
 
   return {
     ...DEFAULT_APP_STATE,
+    ...(cachedAppData || {}),
     ...authState,
-    lastExportHash: meta.hash || null
+    lastExportHash: meta.hash || null,
+    hasInitialRemoteSyncCompleted: hasCachedAppData
   };
 }
 
@@ -25,6 +29,42 @@ export function AppStateProvider({ children }) {
   useLocalStorageSync(state);
   useDirtyTracker(state, dispatch);
 
+  useEffect(() => {
+    if (!state.isAdminAuthenticated) {
+      return undefined;
+    }
+
+    const syncSession = () => {
+      if (!isAdminSessionValid()) {
+        logoutAdmin();
+        dispatch({ type: ACTIONS.LOGOUT });
+        return;
+      }
+      touchAdminSession();
+    };
+
+    const handleActivity = () => {
+      touchAdminSession();
+    };
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        syncSession();
+      }
+    };
+
+    const intervalId = window.setInterval(syncSession, 60_000);
+    window.addEventListener('pointerdown', handleActivity, { passive: true });
+    window.addEventListener('keydown', handleActivity, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener('pointerdown', handleActivity);
+      window.removeEventListener('keydown', handleActivity);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, [dispatch, state.isAdminAuthenticated]);
 
   const value = useMemo(() => ({ state, dispatch }), [state]);
 

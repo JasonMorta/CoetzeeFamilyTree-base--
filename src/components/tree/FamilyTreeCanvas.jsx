@@ -13,9 +13,9 @@ import { Button, ButtonGroup } from 'rsuite';
 import styles from './FamilyTreeCanvas.module.css';
 import FamilyNode from './FamilyNode';
 import { useAppState } from '../../context/AppStateContext';
-import RemoteRefreshPanel from '../sync/RemoteRefreshPanel';
 import { ACTIONS } from '../../context/appReducer';
 import { createDefaultHandles } from '../../utils/nodeFactory';
+import { getCurrentViewportProfile, getStartupViewportForProfile } from '../../utils/viewportProfiles';
 
 const nodeTypes = {
   familyNode: React.memo(FamilyNode)
@@ -114,6 +114,154 @@ function sanitizeRenderableEdges(edges, nodes) {
   });
 }
 
+
+
+function viewportEquals(a, b) {
+  if (!a || !b) return false;
+  return a.x === b.x && a.y === b.y && a.zoom === b.zoom;
+}
+
+function arraysEqual(a = [], b = []) {
+  if (a === b) return true;
+  if (a.length !== b.length) return false;
+  for (let index = 0; index < a.length; index += 1) {
+    if (a[index] !== b[index]) return false;
+  }
+  return true;
+}
+
+function buildHandleUsageForNode(nodeId, handleUsage) {
+  const entries = [];
+  handleUsage.forEach((count, key) => {
+    const prefix = `${nodeId}:`;
+    if (key.startsWith(prefix)) {
+      entries.push([key.slice(prefix.length), count]);
+    }
+  });
+  return Object.fromEntries(entries);
+}
+
+function shallowObjectEqual(a = {}, b = {}) {
+  if (a === b) return true;
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
+  if (aKeys.length !== bKeys.length) return false;
+  for (const key of aKeys) {
+    if (a[key] !== b[key]) return false;
+  }
+  return true;
+}
+
+function buildRenderableNodes({
+  sourceNodes,
+  previousNodes,
+  connectedSlotsByNode,
+  handleUsage,
+  isAdminAuthenticated,
+  selectedNodeIds,
+  nodeAccent,
+  nodeGlow,
+  handleEdit,
+  handleDuplicate,
+  handleDelete
+}) {
+  const previousById = new Map((previousNodes || []).map((node) => [node.id, node]));
+
+  return sourceNodes.map((node) => {
+    const connectedSlotIds = connectedSlotsByNode.get(node.id) || [];
+    const nextHandleUsage = buildHandleUsageForNode(node.id, handleUsage);
+    const selected = selectedNodeIds.includes(node.id);
+    const previousNode = previousById.get(node.id);
+
+    if (previousNode) {
+      const previousData = previousNode.data || {};
+      const sameNodeBase = previousNode.position === node.position
+        && previousNode.data === node.data
+        && previousNode.width === node.width
+        && previousNode.height === node.height
+        && previousNode.hidden === node.hidden
+        && previousNode.type === node.type;
+
+      const sameDerived = previousNode.draggable === isAdminAuthenticated
+        && previousNode.dragHandle === '.dragHandle'
+        && previousNode.selected === selected
+        && previousData.isAdminAuthenticated === isAdminAuthenticated
+        && previousData.nodeAccent === nodeAccent
+        && previousData.nodeGlow === nodeGlow
+        && previousData.onEdit === handleEdit
+        && previousData.onDuplicate === handleDuplicate
+        && previousData.onDelete === handleDelete
+        && arraysEqual(previousData.connectedSlotIds || [], connectedSlotIds)
+        && shallowObjectEqual(previousData.handleUsage || {}, nextHandleUsage);
+
+      if (sameNodeBase && sameDerived) {
+        return previousNode;
+      }
+    }
+
+    return {
+      ...node,
+      draggable: isAdminAuthenticated,
+      dragHandle: '.dragHandle',
+      selected,
+      data: {
+        ...node.data,
+        connectedSlotIds,
+        handleUsage: nextHandleUsage,
+        isAdminAuthenticated,
+        nodeAccent,
+        nodeGlow,
+        onEdit: handleEdit,
+        onDuplicate: handleDuplicate,
+        onDelete: handleDelete
+      }
+    };
+  });
+}
+
+function buildRenderableEdges({ sourceEdges, sourceNodes, previousEdges, selectedEdgeId, edgeType, edgeAnimated, edgeColor, edgeWidth }) {
+  const sanitizedEdges = sanitizeRenderableEdges(sourceEdges, sourceNodes);
+  const previousById = new Map((previousEdges || []).map((edge) => [edge.id, edge]));
+
+  return sanitizedEdges.map((edge) => {
+    const selected = selectedEdgeId === edge.id;
+    const nextType = toReactFlowEdgeType(edgeType);
+    const nextStyle = {
+      strokeWidth: selected ? Math.max(3, edgeWidth + 1) : edgeWidth,
+      stroke: selected ? '#22d3ee' : edgeColor
+    };
+    const previousEdge = previousById.get(edge.id);
+
+    if (previousEdge) {
+      const sameBase = previousEdge.source === edge.source
+        && previousEdge.sourceHandle === edge.sourceHandle
+        && previousEdge.target === edge.target
+        && previousEdge.targetHandle === edge.targetHandle
+        && previousEdge.label === edge.label
+        && previousEdge.markerEnd === edge.markerEnd;
+
+      const previousStyle = previousEdge.style || {};
+      const sameDerived = previousEdge.type === nextType
+        && previousEdge.animated === edgeAnimated
+        && previousEdge.selected === selected
+        && previousStyle.strokeWidth === nextStyle.strokeWidth
+        && previousStyle.stroke === nextStyle.stroke;
+
+      if (sameBase && sameDerived) {
+        return previousEdge;
+      }
+    }
+
+    return {
+      ...edge,
+      type: nextType,
+      animated: edgeAnimated,
+      selected,
+      style: nextStyle
+    };
+  });
+}
+
 function getClientPoint(event) {
   if (!event) return { x: 0, y: 0 };
   if (event.touches?.[0]) {
@@ -131,10 +279,11 @@ function normalizeRect(start, end) {
   return { left, top, width, height };
 }
 
-export default function FamilyTreeCanvas({ refreshWithCooldown }) {
+export default function FamilyTreeCanvas() {
   const { state, dispatch } = useAppState();
   const { connectedSlotsByNode, handleUsage } = useMemo(() => buildConnectedHandleMaps(state.edges), [state.edges]);
   const flowWrapperRef = useRef(null);
+  const drawOverlayRef = useRef(null);
   const reactFlowRef = useRef(null);
   const [draftRect, setDraftRect] = useState(null);
   const dragStartRef = useRef(null);
@@ -186,45 +335,41 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
     }
   }, [state.isDrawNodeMode]);
 
-  const nodes = useMemo(
-    () =>
-      state.nodes.map((node) => ({
-        ...node,
-        draggable: state.isAdminAuthenticated,
-        selected: (state.selectedNodeIds || []).includes(node.id),
-        data: {
-          ...node.data,
-          connectedSlotIds: connectedSlotsByNode.get(node.id) || [],
-          handleUsage: Object.fromEntries(
-            Array.from(handleUsage.entries())
-              .filter(([key]) => key.startsWith(`${node.id}:`))
-              .map(([key, count]) => [key.replace(`${node.id}:`, ''), count])
-          ),
-          isAdminAuthenticated: state.isAdminAuthenticated,
-          nodeAccent: state.appSettings.nodeAccent,
-          nodeGlow: state.appSettings.nodeGlow,
-          onEdit: handleEdit,
-          onDuplicate: handleDuplicate,
-          onDelete: handleDelete
-        }
-      })),
-    [state.nodes, state.isAdminAuthenticated, state.selectedNodeIds, connectedSlotsByNode, handleUsage, state.appSettings, handleEdit, handleDuplicate, handleDelete]
-  );
+  const previousRenderableNodesRef = useRef([]);
+  const previousRenderableEdgesRef = useRef([]);
 
-  const edges = useMemo(
-    () =>
-      sanitizeRenderableEdges(state.edges, state.nodes).map((edge) => ({
-        ...edge,
-        type: toReactFlowEdgeType(state.appSettings.edgeType),
-        animated: state.appSettings.edgeAnimated,
-        selected: state.selectedEdgeId === edge.id,
-        style: {
-          strokeWidth: state.selectedEdgeId === edge.id ? Math.max(3, state.appSettings.edgeWidth + 1) : state.appSettings.edgeWidth,
-          stroke: state.selectedEdgeId === edge.id ? '#22d3ee' : state.appSettings.edgeColor
-        }
-      })),
-    [state.edges, state.nodes, state.selectedEdgeId, state.appSettings]
-  );
+  const nodes = useMemo(() => {
+    const nextNodes = buildRenderableNodes({
+      sourceNodes: state.nodes,
+      previousNodes: previousRenderableNodesRef.current,
+      connectedSlotsByNode,
+      handleUsage,
+      isAdminAuthenticated: state.isAdminAuthenticated,
+      selectedNodeIds: state.selectedNodeIds || [],
+      nodeAccent: state.appSettings.nodeAccent,
+      nodeGlow: state.appSettings.nodeGlow,
+      handleEdit,
+      handleDuplicate,
+      handleDelete
+    });
+    previousRenderableNodesRef.current = nextNodes;
+    return nextNodes;
+  }, [state.nodes, state.isAdminAuthenticated, state.selectedNodeIds, connectedSlotsByNode, handleUsage, state.appSettings.nodeAccent, state.appSettings.nodeGlow, handleEdit, handleDuplicate, handleDelete]);
+
+  const edges = useMemo(() => {
+    const nextEdges = buildRenderableEdges({
+      sourceEdges: state.edges,
+      sourceNodes: state.nodes,
+      previousEdges: previousRenderableEdgesRef.current,
+      selectedEdgeId: state.selectedEdgeId,
+      edgeType: state.appSettings.edgeType,
+      edgeAnimated: state.appSettings.edgeAnimated,
+      edgeColor: state.appSettings.edgeColor,
+      edgeWidth: state.appSettings.edgeWidth
+    });
+    previousRenderableEdgesRef.current = nextEdges;
+    return nextEdges;
+  }, [state.edges, state.nodes, state.selectedEdgeId, state.appSettings.edgeAnimated, state.appSettings.edgeColor, state.appSettings.edgeType, state.appSettings.edgeWidth]);
 
   const defaultEdgeOptions = useMemo(
     () => ({
@@ -263,6 +408,38 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
     (changes) => dispatch({ type: ACTIONS.APPLY_EDGE_CHANGES, payload: changes }),
     [dispatch]
   );
+
+  const commitDraggedNodePositions = useCallback((draggedNodes) => {
+    const updates = Array.isArray(draggedNodes)
+      ? draggedNodes
+          .filter((node) => node?.id && node?.position)
+          .map((node) => ({
+            id: node.id,
+            position: {
+              x: Number(node.position.x) || 0,
+              y: Number(node.position.y) || 0
+            }
+          }))
+      : [];
+
+    if (!updates.length) {
+      return;
+    }
+
+    dispatch({ type: ACTIONS.APPLY_NODE_POSITIONS, payload: updates });
+  }, [dispatch]);
+
+  const onNodeDragStop = useCallback((_, node) => {
+    if (!node?.id || !node?.position) {
+      return;
+    }
+
+    commitDraggedNodePositions([node]);
+  }, [commitDraggedNodePositions]);
+
+  const onSelectionDragStop = useCallback((_, draggedNodes) => {
+    commitDraggedNodePositions(draggedNodes);
+  }, [commitDraggedNodePositions]);
 
   const onConnect = useCallback(
     (params) => {
@@ -325,9 +502,11 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
   }, [dispatch, state.isDrawNodeMode]);
 
   const onMoveEnd = useCallback((_, viewport) => {
-    dispatch({ type: ACTIONS.SET_VIEWPORT, payload: viewport });
+    if (!viewportEquals(state.viewport, viewport)) {
+      dispatch({ type: ACTIONS.SET_VIEWPORT, payload: viewport });
+    }
     window.requestAnimationFrame(syncViewportCenter);
-  }, [dispatch, syncViewportCenter]);
+  }, [dispatch, state.viewport, syncViewportCenter]);
 
   const onInit = useCallback((instance) => {
     reactFlowRef.current = instance;
@@ -366,34 +545,47 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
     dragStartRef.current = null;
   }, [dispatch]);
 
+  const toOverlayPoint = useCallback((clientPoint) => {
+    const overlayRect = drawOverlayRef.current?.getBoundingClientRect();
+    if (!overlayRect) {
+      return clientPoint;
+    }
+
+    return {
+      x: clientPoint.x - overlayRect.left,
+      y: clientPoint.y - overlayRect.top
+    };
+  }, []);
+
   const handleDrawStart = useCallback((event) => {
     if (!state.isAdminAuthenticated || !state.isDrawNodeMode) {
       return;
     }
-    const point = getClientPoint(event);
-    dragStartRef.current = point;
-    setDraftRect(normalizeRect(point, point));
+    const clientPoint = getClientPoint(event);
+    const overlayPoint = toOverlayPoint(clientPoint);
+    dragStartRef.current = clientPoint;
+    setDraftRect(normalizeRect(overlayPoint, overlayPoint));
     event.preventDefault();
     event.stopPropagation();
-  }, [state.isAdminAuthenticated, state.isDrawNodeMode]);
+  }, [state.isAdminAuthenticated, state.isDrawNodeMode, toOverlayPoint]);
 
   const handleDrawMove = useCallback((event) => {
     if (!dragStartRef.current) {
       return;
     }
-    const point = getClientPoint(event);
-    setDraftRect(normalizeRect(dragStartRef.current, point));
+    const clientPoint = getClientPoint(event);
+    setDraftRect(normalizeRect(toOverlayPoint(dragStartRef.current), toOverlayPoint(clientPoint)));
     event.preventDefault();
     event.stopPropagation();
-  }, []);
+  }, [toOverlayPoint]);
 
   const handleDrawEnd = useCallback((event) => {
     if (!dragStartRef.current) {
       return;
     }
 
-    const point = getClientPoint(event);
-    const rect = normalizeRect(dragStartRef.current, point);
+    const clientPoint = getClientPoint(event);
+    const rect = normalizeRect(toOverlayPoint(dragStartRef.current), toOverlayPoint(clientPoint));
     const start = dragStartRef.current;
     dragStartRef.current = null;
 
@@ -412,12 +604,12 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
       return;
     }
 
-    createDrawnNode(start, point);
+    createDrawnNode(start, clientPoint);
     event.preventDefault();
     event.stopPropagation();
-  }, [createDrawnNode, dispatch, state.viewportCenter]);
+  }, [createDrawnNode, dispatch, state.viewportCenter, toOverlayPoint]);
 
-  const initialViewport = state.appSettings?.startupViewport || state.viewport;
+  const initialViewport = getStartupViewportForProfile(state.appSettings, getCurrentViewportProfile()) || state.viewport;
 
   return (
     <div className={styles.canvas} ref={flowWrapperRef}>
@@ -445,6 +637,8 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
         onConnect={onConnect}
         onSelectionChange={onSelectionChange}
         onNodeClick={onNodeClick}
+        onNodeDragStop={onNodeDragStop}
+        onSelectionDragStop={onSelectionDragStop}
         onEdgeClick={onEdgeClick}
         onPaneClick={onPaneClick}
         onMoveEnd={onMoveEnd}
@@ -479,12 +673,7 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
             position="bottom-right"
             className={state.appSettings.showMiniMap ? styles.remotePanelAboveMiniMap : undefined}
           >
-            <RemoteRefreshPanel
-              isUpdating={state.isRemoteUpdating}
-              cooldownUntil={state.remoteCooldownUntil}
-              onRefresh={refreshWithCooldown}
-              description="Reload saved JSON file every 30s"
-            />
+        
           </Panel>
         )}
 
@@ -512,6 +701,7 @@ export default function FamilyTreeCanvas({ refreshWithCooldown }) {
 
       {state.isAdminAuthenticated && state.isDrawNodeMode && (
         <div
+          ref={drawOverlayRef}
           className={styles.drawOverlay}
           onMouseDown={handleDrawStart}
           onMouseMove={handleDrawMove}

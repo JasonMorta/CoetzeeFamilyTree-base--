@@ -4,6 +4,24 @@
   position: relative;
 }
 
+
+.canvas :global(.react-flow__node) {
+  cursor: default !important;
+}
+
+.canvas :global(.react-flow__node.dragging) {
+  cursor: default !important;
+}
+
+.canvas :global(.react-flow__node .dragHandle) {
+  cursor: grab !important;
+}
+
+.canvas :global(.react-flow__node .dragHandle:active),
+.canvas :global(.react-flow__node.dragging .dragHandle) {
+  cursor: grabbing !important;
+}
+
 .tipPanel,
 .edgePanel {
   padding: 10px 12px;
@@ -74,7 +92,7 @@
   position: absolute;
   inset: 0;
   z-index: 6;
-  cursor: crosshair;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%2322d3ee' stroke='%23011131' stroke-width='1.35' d='M3 3l6.7 15.6 2.34-6.08L18 10.2z'/%3E%3C/svg%3E") 0 0, crosshair;
 }
 
 .drawHint {

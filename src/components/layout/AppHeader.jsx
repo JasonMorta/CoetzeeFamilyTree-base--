@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, ButtonGroup, Tag } from 'rsuite';
+import { Button, Tag } from 'rsuite';
 import styles from './AppHeader.module.css';
 import { APP_METADATA } from '../../constants/defaults';
 
-export default function AppHeader({ isAdminAuthenticated, isDrawNodeMode, onLogin, onLogout, onAddNode, onToggleDrawNodeMode, onOpenSettings, extraActions }) {
+export default function AppHeader({ isAdminAuthenticated, onLogin }) {
   return (
     <header className={styles.header}>
       <div className={styles.brand}>
@@ -18,30 +18,9 @@ export default function AppHeader({ isAdminAuthenticated, isDrawNodeMode, onLogi
           {isAdminAuthenticated ? 'Admin Mode' : 'Viewer Mode'}
         </Tag>
 
-        <ButtonGroup>
-          {isAdminAuthenticated && (
-            <>
-              <Button appearance="subtle" onClick={onOpenSettings}>
-                Settings
-              </Button>
-              <Button appearance="primary" color="violet" onClick={onAddNode}>
-                Add Node
-              </Button>
-              <Button appearance={isDrawNodeMode ? 'primary' : 'ghost'} color="cyan" onClick={onToggleDrawNodeMode}>
-                {isDrawNodeMode ? 'Cancel Draw Node' : 'Draw Node'}
-              </Button>
-              {extraActions}
-            </>
-            
-            
-          )}
-
-          {!isAdminAuthenticated ? (
-            <Button appearance="ghost" onClick={onLogin}>Login</Button>
-          ) : (
-            <Button appearance="ghost" color="red" onClick={onLogout}>Logout</Button>
-          )}
-        </ButtonGroup>
+        {!isAdminAuthenticated && (
+          <Button size="xs" appearance="ghost" onClick={onLogin}>Login</Button>
+        )}
       </div>
     </header>
   );

@@ -1,11 +1,14 @@
 import { createId } from './id';
+import {
+  createStandardPersonWrapper,
+  createEmptySavedPersonRecord,
+  normalizeSavedPersonRecord
+} from './family3Schema';
 
-// Central node type registry.
 export const NODE_TYPES = {
   STANDARD: 'standardPhoto',
   PERSONS: 'persons'
 };
-
 
 export function createDefaultImageSettings() {
   return {
@@ -17,7 +20,6 @@ export function createDefaultImageSettings() {
 }
 
 export function createEmptyPerson(overrides = {}) {
-  // Minimal person card used in "Persons Node" (multi-person nodes)
   return {
     id: createId('person'),
     fullName: '',
@@ -28,79 +30,23 @@ export function createEmptyPerson(overrides = {}) {
 }
 
 export function createEmptyStandardPerson(overrides = {}) {
-  // Detailed person record used by the Standard Person Photo Node (single person nodes)
-  return {
-    id: 'standard-person',
-    fullName: '',
-    nickname: '',
-    photo: '',
-
-    // Personal details
-    prefix: '',
-    maidenName: '',
-
-    // About this person
-    birthDate: '',
-    birthPlace: '',
-    stillAlive: false,
-    deathDate: '',
-    deathPlace: '',
-    occupation: '',
-    address: '',
-    contactNumber: '',
-    moreInfo: '',
-
-    // Relationships (name + photo only)
-    father: { name: '', photo: '' },
-    mother: { name: '', photo: '' },
-    children: [],
-
-    girlfriends: [],
-    boyfriends: [],
-    husbands: [],
-    wives: [],
-
-    stepFathers: [],
-    stepMothers: [],
-    fosterParents: [],
-    fosterChildren: [],
-    adoptiveParents: [],
-    adoptedChildren: [],
-
-    siblings: [],
-
-    // Hidden-field toggles for modal rendering
-    hiddenFields: {
-      father: true,
-      mother: true,
-      children: true,
-      girlfriends: true,
-      boyfriends: true,
-      husbands: true,
-      wives: true,
-      stepFathers: true,
-      stepMothers: true,
-      fosterParents: true,
-      fosterChildren: true,
-      adoptiveParents: true,
-      adoptedChildren: true,
-      siblings: true
-    },
-
-    // Optional: node thumbnail metadata snapshot
-    nodeMeta: {
-      title: '',
-      thumbnailPhoto: '',
-      photoCaption: '',
-      eventDate: '',
-      location: ''
-    },
-
-    ...overrides
-  };
+  return createStandardPersonWrapper(
+    createEmptySavedPersonRecord(),
+    {
+      id: 'standard-person',
+      hiddenFields: {},
+      node: {
+        title: '',
+        coverImage: '',
+        imageCaption: '',
+        eventDate: '',
+        location: '',
+        notes: ''
+      },
+      ...overrides
+    }
+  );
 }
-
-
 
 export function createDefaultPeopleByType(nodeType = NODE_TYPES.STANDARD) {
   if (nodeType === NODE_TYPES.PERSONS) {
@@ -179,7 +125,9 @@ export function createNodeData() {
     handleLayout: createDefaultHandleLayout(),
     imageSettings: createDefaultImageSettings(),
     people: [],
-    // Standard nodes carry a single primary person record for metadata (does not affect canvas rendering)
+    peopleNodeDisplaySingleImage: false,
+    peopleNodeSingleImageUrl: '',
+    peopleNodeSingleImageTitle: '',
     standardPerson: createEmptyStandardPerson()
   };
 }
@@ -187,7 +135,6 @@ export function createNodeData() {
 export function normalizePersonRecord(person = {}) {
   const base = createEmptyPerson({ id: person.id || createId('person') });
   const cleaned = { ...person };
-  // Strip legacy / unsupported fields
   delete cleaned.relationLabel;
   delete cleaned.biography;
   delete cleaned.gender;
@@ -206,97 +153,14 @@ export function normalizePersonRecord(person = {}) {
   };
 }
 
-
-function normalizeRelSingle(value) {
-  if (!value) return { name: '', photo: '' };
-  if (typeof value === 'string') return { name: value, photo: '' };
-  return {
-    name: String(value.name || ''),
-    photo: String(value.photo || '')
-  };
-}
-
-function normalizeRelMulti(value) {
-  if (!value) return [];
-  const arr = Array.isArray(value) ? value : [];
-  return arr
-    .map((v) => {
-      if (!v) return null;
-      if (typeof v === 'string') return { name: v, photo: '' };
-      return { name: String(v.name || ''), photo: String(v.photo || '') };
-    })
-    .filter(Boolean)
-    .filter((v) => v.name.trim().length > 0);
-}
-
 function normalizeStandardPerson(person = {}) {
-  const base = createEmptyStandardPerson();
-  const hiddenFields = {
-    ...(base.hiddenFields || {}),
-    ...((typeof person.hiddenFields === 'object' && person.hiddenFields) ? person.hiddenFields : {})
-  };
-  const moreInfo = person.moreInfo ?? person.biography ?? '';
-  const stillAlive = Boolean(person.stillAlive);
-  const address = person.address ?? person.residence ?? '';
-
-  const cleaned = { ...person };
-  // Strip legacy / unsupported fields
-  delete cleaned.relationLabel;
-  delete cleaned.biography;
-  delete cleaned.gender;
-  delete cleaned.confidence;
-  delete cleaned.sources;
-  delete cleaned.burialPlace;
-  delete cleaned.residence;
-  delete cleaned.parents;
-  delete cleaned.parentLinks;
-  delete cleaned.childLinks;
-  delete cleaned.fosterFathers;
-  delete cleaned.fosterMothers;
-  delete cleaned.adoptiveFathers;
-  delete cleaned.adoptiveMothers;
-
-  const nodeMeta = {
-    ...base.nodeMeta,
-    ...(typeof person.nodeMeta === 'object' && person.nodeMeta ? person.nodeMeta : {})
-  };
-
-  return {
-    ...base,
-    ...cleaned,
-    address,
-    stillAlive,
-    moreInfo,
-    hiddenFields,
-
-    // Relationships
-    father: normalizeRelSingle(person.father),
-    mother: normalizeRelSingle(person.mother),
-    children: normalizeRelMulti(person.children),
-
-    girlfriends: normalizeRelMulti(person.girlfriends),
-    boyfriends: normalizeRelMulti(person.boyfriends),
-    husbands: normalizeRelMulti(person.husbands),
-    wives: normalizeRelMulti(person.wives),
-
-    stepFathers: normalizeRelMulti(person.stepFathers),
-    stepMothers: normalizeRelMulti(person.stepMothers),
-    fosterParents: normalizeRelMulti(
-      person.fosterParents ?? [...(person.fosterFathers ?? []), ...(person.fosterMothers ?? [])]
-    ),
-    fosterChildren: normalizeRelMulti(person.fosterChildren ?? []),
-    adoptiveParents: normalizeRelMulti(
-      person.adoptiveParents ?? [...(person.adoptiveFathers ?? []), ...(person.adoptiveMothers ?? [])]
-    ),
-    adoptedChildren: normalizeRelMulti(person.adoptedChildren ?? []),
-
-    siblings: normalizeRelMulti(person.siblings ?? []),
-
-    nodeMeta
-  };
+  return createStandardPersonWrapper(person, {
+    id: person.id || 'standard-person',
+    hiddenFields: person.hiddenFields,
+    node: person.node || person.nodeMeta,
+    nodeMeta: person.nodeMeta
+  });
 }
-
-
 
 function clonePeople(people = []) {
   return people.map((person, index) => ({
@@ -306,31 +170,11 @@ function clonePeople(people = []) {
   }));
 }
 
-function normalizeParentsPeople(people = []) {
-  const current = people?.length ? clonePeople(people) : createDefaultPeopleByType(nodeType);
-  if (!current.length) {
-    current.push(createEmptyPerson({ relationshipToPrimary: 'primary' }));
-  }
-
-  current[0] = {
-    ...current[0],
-    relationshipToPrimary: 'primary'
-  };
-
-  return current.map((person, index) => ({
-    ...person,
-    relationshipToPrimary: index === 0 ? 'primary' : person.relationshipToPrimary || 'other'
-  }));
-}
-
 function normalizePeople(nodeType, people) {
   const current = people?.length ? clonePeople(people) : createDefaultPeopleByType(nodeType);
-
-  
   if (nodeType === NODE_TYPES.STANDARD) {
     return [];
   }
-
   return current;
 }
 
@@ -354,6 +198,9 @@ export function normalizeNodeData(data = {}) {
       ...(data.imageSettings || {})
     },
     people: normalizePeople(nodeType, data.people),
+    peopleNodeDisplaySingleImage: Boolean(data.peopleNodeDisplaySingleImage),
+    peopleNodeSingleImageUrl: typeof data.peopleNodeSingleImageUrl === 'string' ? data.peopleNodeSingleImageUrl : '',
+    peopleNodeSingleImageTitle: typeof data.peopleNodeSingleImageTitle === 'string' ? data.peopleNodeSingleImageTitle : '',
     standardPerson: normalizeStandardPerson(data.standardPerson || {})
   };
 }
@@ -371,6 +218,10 @@ export function createFamilyNode(position = { x: 250, y: 180 }, dataOverrides = 
 export function duplicateFamilyNode(node, offset = { x: 40, y: 40 }) {
   const clonedData = normalizeNodeData(node.data || {});
   clonedData.people = (clonedData.people || []).map((person) => ({ ...person, id: createId('person') }));
+  clonedData.standardPerson = {
+    ...clonedData.standardPerson,
+    id: 'standard-person'
+  };
 
   return {
     id: createId('node'),
@@ -381,4 +232,8 @@ export function duplicateFamilyNode(node, offset = { x: 40, y: 40 }) {
     },
     data: clonedData
   };
+}
+
+export function normalizeSavedPersonForLibrary(record = {}) {
+  return normalizeSavedPersonRecord(record);
 }

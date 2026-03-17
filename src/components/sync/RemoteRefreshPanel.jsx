@@ -32,7 +32,7 @@ export default function RemoteRefreshPanel({
     <div className={styles.wrap} aria-live="polite">
       <div className={styles.row}>
         <span className={`${styles.dot} ${isUpdating ? styles.dotActive : ''}`} />
-        <span className={styles.label}>{isUpdating ? 'Updating' : 'File loaded'}</span>
+        <span className={styles.label}>{isUpdating ? 'Updating' : 'Firebase loaded'}</span>
 
         <Button
           size="xs"
