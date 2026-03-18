@@ -232,7 +232,7 @@ export default function NodeEditorDrawer() {
       const name = String(person?.fullName || '').trim();
       if (!name) return;
 
-      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
+      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(p));
     });
 
     dispatch({ type: ACTIONS.SET_SAVED_PEOPLE, payload: nextLibrary });
@@ -290,7 +290,7 @@ export default function NodeEditorDrawer() {
 
     (nodeData?.people || []).forEach((p) => {
       if (!p?.fullName?.trim()) return;
-      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
+      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(p));
     });
 
     if (nodeData?.nodeType === NODE_TYPES.STANDARD) {
@@ -313,7 +313,7 @@ export default function NodeEditorDrawer() {
     dispatch({ type: ACTIONS.SET_SAVED_PEOPLE, payload: nextLibrary });
     dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
     dispatch({ type: ACTIONS.CLOSE_EDITOR });
-  }, [anyUnsaved, dispatch, nodeData, selectedNode, state.savedPeople]);
+  }, [anyUnsaved, dispatch, nodeData, selectedNode?.id, state.savedPeople]);
 
   useEffect(() => {
     if (!selectedNode || !nodeData || !state.isEditorOpen) return;
