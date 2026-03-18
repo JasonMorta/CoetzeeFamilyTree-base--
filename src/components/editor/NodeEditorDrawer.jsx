@@ -10,8 +10,6 @@ import { updateFirebasePersonRecord } from '../../services/firebasePeopleService
 import {
   createStandardPersonWrapper,
   getRecordName,
-  getRecordPhoto,
-  getRecordNickname,
   normalizeSavedPersonRecord,
   normalizeSavedPeopleCollection,
   standardPersonToSavedRecord,
@@ -101,10 +99,14 @@ export default function NodeEditorDrawer() {
   const [draftStandardPerson, setDraftStandardPerson] = useState(createEmptyStandardPerson());
   const [peopleStatus, setPeopleStatus] = useState('idle');
   const [standardStatus, setStandardStatus] = useState({ personal: 'idle', node: 'idle', relationships: 'idle' });
-  const anyUnsaved = useMemo(() => [peopleStatus, ...Object.values(standardStatus || {})].includes('dirty'), [peopleStatus, standardStatus]);
   const [closeWarning, setCloseWarning] = useState('');
   const [draftPeople, setDraftPeople] = useState([]);
   const [draftSharedNotes, setDraftSharedNotes] = useState('');
+
+  const anyUnsaved = useMemo(
+    () => [peopleStatus, ...Object.values(standardStatus || {})].includes('dirty'),
+    [peopleStatus, standardStatus]
+  );
 
   useEffect(() => {
     if (!state.isEditorOpen) return;
@@ -117,7 +119,9 @@ export default function NodeEditorDrawer() {
   }, [dispatch, selectedNode]);
 
   const updateRootField = useCallback((field, value) => updateNode({ [field]: value }), [updateNode]);
-  const updateImageSetting = useCallback((field, value) => updateNode({ imageSettings: { ...(nodeData?.imageSettings || {}), [field]: value } }), [nodeData?.imageSettings, updateNode]);
+  const updateImageSetting = useCallback((field, value) => {
+    updateNode({ imageSettings: { ...(nodeData?.imageSettings || {}), [field]: value } });
+  }, [nodeData?.imageSettings, updateNode]);
   const updatePeopleNodeDisplaySetting = useCallback((field, value) => updateNode({ [field]: value }), [updateNode]);
 
   const updateNodeSize = useCallback((value) => {
@@ -178,6 +182,7 @@ export default function NodeEditorDrawer() {
   }, [dispatch, state.savedPeople]);
 
   const handleAutofillStandardPerson = useCallback((_, savedPerson) => {
+    setCloseWarning('');
     setDraftStandardPerson(createStandardPersonWrapper(savedPerson));
   }, []);
 
@@ -206,7 +211,6 @@ export default function NodeEditorDrawer() {
     (draftPeople || []).forEach((person) => {
       const name = String(person?.fullName || '').trim();
       if (!name) return;
-
       nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
     });
 
@@ -234,8 +238,21 @@ export default function NodeEditorDrawer() {
     saveStandardRecordToLibrary(withNode);
   }, [commitStandardPerson, saveStandardRecordToLibrary, updateNode]);
 
-  const updateHandleCount = useCallback((side, value) => updateNode({ handles: { ...(nodeData?.handles || {}), [side]: Math.max(0, Number(value) || 0) } }), [nodeData?.handles, updateNode]);
-  const updateHandleLayout = useCallback((side, field, value) => updateNode({ handleLayout: { ...(nodeData?.handleLayout || {}), [side]: { ...(nodeData?.handleLayout?.[side] || {}), [field]: Math.max(0, Math.min(100, Number(value) || 0)) } } }), [nodeData?.handleLayout, updateNode]);
+  const updateHandleCount = useCallback((side, value) => {
+    updateNode({ handles: { ...(nodeData?.handles || {}), [side]: Math.max(0, Number(value) || 0) } });
+  }, [nodeData?.handles, updateNode]);
+
+  const updateHandleLayout = useCallback((side, field, value) => {
+    updateNode({
+      handleLayout: {
+        ...(nodeData?.handleLayout || {}),
+        [side]: {
+          ...(nodeData?.handleLayout?.[side] || {}),
+          [field]: Math.max(0, Math.min(100, Number(value) || 0))
+        }
+      }
+    });
+  }, [nodeData?.handleLayout, updateNode]);
 
   const handleAutofillPerson = useCallback((personId, savedPerson) => {
     setPeopleStatus('dirty');
@@ -265,7 +282,7 @@ export default function NodeEditorDrawer() {
 
     (nodeData?.people || []).forEach((p) => {
       if (!p?.fullName?.trim()) return;
-      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
+      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(p));
     });
 
     if (nodeData?.nodeType === NODE_TYPES.STANDARD) {
@@ -287,8 +304,9 @@ export default function NodeEditorDrawer() {
 
     dispatch({ type: ACTIONS.SET_SAVED_PEOPLE, payload: nextLibrary });
     dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
+    setCloseWarning('');
     dispatch({ type: ACTIONS.CLOSE_EDITOR });
-  }, [anyUnsaved, dispatch, nodeData, selectedNode, state.savedPeople]);
+  }, [anyUnsaved, dispatch, nodeData, selectedNode?.id, state.savedPeople]);
 
   useEffect(() => {
     if (!selectedNode || !nodeData || !state.isEditorOpen) return;
@@ -317,7 +335,7 @@ export default function NodeEditorDrawer() {
     setStandardStatus({ personal: 'idle', node: 'idle', relationships: 'idle' });
     setCloseWarning('');
     dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
-  }, [dispatch, selectedNode?.id, nodeData?.nodeType, state.isEditorOpen]);
+  }, [dispatch, nodeData, selectedNode, state.isEditorOpen]);
 
   if (!selectedNode || !nodeData || !state.isEditorOpen) return null;
 

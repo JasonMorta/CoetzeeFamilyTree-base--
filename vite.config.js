@@ -63,5 +63,9 @@ function localStateWriterPlugin() {
 }
 
 export default defineConfig(({ command }) => ({
-  plugins: command === 'serve' ? [localStateWriterPlugin()] : []
+  plugins: command === 'serve' ? [localStateWriterPlugin()] : [],
+    server: {
+    port: 0,
+    strictPort: false,
+  },
 }));
