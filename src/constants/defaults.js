@@ -11,7 +11,7 @@ export const STORAGE_KEYS = {
 export const APP_METADATA = {
   appName: getFamilyAppTitle(),
   version: '2.29.2',
-  author: 'JasonM'
+  author: 'Jason Morta'
 };
 
 export const DEFAULT_VIEWPORT = { x: 0, y: 0, zoom: 3 };

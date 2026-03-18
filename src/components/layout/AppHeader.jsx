@@ -9,7 +9,7 @@ export default function AppHeader({ isAdminAuthenticated, onLogin }) {
       <div className={styles.brand}>
         <h1 className={styles.title}>{APP_METADATA.appName}</h1>
         <div className={styles.subtitle}>
-          Version {APP_METADATA.version} • Author {APP_METADATA.author}
+          Version {APP_METADATA.version} • Created:  {APP_METADATA.author}
         </div>
       </div>
 
