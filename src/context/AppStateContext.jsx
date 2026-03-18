@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 import { DEFAULT_APP_STATE } from '../constants/defaults';
 import { ACTIONS, appReducer } from './appReducer';
-import { hasPersistedAppData, loadAppData, loadAppMeta } from '../services/localStorageService';
+import { getPersistedAppDataStatus, loadAppData, loadAppMeta } from '../services/localStorageService';
 import { loadAuthState, logoutAdmin, touchAdminSession, isAdminSessionValid } from '../services/authService';
 import { useLocalStorageSync } from '../hooks/useLocalStorageSync';
 import { useDirtyTracker } from '../hooks/useDirtyTracker';
@@ -11,15 +11,19 @@ const AppStateContext = createContext(null);
 function createInitialState() {
   const meta = loadAppMeta();
   const authState = loadAuthState();
-  const hasCachedAppData = hasPersistedAppData();
-  const cachedAppData = hasCachedAppData ? loadAppData() : null;
+  const cacheStatus = getPersistedAppDataStatus();
+  const shouldBootstrapFromCache = cacheStatus.isFresh;
+  const cachedAppData = shouldBootstrapFromCache ? loadAppData() : null;
 
   return {
     ...DEFAULT_APP_STATE,
     ...(cachedAppData || {}),
     ...authState,
     lastExportHash: meta.hash || null,
-    hasInitialRemoteSyncCompleted: hasCachedAppData
+    lastRemoteSyncAt: shouldBootstrapFromCache ? (cacheStatus.cachedAt || Date.now()) : null,
+    remoteSnapshotHash: meta.hash || null,
+    remoteSnapshotExportedAt: meta.exportedAt || null,
+    hasInitialRemoteSyncCompleted: shouldBootstrapFromCache
   };
 }
 

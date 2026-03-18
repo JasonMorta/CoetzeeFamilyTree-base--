@@ -1,17 +1,24 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { ACTIONS } from '../context/appReducer';
 import { fetchFirebaseAppStateSnapshot, isFirebaseAppStateConfigured } from '../services/firebaseAppStateService';
-import { hasPersistedAppData, loadAppMeta, saveAppData, saveAppMeta } from '../services/localStorageService';
+import {
+  APP_CACHE_MAX_AGE_MS,
+  REMOTE_FETCH_MIN_INTERVAL_MS,
+  getPersistedAppDataStatus,
+  loadAppMeta,
+  saveAppData,
+  saveAppMeta
+} from '../services/localStorageService';
 
-const AUTO_REFRESH_INTERVAL_MS = 120_000;
-const NON_ADMIN_FETCH_COOLDOWN_MS = 60_000;
+const AUTO_REFRESH_INTERVAL_MS = REMOTE_FETCH_MIN_INTERVAL_MS;
 
 /**
  * Keeps clients in sync with the Firebase-backed app snapshot.
  *
- * - On load: fetch the latest Firebase snapshot before rendering the canvas.
- * - During idle viewing: poll every 2 minutes.
- * - For non-admin viewers, suppress repeated remote fetches for 1 minute across reloads and use the cached local snapshot instead.
+ * Rules:
+ * - Startup uses fresh local cache when it is valid and not older than 1 hour.
+ * - If there is no fresh cache, fetch Firebase immediately.
+ * - After startup, refresh from Firebase at most once per minute.
  * - Re-apply state only when the remote snapshot hash changes.
  */
 export function useRemoteStateSync(state, dispatch) {
@@ -41,17 +48,31 @@ export function useRemoteStateSync(state, dispatch) {
       return { ok: false, error };
     }
 
-    const isAdminRequest = Boolean(state.isAdminAuthenticated);
     const cacheMeta = loadAppMeta();
-    const hasCachedSnapshot = hasPersistedAppData();
-    const cooldownActive = !isAdminRequest
-      && Boolean(cacheMeta.nextRemoteFetchAllowedAt)
-      && Date.now() < cacheMeta.nextRemoteFetchAllowedAt;
+    const cacheStatus = getPersistedAppDataStatus();
+    const now = Date.now();
+    const cooldownUntil = cacheMeta.nextRemoteFetchAllowedAt || (cacheStatus.cachedAt ? cacheStatus.cachedAt + REMOTE_FETCH_MIN_INTERVAL_MS : null);
+    const cooldownActive = Boolean(cooldownUntil) && now < cooldownUntil;
+    const shouldPreferFreshCacheOnStartup = reason === 'startup' && cacheStatus.isFresh;
 
-    if (cooldownActive && hasCachedSnapshot) {
+    if (shouldPreferFreshCacheOnStartup) {
       dispatch({
         type: ACTIONS.REMOTE_SYNC_END,
-        payload: { error: null, syncedAt: cacheMeta.lastRemoteFetchAt || Date.now(), reason: `${reason}-cache-hit` }
+        payload: { error: null, syncedAt: cacheStatus.cachedAt || now, reason: 'startup-cache-hit' }
+      });
+      return {
+        ok: true,
+        skipped: true,
+        usedCache: true,
+        cacheAgeMs: cacheStatus.ageMs,
+        cacheMaxAgeMs: APP_CACHE_MAX_AGE_MS
+      };
+    }
+
+    if (cooldownActive && cacheStatus.isValid) {
+      dispatch({
+        type: ACTIONS.REMOTE_SYNC_END,
+        payload: { error: null, syncedAt: cacheMeta.lastRemoteFetchAt || cacheStatus.cachedAt || now, reason: `${reason}-cache-hit` }
       });
       return { ok: true, skipped: true, usedCache: true };
     }
@@ -64,7 +85,7 @@ export function useRemoteStateSync(state, dispatch) {
       if (!result.ok) {
         dispatch({
           type: ACTIONS.REMOTE_SYNC_END,
-          payload: { error: result.error, syncedAt: Date.now(), reason }
+          payload: { error: result.error, syncedAt: now, reason }
         });
         return result;
       }
@@ -72,7 +93,7 @@ export function useRemoteStateSync(state, dispatch) {
       const remoteHash = result.meta.hash || result.meta.computedHash;
       const didChange = Boolean(remoteHash) && remoteHash !== latestHashRef.current;
 
-      if (didChange || !hasInitialSyncCompletedRef.current) {
+      if (didChange || !hasInitialSyncCompletedRef.current || !cacheStatus.isValid || !cacheStatus.isFresh) {
         dispatch({
           type: ACTIONS.APPLY_REMOTE_SNAPSHOT,
           payload: {
@@ -93,14 +114,15 @@ export function useRemoteStateSync(state, dispatch) {
       const fetchedAt = Date.now();
       saveAppMeta({
         hash: remoteHash,
-        exportedAt: result.meta.exportedAt || new Date().toISOString(),
+        exportedAt: result.meta.exportedAt || new Date(fetchedAt).toISOString(),
         lastRemoteFetchAt: fetchedAt,
-        nextRemoteFetchAllowedAt: isAdminRequest ? fetchedAt : fetchedAt + NON_ADMIN_FETCH_COOLDOWN_MS
+        cachedSnapshotAt: fetchedAt,
+        nextRemoteFetchAllowedAt: fetchedAt + REMOTE_FETCH_MIN_INTERVAL_MS
       });
 
       dispatch({
         type: ACTIONS.REMOTE_SYNC_END,
-        payload: { error: null, syncedAt: Date.now(), reason }
+        payload: { error: null, syncedAt: fetchedAt, reason }
       });
 
       return { ok: true, changed: didChange };
@@ -114,7 +136,7 @@ export function useRemoteStateSync(state, dispatch) {
     } finally {
       inFlightRef.current = false;
     }
-  }, [dispatch, state.isAdminAuthenticated]);
+  }, [dispatch]);
 
   useEffect(() => {
     void runSync('startup');
@@ -131,6 +153,7 @@ export function useRemoteStateSync(state, dispatch) {
   return {
     runSync,
     autoRefreshIntervalMs: AUTO_REFRESH_INTERVAL_MS,
-    nonAdminFetchCooldownMs: NON_ADMIN_FETCH_COOLDOWN_MS
+    cacheMaxAgeMs: APP_CACHE_MAX_AGE_MS,
+    fetchCooldownMs: REMOTE_FETCH_MIN_INTERVAL_MS
   };
 }

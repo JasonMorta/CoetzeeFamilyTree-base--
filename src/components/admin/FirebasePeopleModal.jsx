@@ -20,19 +20,13 @@ function buildFamily3EditLink(personExternalId) {
   if (!recordId) return '';
 
   try {
-    const url = new URL(family3FormBaseUrl, window.location.origin);
+    const url = new URL(family3FormBaseUrl);
     url.searchParams.set('family', FAMILY_SLUG);
     url.searchParams.set('editPersonId', recordId);
     return url.toString();
   } catch (error) {
-    const [baseWithoutHash, hashFragment = ''] = String(family3FormBaseUrl || '').split('#');
-    const [basePath = '', existingQuery = ''] = baseWithoutHash.split('?');
-    const searchParams = new URLSearchParams(existingQuery);
-    searchParams.set('family', FAMILY_SLUG);
-    searchParams.set('editPersonId', recordId);
-    const nextQuery = searchParams.toString();
-    const nextHash = hashFragment ? `#${hashFragment}` : '';
-    return `${basePath}${nextQuery ? `?${nextQuery}` : ''}${nextHash}`;
+    const separator = family3FormBaseUrl.includes('?') ? '&' : '?';
+    return `${family3FormBaseUrl}${separator}family=${encodeURIComponent(FAMILY_SLUG)}&editPersonId=${encodeURIComponent(recordId)}`;
   }
 }
 
