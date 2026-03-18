@@ -9,13 +9,9 @@ import { fetchFirebasePeopleList, updateFirebasePersonRecord, deleteFirebasePers
 import { saveFirebaseAppStateSnapshot, getFirebaseAppStateCollectionName, getFirebaseAppStateDocumentNames } from '../../services/firebaseAppStateService';
 import { applySavedPersonRecordToNodes, removeSavedPersonRecord, upsertSavedPersonRecord } from '../../utils/firebaseLibraryState';
 import { NODE_TYPES } from '../../utils/nodeFactory';
-import { buildFamily3FormUrl } from '../../utils/family3FormUrl';
+import { buildFamily3EditLink } from '../../utils/family3FormUrl';
 
 const PAGE_SIZE_OPTIONS = [10, 25, 50, 100];
-
-function buildFamily3EditLink(personExternalId) {
-  return buildFamily3FormUrl({ editPersonId: personExternalId });
-}
 
 async function copyTextToClipboard(value) {
   const text = String(value || '');
@@ -64,6 +60,7 @@ function EditFirebasePersonModal({ open, personRecord, onClose, onUpdated, sourc
   const [isSaving, setIsSaving] = useState(false);
   const [generatedEditLink, setGeneratedEditLink] = useState('');
   const [linkStatusText, setLinkStatusText] = useState('');
+  const [actionStatusText, setActionStatusText] = useState('');
 
   useEffect(() => {
     if (!open) return;
@@ -72,6 +69,7 @@ function EditFirebasePersonModal({ open, personRecord, onClose, onUpdated, sourc
     setIsSaving(false);
     setGeneratedEditLink('');
     setLinkStatusText('');
+    setActionStatusText('');
   }, [open, personRecord]);
 
   const canGenerateEditLink = sourceMode === 'savedPeople' && Boolean(String(draftPerson?.firebaseDocumentId || personRecord?.firebaseDocumentId || '').trim());
@@ -101,6 +99,7 @@ function EditFirebasePersonModal({ open, personRecord, onClose, onUpdated, sourc
     }
 
     setIsSaving(true);
+    setActionStatusText(sourceMode === 'savedPeople' ? 'Saving this person to the saved people library…' : 'Saving this person to Firebase…');
     setStatusText('Saving changes to Firebase…');
 
     try {
@@ -132,6 +131,7 @@ function EditFirebasePersonModal({ open, personRecord, onClose, onUpdated, sourc
       setStatusText(error?.message || 'Could not update Firebase right now.');
     } finally {
       setIsSaving(false);
+      setActionStatusText('');
     }
   }, [dispatch, draftPerson, onClose, onUpdated, sourceMode, state.appSettings, state.edges, state.nodes, state.savedPeople, state.viewport]);
 
@@ -159,6 +159,7 @@ function EditFirebasePersonModal({ open, personRecord, onClose, onUpdated, sourc
             {linkStatusText ? <div className={styles.linkStatus}>{linkStatusText}</div> : null}
           </div>
         ) : null}
+        {actionStatusText ? <div className={styles.progressNotice}><Loader size="sm" vertical={false} content={actionStatusText} /></div> : null}
         {statusText ? <div className={styles.statusText}>{statusText}</div> : null}
       </Modal.Body>
       <Modal.Footer>
@@ -188,6 +189,7 @@ export default function FirebasePeopleModal({ open, onClose, mode = 'submissions
   const [limit, setLimit] = useState(10);
   const [editRecord, setEditRecord] = useState(null);
   const [busyRowId, setBusyRowId] = useState('');
+  const [actionStatusText, setActionStatusText] = useState('');
 
   const loadRecords = useCallback(async () => {
     if (!open) return;
@@ -229,6 +231,7 @@ export default function FirebasePeopleModal({ open, onClose, mode = 'submissions
 
   useEffect(() => {
     if (!open) return;
+    setActionStatusText('');
     void loadRecords();
   }, [open, loadRecords, state.savedPeople]);
 
@@ -271,6 +274,7 @@ export default function FirebasePeopleModal({ open, onClose, mode = 'submissions
 
     setBusyRowId(recordId);
     setErrorText('');
+    setActionStatusText(isSavedPeopleMode ? `Deleting ${subjectLabel} from saved people…` : `Deleting ${subjectLabel} from Firebase…`);
     try {
       if (isSavedPeopleMode) {
         const nextSavedPeople = removeSavedPersonRecord(state.savedPeople, record.firebaseDocumentId, getRecordName(record));
@@ -292,6 +296,7 @@ export default function FirebasePeopleModal({ open, onClose, mode = 'submissions
       setErrorText(error?.message || `Could not delete the ${isSavedPeopleMode ? 'saved people' : 'Firebase'} record.`);
     } finally {
       setBusyRowId('');
+      setActionStatusText('');
     }
   }, [dispatch, isSavedPeopleMode, state.appSettings, state.edges, state.nodes, state.savedPeople, state.viewport]);
 
@@ -328,6 +333,7 @@ export default function FirebasePeopleModal({ open, onClose, mode = 'submissions
           </div>
           <div className={styles.helperText}>{isSavedPeopleMode ? <>Click a row to add that saved person as a new node on the map. Edit and delete update the saved people library in the Family Tree app and sync those changes back to Firebase. Current app-state location: <strong>{appStateCollectionName}/{appStateDocumentNames.savedPeople}</strong></> : <>Click a row to add that form submission as a new node on the map. Edit and delete are admin-only Firebase actions. Current Firebase collection: <strong>{collectionName}</strong></>}</div>
           {errorText ? <div className={styles.errorText}>{errorText}</div> : null}
+          {actionStatusText ? <div className={styles.progressNotice}><Loader size="sm" vertical={false} content={actionStatusText} /></div> : null}
           <div className={styles.tableWrap}>
             <table className={styles.table}>
               <thead>
@@ -369,7 +375,7 @@ export default function FirebasePeopleModal({ open, onClose, mode = 'submissions
                           ✎
                         </Button>
                         <Button appearance="subtle" size="xs" color="red" className={styles.iconButton} title={isSavedPeopleMode ? 'Delete saved person' : 'Delete person'} aria-label={isSavedPeopleMode ? 'Delete saved person' : 'Delete person'} disabled={busy} onClick={(event) => void handleDelete(event, record)}>
-                          🗑
+                          {busy ? '…' : '🗑'}
                         </Button>
                       </td>
                     </tr>

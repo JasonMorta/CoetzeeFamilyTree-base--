@@ -219,3 +219,15 @@
     grid-template-columns: 1fr;
   }
 }
+
+.progressNotice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: rgba(8, 24, 44, 0.88);
+  color: rgba(236, 244, 255, 0.92);
+  font-size: 13px;
+}

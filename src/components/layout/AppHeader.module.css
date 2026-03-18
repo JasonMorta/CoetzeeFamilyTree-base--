@@ -72,18 +72,3 @@
   color: #f8fbff !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
-
-.submitFamilyButton {
-  background: linear-gradient(180deg, #46df75, #16a34a) !important;
-  border: 1px solid rgba(101, 255, 151, 0.4) !important;
-  color: #f7fff9 !important;
-  font-weight: 700 !important;
-  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.28) !important;
-}
-
-.submitFamilyButton:hover,
-.submitFamilyButton:focus-visible {
-  background: linear-gradient(180deg, #5ef18a, #15803d) !important;
-  border-color: rgba(128, 255, 171, 0.55) !important;
-  color: #ffffff !important;
-}

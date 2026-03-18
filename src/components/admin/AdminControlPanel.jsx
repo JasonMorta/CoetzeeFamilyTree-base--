@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback, useEffect, useRef } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { Button, IconButton, Tag } from 'rsuite';
 import styles from './AdminControlPanel.module.css';
 
@@ -18,68 +18,35 @@ export default function AdminControlPanel({
   children
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const panelWrapRef = useRef(null);
 
   const toggleLabel = useMemo(() => (isOpen ? 'Hide admin controls' : 'Show admin controls'), [isOpen]);
 
-  const closePanel = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) return undefined;
-
-    const handlePointerDown = (event) => {
-      if (!panelWrapRef.current?.contains(event.target)) {
-        closePanel();
-      }
-    };
-
-    document.addEventListener('mousedown', handlePointerDown);
-    document.addEventListener('touchstart', handlePointerDown, { passive: true });
-
-    return () => {
-      document.removeEventListener('mousedown', handlePointerDown);
-      document.removeEventListener('touchstart', handlePointerDown);
-    };
-  }, [closePanel, isOpen]);
-
   const handleAddNode = useCallback(() => {
-    closePanel();
+    setIsOpen(false);
     onAddNode?.();
-  }, [closePanel, onAddNode]);
-
-  const handleEditSelected = useCallback(() => {
-    closePanel();
-    onEditSelected?.();
-  }, [closePanel, onEditSelected]);
+  }, [onAddNode]);
 
   const handleOpenFirebasePeople = useCallback(() => {
-    closePanel();
+    setIsOpen(false);
     onOpenFirebasePeople?.();
-  }, [closePanel, onOpenFirebasePeople]);
+  }, [onOpenFirebasePeople]);
 
   const handleOpenSavedPeople = useCallback(() => {
-    closePanel();
+    setIsOpen(false);
     onOpenSavedPeople?.();
-  }, [closePanel, onOpenSavedPeople]);
+  }, [onOpenSavedPeople]);
 
   const handleToggleDrawNodeMode = useCallback(() => {
-    closePanel();
+    setIsOpen(false);
     onToggleDrawNodeMode?.();
-  }, [closePanel, onToggleDrawNodeMode]);
-
-  const handleOpenSettings = useCallback(() => {
-    closePanel();
-    onOpenSettings?.();
-  }, [closePanel, onOpenSettings]);
+  }, [onToggleDrawNodeMode]);
 
   if (!isAdminAuthenticated) {
     return null;
   }
 
   return (
-    <div ref={panelWrapRef} className={styles.panelWrap} aria-label="Admin controls">
+    <div className={styles.panelWrap} aria-label="Admin controls">
       <IconButton
         size="sm"
         appearance="primary"
@@ -108,13 +75,13 @@ export default function AdminControlPanel({
         </div>
 
         <div className={styles.actionGrid}>
-          <Button size="sm" appearance="subtle" onClick={handleOpenSettings}>
+          <Button size="sm" appearance="subtle" onClick={onOpenSettings}>
             Settings
           </Button>
           <Button appearance="primary" color="violet" size="sm" onClick={handleAddNode}>
             Add Node
           </Button>
-          <Button appearance="ghost" color="blue" size="sm" onClick={handleEditSelected} disabled={!hasSingleNodeSelection}>
+          <Button appearance="ghost" color="blue" size="sm" onClick={onEditSelected} disabled={!hasSingleNodeSelection}>
             Edit Selected
           </Button>
           <Button appearance="ghost" color="green" size="sm" onClick={handleOpenFirebasePeople}>

@@ -112,3 +112,41 @@
 
 .saveBtnDirty { background: linear-gradient(180deg, #ef4444, #dc2626) !important; border-color: transparent !important; color: #fff !important; }
 .saveBtnSaved { background: linear-gradient(180deg, #22c55e, #16a34a) !important; border-color: transparent !important; color: #fff !important; }
+
+.externalLinkPanel {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.externalLinkTitle {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f8fbff;
+}
+
+.externalLinkText,
+.externalLinkStatus {
+  color: #d7e6ff;
+  line-height: 1.45;
+  font-size: 0.92rem;
+}
+
+.externalLinkRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 720px) {
+  .externalLinkRow {
+    grid-template-columns: 1fr;
+  }
+}

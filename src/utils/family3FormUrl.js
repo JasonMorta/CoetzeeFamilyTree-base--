@@ -1,29 +1,30 @@
 import { FAMILY_SLUG } from '../config/familyConfig';
 
 const DEFAULT_FAMILY3_FORM_BASE_URL = 'https://family3form.mortadev.com/';
+const family3FormBaseUrl = String(import.meta.env.VITE_FAMILY3_FORM_BASE_URL || DEFAULT_FAMILY3_FORM_BASE_URL).trim() || DEFAULT_FAMILY3_FORM_BASE_URL;
 
-export const FAMILY3_FORM_BASE_URL = String(import.meta.env.VITE_FAMILY3_FORM_BASE_URL || DEFAULT_FAMILY3_FORM_BASE_URL).trim() || DEFAULT_FAMILY3_FORM_BASE_URL;
-
-function resolveUrl(baseUrl) {
-  const rawBase = String(baseUrl || FAMILY3_FORM_BASE_URL).trim() || DEFAULT_FAMILY3_FORM_BASE_URL;
-
+export function buildFamily3BaseLink() {
   try {
-    return new URL(rawBase, window.location.origin);
+    const url = new URL(family3FormBaseUrl);
+    url.searchParams.set('family', FAMILY_SLUG);
+    return url.toString();
   } catch (error) {
-    return new URL(DEFAULT_FAMILY3_FORM_BASE_URL);
+    const separator = family3FormBaseUrl.includes('?') ? '&' : '?';
+    return `${family3FormBaseUrl}${separator}family=${encodeURIComponent(FAMILY_SLUG)}`;
   }
 }
 
-export function buildFamily3FormUrl({ family = FAMILY_SLUG, editPersonId = '' } = {}) {
-  const url = resolveUrl(FAMILY3_FORM_BASE_URL);
-  url.searchParams.set('family', String(family || FAMILY_SLUG).trim() || FAMILY_SLUG);
+export function buildFamily3EditLink(personExternalId) {
+  const recordId = String(personExternalId || '').trim();
+  if (!recordId) return '';
 
-  const recordId = String(editPersonId || '').trim();
-  if (recordId) {
+  try {
+    const url = new URL(family3FormBaseUrl);
+    url.searchParams.set('family', FAMILY_SLUG);
     url.searchParams.set('editPersonId', recordId);
-  } else {
-    url.searchParams.delete('editPersonId');
+    return url.toString();
+  } catch (error) {
+    const separator = family3FormBaseUrl.includes('?') ? '&' : '?';
+    return `${family3FormBaseUrl}${separator}family=${encodeURIComponent(FAMILY_SLUG)}&editPersonId=${encodeURIComponent(recordId)}`;
   }
-
-  return url.toString();
 }

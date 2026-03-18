@@ -10,6 +10,8 @@ import { updateFirebasePersonRecord } from '../../services/firebasePeopleService
 import {
   createStandardPersonWrapper,
   getRecordName,
+  getRecordPhoto,
+  getRecordNickname,
   normalizeSavedPersonRecord,
   normalizeSavedPeopleCollection,
   standardPersonToSavedRecord,
@@ -18,6 +20,7 @@ import {
   personRecordToLinkedDraft,
   linkedPersonDraftToSavedRecord
 } from '../../utils/family3Schema';
+import { buildFamily3EditLink } from '../../utils/family3FormUrl';
 
 function normalizeFullName(name) {
   return (name || '').trim().replace(/\s+/g, ' ').toLowerCase();
@@ -91,6 +94,28 @@ function SliderField({ label, value, min, max, step = 1, onChange, help }) {
   );
 }
 
+async function copyTextToClipboard(value) {
+  const text = String(value || '').trim();
+  if (!text) return false;
+
+  if (navigator?.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', 'readonly');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  textarea.style.pointerEvents = 'none';
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand('copy');
+  document.body.removeChild(textarea);
+  return copied;
+}
+
 export default function NodeEditorDrawer() {
   const { state, dispatch } = useAppState();
   const selectedNode = useMemo(() => state.nodes.find((node) => node.id === state.selectedNodeId), [state.nodes, state.selectedNodeId]);
@@ -99,14 +124,12 @@ export default function NodeEditorDrawer() {
   const [draftStandardPerson, setDraftStandardPerson] = useState(createEmptyStandardPerson());
   const [peopleStatus, setPeopleStatus] = useState('idle');
   const [standardStatus, setStandardStatus] = useState({ personal: 'idle', node: 'idle', relationships: 'idle' });
+  const anyUnsaved = useMemo(() => [peopleStatus, ...Object.values(standardStatus || {})].includes('dirty'), [peopleStatus, standardStatus]);
   const [closeWarning, setCloseWarning] = useState('');
   const [draftPeople, setDraftPeople] = useState([]);
   const [draftSharedNotes, setDraftSharedNotes] = useState('');
-
-  const anyUnsaved = useMemo(
-    () => [peopleStatus, ...Object.values(standardStatus || {})].includes('dirty'),
-    [peopleStatus, standardStatus]
-  );
+  const [generatedEditLink, setGeneratedEditLink] = useState('');
+  const [editLinkStatus, setEditLinkStatus] = useState('');
 
   useEffect(() => {
     if (!state.isEditorOpen) return;
@@ -119,9 +142,7 @@ export default function NodeEditorDrawer() {
   }, [dispatch, selectedNode]);
 
   const updateRootField = useCallback((field, value) => updateNode({ [field]: value }), [updateNode]);
-  const updateImageSetting = useCallback((field, value) => {
-    updateNode({ imageSettings: { ...(nodeData?.imageSettings || {}), [field]: value } });
-  }, [nodeData?.imageSettings, updateNode]);
+  const updateImageSetting = useCallback((field, value) => updateNode({ imageSettings: { ...(nodeData?.imageSettings || {}), [field]: value } }), [nodeData?.imageSettings, updateNode]);
   const updatePeopleNodeDisplaySetting = useCallback((field, value) => updateNode({ [field]: value }), [updateNode]);
 
   const updateNodeSize = useCallback((value) => {
@@ -182,7 +203,6 @@ export default function NodeEditorDrawer() {
   }, [dispatch, state.savedPeople]);
 
   const handleAutofillStandardPerson = useCallback((_, savedPerson) => {
-    setCloseWarning('');
     setDraftStandardPerson(createStandardPersonWrapper(savedPerson));
   }, []);
 
@@ -211,6 +231,7 @@ export default function NodeEditorDrawer() {
     (draftPeople || []).forEach((person) => {
       const name = String(person?.fullName || '').trim();
       if (!name) return;
+
       nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
     });
 
@@ -238,21 +259,8 @@ export default function NodeEditorDrawer() {
     saveStandardRecordToLibrary(withNode);
   }, [commitStandardPerson, saveStandardRecordToLibrary, updateNode]);
 
-  const updateHandleCount = useCallback((side, value) => {
-    updateNode({ handles: { ...(nodeData?.handles || {}), [side]: Math.max(0, Number(value) || 0) } });
-  }, [nodeData?.handles, updateNode]);
-
-  const updateHandleLayout = useCallback((side, field, value) => {
-    updateNode({
-      handleLayout: {
-        ...(nodeData?.handleLayout || {}),
-        [side]: {
-          ...(nodeData?.handleLayout?.[side] || {}),
-          [field]: Math.max(0, Math.min(100, Number(value) || 0))
-        }
-      }
-    });
-  }, [nodeData?.handleLayout, updateNode]);
+  const updateHandleCount = useCallback((side, value) => updateNode({ handles: { ...(nodeData?.handles || {}), [side]: Math.max(0, Number(value) || 0) } }), [nodeData?.handles, updateNode]);
+  const updateHandleLayout = useCallback((side, field, value) => updateNode({ handleLayout: { ...(nodeData?.handleLayout || {}), [side]: { ...(nodeData?.handleLayout?.[side] || {}), [field]: Math.max(0, Math.min(100, Number(value) || 0)) } } }), [nodeData?.handleLayout, updateNode]);
 
   const handleAutofillPerson = useCallback((personId, savedPerson) => {
     setPeopleStatus('dirty');
@@ -282,7 +290,7 @@ export default function NodeEditorDrawer() {
 
     (nodeData?.people || []).forEach((p) => {
       if (!p?.fullName?.trim()) return;
-      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(p));
+      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
     });
 
     if (nodeData?.nodeType === NODE_TYPES.STANDARD) {
@@ -304,9 +312,8 @@ export default function NodeEditorDrawer() {
 
     dispatch({ type: ACTIONS.SET_SAVED_PEOPLE, payload: nextLibrary });
     dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
-    setCloseWarning('');
     dispatch({ type: ACTIONS.CLOSE_EDITOR });
-  }, [anyUnsaved, dispatch, nodeData, selectedNode?.id, state.savedPeople]);
+  }, [anyUnsaved, dispatch, nodeData, selectedNode, state.savedPeople]);
 
   useEffect(() => {
     if (!selectedNode || !nodeData || !state.isEditorOpen) return;
@@ -334,13 +341,34 @@ export default function NodeEditorDrawer() {
     setPeopleStatus('idle');
     setStandardStatus({ personal: 'idle', node: 'idle', relationships: 'idle' });
     setCloseWarning('');
+    setGeneratedEditLink('');
+    setEditLinkStatus('');
     dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
-  }, [dispatch, nodeData, selectedNode, state.isEditorOpen]);
+  }, [dispatch, selectedNode?.id, nodeData?.nodeType, state.isEditorOpen]);
 
   if (!selectedNode || !nodeData || !state.isEditorOpen) return null;
 
   const isStandard = nodeData.nodeType === NODE_TYPES.STANDARD;
   const canAddPeople = nodeData.nodeType === NODE_TYPES.PERSONS;
+  const standardExternalEditId = String(draftStandardPerson?.firebaseDocumentId || nodeData?.standardPerson?.firebaseDocumentId || '').trim();
+  const canGenerateExternalEditLink = isStandard && Boolean(standardExternalEditId);
+
+  const handleGenerateExternalEditLink = async () => {
+    const nextLink = buildFamily3EditLink(standardExternalEditId);
+    if (!nextLink) {
+      setGeneratedEditLink('');
+      setEditLinkStatus('This person needs a saved external edit ID before a form edit link can be generated.');
+      return;
+    }
+
+    setGeneratedEditLink(nextLink);
+    try {
+      const copied = await copyTextToClipboard(nextLink);
+      setEditLinkStatus(copied ? 'Edit link copied to clipboard.' : 'Edit link generated. Copy it from the field below.');
+    } catch (error) {
+      setEditLinkStatus('Edit link generated. Copy it from the field below.');
+    }
+  };
 
   return (
     <Drawer open={state.isEditorOpen} onClose={handleClose} keyboard={!anyUnsaved} backdrop={anyUnsaved ? 'static' : true} size="sm" className={styles.drawer}>
@@ -368,6 +396,15 @@ export default function NodeEditorDrawer() {
                 setPerson={setDraftStandardPerson}
                 onSaveSection={saveStandardPersonSection}
               />
+              <div className={styles.externalLinkPanel}>
+                <div className={styles.externalLinkTitle}>External edit link</div>
+                <div className={styles.externalLinkText}>Generate a Family3 form link for this node. It uses the saved external edit ID so the form can open directly in edit mode for this person.</div>
+                <div className={styles.externalLinkRow}>
+                  <Button appearance="ghost" onClick={() => void handleGenerateExternalEditLink()} disabled={!canGenerateExternalEditLink}>Generate edit link</Button>
+                  <Input value={generatedEditLink} readOnly placeholder={canGenerateExternalEditLink ? 'Generated edit link will appear here.' : 'Save/import this person with an external edit ID first.'} />
+                </div>
+                {editLinkStatus ? <div className={styles.externalLinkStatus}>{editLinkStatus}</div> : null}
+              </div>
             </>
           )}
 
