@@ -14,6 +14,10 @@ export function buildFamily3BaseLink() {
   }
 }
 
+export function buildFamily3FormUrl() {
+  return buildFamily3BaseLink();
+}
+
 export function buildFamily3EditLink(personExternalId) {
   const recordId = String(personExternalId || '').trim();
   if (!recordId) return '';
