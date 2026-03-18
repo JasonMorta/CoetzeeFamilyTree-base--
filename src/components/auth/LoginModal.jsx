@@ -67,23 +67,12 @@ export default function LoginModal() {
           </Form.Group>
         </Form>
 
-        <div className={styles.note}>
-          This is still a front-end-only demo login. On Netlify, these values are injected at build time and are not a secure replacement for real backend authentication.
-        </div>
 
         {lockout.isLocked && (
           <Message type="warning" showIcon>
             Admin login is temporarily locked after repeated failed attempts.
           </Message>
         )}
-
-        {!isConfigured && (
-          <Message type="warning" showIcon>
-            Missing environment variables: VITE_ADMIN_USERNAME and VITE_ADMIN_PASSWORD.
-          </Message>
-        )}
-
-        {errorMessage && <Message type="error" showIcon>{errorMessage}</Message>}
       </Modal.Body>
       <Modal.Footer>
         <Button appearance="primary" onClick={handleLogin}>Login</Button>
