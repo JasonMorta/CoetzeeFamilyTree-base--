@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Modal, Button, Form, Message } from 'rsuite';
 import styles from './LoginModal.module.css';
 import { useAppState } from '../../context/AppStateContext';
@@ -13,7 +13,14 @@ export default function LoginModal() {
   const [formValue, setFormValue] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const isConfigured = hasConfiguredAdminCredentials();
-  const lockout = getAdminLockoutStatus();
+  const lockout = useMemo(() => getAdminLockoutStatus(), [errorMessage, formValue.username, formValue.password, state.isLoginOpen]);
+
+  function handleFormChange(nextValue) {
+    setFormValue(nextValue);
+    if (errorMessage) {
+      setErrorMessage('');
+    }
+  }
 
   function handleLogin() {
     if (!isConfigured) {
@@ -56,7 +63,7 @@ export default function LoginModal() {
         <Modal.Title>Admin Login</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form fluid formValue={formValue} onChange={setFormValue}>
+        <Form fluid formValue={formValue} onChange={handleFormChange}>
           <Form.Group>
             <Form.ControlLabel>Username</Form.ControlLabel>
             <Form.Control name="username" autoComplete="username" />
@@ -67,6 +74,12 @@ export default function LoginModal() {
           </Form.Group>
         </Form>
 
+
+        {errorMessage && (
+          <Message type={lockout.isLocked ? 'warning' : 'error'} showIcon closable onClose={() => setErrorMessage('')}>
+            {errorMessage}
+          </Message>
+        )}
 
         {lockout.isLocked && (
           <Message type="warning" showIcon>

@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
-import { Button, Divider, Form, Input, InputPicker, SelectPicker } from 'rsuite';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { Button, Checkbox, Divider, Form, Input, InputPicker, SelectPicker } from 'rsuite';
 import styles from './PersonFields.module.css';
 import {
   RELATIONSHIP_OPTIONS,
@@ -15,6 +15,8 @@ import {
   personRecordToLinkedDraft
 } from '../../utils/family3Schema';
 import { buildSavedPeopleOptions, resolveSavedPersonSelection } from './savedPeopleOptions';
+
+const KNOWN_NODE_DETAIL_KEYS = ['title', 'coverImage', 'imageCaption', 'eventDate', 'location', 'notes', 'hideFromModule'];
 
 function pickerData(values = []) {
   return values.map((value) => ({ label: value, value }));
@@ -132,7 +134,7 @@ function DynamicPersonField({ fieldKey, value, onChange, savedPeopleOptions, sav
           onChange={(nextValue) => {
             const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, nextValue, null);
             if (matched && onAutofillPerson) {
-              onAutofillPerson(null, matched);
+              onAutofillPerson(nextValue || '', matched);
               return;
             }
             onChange(nextValue || '');
@@ -140,7 +142,7 @@ function DynamicPersonField({ fieldKey, value, onChange, savedPeopleOptions, sav
           onSelect={(nextValue, item) => {
             const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, nextValue, item);
             if (matched && onAutofillPerson) {
-              onAutofillPerson(null, matched);
+              onAutofillPerson(nextValue || '', matched);
               return;
             }
             onChange(nextValue || '');
@@ -210,26 +212,85 @@ function DynamicPersonField({ fieldKey, value, onChange, savedPeopleOptions, sav
   );
 }
 
-function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillPerson, onSaveSection, onStatusChange, showSectionSaveButtons = true }) {
+
+function getExtraNodeFieldMeta(fieldKey, value = '') {
+  const key = String(fieldKey || '').trim();
+  const stringValue = typeof value === 'string' ? value : '';
+  const label = key
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\w/g, (char) => char.toUpperCase());
+
+  if (/date/i.test(key)) return { label, inputType: 'date' };
+  if (/hide|show|enabled|visible|featured/i.test(key) && typeof value === 'boolean') return { label, inputType: 'checkbox' };
+  if (stringValue.length > 120 || /caption|notes|description|summary|details|story/i.test(key)) return { label, inputType: 'textarea' };
+  return { label, inputType: 'text' };
+}
+
+function ExtraNodeField({ fieldKey, value, onChange }) {
+  const meta = getExtraNodeFieldMeta(fieldKey, value);
+
+  if (meta.inputType === 'checkbox') {
+    return (
+      <Form.Group className={styles.fullSpan}>
+        <Checkbox checked={Boolean(value)} onChange={(_, checked) => onChange(checked)}>
+          {meta.label}
+        </Checkbox>
+      </Form.Group>
+    );
+  }
+
+  if (meta.inputType === 'textarea') {
+    return (
+      <Form.Group className={styles.fullSpan}>
+        <Form.ControlLabel>{meta.label}</Form.ControlLabel>
+        <Input as="textarea" rows={4} value={value || ''} onChange={(nextValue) => onChange(nextValue || '')} />
+      </Form.Group>
+    );
+  }
+
+  return (
+    <Form.Group>
+      <Form.ControlLabel>{meta.label}</Form.ControlLabel>
+      <Input type={meta.inputType === 'date' ? 'date' : 'text'} value={value || ''} onChange={(nextValue) => onChange(nextValue || '')} />
+    </Form.Group>
+  );
+}
+
+function StandardPersonFields({ person, savedPeople = [], onSaveSection, onStatusChange, showSectionSaveButtons = true, setPerson }) {
   const [saveStatus, setSaveStatus] = useState({ personal: 'idle', node: 'idle', relationships: 'idle' });
+  const [localDraft, setLocalDraft] = useState(() => createStandardPersonWrapper(person));
+  const onStatusChangeRef = useRef(onStatusChange);
+  const setPersonRef = useRef(setPerson);
+  const personSnapshot = useMemo(() => JSON.stringify(createStandardPersonWrapper(person)), [person]);
 
   useEffect(() => {
+    onStatusChangeRef.current = onStatusChange;
+  }, [onStatusChange]);
+
+  useEffect(() => {
+    setPersonRef.current = setPerson;
+  }, [setPerson]);
+
+  useEffect(() => {
+    setLocalDraft(createStandardPersonWrapper(person));
     const next = { personal: 'idle', node: 'idle', relationships: 'idle' };
     setSaveStatus(next);
-    onStatusChange?.(next);
-  }, [onStatusChange, person?.id]);
+    onStatusChangeRef.current?.(next);
+  }, [personSnapshot]);
 
   const savedPeopleOptions = useMemo(() => buildSavedPeopleOptions(savedPeople), [savedPeople]);
-  const draft = useMemo(() => createStandardPersonWrapper(person), [person]);
+  const draft = useMemo(() => createStandardPersonWrapper(localDraft), [localDraft]);
   const personData = draft.person || {};
   const relationshipData = draft.person?.relationships || draft.relationships || {};
   const nodeData = draft.person?.node || draft.node || {};
   const dynamicPersonKeys = useMemo(() => getDynamicPersonFieldKeys(personData), [personData]);
+  const extraNodeKeys = useMemo(() => Object.keys(nodeData || {}).filter((key) => !KNOWN_NODE_DETAIL_KEYS.includes(key)), [nodeData]);
 
   const markDirty = (section) => {
     setSaveStatus((prev) => {
       const next = { ...(prev || {}), [section]: 'dirty' };
-      onStatusChange?.(next);
+      onStatusChangeRef.current?.(next);
       return next;
     });
   };
@@ -237,13 +298,13 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
   const markSaved = (section) => {
     setSaveStatus((prev) => {
       const next = { ...(prev || {}), [section]: 'saved' };
-      onStatusChange?.(next);
+      onStatusChangeRef.current?.(next);
       return next;
     });
     window.setTimeout(() => {
       setSaveStatus((prev) => {
         const next = { ...(prev || {}), [section]: 'idle' };
-        onStatusChange?.(next);
+        onStatusChangeRef.current?.(next);
         return next;
       });
     }, 1200);
@@ -258,7 +319,11 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
 
   const updateWrapper = (updater, section) => {
     markDirty(section);
-    setPerson((prev) => createStandardPersonWrapper(updater(createStandardPersonWrapper(prev))));
+    setLocalDraft((prev) => {
+      const nextWrapper = createStandardPersonWrapper(updater(createStandardPersonWrapper(prev)));
+      setPersonRef.current?.(nextWrapper);
+      return nextWrapper;
+    });
   };
 
   const updatePersonField = (field, value, section) => {
@@ -274,6 +339,36 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
         node: nextNode
       };
     }, section);
+  };
+
+  const autofillFromSavedPerson = (fallbackValue, savedPerson) => {
+    markDirty('personal');
+    setLocalDraft((prev) => {
+      const current = createStandardPersonWrapper(prev);
+      const selected = createStandardPersonWrapper(savedPerson, {
+        id: current.id,
+        firebaseDocumentId: savedPerson?.firebaseDocumentId || current.firebaseDocumentId,
+        submissionMeta: current.submissionMeta
+      });
+      const nextPerson = {
+        ...selected.person,
+        name: getRecordName(selected) || fallbackValue || ''
+      };
+      const nextNode = syncNodeDetailsWithPerson(selected.node, nextPerson, { force: true });
+      const nextWrapper = createStandardPersonWrapper({
+        ...current,
+        firebaseDocumentId: selected.firebaseDocumentId || current.firebaseDocumentId,
+        person: {
+          ...nextPerson,
+          node: nextNode
+        },
+        node: nextNode,
+        relationships: selected.relationships,
+        submissionMeta: current.submissionMeta
+      });
+      setPersonRef.current?.(nextWrapper);
+      return nextWrapper;
+    });
   };
 
   const updateNodeField = (field, value) => {
@@ -327,10 +422,16 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
     updateRelationshipGroup(groupKey, next);
   };
 
+  const saveSection = (section) => {
+    onSaveSection?.(draft, section);
+    markSaved(section);
+  };
+
   return (
     <div className={styles.standardPersonWrap}>
       <Divider className={styles.sectionDivider}>Person details</Divider>
       <div className={styles.glassPanel}>
+        <div className={styles.sectionLead}>Update the main person record first. These fields are pulled from the saved person object.</div>
         <div className={styles.formGrid}>
           {dynamicPersonKeys.map((fieldKey) => (
             <DynamicPersonField
@@ -340,15 +441,12 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
               onChange={(value) => updatePersonField(fieldKey, value, 'personal')}
               savedPeopleOptions={savedPeopleOptions}
               savedPeople={savedPeople}
-              onAutofillPerson={(value, selectedPerson) => {
-                markDirty('personal');
-                onAutofillPerson?.(value, selectedPerson);
-              }}
+              onAutofillPerson={autofillFromSavedPerson}
             />
           ))}
         </div>
         {showSectionSaveButtons ? (
-          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('personal')}`} block onClick={() => { onSaveSection?.(draft); markSaved('personal'); }}>
+          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('personal')}`} block onClick={() => saveSection('personal')}>
             {saveStatus.personal === 'saved' ? 'Saved ✓' : 'Save person details'}
           </Button>
         ) : null}
@@ -356,6 +454,7 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
 
       <Divider className={styles.sectionDivider}>Node details</Divider>
       <div className={styles.glassPanel}>
+        <div className={styles.sectionLead}>These fields control how this node is presented in the modules and on the canvas.</div>
         <div className={styles.formGrid}>
           <Form.Group>
             <Form.ControlLabel>Title</Form.ControlLabel>
@@ -381,9 +480,29 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
             <Form.ControlLabel>Notes</Form.ControlLabel>
             <Input as="textarea" rows={4} value={nodeData.notes || ''} onChange={(value) => updateNodeField('notes', value || '')} />
           </Form.Group>
+          <Form.Group className={styles.fullSpan}>
+            <Checkbox checked={Boolean(nodeData.hideFromModule)} onChange={(_, checked) => updateNodeField('hideFromModule', checked)}>
+              Hide from module
+            </Checkbox>
+          </Form.Group>
+          {extraNodeKeys.length ? (
+            <div className={styles.fullSpan}>
+              <div className={styles.extraFieldsHeader}>Additional node fields from this object</div>
+              <div className={styles.formGrid}>
+                {extraNodeKeys.map((fieldKey) => (
+                  <ExtraNodeField
+                    key={fieldKey}
+                    fieldKey={fieldKey}
+                    value={nodeData?.[fieldKey]}
+                    onChange={(value) => updateNodeField(fieldKey, value)}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
         {showSectionSaveButtons ? (
-          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('node')}`} block onClick={() => { onSaveSection?.(draft); markSaved('node'); }}>
+          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('node')}`} block onClick={() => saveSection('node')}>
             {saveStatus.node === 'saved' ? 'Saved ✓' : 'Save node details'}
           </Button>
         ) : null}
@@ -391,6 +510,7 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
 
       <Divider className={styles.sectionDivider}>Relationships</Divider>
       <div className={styles.glassPanel}>
+        <div className={styles.sectionLead}>Only add related people when you want them shown in the node modules or preserved in the saved person record.</div>
         {['parents', 'children', 'siblings', 'partners'].map((groupKey) => {
           const title = groupKey.charAt(0).toUpperCase() + groupKey.slice(1);
           const entries = relationshipData[groupKey] || [];
@@ -418,7 +538,7 @@ function StandardPersonFields({ person, setPerson, savedPeople = [], onAutofillP
           );
         })}
         {showSectionSaveButtons ? (
-          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('relationships')}`} block onClick={() => { onSaveSection?.(draft); markSaved('relationships'); }}>
+          <Button appearance="primary" className={`${styles.saveBarButton} ${sectionBtnClass('relationships')}`} block onClick={() => saveSection('relationships')}>
             {saveStatus.relationships === 'saved' ? 'Saved ✓' : 'Save relationships'}
           </Button>
         ) : null}

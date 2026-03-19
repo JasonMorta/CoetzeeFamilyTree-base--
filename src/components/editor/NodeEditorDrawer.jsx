@@ -232,7 +232,7 @@ export default function NodeEditorDrawer() {
       const name = String(person?.fullName || '').trim();
       if (!name) return;
 
-      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(p));
+      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
     });
 
     dispatch({ type: ACTIONS.SET_SAVED_PEOPLE, payload: nextLibrary });
@@ -254,7 +254,8 @@ export default function NodeEditorDrawer() {
       photoCaption: syncedNode.imageCaption,
       eventDate: syncedNode.eventDate,
       location: syncedNode.location,
-      notes: syncedNode.notes
+      notes: syncedNode.notes,
+      hideNodeDetailsFromModule: Boolean(syncedNode.hideFromModule)
     });
     saveStandardRecordToLibrary(withNode);
   }, [commitStandardPerson, saveStandardRecordToLibrary, updateNode]);
@@ -288,20 +289,23 @@ export default function NodeEditorDrawer() {
 
     let nextLibrary = Array.isArray(state.savedPeople) ? state.savedPeople : [];
 
-    (nodeData?.people || []).forEach((p) => {
-      if (!p?.fullName?.trim()) return;
-      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(p));
+    (nodeData?.people || []).forEach((person) => {
+      if (!person?.fullName?.trim()) return;
+      nextLibrary = upsertSavedPerson(nextLibrary, linkedPersonDraftToSavedRecord(person));
     });
 
     if (nodeData?.nodeType === NODE_TYPES.STANDARD) {
-      const nextStandard = createStandardPersonWrapper(nodeData.standardPerson, {
+      const existingStandard = createStandardPersonWrapper(nodeData.standardPerson);
+      const nextStandard = createStandardPersonWrapper(existingStandard, {
         node: {
-          title: nodeData?.title || '',
-          coverImage: nodeData?.photo || '',
-          imageCaption: nodeData?.photoCaption || '',
-          eventDate: nodeData?.eventDate || '',
-          location: nodeData?.location || '',
-          notes: nodeData?.notes || ''
+          ...(existingStandard.node || {}),
+          title: nodeData?.title || existingStandard.node?.title || '',
+          coverImage: nodeData?.photo || existingStandard.node?.coverImage || '',
+          imageCaption: nodeData?.photoCaption || existingStandard.node?.imageCaption || '',
+          eventDate: nodeData?.eventDate || existingStandard.node?.eventDate || '',
+          location: nodeData?.location || existingStandard.node?.location || '',
+          notes: nodeData?.notes || existingStandard.node?.notes || '',
+          hideFromModule: Boolean(nodeData?.hideNodeDetailsFromModule || existingStandard.node?.hideFromModule)
         }
       });
       if (getRecordName(nextStandard).trim()) {
@@ -328,14 +332,17 @@ export default function NodeEditorDrawer() {
 
     setDraftSharedNotes(nodeData.notes || '');
     setDraftPeople(Array.isArray(nodeData.people) ? nodeData.people : []);
-    setDraftStandardPerson(createStandardPersonWrapper(nodeData.standardPerson || createEmptyStandardPerson(), {
+    const existingStandard = createStandardPersonWrapper(nodeData.standardPerson || createEmptyStandardPerson());
+    setDraftStandardPerson(createStandardPersonWrapper(existingStandard, {
       node: {
-        title: nodeData.title || '',
-        coverImage: nodeData.photo || '',
-        imageCaption: nodeData.photoCaption || '',
-        eventDate: nodeData.eventDate || '',
-        location: nodeData.location || '',
-        notes: nodeData.notes || ''
+        ...(existingStandard.node || {}),
+        title: nodeData.title || existingStandard.node?.title || '',
+        coverImage: nodeData.photo || existingStandard.node?.coverImage || '',
+        imageCaption: nodeData.photoCaption || existingStandard.node?.imageCaption || '',
+        eventDate: nodeData.eventDate || existingStandard.node?.eventDate || '',
+        location: nodeData.location || existingStandard.node?.location || '',
+        notes: nodeData.notes || existingStandard.node?.notes || '',
+        hideFromModule: Boolean(nodeData.hideNodeDetailsFromModule || existingStandard.node?.hideFromModule)
       }
     }));
     setPeopleStatus('idle');

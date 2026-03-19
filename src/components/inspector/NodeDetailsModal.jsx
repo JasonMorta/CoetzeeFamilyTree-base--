@@ -62,15 +62,21 @@ function CopyButton({ value, label }) {
 }
 
 function FieldLine({ label, children, action = null }) {
+  if (!hasValue(children) && !React.isValidElement(children)) return null;
+
   return (
     <div className={styles.fieldLine}>
       <div className={styles.fieldLabel}>{label}</div>
       <div className={styles.fieldValueRow}>
-        <div className={styles.fieldValue}>{children || <span className={styles.emptyValue}>—</span>}</div>
+        <div className={styles.fieldValue}>{children}</div>
         {action}
       </div>
     </div>
   );
+}
+
+function buildSectionRows(rows = []) {
+  return rows.filter(Boolean);
 }
 
 function LinkValue({ href, children }) {
@@ -98,10 +104,12 @@ function RelationshipTile({ entry }) {
 
 function RelationshipSection({ title, entries }) {
   const list = Array.isArray(entries) ? entries.filter((entry) => entry?.name) : [];
+  if (!list.length) return null;
+
   return (
     <div className={styles.section}>
       <div className={styles.sectionTitle}>{title}</div>
-      {list.length ? <div className={styles.relList}>{list.map((entry, index) => <RelationshipTile key={`${title}-${entry.name}-${index}`} entry={entry} />)}</div> : <div className={styles.emptyState}>No {title.toLowerCase()} added yet.</div>}
+      <div className={styles.relList}>{list.map((entry, index) => <RelationshipTile key={`${title}-${entry.name}-${index}`} entry={entry} />)}</div>
     </div>
   );
 }
@@ -144,17 +152,20 @@ export default function NodeDetailsModal() {
             </div>
           ) : null}
 
-          <Divider />
-          <div className={styles.peopleGridList}>
-            {people.map((p) => (
-              <div key={p.id} className={styles.personGridCard}>
-                {p.photo ? <img className={styles.personGridThumb} src={p.photo} alt={p.fullName || 'Person'} /> : <div className={styles.personGridThumbFallback}>?</div>}
-                <div className={styles.personGridName}>{p.fullName || 'Unnamed person'}</div>
-                {p.nickname ? <div className={styles.personGridNick}>{p.nickname}</div> : null}
+          {people.length ? (
+            <>
+              <Divider />
+              <div className={styles.peopleGridList}>
+                {people.map((p) => (
+                  <div key={p.id} className={styles.personGridCard}>
+                    {p.photo ? <img className={styles.personGridThumb} src={p.photo} alt={p.fullName || 'Person'} /> : <div className={styles.personGridThumbFallback}>?</div>}
+                    <div className={styles.personGridName}>{p.fullName || 'Unnamed person'}</div>
+                    {p.nickname ? <div className={styles.personGridNick}>{p.nickname}</div> : null}
+                  </div>
+                ))}
               </div>
-            ))}
-            {!people.length ? <div className={styles.emptyState}>No people added yet.</div> : null}
-          </div>
+            </>
+          ) : null}
         </>
       );
     }
@@ -169,83 +180,121 @@ export default function NodeDetailsModal() {
     const showMaidenName = hasValue(person.maidenName) && (!hasValue(person.gender) || person.gender === 'Female');
     const currentAge = person.isAlive === true ? calculateCurrentAge(person.birthDate) : null;
     const ageAtDeath = person.isAlive === false ? calculateAgeOnDate(person.birthDate, person.deathDate) : null;
+    const hideNodeDetailsFromModule = Boolean(nodeInfo.hideFromModule || data.hideNodeDetailsFromModule || data.hideFromModule);
+    const displayTitle = hideNodeDetailsFromModule ? (getRecordName(standard) || nodeInfo.title || 'Person details') : (nodeInfo.title || getRecordName(standard) || 'Person details');
+    const displayHeroImage = hideNodeDetailsFromModule ? (person.photo || nodeInfo.coverImage || '') : (nodeInfo.coverImage || person.photo || '');
 
-    return (
-      <>
-        <div className={styles.title}>{nodeInfo.title || getRecordName(standard) || 'Person details'}</div>
-        {nodeInfo.imageCaption ? <div className={styles.caption}>{nodeInfo.imageCaption}</div> : null}
+    const personRows = buildSectionRows([
+      hasValue(person.name) ? <FieldLine key="name" label="Full name">{person.name}</FieldLine> : null,
+      hasValue(person.birthDate) ? <FieldLine key="birthDate" label="Birth date">{person.birthDate}</FieldLine> : null,
+      currentAge != null ? <FieldLine key="currentAge" label="Current age">{String(currentAge)}</FieldLine> : null,
+      hasValue(person.nickname) ? <FieldLine key="nickname" label="Nickname">{person.nickname}</FieldLine> : null,
+      hasValue(person.prefix) ? <FieldLine key="prefix" label="Title or prefix">{person.prefix}</FieldLine> : null,
+      showMaidenName ? <FieldLine key="maidenName" label="Maiden name">{person.maidenName}</FieldLine> : null,
+      hasValue(person.gender) ? <FieldLine key="gender" label="Gender">{person.gender}</FieldLine> : null,
+      hasValue(person.birthPlace) ? <FieldLine key="birthPlace" label="Birth place">{person.birthPlace}</FieldLine> : null,
+      hasValue(mapLocation) ? (
+        <FieldLine
+          key="currentLocation"
+          label="Current location"
+          action={<CopyButton value={mapLocation} label="Current location" />}
+        >
+          <LinkValue href={mapLocation ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapLocation)}` : ''}>{mapLocation}</LinkValue>
+        </FieldLine>
+      ) : null,
+      hasValue(contactNumber) ? (
+        <FieldLine
+          key="contactNumber"
+          label="Contact number"
+          action={<CopyButton value={contactNumber} label="Phone number" />}
+        >
+          <LinkValue href={contactNumber ? `tel:${String(contactNumber).replace(/\s+/g, '')}` : ''}>{contactNumber}</LinkValue>
+        </FieldLine>
+      ) : null,
+      hasValue(person.heritage) ? <FieldLine key="heritage" label="Heritage">{person.heritage}</FieldLine> : null,
+      hasValue(person.occupation) ? <FieldLine key="occupation" label="Occupation">{person.occupation}</FieldLine> : null,
+      hasValue(person.education) ? <FieldLine key="education" label="Education">{person.education}</FieldLine> : null,
+      hasValue(person.maritalStatus) ? <FieldLine key="maritalStatus" label="Marital status">{person.maritalStatus}</FieldLine> : null,
+      hasValue(person.languages) ? <FieldLine key="languages" label="Languages">{person.languages}</FieldLine> : null,
+      person.isAlive === false && hasValue(person.deathDate) ? <FieldLine key="deathDate" label="Death date">{person.deathDate}</FieldLine> : null,
+      person.isAlive === false && hasValue(person.deathPlace) ? <FieldLine key="deathPlace" label="Death place">{person.deathPlace}</FieldLine> : null,
+      ageAtDeath != null ? <FieldLine key="ageAtDeath" label="Died at age">{String(ageAtDeath)}</FieldLine> : null,
+      hasValue(person.biography) ? <FieldLine key="biography" label="Biography"><div className={styles.preWrap}>{person.biography}</div></FieldLine> : null,
+      hasValue(person.achievements) ? <FieldLine key="achievements" label="Achievements"><div className={styles.preWrap}>{person.achievements}</div></FieldLine> : null,
+      hasValue(person.interests) ? <FieldLine key="interests" label="Interests"><div className={styles.preWrap}>{person.interests}</div></FieldLine> : null,
+      hasValue(person.personality) ? <FieldLine key="personality" label="Personality"><div className={styles.preWrap}>{person.personality}</div></FieldLine> : null,
+      hasValue(person.familyNotes) ? <FieldLine key="familyNotes" label="Family notes"><div className={styles.preWrap}>{person.familyNotes}</div></FieldLine> : null
+    ]);
 
-        <div className={styles.hero}>
-          {nodeInfo.coverImage ? <img className={styles.heroImg} src={nodeInfo.coverImage} alt={nodeInfo.title || getRecordName(standard) || 'Person'} /> : <div className={styles.heroFallback}>No image</div>}
-          <div className={styles.heroMeta}>
-            <div className={styles.heroName}>{getRecordName(standard) || 'Unnamed person'}</div>
-            {getRecordNickname(standard) ? <div className={styles.heroNick}>{getRecordNickname(standard)}</div> : null}
-            <div className={styles.heroBadges}>
-              {nodeInfo.eventDate ? <span className={styles.badge}>{nodeInfo.eventDate}</span> : (person.birthDate ? <span className={styles.badge}>{person.birthDate}</span> : null)}
-              <span className={styles.badge}>{person.isAlive === true ? 'Living' : person.isAlive === false ? 'Passed away' : 'Life status unknown'}</span>
-              {nodeInfo.location ? <span className={styles.badge}>{nodeInfo.location}</span> : null}
-            </div>
-          </div>
-        </div>
-
-        <Divider />
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>Person details</div>
-          <FieldLine label="Full name">{person.name}</FieldLine>
-          <FieldLine label="Birth date">{person.birthDate}</FieldLine>
-          {currentAge != null ? <FieldLine label="Current age">{String(currentAge)}</FieldLine> : null}
-          <FieldLine label="Nickname">{person.nickname}</FieldLine>
-          <FieldLine label="Title or prefix">{person.prefix}</FieldLine>
-          {showMaidenName ? <FieldLine label="Maiden name">{person.maidenName}</FieldLine> : null}
-          <FieldLine label="Gender">{person.gender}</FieldLine>
-          <FieldLine label="Birth place">{person.birthPlace}</FieldLine>
+    const nodeRows = hideNodeDetailsFromModule
+      ? []
+      : buildSectionRows([
+        hasValue(nodeInfo.title) ? <FieldLine key="title" label="Node title">{nodeInfo.title}</FieldLine> : null,
+        hasValue(nodeInfo.imageCaption) ? <FieldLine key="imageCaption" label="Image caption">{nodeInfo.imageCaption}</FieldLine> : null,
+        hasValue(nodeInfo.eventDate) ? <FieldLine key="eventDate" label="Event date">{nodeInfo.eventDate}</FieldLine> : null,
+        hasValue(nodeInfo.location) ? (
           <FieldLine
-            label="Current location"
-            action={<CopyButton value={mapLocation} label="Current location" />}
-          >
-            <LinkValue href={mapLocation ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapLocation)}` : ''}>{mapLocation}</LinkValue>
-          </FieldLine>
-          <FieldLine
-            label="Contact number"
-            action={<CopyButton value={contactNumber} label="Phone number" />}
-          >
-            <LinkValue href={contactNumber ? `tel:${String(contactNumber).replace(/\s+/g, '')}` : ''}>{contactNumber}</LinkValue>
-          </FieldLine>
-          <FieldLine label="Heritage">{person.heritage}</FieldLine>
-          <FieldLine label="Occupation">{person.occupation}</FieldLine>
-          <FieldLine label="Education">{person.education}</FieldLine>
-          <FieldLine label="Marital status">{person.maritalStatus}</FieldLine>
-          <FieldLine label="Languages">{person.languages}</FieldLine>
-          {person.isAlive === false ? <FieldLine label="Death date">{person.deathDate}</FieldLine> : null}
-          {person.isAlive === false ? <FieldLine label="Death place">{person.deathPlace}</FieldLine> : null}
-          {ageAtDeath != null ? <FieldLine label="Died at age">{String(ageAtDeath)}</FieldLine> : null}
-          <FieldLine label="Biography"><div className={styles.preWrap}>{person.biography}</div></FieldLine>
-          <FieldLine label="Achievements"><div className={styles.preWrap}>{person.achievements}</div></FieldLine>
-          <FieldLine label="Interests"><div className={styles.preWrap}>{person.interests}</div></FieldLine>
-          <FieldLine label="Personality"><div className={styles.preWrap}>{person.personality}</div></FieldLine>
-          <FieldLine label="Family notes"><div className={styles.preWrap}>{person.familyNotes}</div></FieldLine>
-        </div>
-
-        <Divider />
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>Node details</div>
-          <FieldLine label="Node title">{nodeInfo.title}</FieldLine>
-          <FieldLine label="Image caption">{nodeInfo.imageCaption}</FieldLine>
-          <FieldLine label="Event date">{nodeInfo.eventDate}</FieldLine>
-          <FieldLine
+            key="location"
             label="Location"
             action={<CopyButton value={nodeInfo.location} label="Location" />}
           >
             <LinkValue href={nodeInfo.location ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nodeInfo.location)}` : ''}>{nodeInfo.location}</LinkValue>
           </FieldLine>
-          <FieldLine label="Notes"><div className={styles.preWrap}>{nodeInfo.notes}</div></FieldLine>
-        </div>
+        ) : null,
+        hasValue(nodeInfo.notes) ? <FieldLine key="notes" label="Notes"><div className={styles.preWrap}>{nodeInfo.notes}</div></FieldLine> : null
+      ]);
 
-        <Divider />
-        <RelationshipSection title="Parents" entries={relationships.parents} />
-        <RelationshipSection title="Children" entries={relationships.children} />
-        <RelationshipSection title="Siblings" entries={relationships.siblings} />
-        <RelationshipSection title="Partners" entries={relationships.partners} />
+    const hasRelationshipEntries = ['parents', 'children', 'siblings', 'partners'].some((groupKey) => Array.isArray(relationships?.[groupKey]) && relationships[groupKey].some((entry) => entry?.name));
+
+    return (
+      <>
+        <div className={styles.title}>{displayTitle}</div>
+        {!hideNodeDetailsFromModule && hasValue(nodeInfo.imageCaption) ? <div className={styles.caption}>{nodeInfo.imageCaption}</div> : null}
+
+        {(displayHeroImage || hasValue(getRecordName(standard)) || hasValue(getRecordNickname(standard)) || hasValue(nodeInfo.eventDate) || hasValue(person.birthDate) || hasValue(nodeInfo.location) || hasValue(person.isAlive)) ? (
+          <div className={styles.hero}>
+            {displayHeroImage ? <img className={styles.heroImg} src={displayHeroImage} alt={displayTitle || getRecordName(standard) || 'Person'} /> : null}
+            <div className={styles.heroMeta}>
+              {hasValue(getRecordName(standard)) ? <div className={styles.heroName}>{getRecordName(standard)}</div> : null}
+              {getRecordNickname(standard) ? <div className={styles.heroNick}>{getRecordNickname(standard)}</div> : null}
+              <div className={styles.heroBadges}>
+                {!hideNodeDetailsFromModule ? (nodeInfo.eventDate ? <span className={styles.badge}>{nodeInfo.eventDate}</span> : (person.birthDate ? <span className={styles.badge}>{person.birthDate}</span> : null)) : (person.birthDate ? <span className={styles.badge}>{person.birthDate}</span> : null)}
+                {hasValue(person.isAlive) ? <span className={styles.badge}>{person.isAlive === true ? 'Living' : person.isAlive === false ? 'Passed away' : 'Life status unknown'}</span> : null}
+                {!hideNodeDetailsFromModule && nodeInfo.location ? <span className={styles.badge}>{nodeInfo.location}</span> : null}
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {personRows.length ? (
+          <>
+            <Divider />
+            <div className={styles.section}>
+              <div className={styles.sectionTitle}>Person details</div>
+              {personRows}
+            </div>
+          </>
+        ) : null}
+
+        {nodeRows.length ? (
+          <>
+            <Divider />
+            <div className={styles.section}>
+              <div className={styles.sectionTitle}>Node details</div>
+              {nodeRows}
+            </div>
+          </>
+        ) : null}
+
+        {hasRelationshipEntries ? (
+          <>
+            <Divider />
+            <RelationshipSection title="Parents" entries={relationships.parents} />
+            <RelationshipSection title="Children" entries={relationships.children} />
+            <RelationshipSection title="Siblings" entries={relationships.siblings} />
+            <RelationshipSection title="Partners" entries={relationships.partners} />
+          </>
+        ) : null}
       </>
     );
   }, [node]);

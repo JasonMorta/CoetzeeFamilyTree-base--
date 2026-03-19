@@ -82,6 +82,7 @@ export function applySavedPersonRecordToNodes(nodes = [], record) {
         eventDate: syncedNode.eventDate,
         location: syncedNode.location,
         notes: syncedNode.notes,
+        hideNodeDetailsFromModule: Boolean(syncedNode.hideFromModule),
         standardPerson: nextPayload
       }
     };
@@ -128,6 +129,7 @@ export function applySavedPeopleRecordIdsToNodes(nodes = [], savedPeople = []) {
         eventDate: syncedNode.eventDate,
         location: syncedNode.location,
         notes: syncedNode.notes,
+        hideNodeDetailsFromModule: Boolean(syncedNode.hideFromModule),
         standardPerson: nextPayload
       }
     };

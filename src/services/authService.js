@@ -69,8 +69,21 @@ function normalizeAuthState(raw) {
   };
 }
 
-export function getAdminLockoutStatus(authState = loadAuthState()) {
+function clearExpiredLockout(authState) {
   const state = normalizeAuthState(authState);
+  if (!state.lockoutUntil || now() < state.lockoutUntil) {
+    return state;
+  }
+
+  return {
+    ...state,
+    failedLoginAttempts: 0,
+    lockoutUntil: null
+  };
+}
+
+export function getAdminLockoutStatus(authState = loadAuthState()) {
+  const state = clearExpiredLockout(authState);
   const currentTime = now();
   const isLocked = Boolean(state.lockoutUntil && currentTime < state.lockoutUntil);
   return {
@@ -85,9 +98,12 @@ export function getAdminLockoutStatus(authState = loadAuthState()) {
 export function loadAuthState() {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEYS.AUTH);
-    const parsed = normalizeAuthState(raw ? JSON.parse(raw) : DEFAULT_AUTH_STATE);
+    const parsed = clearExpiredLockout(raw ? JSON.parse(raw) : DEFAULT_AUTH_STATE);
 
     if (!parsed.isAdminAuthenticated) {
+      if (raw && (parsed.failedLoginAttempts === 0) && parsed.lockoutUntil === null) {
+        persistAuthState(parsed);
+      }
       return parsed;
     }
 

@@ -49,6 +49,7 @@ function buildFirebaseNodePayload(record) {
     eventDate: standardPerson.node?.eventDate || '',
     location: standardPerson.node?.location || '',
     notes: standardPerson.node?.notes || '',
+    hideNodeDetailsFromModule: Boolean(standardPerson.node?.hideFromModule),
     standardPerson
   };
 }

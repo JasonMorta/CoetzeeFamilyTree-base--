@@ -13,6 +13,8 @@ export default function AdminControlPanel({
   onEditSelected,
   onOpenFirebasePeople,
   onOpenSavedPeople,
+  onOpenUpdateRequests,
+  pendingUpdateRequestCount = 0,
   onToggleDrawNodeMode,
   onOpenSettings,
   children
@@ -63,6 +65,11 @@ export default function AdminControlPanel({
     closePanel();
     onOpenSavedPeople?.();
   }, [closePanel, onOpenSavedPeople]);
+
+  const handleOpenUpdateRequests = useCallback(() => {
+    closePanel();
+    onOpenUpdateRequests?.();
+  }, [closePanel, onOpenUpdateRequests]);
 
   const handleToggleDrawNodeMode = useCallback(() => {
     closePanel();
@@ -122,6 +129,10 @@ export default function AdminControlPanel({
           </Button>
           <Button appearance="ghost" color="cyan" size="sm" onClick={handleOpenSavedPeople}>
             Load saved people
+          </Button>
+          <Button appearance="ghost" color="red" size="sm" onClick={handleOpenUpdateRequests} className={styles.requestButton}>
+            <span>Update requests</span>
+            {pendingUpdateRequestCount > 0 ? <span className={styles.requestBadge}>{pendingUpdateRequestCount}</span> : null}
           </Button>
           <Button
             appearance={isDrawNodeMode ? 'primary' : 'ghost'}

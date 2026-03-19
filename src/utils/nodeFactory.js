@@ -41,7 +41,8 @@ export function createEmptyStandardPerson(overrides = {}) {
         imageCaption: '',
         eventDate: '',
         location: '',
-        notes: ''
+        notes: '',
+        hideFromModule: false
       },
       ...overrides
     }
@@ -117,6 +118,7 @@ export function createNodeData() {
     location: '',
     eventDate: '',
     notes: '',
+    hideNodeDetailsFromModule: false,
     tags: '',
     nodeWidth: 220,
     nodeHeight: 220,
@@ -201,6 +203,7 @@ export function normalizeNodeData(data = {}) {
     peopleNodeDisplaySingleImage: Boolean(data.peopleNodeDisplaySingleImage),
     peopleNodeSingleImageUrl: typeof data.peopleNodeSingleImageUrl === 'string' ? data.peopleNodeSingleImageUrl : '',
     peopleNodeSingleImageTitle: typeof data.peopleNodeSingleImageTitle === 'string' ? data.peopleNodeSingleImageTitle : '',
+    hideNodeDetailsFromModule: Boolean(data.hideNodeDetailsFromModule || data.hideFromModule || data.standardPerson?.person?.node?.hideFromModule || data.standardPerson?.node?.hideFromModule),
     standardPerson: normalizeStandardPerson(data.standardPerson || {})
   };
 }

@@ -172,3 +172,28 @@
     padding: 14px;
   }
 }
+
+
+.requestButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between !important;
+  gap: 10px;
+}
+
+.requestBadge {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ef4444;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.32);
+}

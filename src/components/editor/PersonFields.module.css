@@ -128,3 +128,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.sectionLead {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(232, 241, 255, 0.82);
+  line-height: 1.5;
+  font-size: 0.93rem;
+}
+
+.extraFieldsHeader {
+  margin: 4px 0 12px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(233, 242, 255, 0.86);
+}
+
+.glassPanel :global(.rs-form-group) {
+  margin-bottom: 0;
+}
+
+.glassPanel :global(.rs-control-label) {
+  font-weight: 700;
+  margin-bottom: 6px;
+}

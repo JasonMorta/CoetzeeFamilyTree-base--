@@ -39,7 +39,8 @@ export const NODE_DETAILS_FIELDS = {
   imageCaption: '',
   eventDate: '',
   location: '',
-  notes: ''
+  notes: '',
+  hideFromModule: false
 };
 
 export const SUBMISSION_META_FIELDS = {
@@ -51,6 +52,7 @@ export const FORM_PERSON_FIELD_ORDER = [
   'name',
   'birthDate',
   'photo',
+  'contactNumber',
   'nickname',
   'prefix',
   'maidenName',
@@ -130,13 +132,7 @@ export const FAMILY3_PERSON_FIELDS = {
   node: { ...NODE_DETAILS_FIELDS }
 };
 
-const LEGACY_PERSON_FIELDS_TO_STRIP = new Set([
-  'contactNumber',
-  'teams',
-  'editedAncestry',
-  'edited ancestry',
-  'ancestryEdited'
-]);
+const LEGACY_PERSON_FIELDS_TO_STRIP = new Set([]);
 
 const INTERNAL_PERSON_KEYS = new Set(['submissionMeta', 'relationships', 'node']);
 
@@ -309,7 +305,8 @@ function normalizeNodeDetails(node = {}, person = {}) {
     imageCaption: cleanString(node?.imageCaption || node?.photoCaption),
     eventDate: cleanString(node?.eventDate),
     location: cleanString(node?.location),
-    notes: cleanString(node?.notes)
+    notes: cleanString(node?.notes),
+    hideFromModule: Boolean(node?.hideFromModule || node?.hideNodeDetailsFromModule)
   });
 }
 
@@ -661,7 +658,8 @@ export function normalizeSavedPersonRecord(record = {}) {
       imageCaption: record.photoCaption,
       eventDate: record.eventDate,
       location: record.location,
-      notes: record.notes
+      notes: record.notes,
+      hideFromModule: record.hideFromModule || record.hideNodeDetailsFromModule
     }, {
       name: getRecordName(record).trim(),
       photo: getRecordPhoto(record)
@@ -716,7 +714,8 @@ export function createStandardPersonWrapper(record = {}, extras = {}) {
       photoCaption: person.node.imageCaption,
       eventDate: person.node.eventDate,
       location: person.node.location,
-      notes: person.node.notes
+      notes: person.node.notes,
+      hideFromModule: Boolean(person.node.hideFromModule)
     }
   };
 }

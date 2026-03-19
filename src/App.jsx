@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback, useEffect } from 'react';
 import styles from './App.module.css';
 import { useAppState } from './context/AppStateContext';
 import { ACTIONS } from './context/appReducer';
@@ -14,6 +14,8 @@ import NodeEditorDrawer from './components/editor/NodeEditorDrawer';
 import NodeDetailsModal from './components/inspector/NodeDetailsModal';
 import SettingsDrawer from './components/settings/SettingsDrawer';
 import FirebasePeopleModal from './components/admin/FirebasePeopleModal';
+import UpdateRequestsModal from './components/admin/UpdateRequestsModal';
+import { fetchPendingUpdateRequestCount } from './services/firebaseUpdateRequestService';
 import { useRemoteStateSync } from './hooks/useRemoteStateSync';
 
 export default function App() {
@@ -21,6 +23,8 @@ export default function App() {
   useRemoteStateSync(state, dispatch);
   const [isFirebasePeopleOpen, setIsFirebasePeopleOpen] = useState(false);
   const [isSavedPeopleOpen, setIsSavedPeopleOpen] = useState(false);
+  const [isUpdateRequestsOpen, setIsUpdateRequestsOpen] = useState(false);
+  const [pendingUpdateRequestCount, setPendingUpdateRequestCount] = useState(0);
 
   const selectedNodes = useMemo(() => state.nodes.filter((node) => (state.selectedNodeIds || []).includes(node.id)), [state.nodes, state.selectedNodeIds]);
   const selectedNode = useMemo(() => state.nodes.find((node) => node.id === state.selectedNodeId) || null, [state.nodes, state.selectedNodeId]);
@@ -55,6 +59,31 @@ export default function App() {
     });
     dispatch({ type: ACTIONS.CLOSE_NODE_MODAL });
   }, [dispatch, state.selectedEdgeId, state.selectedNodeIds]);
+
+
+  useEffect(() => {
+    if (!state.isAdminAuthenticated) {
+      setPendingUpdateRequestCount(0);
+      return undefined;
+    }
+
+    let cancelled = false;
+    const refreshCount = async () => {
+      try {
+        const count = await fetchPendingUpdateRequestCount();
+        if (!cancelled) setPendingUpdateRequestCount(count);
+      } catch (error) {
+        if (!cancelled) setPendingUpdateRequestCount(0);
+      }
+    };
+
+    void refreshCount();
+    const timer = window.setInterval(() => { void refreshCount(); }, 30000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [state.isAdminAuthenticated]);
 
   const workspaceStyle = useMemo(
     () => ({
@@ -102,6 +131,8 @@ export default function App() {
         onEditSelected={handleEditSelected}
         onOpenFirebasePeople={() => setIsFirebasePeopleOpen(true)}
         onOpenSavedPeople={() => setIsSavedPeopleOpen(true)}
+        onOpenUpdateRequests={() => setIsUpdateRequestsOpen(true)}
+        pendingUpdateRequestCount={pendingUpdateRequestCount}
         onToggleDrawNodeMode={() => dispatch({ type: ACTIONS.TOGGLE_DRAW_NODE_MODE })}
         onOpenSettings={() => dispatch({ type: ACTIONS.OPEN_SETTINGS })}
       >
@@ -123,6 +154,7 @@ export default function App() {
       <SettingsDrawer />
       <FirebasePeopleModal mode="submissions" open={isFirebasePeopleOpen} onClose={() => setIsFirebasePeopleOpen(false)} />
       <FirebasePeopleModal mode="savedPeople" open={isSavedPeopleOpen} onClose={() => setIsSavedPeopleOpen(false)} />
+      <UpdateRequestsModal open={isUpdateRequestsOpen} onClose={() => setIsUpdateRequestsOpen(false)} onPendingCountChange={setPendingUpdateRequestCount} />
     </div>
   );
 }
