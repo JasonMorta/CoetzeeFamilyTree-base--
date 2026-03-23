@@ -180,11 +180,33 @@ function normalizePeople(nodeType, people) {
   return current;
 }
 
+function hasGroupedPeopleContent(people = []) {
+  return Array.isArray(people) && people.some((person) => {
+    if (!person || typeof person !== 'object') return false;
+    return ['fullName', 'nickname', 'photo', 'birthDate'].some((field) => String(person[field] || '').trim().length > 0);
+  });
+}
+
+function inferNodeType(data = {}, fallback = NODE_TYPES.STANDARD) {
+  if ([NODE_TYPES.STANDARD, NODE_TYPES.PERSONS].includes(data.nodeType)) {
+    return data.nodeType;
+  }
+
+  const hasPeopleEntries = hasGroupedPeopleContent(data.people);
+  const hasSingleImageConfig = Boolean(data.peopleNodeDisplaySingleImage)
+    || String(data.peopleNodeSingleImageUrl || '').trim().length > 0
+    || String(data.peopleNodeSingleImageTitle || '').trim().length > 0;
+
+  if (hasPeopleEntries || hasSingleImageConfig) {
+    return NODE_TYPES.PERSONS;
+  }
+
+  return fallback;
+}
+
 export function normalizeNodeData(data = {}) {
   const defaults = createNodeData();
-  const nodeType = [NODE_TYPES.STANDARD, NODE_TYPES.PERSONS].includes(data.nodeType)
-    ? data.nodeType
-    : defaults.nodeType;
+  const nodeType = inferNodeType(data, defaults.nodeType);
 
   return {
     ...defaults,

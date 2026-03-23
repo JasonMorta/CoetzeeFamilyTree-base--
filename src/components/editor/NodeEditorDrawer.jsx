@@ -124,12 +124,22 @@ export default function NodeEditorDrawer() {
   const [draftStandardPerson, setDraftStandardPerson] = useState(createEmptyStandardPerson());
   const [peopleStatus, setPeopleStatus] = useState('idle');
   const [standardStatus, setStandardStatus] = useState({ personal: 'idle', node: 'idle', relationships: 'idle' });
-  const anyUnsaved = useMemo(() => [peopleStatus, ...Object.values(standardStatus || {})].includes('dirty'), [peopleStatus, standardStatus]);
   const [closeWarning, setCloseWarning] = useState('');
   const [draftPeople, setDraftPeople] = useState([]);
   const [draftSharedNotes, setDraftSharedNotes] = useState('');
+  const [draftNodeType, setDraftNodeType] = useState(NODE_TYPES.STANDARD);
+  const [draftPeopleNodeDisplaySingleImage, setDraftPeopleNodeDisplaySingleImage] = useState(false);
+  const [draftPeopleNodeSingleImageUrl, setDraftPeopleNodeSingleImageUrl] = useState('');
+  const [draftPeopleNodeSingleImageTitle, setDraftPeopleNodeSingleImageTitle] = useState('');
   const [generatedEditLink, setGeneratedEditLink] = useState('');
   const [editLinkStatus, setEditLinkStatus] = useState('');
+
+  const currentNodeType = nodeData?.nodeType || NODE_TYPES.STANDARD;
+  const hasDraftNodeTypeChange = draftNodeType !== currentNodeType;
+  const hasDraftPeopleDisplayChange = draftPeopleNodeDisplaySingleImage !== Boolean(nodeData?.peopleNodeDisplaySingleImage)
+    || draftPeopleNodeSingleImageUrl !== String(nodeData?.peopleNodeSingleImageUrl || '')
+    || draftPeopleNodeSingleImageTitle !== String(nodeData?.peopleNodeSingleImageTitle || '');
+  const anyUnsaved = useMemo(() => hasDraftNodeTypeChange || hasDraftPeopleDisplayChange || [peopleStatus, ...Object.values(standardStatus || {})].includes('dirty'), [hasDraftNodeTypeChange, hasDraftPeopleDisplayChange, peopleStatus, standardStatus]);
 
   useEffect(() => {
     if (!state.isEditorOpen) return;
@@ -143,8 +153,6 @@ export default function NodeEditorDrawer() {
 
   const updateRootField = useCallback((field, value) => updateNode({ [field]: value }), [updateNode]);
   const updateImageSetting = useCallback((field, value) => updateNode({ imageSettings: { ...(nodeData?.imageSettings || {}), [field]: value } }), [nodeData?.imageSettings, updateNode]);
-  const updatePeopleNodeDisplaySetting = useCallback((field, value) => updateNode({ [field]: value }), [updateNode]);
-
   const updateNodeSize = useCallback((value) => {
     const nextSize = Math.max(100, Math.min(800, Number(value) || 220));
     updateNode({ nodeWidth: nextSize, nodeHeight: nextSize });
@@ -152,15 +160,19 @@ export default function NodeEditorDrawer() {
 
   const updateNodeType = useCallback((value) => {
     const nextType = value || NODE_TYPES.STANDARD;
-    const patch = { nodeType: nextType };
-    if (nextType === NODE_TYPES.STANDARD) {
-      patch.people = [];
-      patch.standardPerson = nodeData?.standardPerson || createEmptyStandardPerson();
-    } else if (nextType === NODE_TYPES.PERSONS && (!nodeData?.people || nodeData.people.length === 0)) {
-      patch.people = createDefaultPeopleByType(NODE_TYPES.PERSONS);
+    setCloseWarning('');
+    setDraftNodeType(nextType);
+
+    if (nextType === NODE_TYPES.PERSONS && (!draftPeople || draftPeople.length === 0)) {
+      setDraftPeople(createDefaultPeopleByType(NODE_TYPES.PERSONS));
     }
-    updateNode(patch);
-  }, [nodeData?.people, nodeData?.standardPerson, updateNode]);
+
+    if (nextType === NODE_TYPES.PERSONS) {
+      setPeopleStatus('dirty');
+    } else {
+      setStandardStatus({ personal: 'dirty', node: 'dirty', relationships: 'dirty' });
+    }
+  }, [draftPeople]);
 
   const commitStandardPerson = useCallback((nextStandard) => {
     updateNode({ standardPerson: createStandardPersonWrapper(nextStandard) });
@@ -225,7 +237,17 @@ export default function NodeEditorDrawer() {
   }, []);
 
   const savePeopleSection = useCallback(() => {
-    updateNode({ people: draftPeople, notes: draftSharedNotes });
+    updateNode({
+      nodeType: NODE_TYPES.PERSONS,
+      people: draftPeople,
+      notes: draftSharedNotes,
+      peopleNodeDisplaySingleImage: draftPeopleNodeDisplaySingleImage,
+      peopleNodeSingleImageUrl: draftPeopleNodeDisplaySingleImage ? draftPeopleNodeSingleImageUrl : '',
+      peopleNodeSingleImageTitle: draftPeopleNodeDisplaySingleImage ? draftPeopleNodeSingleImageTitle : '',
+      standardPerson: createEmptyStandardPerson()
+    });
+
+    setDraftNodeType(NODE_TYPES.PERSONS);
 
     let nextLibrary = Array.isArray(state.savedPeople) ? state.savedPeople : [];
     (draftPeople || []).forEach((person) => {
@@ -239,7 +261,7 @@ export default function NodeEditorDrawer() {
     setCloseWarning('');
     setPeopleStatus('saved');
     window.setTimeout(() => setPeopleStatus('idle'), 1200);
-  }, [dispatch, draftPeople, draftSharedNotes, state.savedPeople, updateNode]);
+  }, [dispatch, draftPeople, draftPeopleNodeDisplaySingleImage, draftPeopleNodeSingleImageTitle, draftPeopleNodeSingleImageUrl, draftSharedNotes, state.savedPeople, updateNode]);
 
   const saveStandardPersonSection = useCallback((nextStandard) => {
     const normalized = createStandardPersonWrapper(nextStandard);
@@ -249,14 +271,24 @@ export default function NodeEditorDrawer() {
     setCloseWarning('');
     commitStandardPerson(withNode);
     updateNode({
+      nodeType: NODE_TYPES.STANDARD,
       title: syncedNode.title,
       photo: syncedNode.coverImage,
       photoCaption: syncedNode.imageCaption,
       eventDate: syncedNode.eventDate,
       location: syncedNode.location,
       notes: syncedNode.notes,
-      hideNodeDetailsFromModule: Boolean(syncedNode.hideFromModule)
+      hideNodeDetailsFromModule: Boolean(syncedNode.hideFromModule),
+      people: [],
+      peopleNodeDisplaySingleImage: false,
+      peopleNodeSingleImageUrl: '',
+      peopleNodeSingleImageTitle: ''
     });
+    setDraftNodeType(NODE_TYPES.STANDARD);
+    setDraftPeople([]);
+    setDraftPeopleNodeDisplaySingleImage(false);
+    setDraftPeopleNodeSingleImageUrl('');
+    setDraftPeopleNodeSingleImageTitle('');
     saveStandardRecordToLibrary(withNode);
   }, [commitStandardPerson, saveStandardRecordToLibrary, updateNode]);
 
@@ -330,8 +362,12 @@ export default function NodeEditorDrawer() {
   useEffect(() => {
     if (!selectedNode || !nodeData || !state.isEditorOpen) return;
 
+    setDraftNodeType(nodeData.nodeType || NODE_TYPES.STANDARD);
     setDraftSharedNotes(nodeData.notes || '');
     setDraftPeople(Array.isArray(nodeData.people) ? nodeData.people : []);
+    setDraftPeopleNodeDisplaySingleImage(Boolean(nodeData.peopleNodeDisplaySingleImage));
+    setDraftPeopleNodeSingleImageUrl(String(nodeData.peopleNodeSingleImageUrl || ''));
+    setDraftPeopleNodeSingleImageTitle(String(nodeData.peopleNodeSingleImageTitle || ''));
     const existingStandard = createStandardPersonWrapper(nodeData.standardPerson || createEmptyStandardPerson());
     setDraftStandardPerson(createStandardPersonWrapper(existingStandard, {
       node: {
@@ -351,12 +387,12 @@ export default function NodeEditorDrawer() {
     setGeneratedEditLink('');
     setEditLinkStatus('');
     dispatch({ type: ACTIONS.SET_EDITOR_UNSAVED_CHANGES, payload: false });
-  }, [dispatch, selectedNode?.id, nodeData?.nodeType, state.isEditorOpen]);
+  }, [dispatch, selectedNode?.id, state.isEditorOpen]);
 
   if (!selectedNode || !nodeData || !state.isEditorOpen) return null;
 
-  const isStandard = nodeData.nodeType === NODE_TYPES.STANDARD;
-  const canAddPeople = nodeData.nodeType === NODE_TYPES.PERSONS;
+  const isStandard = draftNodeType === NODE_TYPES.STANDARD;
+  const canAddPeople = draftNodeType === NODE_TYPES.PERSONS;
   const standardExternalEditId = String(draftStandardPerson?.firebaseDocumentId || nodeData?.standardPerson?.firebaseDocumentId || '').trim();
   const canGenerateExternalEditLink = isStandard && Boolean(standardExternalEditId);
 
@@ -386,7 +422,7 @@ export default function NodeEditorDrawer() {
         <Form fluid>
           <Form.Group controlId="node-type">
             <Form.ControlLabel>Node type</Form.ControlLabel>
-            <SelectPicker block cleanable={false} searchable={false} data={NODE_TYPE_OPTIONS} value={nodeData.nodeType || NODE_TYPES.STANDARD} onChange={updateNodeType} />
+            <SelectPicker block cleanable={false} searchable={false} data={NODE_TYPE_OPTIONS} value={draftNodeType || NODE_TYPES.STANDARD} onChange={updateNodeType} />
           </Form.Group>
 
           {isStandard && (
@@ -420,33 +456,35 @@ export default function NodeEditorDrawer() {
               <Divider>Persons node display</Divider>
               <Form.Group controlId="people-node-single-image-toggle">
                 <Checkbox
-                  checked={Boolean(nodeData.peopleNodeDisplaySingleImage)}
+                  checked={draftPeopleNodeDisplaySingleImage}
                   onChange={(_, checked) => {
-                    updatePeopleNodeDisplaySetting('peopleNodeDisplaySingleImage', checked);
+                    setPeopleStatus('dirty');
+                    setCloseWarning('');
+                    setDraftPeopleNodeDisplaySingleImage(Boolean(checked));
                     if (!checked) {
-                      updatePeopleNodeDisplaySetting('peopleNodeSingleImageUrl', '');
-                      updatePeopleNodeDisplaySetting('peopleNodeSingleImageTitle', '');
+                      setDraftPeopleNodeSingleImageUrl('');
+                      setDraftPeopleNodeSingleImageTitle('');
                     }
                   }}
                 >
                   Only display one image on the node
                 </Checkbox>
               </Form.Group>
-              {nodeData.peopleNodeDisplaySingleImage ? (
+              {draftPeopleNodeDisplaySingleImage ? (
                 <>
                   <Form.Group controlId="people-node-single-image-url">
                     <Form.ControlLabel>Display image URL</Form.ControlLabel>
                     <Input
-                      value={nodeData.peopleNodeSingleImageUrl || ''}
-                      onChange={(value) => updatePeopleNodeDisplaySetting('peopleNodeSingleImageUrl', value || '')}
+                      value={draftPeopleNodeSingleImageUrl}
+                      onChange={(value) => { setPeopleStatus('dirty'); setCloseWarning(''); setDraftPeopleNodeSingleImageUrl(value || ''); }}
                       placeholder="Paste the image URL to show on the node"
                     />
                   </Form.Group>
                   <Form.Group controlId="people-node-single-image-title">
                     <Form.ControlLabel>Display image title</Form.ControlLabel>
                     <Input
-                      value={nodeData.peopleNodeSingleImageTitle || ''}
-                      onChange={(value) => updatePeopleNodeDisplaySetting('peopleNodeSingleImageTitle', value || '')}
+                      value={draftPeopleNodeSingleImageTitle}
+                      onChange={(value) => { setPeopleStatus('dirty'); setCloseWarning(''); setDraftPeopleNodeSingleImageTitle(value || ''); }}
                       placeholder="Add the title to show under the node image"
                     />
                   </Form.Group>

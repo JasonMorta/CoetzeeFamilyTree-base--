@@ -1,0 +1,290 @@
+.modal :global(.rs-modal-dialog) {
+  width: 100%;
+  margin: 1.75vh auto;
+}
+
+.modal :global(.rs-modal-content) {
+  background:
+    radial-gradient(circle at top right, rgba(34, 228, 255, 0.14), transparent 26%),
+    radial-gradient(circle at top left, rgba(77, 87, 255, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(4, 10, 20, 0.98), rgba(2, 7, 16, 0.98));
+  border: 1px solid rgba(109, 131, 168, 0.14);
+  border-radius: 34px;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.52);
+  overflow: hidden;
+  padding: 0;
+}
+
+.modal :global(.rs-modal-body) {
+  padding: 0;
+  margin-top: 0;
+}
+
+.body {
+  height: min(92vh, 1040px);
+  color: #eaf3ff;
+  overflow: hidden;
+}
+
+.peopleShell {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 26px 28px 14px;
+  flex: 0 0 auto;
+}
+
+.topBarSpacer {
+  min-height: 1px;
+}
+
+.topBarActions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.editButton {
+  border-radius: 999px !important;
+  min-height: 42px;
+  padding: 0 20px !important;
+  font-weight: 700 !important;
+  color: #04131d !important;
+  background: linear-gradient(90deg, #20dff7, #2cbef5) !important;
+  border: none !important;
+  box-shadow: 0 10px 26px rgba(44, 190, 245, 0.22);
+}
+
+.closeButton {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  flex: 0 0 32px;
+}
+
+.closeButton span {
+  position: absolute;
+  top: 15px;
+  left: 4px;
+  width: 24px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(235, 244, 255, 0.76);
+}
+
+.closeButton span:first-child {
+  transform: rotate(45deg);
+}
+
+.closeButton span:last-child {
+  transform: rotate(-45deg);
+}
+
+.peopleScroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 28px 28px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(55, 191, 227, 0.5) transparent;
+}
+
+.peopleScroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.peopleScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.peopleScroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(47, 198, 239, 0.58), rgba(104, 124, 255, 0.34));
+  border-radius: 999px;
+}
+
+.heroCard {
+  margin-bottom: 24px;
+}
+
+.heroMediaWrap {
+  position: relative;
+  min-height: 300px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(116, 129, 155, 0.12);
+  background:
+    radial-gradient(circle at top left, rgba(37, 197, 255, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(9, 16, 30, 0.92), rgba(5, 10, 20, 0.96));
+}
+
+.heroMedia,
+.heroMediaPlaceholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroMedia {
+  object-fit: cover;
+}
+
+.heroMediaPlaceholder {
+  display: grid;
+  place-items: center;
+  color: rgba(233, 241, 255, 0.68);
+  font-size: 1rem;
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 14, 0.12) 0%, rgba(2, 6, 14, 0.28) 48%, rgba(2, 6, 14, 0.82) 100%),
+    linear-gradient(90deg, rgba(3, 8, 16, 0.38), rgba(3, 8, 16, 0.06));
+}
+
+.heroText {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 26px;
+  z-index: 1;
+}
+
+.heroTitle {
+  margin: 0;
+  color: #f3f7ff;
+  font-size: clamp(1.9rem, 3vw, 3rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.heroCaption {
+  margin: 10px 0 0;
+  max-width: 72ch;
+  color: rgba(233, 241, 255, 0.8);
+  line-height: 1.6;
+}
+
+.peopleSection {
+  padding-bottom: 6px;
+}
+
+.peopleList {
+  display: grid;
+  gap: 14px;
+}
+
+.personPill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 82px;
+  padding: 10px 18px 10px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(116, 129, 155, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.personPillImage,
+.personPillPlaceholder {
+  width: 62px;
+  height: 62px;
+  flex: 0 0 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(88, 104, 129, 0.42), rgba(39, 47, 62, 0.62));
+}
+
+.personPillPlaceholder {
+  display: grid;
+  place-items: center;
+  color: rgba(235, 244, 255, 0.88);
+  font-weight: 700;
+}
+
+.personPillText {
+  min-width: 0;
+}
+
+.personPillName {
+  color: #f3f7ff;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.22;
+}
+
+.personPillMeta {
+  margin-top: 4px;
+  color: rgba(233, 241, 255, 0.62);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.emptyText {
+  color: rgba(233, 241, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .modal :global(.rs-modal-dialog) {
+    width: 96vw;
+    margin: 1.5vh auto;
+  }
+
+  .body {
+    height: 94vh;
+  }
+
+  .topBar,
+  .peopleScroll {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .editButton {
+    min-height: 40px;
+    padding: 0 18px !important;
+  }
+
+  .heroMediaWrap {
+    min-height: 240px;
+  }
+
+  .heroText {
+    left: 22px;
+    right: 22px;
+    bottom: 20px;
+  }
+
+  .personPill {
+    min-height: 76px;
+    padding-right: 16px;
+  }
+
+  .personPillImage,
+  .personPillPlaceholder {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+  }
+}
