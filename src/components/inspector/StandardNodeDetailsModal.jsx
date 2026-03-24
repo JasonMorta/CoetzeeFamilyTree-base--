@@ -172,6 +172,7 @@ function ProfileMetaItem({ item }) {
 }
 
 function FamilyCard({ item }) {
+  console.log('item', item)
   if (!item) return null;
 
   return (
@@ -184,7 +185,7 @@ function FamilyCard({ item }) {
       <div className={styles.familyCardText}>
         <div className={styles.familyCardName}>{item.name}</div>
         {hasValue(item.meta) ? <div className={styles.familyCardMeta}>{item.meta}</div> : null}
-        <div className={styles.familyCardType}>{item.type === 'Biological parent' ? 'Parent' : item.type}</div>
+        {/* <div className={styles.familyCardType}>{item.meta}</div> */}
       </div>
     </div>
   );
