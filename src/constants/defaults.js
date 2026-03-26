@@ -10,7 +10,7 @@ export const STORAGE_KEYS = {
 
 export const APP_METADATA = {
   appName: getFamilyAppTitle(),
-  version: '2.29.13',
+  version: '2.30.14',
   author: 'Jason Morta'
 };
 

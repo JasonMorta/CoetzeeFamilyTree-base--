@@ -13,11 +13,31 @@ import {
   getFirebaseAppStateDocumentNames,
   isFirebaseAppStateConfigured,
   migrateLocalSnapshotToFirebase,
+  readFirebaseAppStateDocuments,
   saveFirebaseAppStateSnapshot
 } from '../../services/firebaseAppStateService';
 import styles from './AdminMigrateFirebaseButton.module.css';
 import { FAMILY_DISPLAY_NAME, FAMILY_SLUG } from '../../config/familyConfig';
-import { getFirebasePeopleCollectionName, getLegacyFirebasePeopleCollectionName, syncLegacyPeopleCollectionToFamilyScope } from '../../services/firebasePeopleService';
+import {
+  fetchFirebasePeopleList,
+  getFirebasePeopleCollectionName,
+  getLegacyFirebasePeopleCollectionName,
+  syncLegacyPeopleCollectionToFamilyScope
+} from '../../services/firebasePeopleService';
+import { isLocalRuntime } from '../sync/saveStateHelpers';
+
+const LOCAL_DEBUG_EXPORT_ROUTE = '/__local-state/save';
+
+function mapDocumentsById(documents) {
+  return Array.isArray(documents)
+    ? documents.reduce((accumulator, item) => {
+        if (item?.id) {
+          accumulator[item.id] = item;
+        }
+        return accumulator;
+      }, {})
+    : {};
+}
 
 function buildMigrationPayload(state) {
   saveAppData(state);
@@ -55,6 +75,36 @@ function buildMigrationPayload(state) {
   };
 }
 
+async function saveFirebaseDebugExportLocally(payload) {
+  const response = await fetch(LOCAL_DEBUG_EXPORT_ROUTE, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || !result?.ok) {
+    throw new Error(result?.error || 'Local debug export failed.');
+  }
+
+  return result;
+}
+
+function ActionCard({ title, description, meta, children }) {
+  return (
+    <section className={styles.actionCard}>
+      <div className={styles.actionCopy}>
+        <div className={styles.actionTitle}>{title}</div>
+        <div className={styles.actionDescription}>{description}</div>
+        {meta ? <div className={styles.actionMeta}>{meta}</div> : null}
+      </div>
+      <div className={styles.actionControl}>{children}</div>
+    </section>
+  );
+}
+
 export default function AdminMigrateFirebaseButton() {
   const { state, dispatch } = useAppState();
   const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +115,7 @@ export default function AdminMigrateFirebaseButton() {
   const [statusTone, setStatusTone] = useState('neutral');
   const [isMigratingFamilyScope, setIsMigratingFamilyScope] = useState(false);
   const [isMigratingSubmissions, setIsMigratingSubmissions] = useState(false);
+  const [isSavingFirebaseDebugExport, setIsSavingFirebaseDebugExport] = useState(false);
 
   const isConfigured = useMemo(() => isFirebaseAppStateConfigured(), []);
   const collectionName = useMemo(() => getFirebaseAppStateCollectionName(), []);
@@ -72,9 +123,17 @@ export default function AdminMigrateFirebaseButton() {
   const submissionsCollectionName = useMemo(() => getFirebasePeopleCollectionName(), []);
   const legacySubmissionsCollectionName = useMemo(() => getLegacyFirebasePeopleCollectionName(), []);
   const documentNames = useMemo(() => getFirebaseAppStateDocumentNames(), []);
+  const isLocalOnlySaveVisible = useMemo(() => isLocalRuntime(), []);
+
+  const isAnyActionRunning = isMigrating
+    || isNormalizing
+    || isBackfillingIds
+    || isMigratingFamilyScope
+    || isMigratingSubmissions
+    || isSavingFirebaseDebugExport;
 
   const handleMigrate = useCallback(async () => {
-    if (!isConfigured || isMigrating || isMigratingFamilyScope || isMigratingSubmissions) {
+    if (!isConfigured || isAnyActionRunning) {
       return;
     }
 
@@ -93,11 +152,10 @@ export default function AdminMigrateFirebaseButton() {
     } finally {
       setIsMigrating(false);
     }
-  }, [isConfigured, isMigrating, isMigratingFamilyScope, isMigratingSubmissions, state]);
-
+  }, [isAnyActionRunning, isConfigured, state]);
 
   const handleMigrateToFamilyScope = useCallback(async () => {
-    if (!isConfigured || isMigrating || isNormalizing || isBackfillingIds || isMigratingFamilyScope) {
+    if (!isConfigured || isAnyActionRunning) {
       return;
     }
 
@@ -117,11 +175,10 @@ export default function AdminMigrateFirebaseButton() {
     } finally {
       setIsMigratingFamilyScope(false);
     }
-  }, [collectionName, isBackfillingIds, isConfigured, isMigrating, isMigratingFamilyScope, isNormalizing, state]);
-
+  }, [collectionName, isAnyActionRunning, isConfigured, state]);
 
   const handleMigrateSubmissionsToFamilyScope = useCallback(async () => {
-    if (!isConfigured || isMigrating || isNormalizing || isBackfillingIds || isMigratingFamilyScope || isMigratingSubmissions) {
+    if (!isConfigured || isAnyActionRunning) {
       return;
     }
 
@@ -141,11 +198,10 @@ export default function AdminMigrateFirebaseButton() {
     } finally {
       setIsMigratingSubmissions(false);
     }
-  }, [isBackfillingIds, isConfigured, isMigrating, isMigratingFamilyScope, isMigratingSubmissions, isNormalizing, submissionsCollectionName]);
-
+  }, [isAnyActionRunning, isConfigured, submissionsCollectionName]);
 
   const handleBackfillSavedPeopleIds = useCallback(async () => {
-    if (!isConfigured || isMigrating || isNormalizing || isBackfillingIds || isMigratingFamilyScope || isMigratingSubmissions) {
+    if (!isConfigured || isAnyActionRunning) {
       return;
     }
 
@@ -175,10 +231,10 @@ export default function AdminMigrateFirebaseButton() {
     } finally {
       setIsBackfillingIds(false);
     }
-  }, [dispatch, isBackfillingIds, isConfigured, isMigrating, isMigratingFamilyScope, isMigratingSubmissions, isNormalizing, state]);
+  }, [dispatch, isAnyActionRunning, isConfigured, state]);
 
   const handleNormalizeSavedPeople = useCallback(async () => {
-    if (!isConfigured || isMigrating || isNormalizing || isBackfillingIds || isMigratingFamilyScope || isMigratingSubmissions) {
+    if (!isConfigured || isAnyActionRunning) {
       return;
     }
 
@@ -200,14 +256,82 @@ export default function AdminMigrateFirebaseButton() {
     } finally {
       setIsNormalizing(false);
     }
-  }, [dispatch, isBackfillingIds, isConfigured, isMigrating, isMigratingFamilyScope, isMigratingSubmissions, isNormalizing, state]);
+  }, [dispatch, isAnyActionRunning, isConfigured, state]);
+
+  const handleSaveFirebaseDebugExport = useCallback(async () => {
+    if (!isConfigured || !isLocalOnlySaveVisible || isAnyActionRunning) {
+      return;
+    }
+
+    setIsSavingFirebaseDebugExport(true);
+    setStatus('Downloading the exact Firebase family-tree documents and mirroring them into public/data…');
+    setStatusTone('neutral');
+
+    try {
+      const [appStateDocuments, submissions] = await Promise.all([
+        readFirebaseAppStateDocuments(),
+        fetchFirebasePeopleList()
+      ]);
+
+      const documentsById = mapDocumentsById(appStateDocuments);
+      const configDocument = documentsById[documentNames.config] || null;
+      const savedPeopleDocument = documentsById[documentNames.savedPeople] || null;
+      const legacyStateDocument = documentsById[documentNames.legacyState] || null;
+
+      if (!configDocument || !savedPeopleDocument || !legacyStateDocument) {
+        throw new Error(`Could not find all required Firebase app-state documents in ${collectionName}. Expected ${documentNames.config}, ${documentNames.savedPeople}, and ${documentNames.legacyState}.`);
+      }
+
+      const exportedAt = new Date().toISOString();
+      const debugPayload = {
+        kind: 'firebase-debug-export',
+        exportedAt,
+        appVersion: APP_METADATA.version,
+        family: {
+          displayName: FAMILY_DISPLAY_NAME,
+          slug: FAMILY_SLUG
+        },
+        collections: {
+          appState: {
+            active: collectionName,
+            legacyFallback: legacyCollectionName,
+            documents: appStateDocuments
+          },
+          submissions: {
+            active: submissionsCollectionName,
+            legacyFallback: legacySubmissionsCollectionName,
+            documents: submissions
+          }
+        }
+      };
+
+      const result = await saveFirebaseDebugExportLocally({
+        configPayload: configDocument,
+        savedPeoplePayload: savedPeopleDocument,
+        legacyCombinedPayload: legacyStateDocument,
+        debugExportPayload: debugPayload
+      });
+
+      const savedPath = Array.isArray(result?.paths)
+        ? result.paths.find((item) => item === 'public/data/firebase-debug-export.json')
+        : 'public/data/firebase-debug-export.json';
+
+      setStatus(`Firebase family-tree data was mirrored locally and the debug export was saved to ${savedPath}. This button is only available while running the Vite dev server locally.`);
+      setStatusTone('success');
+    } catch (error) {
+      setStatus(error?.message || 'Local Firebase debug export failed.');
+      setStatusTone('error');
+    } finally {
+      setIsSavingFirebaseDebugExport(false);
+    }
+  }, [collectionName, documentNames, isAnyActionRunning, isConfigured, isLocalOnlySaveVisible, legacyCollectionName, legacySubmissionsCollectionName, submissionsCollectionName]);
 
   if (!state.isAdminAuthenticated) {
     return null;
   }
 
   const tooltipText = isConfigured
-    ? 'Push the current local JSON snapshot to Firebase, normalize saved people, backfill missing saved-people edit IDs, or sync the live tree into the family-scoped Firebase collection built from the env slug.'
+    ? 'Open Firebase migration tools, read what each action does, and optionally save a local debug export while running the app in VS Code.'
     : 'Firebase app-state migration is not configured.';
 
   return (
@@ -222,18 +346,18 @@ export default function AdminMigrateFirebaseButton() {
             disabled={!isConfigured}
             className={styles.button}
           >
-            Migrate local data to Firebase
+            Migration options
           </Button>
         </span>
       </Whisper>
 
-      <Modal open={isOpen} onClose={() => !(isMigrating || isNormalizing || isBackfillingIds || isMigratingFamilyScope || isMigratingSubmissions) && setIsOpen(false)} size="sm" className={styles.modal}>
+      <Modal open={isOpen} onClose={() => !isAnyActionRunning && setIsOpen(false)} size="md" className={styles.modal}>
         <Modal.Header>
-          <Modal.Title>Firebase migration</Modal.Title>
+          <Modal.Title>Firebase migration options</Modal.Title>
         </Modal.Header>
         <Modal.Body className={styles.body}>
           <div className={styles.text}>
-            This app now derives its Firebase collection names from the family slug in <strong>.env</strong>. The active collection is family-scoped, while the legacy generic collection remains available as a fallback read until you migrate.
+            This app derives its Firebase collection names from the family slug in <strong>.env</strong>. Use the actions below to move data, clean older records, or create a local debugging export while the app is running in VS Code.
           </div>
           <div className={styles.metaCard}>
             <div><strong>Family display name:</strong> {FAMILY_DISPLAY_NAME}</div>
@@ -246,37 +370,75 @@ export default function AdminMigrateFirebaseButton() {
             <div><strong>Saved people document:</strong> {documentNames.savedPeople}</div>
             <div><strong>Legacy combined document:</strong> {documentNames.legacyState}</div>
           </div>
-          <div className={styles.text}>
-            The saved-people document name stays <strong>familyTreeAppSavedPeople</strong>. Only the outer Firebase collection name changes by family slug.
+
+          <div className={styles.actionGrid}>
+            <ActionCard
+              title="Run migration"
+              description="Push the current local app snapshot into the Firebase app-state documents. This writes the config document, the saved-people document, and the legacy combined state document."
+              meta="Best when you want the current browser state mirrored into Firebase exactly as it is now."
+            >
+              <Button appearance="primary" color="orange" onClick={handleMigrate} loading={isMigrating} disabled={isAnyActionRunning && !isMigrating}>
+                Run migration
+              </Button>
+            </ActionCard>
+
+            <ActionCard
+              title="Sync to family collection"
+              description="Write the current app state into the family-scoped Firebase collection built from the family slug. Use this when the active family collection should become the source of truth."
+              meta={`Writes into ${collectionName}.`}
+            >
+              <Button appearance="ghost" color="green" onClick={handleMigrateToFamilyScope} loading={isMigratingFamilyScope} disabled={isAnyActionRunning && !isMigratingFamilyScope}>
+                Sync to family collection
+              </Button>
+            </ActionCard>
+
+            <ActionCard
+              title="Sync form submissions"
+              description="Copy legacy Family3 form submission documents into the new family-scoped submissions collection so the admin submission picker reads from the family-specific source."
+              meta={`Copies from ${legacySubmissionsCollectionName} into ${submissionsCollectionName}.`}
+            >
+              <Button appearance="ghost" color="cyan" onClick={handleMigrateSubmissionsToFamilyScope} loading={isMigratingSubmissions} disabled={isAnyActionRunning && !isMigratingSubmissions}>
+                Sync form submissions
+              </Button>
+            </ActionCard>
+
+            <ActionCard
+              title="Normalize saved people"
+              description="Clean saved-people records into the current form-aligned structure and write the normalized result back to Firebase."
+              meta="Useful after schema changes so older records follow the current editor and form shape."
+            >
+              <Button appearance="ghost" color="violet" onClick={handleNormalizeSavedPeople} loading={isNormalizing} disabled={isAnyActionRunning && !isNormalizing}>
+                Normalize saved people
+              </Button>
+            </ActionCard>
+
+            <ActionCard
+              title="Backfill saved people IDs"
+              description="Fill in missing external edit IDs on older saved-people records, apply those IDs back onto matching nodes, and sync the updated snapshot to Firebase."
+              meta="Use this when older imported people are missing firebaseDocumentId values."
+            >
+              <Button appearance="ghost" color="blue" onClick={handleBackfillSavedPeopleIds} loading={isBackfillingIds} disabled={isAnyActionRunning && !isBackfillingIds}>
+                Backfill saved people IDs
+              </Button>
+            </ActionCard>
+
+            {isLocalOnlySaveVisible ? (
+              <ActionCard
+                title="Save current data locally (VS code only)"
+                description="Read the exact Firebase family-tree documents and save them back into the local JSON files in public/data. It also writes a full debug export file with the related submissions for troubleshooting."
+                meta="Visible only on localhost / Vite dev so the app can mirror Firebase into familytree.config.json, savedPeople.json, family-tree-state.json, and firebase-debug-export.json."
+              >
+                <Button appearance="ghost" color="yellow" onClick={handleSaveFirebaseDebugExport} loading={isSavingFirebaseDebugExport} disabled={isAnyActionRunning && !isSavingFirebaseDebugExport}>
+                  Save current data locally (VS code only)
+                </Button>
+              </ActionCard>
+            ) : null}
           </div>
-          <div className={styles.text}>
-            You can also normalize the saved-people library so each <strong>person</strong> object matches the form-aligned structure while keeping future unknown person fields intact.
-          </div>
-          <div className={styles.text}>
-            If older saved people are missing their external edit ID in <strong>firebaseDocumentId</strong>, you can backfill those IDs here. New people imported from form submissions will carry over the submission document ID automatically when available.
-          </div>
-          <div className={styles.text}>
-            You can also copy the legacy generic form submissions collection into the new family-scoped submissions collection so the "Add form submission" flow uses the family-specific Firebase source.
-          </div>
+
           {status ? <div className={`${styles.status} ${statusTone === 'success' ? styles.success : statusTone === 'error' ? styles.error : ''}`}>{status}</div> : null}
         </Modal.Body>
         <Modal.Footer>
-          <Button appearance="subtle" onClick={() => setIsOpen(false)} disabled={isMigrating || isNormalizing || isBackfillingIds || isMigratingFamilyScope || isMigratingSubmissions}>Close</Button>
-          <Button appearance="ghost" color="green" onClick={handleMigrateToFamilyScope} loading={isMigratingFamilyScope} disabled={isMigrating || isNormalizing || isBackfillingIds || isMigratingSubmissions}>
-            Sync to family collection
-          </Button>
-          <Button appearance="ghost" color="cyan" onClick={handleMigrateSubmissionsToFamilyScope} loading={isMigratingSubmissions} disabled={isMigrating || isNormalizing || isBackfillingIds || isMigratingFamilyScope}>
-            Sync form submissions
-          </Button>
-          <Button appearance="ghost" color="violet" onClick={handleNormalizeSavedPeople} loading={isNormalizing} disabled={isMigrating || isBackfillingIds || isMigratingFamilyScope || isMigratingSubmissions}>
-            Normalize saved people
-          </Button>
-          <Button appearance="ghost" color="blue" onClick={handleBackfillSavedPeopleIds} loading={isBackfillingIds} disabled={isMigrating || isNormalizing || isMigratingFamilyScope || isMigratingSubmissions}>
-            Backfill saved people IDs
-          </Button>
-          <Button appearance="primary" color="orange" onClick={handleMigrate} loading={isMigrating} disabled={isNormalizing || isBackfillingIds || isMigratingFamilyScope || isMigratingSubmissions}>
-            Run migration
-          </Button>
+          <Button appearance="subtle" onClick={() => setIsOpen(false)} disabled={isAnyActionRunning}>Close</Button>
         </Modal.Footer>
       </Modal>
     </>
