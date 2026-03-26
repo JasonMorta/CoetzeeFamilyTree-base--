@@ -46,9 +46,10 @@ export default function PeopleNodeDetailsModal({ node }) {
     if (!node) return null;
     const data = node.data || {};
     const people = Array.isArray(data.people) ? data.people.filter((person) => hasValue(person?.fullName)) : [];
-    const title = data.peopleNodeSingleImageTitle || data.title || 'Family members';
+    const title = String(data.peopleModalFamilyName || '').trim() || 'Family name';
     const caption = data.photoCaption || data.notes || '';
-    const heroImage = data.peopleNodeSingleImageUrl || '';
+    const showHeroImage = Boolean(data.peopleModalShowDisplayImage);
+    const heroImage = data.peopleModalDisplayImageUrl || '';
 
     return (
       <div className={styles.peopleShell}>
@@ -68,20 +69,23 @@ export default function PeopleNodeDetailsModal({ node }) {
         </div>
 
         <div className={styles.peopleScroll}>
-          <div className={styles.heroCard}>
-            <div className={styles.heroMediaWrap}>
-              {heroImage ? (
-                <img className={styles.heroMedia} src={heroImage} alt={title} />
-              ) : (
-                <div className={styles.heroMediaPlaceholder}>No display image</div>
-              )}
-              <div className={styles.heroShade} />
-              <div className={styles.heroText}>
-                <h2 className={styles.heroTitle}>{title}</h2>
-                {hasValue(caption) ? <p className={styles.heroCaption}>{caption}</p> : null}
+          {showHeroImage ? (
+            <div className={styles.heroCard}>
+              <div className={styles.heroMediaWrap}>
+                {heroImage ? <img className={styles.heroMedia} src={heroImage} alt={title} /> : null}
+                <div className={styles.heroShade} />
+                <div className={styles.heroText}>
+                  <h2 className={styles.heroTitle}>{title}</h2>
+                  {hasValue(caption) ? <p className={styles.heroCaption}>{caption}</p> : null}
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className={styles.titleOnlyHeader}>
+              <h2 className={styles.titleOnlyHeaderTitle}>{title}</h2>
+              {hasValue(caption) ? <p className={styles.titleOnlyHeaderCaption}>{caption}</p> : null}
+            </div>
+          )}
 
           <div className={styles.peopleSection}>
             {people.length ? (

@@ -14,7 +14,7 @@ import {
   syncNodeDetailsWithPerson,
   personRecordToLinkedDraft
 } from '../../utils/family3Schema';
-import { buildSavedPeopleOptions, resolveSavedPersonSelection } from './savedPeopleOptions';
+import { buildSavedPeopleOptions, ensurePickerValueOption, resolveSavedPersonSelection } from './savedPeopleOptions';
 
 const KNOWN_NODE_DETAIL_KEYS = ['title', 'coverImage', 'imageCaption', 'eventDate', 'location', 'notes', 'hideFromModule'];
 
@@ -37,6 +37,8 @@ function renderPersonOption(label, item) {
 }
 
 function RelationshipCard({ groupKey, label, entry, index, onChange, onRemove, savedPeopleOptions, savedPeople = [] }) {
+  const relationshipNameOptions = useMemo(() => ensurePickerValueOption(savedPeopleOptions, entry?.name || ''), [entry?.name, savedPeopleOptions]);
+
   const applyPerson = (record, fallbackValue = '') => {
     const linked = personRecordToLinkedDraft(record, { fullName: getRecordName(record) || fallbackValue || '' });
     onChange({
@@ -91,7 +93,7 @@ function RelationshipCard({ groupKey, label, entry, index, onChange, onRemove, s
           <Form.ControlLabel>Full name</Form.ControlLabel>
           <InputPicker
             block
-            data={savedPeopleOptions}
+            data={relationshipNameOptions}
             value={entry.name || ''}
             onChange={(value, item) => handleNameChange(value, item)}
             onSelect={handleSelect}
@@ -122,6 +124,7 @@ function RelationshipCard({ groupKey, label, entry, index, onChange, onRemove, s
 function DynamicPersonField({ fieldKey, value, onChange, savedPeopleOptions, savedPeople = [], onAutofillPerson }) {
   const meta = getPersonFieldMeta(fieldKey, value);
   const isFullSpan = meta.inputType === 'textarea';
+  const personNameOptions = useMemo(() => ensurePickerValueOption(savedPeopleOptions, value || ''), [savedPeopleOptions, value]);
 
   if (meta.inputType === 'person-name') {
     return (
@@ -129,7 +132,7 @@ function DynamicPersonField({ fieldKey, value, onChange, savedPeopleOptions, sav
         <Form.ControlLabel>{meta.label}</Form.ControlLabel>
         <InputPicker
           block
-          data={savedPeopleOptions}
+          data={personNameOptions}
           value={value || ''}
           onChange={(nextValue) => {
             const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, nextValue, null);

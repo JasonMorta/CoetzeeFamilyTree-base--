@@ -129,23 +129,33 @@
     linear-gradient(180deg, rgba(9, 16, 30, 0.92), rgba(5, 10, 20, 0.96));
 }
 
-.heroMedia,
-.heroMediaPlaceholder {
+.heroMedia {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-}
-
-.heroMedia {
   object-fit: cover;
 }
 
-.heroMediaPlaceholder {
-  display: grid;
-  place-items: center;
-  color: rgba(233, 241, 255, 0.68);
-  font-size: 1rem;
+.titleOnlyHeader {
+  margin-bottom: 24px;
+  padding: 8px 10px 0;
+}
+
+.titleOnlyHeaderTitle {
+  margin: 0;
+  color: #f3f7ff;
+  font-size: clamp(1.9rem, 3vw, 3rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.titleOnlyHeaderCaption {
+  margin: 12px 0 0;
+  max-width: 72ch;
+  color: rgba(233, 241, 255, 0.8);
+  line-height: 1.6;
 }
 
 .heroShade {

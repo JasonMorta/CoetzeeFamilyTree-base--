@@ -113,7 +113,7 @@
 
 .personTile {
   height: 150px;
-      width: 100% !important;
+  width: 100% !important;
   min-height: 100px;
 }
 
@@ -179,6 +179,9 @@
 }
 
 .standardName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 800;
   color: #f8fbff;
 }

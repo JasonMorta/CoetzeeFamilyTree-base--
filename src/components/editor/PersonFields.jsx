@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 import { Form, Button, Input, InputPicker, Divider } from 'rsuite';
 import styles from './PersonFields.module.css';
 import { getRecordNickname } from '../../utils/family3Schema';
-import { buildSavedPeopleOptions, resolveSavedPersonSelection } from './savedPeopleOptions';
+import { buildSavedPeopleOptions, ensurePickerValueOption, resolveSavedPersonSelection } from './savedPeopleOptions';
 
 
 function renderPersonOption(label, item) {
@@ -17,6 +17,7 @@ function renderPersonOption(label, item) {
 
 function PersonFields({ person, index, onChange, onRemove, canRemove, savedPeople = [], onAutofillPerson }) {
   const savedPeopleOptions = useMemo(() => buildSavedPeopleOptions(savedPeople), [savedPeople]);
+  const personNameOptions = useMemo(() => ensurePickerValueOption(savedPeopleOptions, person?.fullName || ''), [person?.fullName, savedPeopleOptions]);
 
   const handleNameSelect = (value, item) => {
     const matched = resolveSavedPersonSelection(savedPeopleOptions, savedPeople, value, item);
@@ -45,7 +46,7 @@ function PersonFields({ person, index, onChange, onRemove, canRemove, savedPeopl
         <Form.Group controlId={`person-${person.id}-fullName`}>
           <Form.ControlLabel>Name &amp; Surname</Form.ControlLabel>
           <InputPicker
-            data={savedPeopleOptions}
+            data={personNameOptions}
             value={person.fullName || ''}
             onChange={(val) => handleNameSelect(val, null)}
             onSelect={handleNameSelect}

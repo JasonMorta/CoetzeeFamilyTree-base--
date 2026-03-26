@@ -131,6 +131,9 @@ export default function NodeEditorDrawer() {
   const [draftPeopleNodeDisplaySingleImage, setDraftPeopleNodeDisplaySingleImage] = useState(false);
   const [draftPeopleNodeSingleImageUrl, setDraftPeopleNodeSingleImageUrl] = useState('');
   const [draftPeopleNodeSingleImageTitle, setDraftPeopleNodeSingleImageTitle] = useState('');
+  const [draftPeopleModalShowDisplayImage, setDraftPeopleModalShowDisplayImage] = useState(false);
+  const [draftPeopleModalDisplayImageUrl, setDraftPeopleModalDisplayImageUrl] = useState('');
+  const [draftPeopleModalFamilyName, setDraftPeopleModalFamilyName] = useState('');
   const [generatedEditLink, setGeneratedEditLink] = useState('');
   const [editLinkStatus, setEditLinkStatus] = useState('');
 
@@ -138,7 +141,10 @@ export default function NodeEditorDrawer() {
   const hasDraftNodeTypeChange = draftNodeType !== currentNodeType;
   const hasDraftPeopleDisplayChange = draftPeopleNodeDisplaySingleImage !== Boolean(nodeData?.peopleNodeDisplaySingleImage)
     || draftPeopleNodeSingleImageUrl !== String(nodeData?.peopleNodeSingleImageUrl || '')
-    || draftPeopleNodeSingleImageTitle !== String(nodeData?.peopleNodeSingleImageTitle || '');
+    || draftPeopleNodeSingleImageTitle !== String(nodeData?.peopleNodeSingleImageTitle || '')
+    || draftPeopleModalShowDisplayImage !== Boolean(nodeData?.peopleModalShowDisplayImage)
+    || draftPeopleModalDisplayImageUrl !== String(nodeData?.peopleModalDisplayImageUrl || '')
+    || draftPeopleModalFamilyName !== String(nodeData?.peopleModalFamilyName || '');
   const anyUnsaved = useMemo(() => hasDraftNodeTypeChange || hasDraftPeopleDisplayChange || [peopleStatus, ...Object.values(standardStatus || {})].includes('dirty'), [hasDraftNodeTypeChange, hasDraftPeopleDisplayChange, peopleStatus, standardStatus]);
 
   useEffect(() => {
@@ -244,6 +250,9 @@ export default function NodeEditorDrawer() {
       peopleNodeDisplaySingleImage: draftPeopleNodeDisplaySingleImage,
       peopleNodeSingleImageUrl: draftPeopleNodeDisplaySingleImage ? draftPeopleNodeSingleImageUrl : '',
       peopleNodeSingleImageTitle: draftPeopleNodeDisplaySingleImage ? draftPeopleNodeSingleImageTitle : '',
+      peopleModalShowDisplayImage: draftPeopleModalShowDisplayImage,
+      peopleModalDisplayImageUrl: draftPeopleModalShowDisplayImage ? draftPeopleModalDisplayImageUrl : '',
+      peopleModalFamilyName: draftPeopleModalFamilyName,
       standardPerson: createEmptyStandardPerson()
     });
 
@@ -261,7 +270,7 @@ export default function NodeEditorDrawer() {
     setCloseWarning('');
     setPeopleStatus('saved');
     window.setTimeout(() => setPeopleStatus('idle'), 1200);
-  }, [dispatch, draftPeople, draftPeopleNodeDisplaySingleImage, draftPeopleNodeSingleImageTitle, draftPeopleNodeSingleImageUrl, draftSharedNotes, state.savedPeople, updateNode]);
+  }, [dispatch, draftPeople, draftPeopleNodeDisplaySingleImage, draftPeopleNodeSingleImageTitle, draftPeopleNodeSingleImageUrl, draftPeopleModalDisplayImageUrl, draftPeopleModalFamilyName, draftPeopleModalShowDisplayImage, draftSharedNotes, state.savedPeople, updateNode]);
 
   const saveStandardPersonSection = useCallback((nextStandard) => {
     const normalized = createStandardPersonWrapper(nextStandard);
@@ -282,13 +291,19 @@ export default function NodeEditorDrawer() {
       people: [],
       peopleNodeDisplaySingleImage: false,
       peopleNodeSingleImageUrl: '',
-      peopleNodeSingleImageTitle: ''
+      peopleNodeSingleImageTitle: '',
+      peopleModalShowDisplayImage: false,
+      peopleModalDisplayImageUrl: '',
+      peopleModalFamilyName: ''
     });
     setDraftNodeType(NODE_TYPES.STANDARD);
     setDraftPeople([]);
     setDraftPeopleNodeDisplaySingleImage(false);
     setDraftPeopleNodeSingleImageUrl('');
     setDraftPeopleNodeSingleImageTitle('');
+    setDraftPeopleModalShowDisplayImage(false);
+    setDraftPeopleModalDisplayImageUrl('');
+    setDraftPeopleModalFamilyName('');
     saveStandardRecordToLibrary(withNode);
   }, [commitStandardPerson, saveStandardRecordToLibrary, updateNode]);
 
@@ -368,6 +383,9 @@ export default function NodeEditorDrawer() {
     setDraftPeopleNodeDisplaySingleImage(Boolean(nodeData.peopleNodeDisplaySingleImage));
     setDraftPeopleNodeSingleImageUrl(String(nodeData.peopleNodeSingleImageUrl || ''));
     setDraftPeopleNodeSingleImageTitle(String(nodeData.peopleNodeSingleImageTitle || ''));
+    setDraftPeopleModalShowDisplayImage(Boolean(nodeData.peopleModalShowDisplayImage));
+    setDraftPeopleModalDisplayImageUrl(String(nodeData.peopleModalDisplayImageUrl || ''));
+    setDraftPeopleModalFamilyName(String(nodeData.peopleModalFamilyName || ''));
     const existingStandard = createStandardPersonWrapper(nodeData.standardPerson || createEmptyStandardPerson());
     setDraftStandardPerson(createStandardPersonWrapper(existingStandard, {
       node: {
@@ -490,6 +508,41 @@ export default function NodeEditorDrawer() {
                   </Form.Group>
                 </>
               ) : null}
+
+              <Divider>Modal options</Divider>
+              <Form.Group controlId="people-modal-display-image-toggle">
+                <Checkbox
+                  checked={draftPeopleModalShowDisplayImage}
+                  onChange={(_, checked) => {
+                    setPeopleStatus('dirty');
+                    setCloseWarning('');
+                    setDraftPeopleModalShowDisplayImage(Boolean(checked));
+                    if (!checked) {
+                      setDraftPeopleModalDisplayImageUrl('');
+                    }
+                  }}
+                >
+                  Show a display image in the modal
+                </Checkbox>
+              </Form.Group>
+              {draftPeopleModalShowDisplayImage ? (
+                <Form.Group controlId="people-modal-display-image-url">
+                  <Form.ControlLabel>Modal display image URL</Form.ControlLabel>
+                  <Input
+                    value={draftPeopleModalDisplayImageUrl}
+                    onChange={(value) => { setPeopleStatus('dirty'); setCloseWarning(''); setDraftPeopleModalDisplayImageUrl(value || ''); }}
+                    placeholder="Paste the image URL to show at the top of the modal"
+                  />
+                </Form.Group>
+              ) : null}
+              <Form.Group controlId="people-modal-family-name">
+                <Form.ControlLabel>Family name</Form.ControlLabel>
+                <Input
+                  value={draftPeopleModalFamilyName}
+                  onChange={(value) => { setPeopleStatus('dirty'); setCloseWarning(''); setDraftPeopleModalFamilyName(value || ''); }}
+                  placeholder="Set the modal title, for example Van Der Heuvel Family"
+                />
+              </Form.Group>
 
               <Divider>People in this node</Divider>
               {(draftPeople || []).map((person, index) => (

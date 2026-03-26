@@ -130,6 +130,9 @@ export function createNodeData() {
     peopleNodeDisplaySingleImage: false,
     peopleNodeSingleImageUrl: '',
     peopleNodeSingleImageTitle: '',
+    peopleModalShowDisplayImage: false,
+    peopleModalDisplayImageUrl: '',
+    peopleModalFamilyName: '',
     standardPerson: createEmptyStandardPerson()
   };
 }
@@ -195,7 +198,10 @@ function inferNodeType(data = {}, fallback = NODE_TYPES.STANDARD) {
   const hasPeopleEntries = hasGroupedPeopleContent(data.people);
   const hasSingleImageConfig = Boolean(data.peopleNodeDisplaySingleImage)
     || String(data.peopleNodeSingleImageUrl || '').trim().length > 0
-    || String(data.peopleNodeSingleImageTitle || '').trim().length > 0;
+    || String(data.peopleNodeSingleImageTitle || '').trim().length > 0
+    || Boolean(data.peopleModalShowDisplayImage)
+    || String(data.peopleModalDisplayImageUrl || '').trim().length > 0
+    || String(data.peopleModalFamilyName || '').trim().length > 0;
 
   if (hasPeopleEntries || hasSingleImageConfig) {
     return NODE_TYPES.PERSONS;
@@ -225,6 +231,9 @@ export function normalizeNodeData(data = {}) {
     peopleNodeDisplaySingleImage: Boolean(data.peopleNodeDisplaySingleImage),
     peopleNodeSingleImageUrl: typeof data.peopleNodeSingleImageUrl === 'string' ? data.peopleNodeSingleImageUrl : '',
     peopleNodeSingleImageTitle: typeof data.peopleNodeSingleImageTitle === 'string' ? data.peopleNodeSingleImageTitle : '',
+    peopleModalShowDisplayImage: Boolean(data.peopleModalShowDisplayImage),
+    peopleModalDisplayImageUrl: typeof data.peopleModalDisplayImageUrl === 'string' ? data.peopleModalDisplayImageUrl : '',
+    peopleModalFamilyName: typeof data.peopleModalFamilyName === 'string' ? data.peopleModalFamilyName : '',
     hideNodeDetailsFromModule: Boolean(data.hideNodeDetailsFromModule || data.hideFromModule || data.standardPerson?.person?.node?.hideFromModule || data.standardPerson?.node?.hideFromModule),
     standardPerson: normalizeStandardPerson(data.standardPerson || {})
   };

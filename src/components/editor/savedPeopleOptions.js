@@ -38,3 +38,16 @@ export function resolveSavedPersonSelection(savedPeopleOptions = [], savedPeople
 
   return findSavedPersonByName(savedPeople, normalizedValue);
 }
+
+
+export function ensurePickerValueOption(options = [], value = '') {
+  const normalizedValue = normalizeOptionLabel(value);
+  if (!normalizedValue) return Array.isArray(options) ? options : [];
+
+  const baseOptions = Array.isArray(options) ? options : [];
+  const hasMatch = baseOptions.some((option) => normalizeOptionLabel(option?.value || option?.label || '') === normalizedValue);
+
+  if (hasMatch) return baseOptions;
+
+  return [{ label: normalizedValue, value: normalizedValue }, ...baseOptions];
+}
